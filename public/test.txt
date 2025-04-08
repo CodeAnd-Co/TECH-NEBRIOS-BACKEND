@@ -1,0 +1,2 @@
+---->AÑADE CUALQUIER ARCHIVO PARA ACCESSO PUBLICO<----
+Ten en mente que cualquier cosa que coloques aqui sera accesible atravez de rutas por el servidor

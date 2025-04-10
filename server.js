@@ -4,11 +4,9 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const session = require("express-session");
 const app = express();
-const testRoutes = require("./routes/test.routes");
+const testRoutes = require("./routes/excel.rutas");
 
 app.use(express.json());
-
-const db = require("./utils/database");
 
 async function testDB() {
   try {
@@ -24,6 +22,7 @@ testDB();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/api", testRoutes);
 
 // Route 404 Error
 app.use((req, res, next) => {
@@ -33,8 +32,6 @@ app.use((req, res) => {
   console.log("invalid url");
   res.redirect("/");
 });
-
-app.use("/api", testRoutes);
 
 /* Start server */
 const port = process.env.PORT || 3000;

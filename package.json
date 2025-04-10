@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -29,5 +30,6 @@
     "mariadb": "^3.4.0",
     "mysql2": "^3.14.0",
     "nodejs": "^0.0.0"
-  }
+  },
+  "keywords": []
 }

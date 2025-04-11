@@ -3,9 +3,20 @@ const path = require('path');
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const session = require("express-session");
+
 const app = express();
 
+// Monitor de errores y reinicios automáticos
+require('./utils/monitor');
+
+// Variables de entorno
+dotenv.config();
+
 const db = require('./utils/database');
+
+// Ruta para simular fallo del servidor
+const testCrashRoute = require('./routes/testCrash.routes');
+app.use('/', testCrashRoute);
 
 async function testDB(){
     try {

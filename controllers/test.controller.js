@@ -1,7 +1,11 @@
+const Test = require("../models/test.model");
+
 exports.get_test = async (req, res, next) => {
   try {
-    res.json({
-      message: "Hola desde el backend xd",
+    const test = await Test.fetchAll();
+    res.status(200).json({
+      status: "success",
+      data: test,
     });
     console.log("Conexión exitosa entre el frontend y el backend xd");
   } catch (error) {

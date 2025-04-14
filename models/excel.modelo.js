@@ -1,3 +1,4 @@
+//'../models/excel.modelo.js'
 const getConexion = require('../utils/database');
 
 async function obtenerDatosCharolas() {
@@ -17,7 +18,7 @@ async function obtenerDatosCharolas() {
         cantidadResiduos
       FROM CHAROLA
     `);
-
+      console.log(rows);
     return rows;
     } finally {
         conexion.release();

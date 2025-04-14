@@ -1,3 +1,4 @@
+//'../utils/excel.generador.js'
 const ExcelJS = require('exceljs');
 
 async function generarExcelDesdeDatos(datos) {
@@ -6,14 +7,14 @@ async function generarExcelDesdeDatos(datos) {
 
   hoja_trabajo.columns = [
     { header: 'Charola ID', key: 'charolaId', width: 10 },
-    { header: 'Comida Ciclo', key: 'comidaCiclo', width: 15 },
-    { header: 'Hidratación Ciclo', key: 'hidratacionCiclo', width: 18 },
-    { header: 'Fecha Actualización', key: 'fechaActualizaci', width: 20 },
+    { header: 'Comida (gramos)', key: 'comidaCiclo', width: 15 },
+    { header: 'Hidratación (gramos)', key: 'hidratacionCiclo', width: 18 },
+    { header: 'Fecha Actualización', key: 'fechaActualizacion', width: 20 },
     { header: 'Estado', key: 'estado', width: 15 },
     { header: 'Densidad Larva', key: 'densidadLarva', width: 15 },
     { header: 'Fecha Creación', key: 'fechaCreacion', width: 20 },
-    { header: 'Peso Charola', key: 'pesoCharola', width: 15 },
-    { header: 'Cantidad Residuo', key: 'cantidadResiduo', width: 18 },
+    { header: 'Peso Charola (gramos)', key: 'pesoCharola', width: 18 },
+    { header: 'Frass (gramos)', key: 'cantidadResiduos', width: 22 },
   ];
 
   datos.forEach((fila) => {

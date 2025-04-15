@@ -15,6 +15,7 @@ const controlador = require("../controllers/test.controller");
 /* GET METHODS */
 
 router.get("/get", controlador.get_test);
+router.post("/post", controlador.post_test);
 /* ----------- */
 
 /* POST METHODS */

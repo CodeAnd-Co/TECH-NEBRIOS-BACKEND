@@ -16,3 +16,26 @@ exports.get_test = async (req, res, next) => {
     });
   }
 };
+
+exports.post_test = async (req, res, next) => {
+  try {
+    const data = {
+      nombre: req.body.nombre,
+      descripcion: req.body.descripcion,
+    };
+    const result = await Test.createFood(data);
+    console.log("Data inserted successfully:", result);
+    res.status(201).json({
+      status: "success",
+      message: "Comida registrada exitosamente",
+      insertId: Number(result.insertId),
+    });
+    console.log("BODY recibido en backend:", req.body);
+  } catch (error) {
+    console.error("Error in test controller:", error);
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+    });
+  }
+};

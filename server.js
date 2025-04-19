@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const session = require("express-session");
 const app = express();
 
+const charolasRoutes = require('./routes/charolas.ruta');
 const db = require('./utils/database');
 
 async function testDB(){
@@ -21,6 +22,9 @@ testDB();
 app.set('view engine', 'ejs');
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json()); 
+
+app.use('/api', charolasRoutes);
 
 // Route 404 Error
 app.use((req, res, next) => {

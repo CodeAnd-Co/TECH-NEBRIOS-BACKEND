@@ -3,7 +3,7 @@ const Charola = require('../models/charola.modelo');
 const obtenerCharolas = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 12;
+    const limit = parseInt(req.query.limit) || 20;
     const offset = (page - 1) * limit;
 
     const datos = await Charola.getCharolasPaginadas(limit, offset);
@@ -17,6 +17,7 @@ const obtenerCharolas = async (req, res) => {
       totalPages: Math.ceil(totalNumber / limit),
       data: datos
     });
+    console.log("Se pudo coenctar el front con el back :)")
   } catch (error) {
     console.error('Error al obtener charolas paginadas:', error);
     res.status(500).json({ mensaje: 'Error interno del servidor' });

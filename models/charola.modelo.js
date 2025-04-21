@@ -1,26 +1,26 @@
 const db = require('../utils/database');
 
 const Charola = {
-  obtenerCharolasPaginadas: async (limite, contrapeso) => {
-    const conexion = await db();
+  getCharolasPaginadas: async (limit, offset) => {
+    const connection = await db();
     try {
-      const filas = await conexion.query(
+      const rows = await connection.query(
         'SELECT nombreCharola, fechaCreacion FROM CHAROLA ORDER BY fechaCreacion DESC LIMIT ? OFFSET ?',
-        [limite, contrapeso]
+        [limit, offset]
       );
-      return filas;
+      return rows;
     } finally {
-      conexion.release();
+      connection.release();
     }
   },
 
-  obtenerCantidadTotal: async () => {
-    const conexion = await db();
+  getCantidadTotal: async () => {
+    const connection = await db();
     try {
-      const resultado = await conexion.query('SELECT COUNT(*) as total FROM CHAROLA');
-      return resultado[0].total;
+      const result = await connection.query('SELECT COUNT(*) as total FROM CHAROLA');
+      return result[0].total;
     } finally {
-      conexion.release();
+      connection.release();
     }
   }
 };

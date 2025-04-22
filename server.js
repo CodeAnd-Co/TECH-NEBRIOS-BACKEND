@@ -7,6 +7,8 @@ const app = express();
 
 const db = require('./utils/database');
 
+const alimentacionRoutes = require("./routes/alimentacionIndex");
+
 async function testDB(){
     try {
         const test = await db();
@@ -21,6 +23,8 @@ testDB();
 app.set('view engine', 'ejs');
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use('/alimentacion', alimentacionRoutes);
 
 // Route 404 Error
 app.use((req, res, next) => {

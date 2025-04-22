@@ -9,6 +9,7 @@ router.use(express.urlencoded({ extended: true }));
 
 /* INCLUDE CONTROLLERS */
 const editarAlimentoController = require("../controllers/editar-alimentacion.controller.js");
+const eliminarAlimentoController = require("../controllers/eliminar-alimentacion.controller.js");
 /* ------------------- */
 
 /* GET METHODS */
@@ -28,7 +29,7 @@ router.patch('/editar/:idAlimento', editarAlimentoController.editarAlimento);
 /* ----------- */
 
 /* DELETE METHODS */
-
+router.delete('/eliminar/:idAlimento', eliminarAlimentoController.eliminarAlimento);
 /* ----------- */
 
 module.exports = router;

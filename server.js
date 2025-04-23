@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const session = require("express-session");
 const app = express();
-const excelRoutes = require('./routes/excel.rutas'); // <--- Se agrega esta parte de aquí
+const excelRoutes = require('./routes/excel.route'); // <--- Se agrega esta parte de aquí
 
 
 const db = require('./utils/database');

@@ -1,7 +1,7 @@
 //../controllers/excel.controlador.js
 const { Console } = require('console');
-const { obtenerDatosCharolas } = require('../models/excel.modelo');
-const { generarExcelDesdeDatos } = require('../utils/excel.generador');
+const { obtenerDatosCharolas } = require('../models/excel.model');
+const { generarExcelDesdeDatos } = require('../utils/excel.generator');
 
 exports.descargarExcel = async (req, res) => {
   try {

@@ -1,4 +1,4 @@
-const Charola = require('../models/charola.modelo');
+const Charola = require('../models/menu_charolas.model');
 
 const obtenerCharolas = async (req, res) => {
   try {

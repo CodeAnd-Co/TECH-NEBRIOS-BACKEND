@@ -17,7 +17,7 @@ const obtenerCharolas = async (req, res) => {
       totalPages: Math.ceil(totalNumber / limit),
       data: datos
     });
-    console.log("Se pudo coenctar el front con el back :)")
+    console.log("Se pudo conectar el front con el back :)")
   } catch (error) {
     console.error('Error al obtener charolas paginadas:', error);
     res.status(500).json({ mensaje: 'Error interno del servidor' });

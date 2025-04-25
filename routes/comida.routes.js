@@ -13,7 +13,7 @@ const controlador = require("../controllers/comida.controller");
 /* ------------------- */
 
 /* GET METHODS */
-router.get("/obtenerComida", controlador.obtenerComida);
+router.get("/obtener-comida", controlador.obtenerComida);
 /* ----------- */
 
 /* POST METHODS */

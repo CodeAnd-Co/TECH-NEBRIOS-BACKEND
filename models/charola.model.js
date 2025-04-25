@@ -8,14 +8,14 @@ module.exports = class Charola {
       // Iniciar una transacción para asegurar consistencia entre las tablas
       await connection.beginTransaction();
       const charolaResult = await connection.query(
-        "INSERT INTO CHAROLA (nombreCharola, comidaCiclo, hidratacionCiclo, estado, pesoCharola, cantidadResiduos) VALUES (?, ?, ?, ?, ?, ?)",
+        "INSERT INTO CHAROLA (nombreCharola, comidaCiclo, hidratacionCiclo, estado, pesoCharola, densidadLarva) VALUES (?, ?, ?, ?, ?, ?)",
         [
           data.nombre,
           data.comidaCiclo,
           data.hidratacionCiclo,
           data.estado || "activa", // valor por defecto
           data.pesoCharola,
-          data.cantidadResiduos,
+          data.densidadLarva,
         ]
       );
 

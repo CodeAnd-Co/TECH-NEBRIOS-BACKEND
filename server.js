@@ -29,12 +29,12 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // cors
 const corsOptions = {
-    origin: 'http://localhost:53289',    // tu frontend exacto, sin "/"
-    methods: ['GET','POST','PUT','DELETE','OPTIONS'],  // incluye OPTIONS
+    origin: 'http://localhost:54769',    // tu frontend exacto, sin "/"
+    methods: ['GET','POST','PUT','DELETE','OPTIONS'],  
     allowedHeaders: ['Content-Type','Authorization']
   };
-  
-  app.use(cors(corsOptions));
+
+app.use(cors(corsOptions));
 
 app.use('/alimentacion', alimentacionRoutes);
 

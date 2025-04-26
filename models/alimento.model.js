@@ -7,6 +7,19 @@ module.exports.Alimento = class {
         this.descripcionAlimento = descripcionAlimento;
     }
 
+    async obtener() {
+        try {
+            const connection = await db();
+            const query = `SELECT comidaId, nombre, descripcion FROM COMIDA`;
+            const resultado = await connection.query(query);
+            await connection.release();
+            return resultado;
+        } catch (error) {
+            console.error('Error al obtener alimentos:', error);
+            throw error;
+        }
+    }
+
     async eliminar() {
         try {
             const connection = await db();

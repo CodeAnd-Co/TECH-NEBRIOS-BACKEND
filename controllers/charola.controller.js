@@ -2,51 +2,23 @@ const Charola = require("../models/charola.model.js");
 
 exports.registrarCharola = async (req, res) => {
   try {
-    const {
-      nombre,
-      comidaCiclo,
-      hidratacionCiclo,
-      estado,
-      pesoCharola,
-      cantidadResiduos,
-      comidas,
-    } = req.body;
-
-    // Validar que se reciban los datos necesarios
-    if (
-      !nombre ||
-      !comidaCiclo ||
-      !hidratacionCiclo ||
-      !pesoCharola ||
-      !cantidadResiduos ||
-      !comidas
-    ) {
-      return res.status(400).json({
-        status: "error",
-        message: "Faltan datos requeridos para registrar la charola",
-      });
-    }
-
-    const charola = await Charola.registrarCharola({
-      nombre,
-      comidaCiclo,
-      hidratacionCiclo,
-      estado,
-      pesoCharola,
-      cantidadResiduos,
-      comidas,
-    });
-
+    const data = {
+      nombre: req.body.nombre,
+      comidaCiclo: req.body.comidaCiclo,
+      hidratacionCiclo: req.body.hidratacionCiclo,
+      estado: req.body.estado,
+      pesoCharola: req.body.pesoCharola,
+      densidadLarva: req.body.densidadLarva,
+      comidas: req.body.comidas, // Asegúrate de que este campo esté en el cuerpo de la solicitud
+    };
+    const result = await Charola.registrarCharola(data);
+    console.log("Charola registrada con éxito:", result);
     res.status(201).json({
-      status: "success",
-      data: {
-        charola,
-      },
+      message: "Charola registrada con éxito",
+      insertId: Number(result.insertId),
     });
   } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: "Error al registrar la charola",
-    });
+    console.error("Error al registrar la charola:", error);
+    res.status(500).json({ error: "Error al registrar la charola" });
   }
 };

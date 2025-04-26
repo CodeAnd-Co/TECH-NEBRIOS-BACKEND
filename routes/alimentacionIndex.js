@@ -8,7 +8,6 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 /* INCLUDE CONTROLLERS */
-const editarAlimentoController = require("../controllers/editar-alimentacion.controller.js");
 const eliminarAlimentoController = require("../controllers/eliminar-alimentacion.controller.js");
 /* ------------------- */
 
@@ -22,10 +21,6 @@ const eliminarAlimentoController = require("../controllers/eliminar-alimentacion
 
 /* PUT METHODS */
 
-/* ----------- */
-
-/*  PATCH METHODS */
-router.patch('/editar/:idAlimento', editarAlimentoController.editarAlimento);
 /* ----------- */
 
 /* DELETE METHODS */

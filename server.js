@@ -5,6 +5,9 @@ const dotenv = require("dotenv");
 const session = require("express-session");
 const app = express();
 
+// add cors
+const cors = require("cors");
+
 const db = require('./utils/database');
 
 const alimentacionRoutes = require("./routes/alimentacionIndex");
@@ -23,6 +26,15 @@ testDB();
 app.set('view engine', 'ejs');
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
+
+// cors
+const corsOptions = {
+    origin: 'http://localhost:53289',    // tu frontend exacto, sin "/"
+    methods: ['GET','POST','PUT','DELETE','OPTIONS'],  // incluye OPTIONS
+    allowedHeaders: ['Content-Type','Authorization']
+  };
+  
+  app.use(cors(corsOptions));
 
 app.use('/alimentacion', alimentacionRoutes);
 

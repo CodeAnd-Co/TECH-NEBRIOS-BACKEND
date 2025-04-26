@@ -20,11 +20,7 @@ const editarAlimentoController = require("../controllers/editar-alimentacion.con
 /* ----------- */
 
 /* PUT METHODS */
-
-/* ----------- */
-
-/*  PATCH METHODS */
-router.patch('/editar/:idAlimento', editarAlimentoController.editarAlimento);
+router.put('/editar/:idAlimento', editarAlimentoController.editarAlimento);
 /* ----------- */
 
 /* DELETE METHODS */

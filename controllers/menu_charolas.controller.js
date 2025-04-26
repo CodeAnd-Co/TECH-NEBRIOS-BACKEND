@@ -1,3 +1,5 @@
+// RF16 Visualizar todas las charolas registradas en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
+
 const Charola = require('../models/menu_charolas.model');
 
 const obtenerCharolas = async (req, res) => {

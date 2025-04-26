@@ -4,7 +4,7 @@ module.exports = class Hidratacion {
   static async obtenerHidratacion() {
     const connection = await db();
     try {
-      const [rows] = await connection.query("SELECT NOMBRE FROM HIDRATACION");
+      const rows = await connection.query("SELECT NOMBRE FROM HIDRATACION");
       if (rows.length === 0) {
         throw new Error("No se encontraron registros de hidratación.");
       }

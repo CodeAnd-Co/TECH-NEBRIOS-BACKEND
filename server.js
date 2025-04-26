@@ -12,11 +12,13 @@ const app = express();
 /* Rutas */
 const charolaRoutes = require("./routes/charola.routes");
 const comidaRoutes = require("./routes/comida.routes");
+const hidratacionRoutes = require("./routes/hidratacion.routes");
 /* ----- */
 
 /* Rutas de la API */
 app.use("/charola", charolaRoutes);
 app.use("/comida", comidaRoutes);
+app.use("/hidratacion", hidratacionRoutes);
 /* ----- */
 
 /* Conexion a la base de datos*/

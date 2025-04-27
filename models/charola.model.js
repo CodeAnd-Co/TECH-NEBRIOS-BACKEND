@@ -1,14 +1,17 @@
 const db = require("../utils/database");
 
-// TODO: Revisar el modelo, ya que probablemente no es correcto porque se debe trabajar con mas tablas
 module.exports = class Charola {
   static async registrarCharola(data) {
     const connection = await db();
     try {
-      // Iniciar una transacción para asegurar consistencia entre las tablas
       await connection.beginTransaction();
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(data.fechaRegistro)) {
+        throw new Error(
+          "El formato de la fecha es inválido. Debe ser yyyy-mm-dd."
+        );
+      }
       const charolaResult = await connection.query(
-        "INSERT INTO CHAROLA (nombreCharola, comidaCiclo, hidratacionCiclo, estado, pesoCharola, densidadLarva) VALUES (?, ?, ?, ?, ?, ?)",
+        "INSERT INTO CHAROLA (nombreCharola, comidaCiclo, hidratacionCiclo, estado, pesoCharola, densidadLarva, fechaCreacion) VALUES (?, ?, ?, ?, ?, ?, ?)",
         [
           data.nombre,
           data.comidaCiclo,
@@ -16,6 +19,7 @@ module.exports = class Charola {
           data.estado || "activa", // valor por defecto
           data.pesoCharola,
           data.densidadLarva,
+          data.fechaCreacion,
         ]
       );
 
@@ -27,6 +31,18 @@ module.exports = class Charola {
         await connection.query(
           "INSERT INTO CHAROLA_COMIDA (charolaId, comidaId, cantidadOtorgada) VALUES (?, ?, ?)",
           [charolaId, comida.comidaId, comida.cantidadOtorgada]
+        );
+      }
+
+      // Insertar la relación en la tabla CHAROLA_HIDRATACION
+      for (const hidratacion of data.hidrataciones) {
+        await connection.query(
+          "INSERT INTO CHAROLA_HIDRATACION (charolaId, hidratacionId, cantidadOtorgada) VALUES (?, ?, ?)",
+          [
+            charolaId,
+            hidratacion.hidratacionId,
+            hidratacion.cantidadHidratacion,
+          ]
         );
       }
 

@@ -4,12 +4,13 @@ exports.registrarCharola = async (req, res) => {
   try {
     const data = {
       nombre: req.body.nombre,
+      densidadLarva: req.body.densidadLarva,
+      fechaCreacion: req.body.fechaCreacion,
       comidaCiclo: req.body.comidaCiclo,
       hidratacionCiclo: req.body.hidratacionCiclo,
-      estado: req.body.estado,
       pesoCharola: req.body.pesoCharola,
-      densidadLarva: req.body.densidadLarva,
-      comidas: req.body.comidas, // Asegúrate de que este campo esté en el cuerpo de la solicitud
+      comidas: req.body.comidas, // Array de comidas
+      hidrataciones: req.body.hidrataciones, // Array de hidrataciones
     };
     const result = await Charola.registrarCharola(data);
     console.log("Charola registrada con éxito:", result);

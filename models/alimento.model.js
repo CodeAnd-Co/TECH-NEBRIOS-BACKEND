@@ -31,4 +31,17 @@ module.exports.Alimento = class {
             throw error;
         }
     }
+
+    async agregar() {
+        try {
+            const connection = await db();
+            const query = `INSERT INTO COMIDA(nombre, descripcion) VALUES (?, ?)`;
+            await connection.query(query, [this.nombreAlimento, this.descripcionAlimento]);
+            await connection.release();
+        } catch (error) {
+            console.error('Error al agregar alimento:', error);
+            throw error;
+        }
+    }
+    
 }

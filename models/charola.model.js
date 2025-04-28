@@ -15,4 +15,17 @@ module.exports = class Charola {
       throw error;
     }
   }
-};
+
+  static async tablaCharolas(){ 
+    try{
+      const conexion = await db(); 
+      const resultado = await conexion.query("SELECT nombreCharola, charolaId, comidaCiclo, hidratacionCiclo, DATE_FORMAT(fechaActualizacion, '%d/%m/%Y') AS fechaActualizacion, estado, densidadLarva, DATE_FORMAT(fechaCreacion, '%d/%m/%Y') AS fechaCreacion, pesoCharola FROM CHAROLA");
+      
+      return resultado;
+    }catch (error) {
+      console.error("[Model]. Error al obtener informacion de las charolas: ", error)
+      throw error;
+    }
+  };
+   
+} 

@@ -7,6 +7,7 @@ const session = require("express-session");
 const db = require("./utils/database");
 /* ------------ */
 
+const app = express();
 /* Rutas */
 const charolaRoutes = require("./routes/charola.routes");
 /* ----- */

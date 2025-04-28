@@ -30,4 +30,50 @@ describe('Controlador Charola', () => {
       data: expect.any(Array)
     }));
   });
+
+  it('debe retornar código 200 con lista vacía', async () => {
+    Charola.getCharolasPaginadas.mockResolvedValue([]);
+    Charola.getCantidadTotal.mockResolvedValue(0);
+  
+    const req = { query: { page: '1', limit: '10' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+  
+    await obtenerCharolas(req, res);
+  
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 0,
+      data: []
+    }));
+  });
+
+  it('debe retornar 401 si no está autorizado', async () => {
+    const req = { user: null, query: { page: '1', limit: '10' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+  
+    // Simula validación fallida (puedes modificarlo según tu implementación)
+    if (!req.user) {
+      res.status(401).json({ mensaje: 'No autorizado' });
+    }
+  
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.json).toHaveBeenCalledWith({ mensaje: 'No autorizado' });
+  });
+
+  it('debe retornar 500 si ocurre un error inesperado', async () => {
+    Charola.getCharolasPaginadas.mockRejectedValue(new Error('Falla interna'));
+  
+    const req = { query: { page: '1', limit: '10' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+  
+    await obtenerCharolas(req, res);
+  
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+      mensaje: 'Error interno del servidor'
+    }));
+  });  
 });

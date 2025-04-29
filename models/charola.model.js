@@ -30,19 +30,46 @@ module.exports = class Charola {
       // Obtener el ID de la charola recién insertada
       const charolaId = charolaResult.insertId;
 
+      // Obtener el ID de la comida desde la tabla COMIDA
+      const comidaResult = await connection.query(
+        "SELECT comidaId FROM COMIDA WHERE nombre = ?",
+        [data.nombreComida]
+      );
+
+      if (!comidaResult || comidaResult.length === 0) {
+        throw new Error(
+          `No se encontró una comida con el nombre: ${data.nombreComida}`
+        );
+      }
+      console.log("Comida encontrada:", comidaResult, comidaResult[0]);
+
+      const comidaId = comidaResult[0].comidaId; // ID de la comida obtenida
+
       // Insertar en la tabla CHAROLA_COMIDA
       if (data.comidaCiclo > 0) {
         await connection.query(
           "INSERT INTO CHAROLA_COMIDA (charolaId, comidaId, cantidadOtorgada) VALUES (?, ?, ?)",
-          [charolaId, 1, data.comidaCiclo] // comidaId puede ser un valor fijo o dinámico
+          [charolaId, comidaId, data.comidaCiclo]
         );
       }
+
+      // Obtener el ID de la hidratación desde la tabla HIDRATACION
+      const hidratacionResult = await connection.query(
+        "SELECT hidratacionId FROM HIDRATACION WHERE nombre = ?",
+        [data.nombreHidratacion]
+      );
+      if (!hidratacionResult || hidratacionResult.length === 0) {
+        throw new Error(
+          `No se encontró una hidratación con el nombre: ${data.nombreHidratacion}`
+        );
+      }
+      const hidratacionId = hidratacionResult[0].hidratacionId; // ID de la hidratación obtenida
 
       // Insertar en la tabla CHAROLA_HIDRATACION
       if (data.hidratacionCiclo > 0) {
         await connection.query(
           "INSERT INTO CHAROLA_HIDRATACION (charolaId, hidratacionId, cantidadOtorgada) VALUES (?, ?, ?)",
-          [charolaId, 1, data.hidratacionCiclo] // hidratacionId puede ser un valor fijo o dinámico
+          [charolaId, hidratacionId, data.hidratacionCiclo] // hidratacionId puede ser un valor fijo o dinámico
         );
       }
 

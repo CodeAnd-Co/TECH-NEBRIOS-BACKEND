@@ -5,8 +5,8 @@ exports.registrarCharola = async (req, res) => {
     console.log("Datos recibidos:", req.body);
     const data = {
       nombre: req.body.nombre || "Sin nombre", // Valor predeterminado
-      comidaCiclo: req.body.comidaCiclo || "Desconocido", // Validar comidaCiclo
-      hidratacionCiclo: req.body.hidratacionCiclo || "Desconocido", // Validar hidratacionCiclo
+      nombreComida: req.body.nombreComida || "Desconocido", // Validar comidaCiclo
+      nombreHidratacion: req.body.nombreHidratacion || "Desconocido", // Validar hidratacionCiclo
       estado: req.body.estado || "activa", // Valor predeterminado
       pesoCharola: parseFloat(req.body.pesoCharola) || 0, // Convertir a número
       densidadLarva: parseFloat(req.body.densidadLarva) || 0, // Convertir a número

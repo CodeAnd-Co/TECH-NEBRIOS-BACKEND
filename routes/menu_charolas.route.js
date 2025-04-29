@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { obtenerCharolas } = require('../controllers/charolas.controlador');
+const { obtenerCharolas } = require('../controllers/menu_charolas.controller');
 
 router.get('/charolas', obtenerCharolas);
 

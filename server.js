@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const app = express();
 
-const charolasRoutes = require('./routes/charolas.ruta');
+const charolasRoutes = require('./routes/menu_charolas.route');
 const db = require('./utils/database');
 
 async function testDB(){

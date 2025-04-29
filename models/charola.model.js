@@ -5,18 +5,22 @@ module.exports = class Charola {
     const connection = await db();
     try {
       await connection.beginTransaction();
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(data.fechaRegistro)) {
+
+      // Validar formato de la fecha
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(data.fechaCreacion)) {
         throw new Error(
           "El formato de la fecha es inválido. Debe ser yyyy-mm-dd."
         );
       }
+
+      // Insertar en la tabla CHAROLA
       const charolaResult = await connection.query(
         "INSERT INTO CHAROLA (nombreCharola, comidaCiclo, hidratacionCiclo, estado, pesoCharola, densidadLarva, fechaCreacion) VALUES (?, ?, ?, ?, ?, ?, ?)",
         [
           data.nombre,
           data.comidaCiclo,
           data.hidratacionCiclo,
-          data.estado || "activa", // valor por defecto
+          data.estado || "activa",
           data.pesoCharola,
           data.densidadLarva,
           data.fechaCreacion,
@@ -26,23 +30,19 @@ module.exports = class Charola {
       // Obtener el ID de la charola recién insertada
       const charolaId = charolaResult.insertId;
 
-      // Insertar la relación en la tabla CHAROLA_COMIDA
-      for (const comida of data.comidas) {
+      // Insertar en la tabla CHAROLA_COMIDA
+      if (data.comidaCiclo > 0) {
         await connection.query(
           "INSERT INTO CHAROLA_COMIDA (charolaId, comidaId, cantidadOtorgada) VALUES (?, ?, ?)",
-          [charolaId, comida.comidaId, comida.cantidadOtorgada]
+          [charolaId, 1, data.comidaCiclo] // comidaId puede ser un valor fijo o dinámico
         );
       }
 
-      // Insertar la relación en la tabla CHAROLA_HIDRATACION
-      for (const hidratacion of data.hidrataciones) {
+      // Insertar en la tabla CHAROLA_HIDRATACION
+      if (data.hidratacionCiclo > 0) {
         await connection.query(
           "INSERT INTO CHAROLA_HIDRATACION (charolaId, hidratacionId, cantidadOtorgada) VALUES (?, ?, ?)",
-          [
-            charolaId,
-            hidratacion.hidratacionId,
-            hidratacion.cantidadHidratacion,
-          ]
+          [charolaId, 1, data.hidratacionCiclo] // hidratacionId puede ser un valor fijo o dinámico
         );
       }
 

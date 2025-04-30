@@ -1,6 +1,33 @@
-/*modulse.exports = (req, res, next) => {
-    if(1 = 0){
-        return res.status(401).json({code:401, msg: "Sin sesión activa"})
+const Usuario = require("../models/usuario.model.js"); 
+const jwt = require('jsonwebtoken')
+const dotenv = require("dotenv");
+dotenv.config();
+
+async function verificarSesionActiva(req, res, next) {
+    const autenticacion = req.headers.authorization;
+
+    if(!autenticacion){
+        return res.status(401).json({code:401, msg: "Sin token de autorización"});
     }
-    next();
-}*/
+    const token = autenticacion.split(' ')[1]; // Extraes token de "Bearer <token>"
+        if (!token) {
+            return res.status(401).json({ message: "Token no válido" });
+        }
+        //Verifificar y decodificar el token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET); 
+
+        const usuario = decoded;
+
+        // Se busca si el usuario existe en la base de datos
+        const existe = await Usuario.buscarUsuario(usuario.nombreDeUsuario);
+
+        // Si el usuario está presente, se continua
+        if (!existe) {
+            console.log("Usuario no autorizado");
+            return res.status(401).json({ code: 401, msg: "Usuario no autorizado" });
+        }
+        console.log("Usuario autorizado");
+        next()
+}
+
+module.exports = verificarSesionActiva;

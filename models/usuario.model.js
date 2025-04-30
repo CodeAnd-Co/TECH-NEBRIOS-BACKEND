@@ -53,4 +53,18 @@ module.exports = class Usuario {
       throw error;
     }
   }
+
+  static async buscarUsuario(usuario){
+    try {
+      const connection = await db();
+      const rows = await connection.query(
+        "SELECT user FROM USUARIO WHERE user = ?",
+        [usuario]
+      );
+      return rows[0];
+    } catch (error) {
+      console.error("Error al buscar usuario:", error);
+      throw error;
+    }
+  }
 };

@@ -9,7 +9,7 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 /* INCLUDE CONTROLLERS */
-const controlador = require("../controllers/test.controller");
+const controlador = require("../controllers/charola.controller");
 /* ------------------- */
 
 /* GET METHODS */

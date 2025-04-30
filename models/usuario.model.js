@@ -5,32 +5,37 @@ dotenv.config();
 
 module.exports = class Usuario {
 
-  static async iniciarSesion(data) {
+  static async iniciarSesion(datos) {
     try {
       const connection = await db();
-      const [resultado] = await connection.query(
+      let rows = await connection.query(
         "SELECT usuarioId, user, contrasena FROM USUARIO WHERE user = ?",
-        [data.usuario]
+        [datos.usuario]
       );
 
-      if(resultado.length == 0){
+      if(rows.length == 0){
         return {error: "Usuario inexistente"}
       }
 
-      const usuario = resultado[0];
+      const usuario = rows[0];
 
-      data.contrasena == usuario.contrasena ? contrasenaCorrecta = true : contrasenaCorrecta = false
+      console.log("Usuario: ", usuario.user);
+      console.log("Contrasena: ", usuario.contrasena);
+
+      let contrasenaCorrecta = false;
+
+      datos.contrasena == usuario.contrasena ? contrasenaCorrecta = true : contrasenaCorrecta = false
 
       if(!contrasenaCorrecta){
         return {error: "Contraseña incorrecta"}
       }
 
-      const [admin] = await connection.query(
+      rows = await connection.query(
         "SELECT * FROM ADMINISTRADOR WHERE usuarioId = ?",
         [usuario.usuarioId]
       );
 
-      if(admin.length > 0){
+      if(rows.length > 0){
         const token = jwt.sign({ id: usuario.usuarioId, nombreDeUsuario: usuario.user, rol: "admin" }, process.env.JWT_SECRET, {
             expiresIn: '1d',
           });

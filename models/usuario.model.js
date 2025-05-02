@@ -4,10 +4,10 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 module.exports = class Usuario {
-
   static async iniciarSesion(datos) {
+    let connection;
     try {
-      const connection = await db();
+      connection = await db();
       let rows = await connection.query(
         "SELECT usuarioId, user, contrasena FROM USUARIO WHERE user = ?",
         [datos.usuario]
@@ -18,9 +18,6 @@ module.exports = class Usuario {
       }
 
       const usuario = rows[0];
-
-      console.log("Usuario: ", usuario.user);
-      console.log("Contrasena: ", usuario.contrasena);
 
       let contrasenaCorrecta = false;
 
@@ -49,7 +46,7 @@ module.exports = class Usuario {
       }
 
     } catch (error) {
-      console.error("Error al iniciar sesión:", error);
+      console.log("Error al iniciar sesión:", error);
       throw error;
     }finally {
       if (connection) {
@@ -59,8 +56,9 @@ module.exports = class Usuario {
   }
 
   static async buscarUsuario(usuario){
+    let connection;
     try {
-      const connection = await db();
+      connection = await db();
       const rows = await connection.query(
         "SELECT user FROM USUARIO WHERE user = ?",
         [usuario]

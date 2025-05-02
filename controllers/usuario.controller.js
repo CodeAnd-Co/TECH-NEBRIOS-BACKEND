@@ -7,13 +7,15 @@ exports.iniciarSesion = async (req, res) => {
 
         const sesion = await Usuario.iniciarSesion(req.body);
 
+        //console.log("Sesion: ", sesion);
+
         if(sesion.error){
             return res.status(401).json({code:401});
         }
 
-        res.status(200).json({code: 200, token: sesion});
+        return res.status(200).json({code: 200, token: sesion});
 
     }catch(error){
-        res.status(500).json({code: 500})
+        return res.status(500).json({code: 500})
     }
 };

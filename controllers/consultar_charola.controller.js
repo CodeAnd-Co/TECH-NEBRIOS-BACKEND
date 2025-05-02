@@ -2,7 +2,7 @@ const Charola = require('../models/consultar_charola.model');
 
 const consultarCharola = async (req, res) => {
   try {
-    const charola = await Charola.getCharola(10);
+    const charola = await Charola.getCharola(1004);
 
     res.status(200).json({
       data: charola

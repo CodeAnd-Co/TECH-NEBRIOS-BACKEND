@@ -1,79 +1,58 @@
 // RF16 Visualizar todas las charolas registradas en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
 
-const { obtenerCharolas } = require('../controllers/menu_charolas.controller');
-const Charola = require('../models/menu_charolas.model');
+// Pruebas del controlador de charolas.
+// Se asegura que las funciones del controlador respondan correctamente a solicitudes válidas o inválidas.
 
-jest.mock('../models/menu_charolas.model');
+const { describe, test, expect, beforeEach, jest } = require('@jest/globals');
+const charolaController = require('../../controllers/menu_charolas.controller');
+const Charola = require('../../models/charola.model');
+
+jest.mock('../../models/charola.model');
 
 describe('Controlador Charola', () => {
-  it('responde con JSON de charolas', async () => {
-    // Simula datos de prueba
-    Charola.getCharolasPaginadas.mockResolvedValue([
-      { nombreCharola: 'E-001', fechaCreacion: '2025-04-01' }
-    ]);
-    Charola.getCantidadTotal.mockResolvedValue(1);
+  let req, res;
 
-    const req = { query: { page: '1', limit: '10' } };
-    const res = {
+  beforeEach(() => {
+    // Simulaciones básicas de req y res para probar controladores
+    req = {
+      body: {},
+      params: {},
+      query: {},
+    };
+    res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn()
+      json: jest.fn(),
+    };
+  });
+
+  test('Debe registrar correctamente una charola con datos válidos', async () => {
+    const datos = {
+      nombre: 'C-321',
+      comidaCiclo: 'harina',
+      hidratacionCiclo: 'agua',
+      pesoCharola: 0.8,
+      densidadLarva: 'media',
+      fechaCreacion: '2025-04-30',
     };
 
-    await obtenerCharolas(req, res);
+    req.body = datos;
 
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
-      total: 1,
-      page: 1,
-      limit: 10,
-      totalPages: 1,
-      data: expect.any(Array)
-    }));
+    Charola.registrarCharola.mockResolvedValue({ charolaId: 1 });
+
+    await charolaController.registrarCharola(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(201);
+    expect(res.json).toHaveBeenCalledWith({ mensaje: 'Charola registrada correctamente', id: 1 });
   });
 
-  it('debe retornar código 200 con lista vacía', async () => {
-    Charola.getCharolasPaginadas.mockResolvedValue([]);
-    Charola.getCantidadTotal.mockResolvedValue(0);
-  
-    const req = { query: { page: '1', limit: '10' } };
-    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
-  
-    await obtenerCharolas(req, res);
-  
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
-      total: 0,
-      page: 1,
-      limit: 10,
-      totalPages: 0,
-      data: []
-    }));
-  });
+  test('Debe retornar error 500 si ocurre una excepción interna', async () => {
+    req.body = { nombre: 'C-000' };
 
-  it('debe retornar 401 si no está autorizado', async () => {
-    const req = { user: null, query: { page: '1', limit: '10' } };
-    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
-  
-    // Simula validación fallida (puedes modificarlo según tu implementación)
-    if (!req.user) {
-      res.status(401).json({ mensaje: 'No autorizado' });
-    }
-  
-    expect(res.status).toHaveBeenCalledWith(401);
-    expect(res.json).toHaveBeenCalledWith({ mensaje: 'No autorizado' });
-  });
+    Charola.registrarCharola.mockRejectedValue(new Error('Error interno'));
 
-  it('debe retornar 500 si ocurre un error inesperado', async () => {
-    Charola.getCharolasPaginadas.mockRejectedValue(new Error('Falla interna'));
-  
-    const req = { query: { page: '1', limit: '10' } };
-    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
-  
-    await obtenerCharolas(req, res);
-  
+    await charolaController.registrarCharola(req, res);
+
     expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
-      mensaje: 'Error interno del servidor'
-    }));
-  });  
+    expect(res.json).toHaveBeenCalledWith({ mensaje: 'Ocurrió un error al registrar la charola' });
+  });
 });

@@ -6,6 +6,7 @@ const session = require("express-session");
 const app = express();
 
 const db = require('./utils/database');
+const charolaRoutes = require('./routes/consultar_charola.route');
 
 async function testDB(){
     try {
@@ -21,6 +22,8 @@ testDB();
 app.set('view engine', 'ejs');
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use('/', charolaRoutes);
 
 // Route 404 Error
 app.use((req, res, next) => {

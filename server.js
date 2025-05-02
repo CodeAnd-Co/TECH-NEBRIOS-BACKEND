@@ -5,8 +5,6 @@ const dotenv = require("dotenv");
 const session = require("express-session");
 const app = express();
 
-// add cors
-const cors = require("cors");
 
 const db = require('./utils/database');
 
@@ -34,7 +32,6 @@ const corsOptions = {
     allowedHeaders: ['Content-Type','Authorization']
   };
 
-app.use(cors(corsOptions));
 
 app.use('/alimentacion', alimentacionRoutes);
 

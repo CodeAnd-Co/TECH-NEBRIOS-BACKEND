@@ -12,6 +12,7 @@ module.exports.registrarAlimento = async (req, res) => {
         const alimento = new Alimento(null, nombre, descripcion);
         await alimento.agregar();
         res.status(200).json({ success: true, message: "Alimento registrado exitosamente" });
+        console.log("Se conecto back con front");
     } catch (error) {
         console.error("Error al registrar alimento:", error);
 

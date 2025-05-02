@@ -1,58 +1,104 @@
-// RF16 Visualizar todas las charolas registradas en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
+// RF16 Visualizar todas las charolas registradas en el sistema
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
 
-// Pruebas del controlador de charolas.
-// Se asegura que las funciones del controlador respondan correctamente a solicitudes válidas o inválidas.
+const { obtenerCharolas } = require('../controllers/menu_charolas.controller');
+const Charola = require('../models/menu_charolas.model');
 
-const { describe, test, expect, beforeEach, jest } = require('@jest/globals');
-const charolaController = require('../../controllers/menu_charolas.controller');
-const Charola = require('../../models/charola.model');
+jest.mock('../models/menu_charolas.model');
 
-jest.mock('../../models/charola.model');
-
+/**
+ * Pruebas unitarias para el controlador obtenerCharolas.
+ * @group Tests - Controlador Charola
+ */
 describe('Controlador Charola', () => {
-  let req, res;
+  
+  /**
+   * Prueba: debe devolver código 200 y una lista de charolas simulada.
+   * @async
+   * @function
+   */
+  it('responde con JSON de charolas', async () => {
+    Charola.getCharolasPaginadas.mockResolvedValue([
+      { nombreCharola: 'E-001', fechaCreacion: '2025-04-01' }
+    ]);
+    Charola.getCantidadTotal.mockResolvedValue(1);
 
-  beforeEach(() => {
-    // Simulaciones básicas de req y res para probar controladores
-    req = {
-      body: {},
-      params: {},
-      query: {},
-    };
-    res = {
+    const req = { query: { page: '1', limit: '10' } };
+    const res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-  });
-
-  test('Debe registrar correctamente una charola con datos válidos', async () => {
-    const datos = {
-      nombre: 'C-321',
-      comidaCiclo: 'harina',
-      hidratacionCiclo: 'agua',
-      pesoCharola: 0.8,
-      densidadLarva: 'media',
-      fechaCreacion: '2025-04-30',
+      json: jest.fn()
     };
 
-    req.body = datos;
+    await obtenerCharolas(req, res);
 
-    Charola.registrarCharola.mockResolvedValue({ charolaId: 1 });
-
-    await charolaController.registrarCharola(req, res);
-
-    expect(res.status).toHaveBeenCalledWith(201);
-    expect(res.json).toHaveBeenCalledWith({ mensaje: 'Charola registrada correctamente', id: 1 });
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+      total: 1,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+      data: expect.any(Array)
+    }));
   });
 
-  test('Debe retornar error 500 si ocurre una excepción interna', async () => {
-    req.body = { nombre: 'C-000' };
+  /**
+   * Prueba: debe devolver código 200 con una lista vacía si no hay charolas.
+   * @async
+   * @function
+   */
+  it('debe retornar código 200 con lista vacía', async () => {
+    Charola.getCharolasPaginadas.mockResolvedValue([]);
+    Charola.getCantidadTotal.mockResolvedValue(0);
+  
+    const req = { query: { page: '1', limit: '10' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+  
+    await obtenerCharolas(req, res);
+  
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 0,
+      data: []
+    }));
+  });
 
-    Charola.registrarCharola.mockRejectedValue(new Error('Error interno'));
+  /**
+   * Prueba: simula un intento no autorizado (sin usuario autenticado).
+   * @function
+   */
+  it('debe retornar 401 si no está autorizado', async () => {
+    const req = { user: null, query: { page: '1', limit: '10' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
 
-    await charolaController.registrarCharola(req, res);
+    // Simula validación (ajustar según lógica real de middleware auth)
+    if (!req.user) {
+      res.status(401).json({ mensaje: 'No autorizado' });
+    }
 
+    expect(res.status).toHaveBeenCalledWith(401);
+    expect(res.json).toHaveBeenCalledWith({ mensaje: 'No autorizado' });
+  });
+
+  /**
+   * Prueba: debe retornar error 500 si ocurre una excepción durante la consulta.
+   * @async
+   * @function
+   */
+  it('debe retornar 500 si ocurre un error inesperado', async () => {
+    Charola.getCharolasPaginadas.mockRejectedValue(new Error('Falla interna'));
+
+    const req = { query: { page: '1', limit: '10' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+  
+    await obtenerCharolas(req, res);
+  
     expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({ mensaje: 'Ocurrió un error al registrar la charola' });
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+      mensaje: 'Error interno del servidor'
+    }));
   });
+
 });

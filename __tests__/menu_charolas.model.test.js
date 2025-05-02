@@ -1,38 +1,41 @@
-// RF16 Visualizar todas las charolas registradas en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
+// RF16 Visualizar todas las charolas registradas en el sistema
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
 
-// Pruebas unitarias para el modelo Charola.
-// Se asegura que la creación del modelo con datos simulados funcione correctamente.
+const Charola = require('../models/menu_charolas.model');
 
-const { describe, test, expect } = require('@jest/globals');
-const Charola = require('../../models/charola.model'); // Ajusta según estructura real
+jest.mock('../utils/database', () => {
+  return async () => ({
+    /**
+     * Mock de la función `query` que simula una respuesta de la base de datos.
+     * Devuelve una lista de charolas con datos ficticios.
+     */
+    query: jest.fn().mockResolvedValue([
+      { nombreCharola: 'C-105', fechaCreacion: '2025-04-18' }
+    ]),
 
-describe('Modelo Charola', () => {
-  test('Debe crear una instancia válida de Charola con datos completos', () => {
-    const datosSimulados = {
-      nombreCharola: 'C-123',
-      comidaCiclo: 'harina',
-      hidratacionCiclo: 'agua',
-      estado: 'activa',
-      pesoCharola: 0.5,
-      densidadLarva: 'alta',
-      fechaCreacion: '2025-04-30',
-    };
-
-    const nuevaCharola = new Charola(datosSimulados);
-
-    // Validaciones de propiedades
-    expect(nuevaCharola.nombreCharola).toBe('C-123');
-    expect(nuevaCharola.estado).toBe('activa');
-    expect(nuevaCharola.fechaCreacion).toBe('2025-04-30');
+    /**
+     * Mock de `release`, simula liberar la conexión (sin acción real).
+     */
+    release: jest.fn()
   });
+});
 
-  test('Debe lanzar error si falta algún campo obligatorio', () => {
-    const datosIncompletos = {
-      comidaCiclo: 'harina',
-      hidratacionCiclo: 'agua',
-    };
+/**
+ * Pruebas unitarias para el modelo `Charola`.
+ * @group Tests - Modelo Charola
+ */
+describe('Modelo Charola', () => {
+  /**
+   * Prueba: verifica que `getCharolasPaginadas` retorne una lista con los campos esperados.
+   * @async
+   * @function
+   * @returns {Promise<void>}
+   */
+  it('debe retornar una lista de charolas', async () => {
+    const datos = await Charola.getCharolasPaginadas(10, 0);
 
-    // Se espera que falle al construir el modelo
-    expect(() => new Charola(datosIncompletos)).toThrow();
+    expect(datos).toBeInstanceOf(Array);
+    expect(datos[0]).toHaveProperty('nombreCharola', 'C-105');
+    expect(datos[0]).toHaveProperty('fechaCreacion', '2025-04-18');
   });
 });

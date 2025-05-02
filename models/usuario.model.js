@@ -51,6 +51,10 @@ module.exports = class Usuario {
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       throw error;
+    }finally {
+      if (connection) {
+        connection.release();
+      }
     }
   }
 

@@ -69,6 +69,10 @@ module.exports = class Usuario {
     } catch (error) {
       console.error("Error al buscar usuario:", error);
       throw error;
+    }finally {
+      if (connection) {
+        connection.release();
+      }
     }
   }
 };

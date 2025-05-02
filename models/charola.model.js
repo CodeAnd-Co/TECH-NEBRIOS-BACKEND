@@ -32,66 +32,40 @@ module.exports = class Charola {
     }
   };
 
-  static async buscarPorId(charolaId) {
-    const connection = await db();
+  static async obtenerFechaCreacion(charolaId) {
+    const conexion = await db();
 
     try {
-      const rows = await connection.query(
-        "SELECT * FROM CHAROLA WHERE charolaId = ?",
+      const resultado = await conexion.query(
+        "SELECT fechaCreacion FROM CHAROLA WHERE charolaId = ?",
         [charolaId]
       );
-      
-      return rows.length ? rows[0] : null;
+      console.log(resultado);
+      return resultado;
     } catch (err) {
-      console.error("[Model][buscarPorId] error en query:", err);
+      console.error("[Model][obtenerFechaCreacion] error en query:", err);
       throw err;
     } finally {
-      connection.release();
+      conexion.release();
     }
   }
   
    
   static async obtenerAncestros(charolaId) {
-    const connection = await db();
+    const conexion = await db();
 
     try {
-      const actual = await this.buscarPorId(charolaId);
-
-      if (!actual) {
-        return { actual: null, ancestros: [] };
-      }
-
-      const ancestros = [];
-      let currentId = charolaId;
-
-      while (true) {
-        const relaciones = await connection.query(
-          "SELECT charolaAncestro FROM CHAROLA_CHAROLA WHERE charolaHija = ?",
-          [currentId]
-        );
-
-        if (relaciones.length === 0 || !relaciones[0].charolaAncestro) {
-          break;
-        }
-
-        const padreId = relaciones[0].charolaAncestro;
-        const padre = await this.buscarPorId(padreId);
-
-        if (!padre) {
-          break;
-        }
-
-        ancestros.push(padre);
-        currentId = padre.charolaId;
-      }
-
-      return { actual, ancestros };
-
+      const relaciones = await conexion.query(
+        "SELECT a.charolaAncestro, c.nombreCharola FROM CHAROLA_CHAROLA a JOIN CHAROLA c ON a.charolaAncestro = c.charolaId WHERE a.charolaHija = ?",
+        [charolaId]
+      );
+      
+      return relaciones;
     } catch (error) {
       console.error("[Model][obtenerAncestros] error general:", error);
       throw error;
     } finally {
-      connection.release();
+      conexion.release();
     }
   }
 };

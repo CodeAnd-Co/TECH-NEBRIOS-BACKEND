@@ -14,7 +14,7 @@ const controlador = require("../controllers/charola.controller");
 
 /* GET METHODS */
 router.get("/getTablaCharolas", controlador.getTablasCharolas);
-router.get("/:charolaId/ancestros", controlador.obtenerHistorialAncestros);
+router.get("/:charolaId/historial", controlador.obtenerHistorialAncestros);
 /* ----------- */
 
 /* POST METHODS */

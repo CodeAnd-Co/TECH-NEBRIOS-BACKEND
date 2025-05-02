@@ -36,32 +36,25 @@ exports.postDescargarExcel = async (req, res) => {
 
 exports.obtenerHistorialAncestros = async (req, res) => {
     const charolaId = parseInt(req.params.charolaId, 10);
-    console.log("[Controller][obtenerHistorialAncestros] req.params:", req.params);
-    console.log("[Controller][obtenerHistorialAncestros] charolaId parsed:", charolaId);
-  
     if (isNaN(charolaId)) {
-      console.log("[Controller][obtenerHistorialAncestros] ID inválido");
-      return res.status(400).json({ error: 'ID inválido' });
+      return res.status(400).json({ error: 'ID de charola inválido' });
     }
   
     try {
-      console.log("[Controller][obtenerHistorialAncestros] llamando a modelo.obtenerAncestros");
-      const { actual, ancestros } = await Charola.obtenerAncestros(charolaId);
-      console.log("[Controller][obtenerHistorialAncestros] respuesta modelo actual:", actual);
-      console.log("[Controller][obtenerHistorialAncestros] respuesta modelo ancestros:", ancestros);
-  
-      if (!actual) {
-        console.log("[Controller][obtenerHistorialAncestros] no se encontró la charola");
+      const fecha = await Charola.obtenerFechaCreacion(charolaId);
+      if (!fecha || fecha.length === 0) {
         return res.status(404).json({ error: 'Charola no encontrada' });
       }
+      const fechaCreacion = fecha[0].fechaCreacion;
   
-      console.log("[Controller][obtenerHistorialAncestros] enviando éxito 200");
-      res.status(200).json({
-        charola_actual: actual,
+      const ancestros = await Charola.obtenerAncestros(charolaId);
+      
+      return res.status(200).json({
+        fechaCreacion,
         ancestros
       });
-    } catch (error) {
-      console.error("[Controller][obtenerHistorialAncestros] error capturado:", error);
-      res.status(500).json({ error: 'Error del servidor' });
+    } catch (err) {
+      console.error('[Controller][obtenerHistorialAncestros] error:', err);
+      return res.status(500).json({ error: 'Error interno del servidor' });
     }
-};
+  };

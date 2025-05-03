@@ -8,7 +8,7 @@ const app = express();
 
 const db = require('./utils/database');
 
-const alimentacionRoutes = require("./routes/alimentacionIndex");
+const alimentacionRoutes = require("./routes/alimentacion.routes");
 
 async function testDB(){
     try {

@@ -23,4 +23,9 @@ module.exports.registrarAlimento = async (req, res) => {
 
         res.status(500).json({ success: false, message: "Error del servidor al registrar alimento" });
     }
+
+    return res.status(500).json({
+        success: false,
+        message: "Error del servidor al registrar alimento (error 500)"
+    });
 }

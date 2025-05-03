@@ -1,34 +1,28 @@
 /* Dependencias */
-const express = require("express");
-const bodyParser = require("body-parser");
 const router = express.Router();
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(express.json()); 
 router.use(express.urlencoded({ extended: true }));
 
-/* INCLUDE CONTROLLERS */
+//Incluir Controladores
 const obtenerAlimentosController = require("../controllers/obtener-alimentacion.controller.js");
 const eliminarAlimentoController = require("../controllers/eliminar-alimentacion.controller.js");
 const registrarAlimentoController = require("../controllers/agregar-alimentacion.controller.js");
 
-/* ------------------- */
 
-/* GET METHODS */
+//Metodo GET
 router.get('/', obtenerAlimentosController.obtenerAlimentos); 
-/* ----------- */
 
-/* POST METHODS */
+//Metodo POST
 router.post('/agregar', registrarAlimentoController.registrarAlimento);
 
-/* ----------- */
 
-/* PUT METHODS */
+// Metodo PUT
 
-/* ----------- */
 
-/* DELETE METHODS */
+//Metodo DELETE
 router.delete('/eliminar/:idAlimento', eliminarAlimentoController.eliminarAlimento);
-/* ----------- */
+
 
 module.exports = router;

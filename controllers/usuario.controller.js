@@ -19,3 +19,11 @@ exports.iniciarSesion = async (req, res) => {
         return res.status(500).json({code: 500})
     }
 };
+exports.registrarUsuario = async (req, res) => {
+    try {
+        const nuevoUsuario = await Usuario.registrarUsuario(req.body);
+        return res.status(201).json({ code: 201 });
+    } catch (error) {
+        return res.status(500).json({ code: 500 });
+    }
+}

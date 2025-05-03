@@ -17,6 +17,7 @@ const controlador = require("../controllers/usuario.controller");
 
 /* POST METHODS */
 router.post("/iniciarSesion", controlador.iniciarSesion);
+router.post("/registrarUsuario", controlador.registrarUsuario);
 /* ----------- */
 
 /* PUT METHODS */

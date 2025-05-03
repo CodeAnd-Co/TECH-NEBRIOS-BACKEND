@@ -9,7 +9,7 @@ const e = require('express');
 describe('Modelo Usuario', () => {
   test('Debe crear un token jwt', async () => {
     const datosSimulados = {
-      usuario: 'EmiV',
+      usuario: 'EmiVa',
       contrasena: '123',
     };
     const nuevaSesion = await Usuario.iniciarSesion(datosSimulados);

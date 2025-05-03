@@ -1,6 +1,8 @@
+const bcrypt = require("bcryptjs");
 const db = require("../utils/database");
 const jwt = require('jsonwebtoken');
 const dotenv = require("dotenv");
+
 dotenv.config();
 
 module.exports = class Usuario {
@@ -19,9 +21,7 @@ module.exports = class Usuario {
 
       const usuario = rows[0];
 
-      let contrasenaCorrecta = false;
-
-      datos.contrasena == usuario.contrasena ? contrasenaCorrecta = true : contrasenaCorrecta = false
+      const contrasenaCorrecta = await bcrypt.compare(datos.contrasena, usuario.contrasena);
 
       if(!contrasenaCorrecta){
         return {error: "Contraseña incorrecta"}
@@ -73,4 +73,20 @@ module.exports = class Usuario {
       }
     }
   }
+
+  static async registrarUsuario(usuarioNuevo) {
+    try {
+        const connection = await db();
+        const contrasenaHash = await bcrypt.hash(usuarioNuevo.contrasena, 12)
+        const usuario = await connection.execute(
+        `INSERT INTO USUARIO (user, contrasena, nombre, apellido_m, apellido_p) VALUES (?, ?, ?, ?, ?)`,
+        [usuarioNuevo.usuario, contrasenaHash, usuarioNuevo.nombre, usuarioNuevo.apellido_m, usuarioNuevo.apellido_p]
+        );
+        await connection.release();
+        return usuario;
+    } catch (error) {
+      console.log("Error al registrar usuario:", error);
+        throw error; 
+    }
+}
 };

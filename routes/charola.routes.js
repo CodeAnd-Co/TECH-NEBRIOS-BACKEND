@@ -1,6 +1,6 @@
 /* Dependencias */
 const express = require("express");
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser"); // ESTO VA EN LA RAÍZ DEL PROYECTO
 const router = express.Router();
 /* ------------ */
 

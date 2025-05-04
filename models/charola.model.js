@@ -41,7 +41,6 @@ module.exports = class Charola {
           `No se encontró una comida con el nombre: ${data.nombreComida}`
         );
       }
-      console.log("Comida encontrada:", comidaResult, comidaResult[0]);
 
       const comidaId = comidaResult[0].comidaId; // ID de la comida obtenida
 
@@ -58,11 +57,13 @@ module.exports = class Charola {
         "SELECT hidratacionId FROM HIDRATACION WHERE nombre = ?",
         [data.nombreHidratacion]
       );
+
       if (!hidratacionResult || hidratacionResult.length === 0) {
         throw new Error(
           `No se encontró una hidratación con el nombre: ${data.nombreHidratacion}`
         );
       }
+
       const hidratacionId = hidratacionResult[0].hidratacionId; // ID de la hidratación obtenida
 
       // Insertar en la tabla CHAROLA_HIDRATACION
@@ -80,10 +81,6 @@ module.exports = class Charola {
     } catch (error) {
       // Revertir la transacción en caso de error
       await connection.rollback();
-      console.error(
-        "Error al registrar la charola y su relación con comida:",
-        error
-      );
       throw error;
     } finally {
       // Cerrar la conexión

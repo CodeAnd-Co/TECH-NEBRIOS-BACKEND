@@ -9,14 +9,14 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 /* INCLUDE CONTROLLERS */
-const controlador = require("../controllers/charola.controller");
+const controlador = require("../controllers/hidratacion.controller");
 /* ------------------- */
 
 /* GET METHODS */
+router.get("/obtener-hidratacion", controlador.obtenerHidratacion);
 /* ----------- */
 
 /* POST METHODS */
-router.post("/registrarCharola", controlador.registrarCharola);
 /* ----------- */
 
 /* PUT METHODS */

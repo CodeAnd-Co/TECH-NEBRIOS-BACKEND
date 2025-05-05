@@ -3,6 +3,12 @@ const jwt = require('jsonwebtoken')
 const dotenv = require("dotenv");
 dotenv.config();
 
+/**
+ * @description Middleware para verificar que la sesión del usuario es válida.
+ * @param {*} req - Solicitud HTTP entrante.
+ * @param {*} res - Respuesta HTTP.
+ * @param {} next - Función para continuar con el siguiente middleware.
+ */
 async function verificarSesionActiva(req, res, next) {
     const autenticacion = req.headers.authorization;
 

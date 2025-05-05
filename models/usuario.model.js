@@ -6,6 +6,11 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 module.exports = class Usuario {
+/**
+ * @description Intenta iniciar sesión buscando al usuario en la base de datos.
+ * @param {Object} datos - Objeto con el nombre de usuario y contraseña.
+ * @returns {String} - Token de JWT con información sobre el usuario.
+ */
   static async iniciarSesion(datos) {
     let connection;
     try {
@@ -55,6 +60,11 @@ module.exports = class Usuario {
     }
   }
 
+ /**
+ * @description Busca un usuario en la base de datos a partir de su nombre de usuario.
+ * @param {String} usuario - Nombre de usuario a buscar.
+ * @returns {JSON} - Fila de la base de datos o error si no se encuentra.
+ */
   static async buscarUsuario(usuario){
     let connection;
     try {
@@ -74,6 +84,11 @@ module.exports = class Usuario {
     }
   }
 
+  /**
+ * @description Registra al usuario nuevo en la base de datos.
+ * @param {Object} usuarioNuevo - Objeto con información del nuevo usuario.
+ * @returns {Array} Arreglo con información de la inserción en la base de datos.
+ */
   static async registrarUsuario(usuarioNuevo) {
     try {
         const connection = await db();
@@ -88,5 +103,5 @@ module.exports = class Usuario {
       console.log("Error al registrar usuario:", error);
         throw error; 
     }
-}
+  }
 };

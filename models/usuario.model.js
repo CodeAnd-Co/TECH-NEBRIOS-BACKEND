@@ -12,10 +12,10 @@ module.exports = class Usuario {
  * @returns {String} - Token de JWT con información sobre el usuario.
  */
   static async iniciarSesion(datos) {
-    let connection;
+    let conexion;
     try {
-      connection = await db();
-      let rows = await connection.query(
+      conexion = await db();
+      let rows = await conexion.query(
         "SELECT usuarioId, user, contrasena FROM USUARIO WHERE user = ?",
         [datos.usuario]
       );
@@ -32,7 +32,7 @@ module.exports = class Usuario {
         return {error: "Contraseña incorrecta"}
       }
 
-      rows = await connection.query(
+      rows = await conexion.query(
         "SELECT * FROM ADMINISTRADOR WHERE usuarioId = ?",
         [usuario.usuarioId]
       );
@@ -54,8 +54,8 @@ module.exports = class Usuario {
       console.log("Error al iniciar sesión:", error);
       throw error;
     }finally {
-      if (connection) {
-        connection.release();
+      if (conexion) {
+        conexion.release();
       }
     }
   }

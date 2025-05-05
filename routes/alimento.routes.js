@@ -1,19 +1,16 @@
 /* Dependencias */
 const express = require("express");
-const bodyParser = require("body-parser");
 const router = express.Router();
 
-router.use(bodyParser.urlencoded({ extended: true }));
 router.use(express.json()); 
 router.use(express.urlencoded({ extended: true }));
 
 /* INCLUDE CONTROLLERS */
-const obtenerAlimentosController = require("../controllers/obtener-alimentacion.controller.js");
-const eliminarAlimentoController = require("../controllers/eliminar-alimentacion.controller.js");
+const alimentoController = require("../controllers/alimento.controller.js");
 /* ------------------- */
 
 /* GET METHODS */
-router.get('/', obtenerAlimentosController.obtenerAlimentos); 
+router.get('/', alimentoController.obtenerAlimentos); 
 /* ----------- */
 
 /* POST METHODS */
@@ -25,7 +22,7 @@ router.get('/', obtenerAlimentosController.obtenerAlimentos);
 /* ----------- */
 
 /* DELETE METHODS */
-router.delete('/eliminar/:idAlimento', eliminarAlimentoController.eliminarAlimento);
+router.delete('/eliminar/:idAlimento', alimentoController.eliminarAlimento);
 /* ----------- */
 
 module.exports = router;

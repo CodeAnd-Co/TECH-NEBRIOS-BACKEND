@@ -7,14 +7,15 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 /* INCLUDE CONTROLLERS */
-const controlador = require("../controllers/charola.controller");
+const controlador = require("../controllers/usuario.controller");
 /* ------------------- */
 
 /* GET METHODS */
 /* ----------- */
 
 /* POST METHODS */
-router.post("/registrarCharola", controlador.registrarCharola);
+router.post("/iniciarSesion", controlador.iniciarSesion);
+router.post("/registrarUsuario", controlador.registrarUsuario);
 /* ----------- */
 
 /* PUT METHODS */

@@ -4,7 +4,6 @@
 const { describe, test, expect } = require('@jest/globals');
 const jwt = require("jsonwebtoken");
 const Usuario = require('../models/usuario.model'); 
-const e = require('express');
 
 describe('Modelo Usuario', () => {
   test('Debe crear un token jwt', async () => {

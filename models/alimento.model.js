@@ -1,5 +1,13 @@
+/**
+ * @file Modelo Alimento para gestionar operaciones con la base de datos.
+ * @module models/Alimento
+ */
+
 const db = require('../utils/database.js');
 
+/**
+ * Clase que representa un alimento.
+ */
 module.exports.Alimento = class {
     constructor(idAlimento, nombreAlimento, descripcionAlimento) {
         this.idAlimento = idAlimento;

@@ -6,6 +6,8 @@ const session = require("express-session");
 const db = require("./utils/database");
 
 const app = express();
+
+const sesionActiva = require("./utils/middlewares/sesionActiva");
 /* ------------ */
 
 

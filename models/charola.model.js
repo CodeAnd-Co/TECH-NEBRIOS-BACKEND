@@ -1,6 +1,5 @@
 const db = require("../utils/database");
 
-// TODO: Revisar el modelo, ya que probablemente no es correcto porque se debe trabajar con mas tablas
 module.exports = class Charola {
   static async registrarCharola(data) {
     try {
@@ -13,6 +12,60 @@ module.exports = class Charola {
     } catch (error) {
       console.error("Error al registrar la charola:", error);
       throw error;
+    }
+  }
+
+  static async getCharola(charolaID) {
+    const connection = await db();
+    try {
+      const [charola] = await connection.query(
+        'SELECT * FROM CHAROLA WHERE charolaId = ?',
+        [charolaID]
+      );
+
+      if (charola.length === 0) {
+        return { error: 'No se encontró la charola con el ID proporcionado.' };
+      }
+
+      const [relacionHidratacion] = await connection.query(
+        'SELECT * FROM CHAROLA_HIDRATACION WHERE charolaId = ?',
+        [charolaID]
+      );
+
+      const [relacionComida] = await connection.query(
+        'SELECT * FROM CHAROLA_COMIDA WHERE charolaId = ?',
+        [charolaID]
+      );
+
+      if (relacionHidratacion.length === 0 || relacionComida.length === 0) {
+        return {
+          charola,
+          relacionHidratacion: [],
+          relacionComida: [],
+          hidratacion: [],
+          comida: [],
+        };
+      }
+
+      const [hidratacion] = await connection.query(
+        'SELECT * FROM HIDRATACION WHERE hidratacionId = ?',
+        [relacionHidratacion[0].hidratacionId]
+      );
+
+      const [comida] = await connection.query(
+        'SELECT * FROM COMIDA WHERE comidaId = ?',
+        [relacionComida[0].comidaId]
+      );
+
+      return {
+        charola,
+        hidratacion,
+        comida,
+      };
+    } catch (error) {
+      return { error: error.message };
+    } finally {
+      connection.release();
     }
   }
 };

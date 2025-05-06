@@ -18,11 +18,11 @@ router.get('/', alimentoController.obtenerAlimentos);
 /* ----------- */
 
 /* PUT METHODS */
-
+router.put('/editar/:idAlimento', alimentoController.editarAlimento);
 /* ----------- */
 
 /* DELETE METHODS */
-router.delete('/eliminar/:idAlimento', alimentoController.eliminarAlimento);
+
 /* ----------- */
 
 module.exports = router;

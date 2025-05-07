@@ -3,7 +3,7 @@ const router = express.Router();
 /* ------------ */
 
 /* INCLUDE CONTROLLERS */
-const controlador = require("../controllers/charola.controller");
+const controlador = require("../controllers/tablaCharola.controller");
 /* ------------------- */
 
 /* GET METHODS */

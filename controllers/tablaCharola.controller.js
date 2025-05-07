@@ -1,5 +1,5 @@
-const Charola = require("../models/charola.model.js");
-const {generarExcelDesdeDatos}  = require('../utils/excelGenerador');
+const Charola = require("../models/tablaCharola.model.js");
+const {generarExcelDesdeDatos}  = require('../utils/excelGenerador.js');
 
 // Metodo http GET para obtener la informacion de todas las charolas de larva o escarabajo
 // Nota: A falta de los middleware de autentificación, falta la implementacion de los errores 401 y 403

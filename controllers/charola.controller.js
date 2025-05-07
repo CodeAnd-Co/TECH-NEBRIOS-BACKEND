@@ -3,6 +3,7 @@ const Charola = require("../models/charola.model.js");
 exports.registrarCharola = async (req, res) => {
   try {
     console.log("Datos recibidos:", req.body);
+
     const data = {
       nombre: req.body.nombre || "Sin nombre",
       nombreComida: req.body.nombreComida || "Desconocido",
@@ -16,6 +17,15 @@ exports.registrarCharola = async (req, res) => {
     };
 
     console.log("Datos procesados:", data);
+
+    // Verificar si el nombre ya existe
+    const nombreExistente = await Charola.verificarNombre(data.nombre);
+    if (nombreExistente) {
+      return res.status(409).json({
+        status: "error",
+        message: "El nombre ya existe en la base de datos.",
+      });
+    }
 
     const result = await Charola.registrarCharola(data);
 

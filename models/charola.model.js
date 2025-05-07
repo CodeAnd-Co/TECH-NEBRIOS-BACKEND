@@ -1,6 +1,21 @@
 const db = require("../utils/database");
 
 module.exports = class Charola {
+  static async verificarNombre(nombre) {
+    const connection = await db();
+    try {
+      const [result] = await connection.query(
+        "SELECT COUNT(*) AS count FROM CHAROLA WHERE nombreCharola = ?",
+        [nombre]
+      );
+      return result.count > 0; // Devuelve true si el nombre ya existe
+    } catch (error) {
+      throw error;
+    } finally {
+      connection.end();
+    }
+  }
+
   static async registrarCharola(data) {
     const connection = await db();
     try {

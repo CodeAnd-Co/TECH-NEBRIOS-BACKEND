@@ -1,20 +1,33 @@
 /**
- * @file Modelo Alimento para gestionar operaciones con la base de datos.
+ * @file Modelo que representa y gestiona operaciones de alimentos en la base de datos.
  * @module models/Alimento
  */
 
 const db = require('../utils/database.js');
 
 /**
- * Clase que representa un alimento.
+ * Clase que representa un alimento y sus operaciones CRUD.
  */
 module.exports.Alimento = class {
+      /**
+   * Crea una nueva instancia de Alimento.
+   * @constructor
+   * @param {?number} idAlimento - ID único del alimento. Puede ser null si es un nuevo alimento.
+   * @param {string} nombreAlimento - Nombre del alimento.
+   * @param {string} descripcionAlimento - Descripción del alimento.
+   */
     constructor(idAlimento, nombreAlimento, descripcionAlimento) {
         this.idAlimento = idAlimento;
         this.nombreAlimento = nombreAlimento;
         this.descripcionAlimento = descripcionAlimento;
     }
 
+      /**
+   * Obtiene todos los alimentos desde la base de datos.
+   * @async
+   * @returns {Promise<Object[]>} Lista de alimentos.
+   * @throws Lanza un error si falla la consulta a la base de datos.
+   */
     async obtener() {
         try {
             const connection = await db();
@@ -28,6 +41,12 @@ module.exports.Alimento = class {
         }
     }
 
+    /**
+   * Elimina este alimento de la base de datos.
+   * @async
+   * @returns {Promise<void>}
+   * @throws Lanza un error si la eliminación falla.
+   */
     async eliminar() {
         try {
             const connection = await db();
@@ -40,6 +59,12 @@ module.exports.Alimento = class {
         }
     }
 
+    /**
+   * Agrega este alimento a la base de datos.
+   * @async
+   * @returns {Promise<void>}
+   * @throws Lanza un error si la inserción falla.
+   */
     async agregar() {
         try {
             const connection = await db();

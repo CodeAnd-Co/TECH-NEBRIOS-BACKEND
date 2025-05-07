@@ -10,10 +10,12 @@ const db = require("./utils/database");
 const app = express();
 /* Rutas */
 const charolaRoutes = require("./routes/charola.routes");
+const usuarioRoutes = require("./routes/usuario.routes");
 /* ----- */
 
 /* Rutas de la API */
 app.use("/charola", charolaRoutes);
+app.use("/usuario", usuarioRoutes);
 /* ----- */
 
 /* Conexion a la base de datos*/

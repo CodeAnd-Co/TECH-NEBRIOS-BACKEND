@@ -1,22 +1,38 @@
 const Charola = require("../models/tablaCharola.model.js");
 const {generarExcelDesdeDatos}  = require('../utils/excelGenerador.js');
 
-// Metodo http GET para obtener la informacion de todas las charolas de larva o escarabajo
+/** 
+  *@description Metodo http GET para obtener la informacion de todas las charolas de larva o escarabajo.
+  * @param {*} res - Respuesta HTTP que se usa para enviar el resultado.
+  * @returns {JSON} Codigo de respuesta y array con la consulta de la BD.
+*/
 // Nota: A falta de los middleware de autentificación, falta la implementacion de los errores 401 y 403
 // RF11:
 // https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF11
 exports.getTablasCharolas = async (req, res) => {
     try{
         const resultado = await Charola.tablaCharolas();
-        //const resultado = [];
-        res.status(200).json(resultado);
+
+        if (resultado.error){
+            res.status(500).json({'error': 'Ocurrio un error en el servidor'});
+        }
+
+        if (resultado.length > 0){
+            res.status(200).json({"code": "Ok", "resultado": resultado});
+        }else {
+            res.status(201).json({"code": "Ok", "resultado": resultado});
+        }
     }catch (error){
         console.error("[Controller]. Error al obtener informacion de las charolas: ", error);
-        res.status(500).json({'Error': 'Ocurrio un error en el servidor'});
+        res.status(500).json({'error': 'Ocurrio un error en el servidor'});
     }
 };
 
-// Metodo http POST Para descargar los archivos de excel con la información de las charolas
+/** 
+  *@description Metodo http POST Para descargar los archivos de excel con la información de las charolas.
+  * @param {*} res - Respuesta HTTP que se usa para enviar el archivo excel.
+  * @returns {buffer} Codigo de respuesta y buffer del archivo excel.
+*/
 // Nota: A falta de los middleware de autentificación, falta la implementacion de los errores 401 y 403
 // RF11:
 // https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF11
@@ -26,7 +42,7 @@ exports.postDescargarExcel = async (req, res) => {
 
         // Si no hay datos de las charolas en la BD no se devuelve un buffer con el archivo
         if (!datos || datos.length === 0) {
-            return res.status(200).json({'Error': 'No hay datos de charolas'});
+            return res.status(201).json({'error': 'No hay datos de charolas'});
         }
 
         const buffer = await generarExcelDesdeDatos(datos);

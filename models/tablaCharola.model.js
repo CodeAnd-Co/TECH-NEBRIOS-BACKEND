@@ -5,7 +5,10 @@ const { format } = require('date-fns');
 const prisma = new PrismaClient();
  
 const CharolaModel = {
-  // Metodo para realizar la consulta de la información de las charolas
+  /**
+   * @description Metodo para realizar la consulta de la información de las charolas.
+   * @returns {Array} - Array con la informacion de la consulta de la BD
+  */
   // RF11:
   // https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF11
   async tablaCharolas() {
@@ -39,7 +42,7 @@ const CharolaModel = {
       return resultadoFormateado;
     } catch (error) {
       console.error("[Model] Error al obtener información de las charolas:", error);
-      throw error;
+      throw error;      
     }
   }
 };

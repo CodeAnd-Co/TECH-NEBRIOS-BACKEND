@@ -11,6 +11,7 @@ const controlador = require("../controllers/charola.controller");
 /* ------------------- */
 
 /* GET METHODS */
+router.get('/consultarCharola/:id', controlador.consultarCharola);
 /* ----------- */
 
 /* POST METHODS */

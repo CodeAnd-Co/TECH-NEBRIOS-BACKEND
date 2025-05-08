@@ -95,4 +95,8 @@ module.exports = class Charola {
       connection.release();
     }
   }
+
+  static async eliminarCharola(charolaID){
+
+  }
 };

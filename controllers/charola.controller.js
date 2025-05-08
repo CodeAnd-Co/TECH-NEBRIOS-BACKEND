@@ -9,6 +9,11 @@ const Charola = require("../models/charola.model.js");
 
 const consultarCharola = async (req, res) => {
   const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'Falta id' });
+  }
+  
   try {
     const charola = await Charola.getCharola(parseInt(id));
 
@@ -28,16 +33,7 @@ const consultarCharola = async (req, res) => {
 
 const registrarCharola = async (req, res) => {};
 
-module.exports = {
-  consultarCharola,
-  registrarCharola
-};
-
-
-const db = require("../utils/database");
-const connection = await db();
-
-exports.eliminarCharola = async (req, res) => {
+const eliminarCharola = async (req, res) => {
   const { id } = req.params;
 
   if (!id) {
@@ -45,14 +41,15 @@ exports.eliminarCharola = async (req, res) => {
   }
 
   try {
-    const query = 'DELETE FROM CHAROLA WHERE charolaId = ?';
-    const [resultado] = await connection.query(query, [id]);
+    const charola = await Charola.eliminarCharola(parseInt(id))
 
-    if (resultado.affectedRows === 0) {
-      return res.status(404).json({ mensaje: `No se encontró una charola con ID ${id}` });
+    if (charola.error) {
+      return res.status(404).json({ error: charola.error });
     }
 
-    res.json({ mensaje: `Charola con ID ${id} eliminada exitosamente` });
+    res.status(200).json({
+      data: charola
+    });2
 
   } catch (err) {
     console.error('Error al eliminar la charola:', err);
@@ -61,4 +58,10 @@ exports.eliminarCharola = async (req, res) => {
   } finally {
     if (connection) connection.release();
   }
+};
+
+module.exports = {
+  consultarCharola,
+  registrarCharola,
+  eliminarCharola
 };

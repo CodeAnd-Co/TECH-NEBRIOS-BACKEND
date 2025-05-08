@@ -1,3 +1,7 @@
+// RF10 Consultar charola - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF10
+// Pruebas del modelo de charola
+// Se asegura que la creación del modelo con datos simulados
+
 const Charola = require('../models/charola.model');
 const mockDb = require('../utils/database');
 

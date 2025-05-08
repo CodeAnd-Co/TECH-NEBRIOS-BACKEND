@@ -17,7 +17,7 @@ const usuarioRoutes = require("./routes/usuario.routes");
 /* ----- */
 
 /* Rutas de la API */
-app.use("/charola", sesionActiva, charolasRoutes);
+app.use("/charola", charolasRoutes);
 app.use("/usuario", usuarioRoutes);
 /* ----- */
 

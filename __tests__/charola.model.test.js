@@ -37,12 +37,12 @@ describe('Modelo Charola', () => {
             .mockResolvedValueOnce([[{ 
                 charolaId: 1004, 
                 hidratacionId: 1, 
-                cantidadOtorgada: 50 
+                cantidadOtorgada: 15 
             }]]) // CHAROLA_HIDRATACION
             .mockResolvedValueOnce([[{ 
                 charolaId: 1004, 
                 comidaId: 1, 
-                cantidadOtorgada: 30 
+                cantidadOtorgada: 10 
             }]]) // CHAROLA_COMIDA
             .mockResolvedValueOnce([[{ 
                 hidratacionId: 1, 
@@ -58,6 +58,16 @@ describe('Modelo Charola', () => {
         const resultado = await Charola.getCharola(charolaID);
       
         expect(resultado).toEqual({
+            relacionComida: [{
+              charolaId : 1004,
+              comidaId: 1,
+              cantidadOtorgada: 10
+            }],
+            relacionHidratacion: [{
+              charolaId : 1004,
+              hidratacionId: 1,
+              cantidadOtorgada: 15
+            }],
             charola: [{
               charolaId: 1004,
               nombreCharola: 'testxd',
@@ -80,7 +90,6 @@ describe('Modelo Charola', () => {
               descripcion: 'fruta roja'
             }]
           });
-          
     });
 
     test('debe devolver un mensaje de error si no se encuentra la charola', async () => {

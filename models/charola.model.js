@@ -82,9 +82,11 @@ module.exports = class Charola {
       );
 
       return {
-        charola: charola,
-        hidratacion: hidratacion,
-        comida: comida
+        relacionComida,
+        relacionHidratacion,
+        charola,
+        hidratacion,
+        comida
       };
 
     } catch (error) {

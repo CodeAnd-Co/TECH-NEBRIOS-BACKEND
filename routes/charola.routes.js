@@ -1,8 +1,28 @@
-const express = require('express');
-const enrutador = express.Router();
-const controlador = require('../controllers/charola.controller.js');
+/* Dependencias */
+const express = require("express");
+const router = express.Router();
+/* ------------ */
 
-// Ruta para eliminar una charola
-enrutador.delete('/eliminar-charola/:id', controlador.eliminarCharola);
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
 
-module.exports = enrutador;
+/* INCLUDE CONTROLLERS */
+const controlador = require("../controllers/charola.controller");
+/* ------------------- */
+
+/* GET METHODS */
+/* ----------- */
+
+/* POST METHODS */
+router.post("/registrarCharola", controlador.registrarCharola);
+/* ----------- */
+
+/* PUT METHODS */
+
+/* ----------- */
+
+/* DELETE METHODS */
+
+/* ----------- */
+
+module.exports = router;

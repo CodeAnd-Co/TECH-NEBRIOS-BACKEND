@@ -5,16 +5,21 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const session = require("express-session");
 const db = require("./utils/database");
+
+const app = express();
 /* ------------ */
 
 /* Rutas */
-const excelRoutes = require("./routes/excel.rutas");
-const testRoutes = require("./routes/test.routes");
+const charolaRoutes = require("./routes/charola.routes");
+const usuarioRoutes = require("./routes/usuario.routes");
 /* ----- */
 
-const app = express();
-app.use(express.json());
+/* Rutas de la API */
+app.use("/charola", charolaRoutes);
+app.use("/usuario", usuarioRoutes);
+/* ----- */
 
+/* Conexion a la base de datos*/
 async function testDB() {
   try {
     const test = await db();
@@ -25,14 +30,12 @@ async function testDB() {
 }
 
 testDB();
+/* ----- */
 
+/* Inicializar express */
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
-
-/* Rutas */
-app.use("/api", excelRoutes);
-app.use("/test", testRoutes);
 /* ----- */
 
 /* Route 404 Error */

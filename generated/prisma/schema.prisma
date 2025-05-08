@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -12,4 +6,106 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model ADMINISTRADOR {
+  adminId   Int      @id @default(autoincrement())
+  usuarioId Int?
+  USUARIO   USUARIO? @relation(fields: [usuarioId], references: [usuarioId], onDelete: Cascade, onUpdate: Restrict, map: "ADMINISTRADOR_ibfk_1")
+
+  @@index([usuarioId], map: "usuarioId")
+}
+
+model CHAROLA {
+  charolaId                                                Int                   @id @default(autoincrement())
+  nombreCharola                                            String?               @db.VarChar(20)
+  comidaCiclo                                              Float                 @db.Float
+  hidratacionCiclo                                         Float                 @db.Float
+  fechaActualizacion                                       DateTime?             @db.Date
+  estado                                                   String?               @db.VarChar(25)
+  densidadLarva                                            Float?                @db.Float
+  fechaCreacion                                            DateTime?             @db.Date
+  pesoCharola                                              Float?                @db.Float
+  CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA     CHAROLA_CHAROLA[]     @relation("CHAROLA_CHAROLA_charolaHijaToCHAROLA")
+  CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA CHAROLA_CHAROLA[]     @relation("CHAROLA_CHAROLA_charolaAncestroToCHAROLA")
+  CHAROLA_COMIDA                                           CHAROLA_COMIDA[]
+  CHAROLA_HIDRATACION                                      CHAROLA_HIDRATACION[]
+  FRAS                                                     FRAS[]
+  USUARIO_CHAROLA                                          USUARIO_CHAROLA[]
+}
+
+model CHAROLA_CHAROLA {
+  charolaHija                                      Int
+  charolaAncestro                                  Int
+  CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA     CHAROLA @relation("CHAROLA_CHAROLA_charolaHijaToCHAROLA", fields: [charolaHija], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_CHAROLA_ibfk_1")
+  CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA CHAROLA @relation("CHAROLA_CHAROLA_charolaAncestroToCHAROLA", fields: [charolaAncestro], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_CHAROLA_ibfk_2")
+
+  @@id([charolaHija, charolaAncestro])
+  @@index([charolaAncestro], map: "charolaAncestro")
+}
+
+model CHAROLA_COMIDA {
+  charolaId        Int
+  comidaId         Int
+  cantidadOtorgada Float   @db.Float
+  CHAROLA          CHAROLA @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_COMIDA_ibfk_1")
+  COMIDA           COMIDA  @relation(fields: [comidaId], references: [comidaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_COMIDA_ibfk_2")
+
+  @@id([charolaId, comidaId])
+  @@index([comidaId], map: "comidaId")
+}
+
+model CHAROLA_HIDRATACION {
+  charolaId        Int
+  hidratacionId    Int
+  cantidadOtorgada Float?      @db.Float
+  CHAROLA          CHAROLA     @relation(fields: [charolaId], references: [charolaId], onUpdate: Restrict, map: "CHAROLA_HIDRATACION_ibfk_1")
+  HIDRATACION      HIDRATACION @relation(fields: [hidratacionId], references: [hidratacionId], onUpdate: Restrict, map: "CHAROLA_HIDRATACION_ibfk_2")
+
+  @@id([charolaId, hidratacionId])
+  @@index([hidratacionId], map: "hidratacionId")
+}
+
+model COMIDA {
+  comidaId       Int              @id @default(autoincrement())
+  nombre         String           @db.VarChar(25)
+  descripcion    String?          @db.VarChar(200)
+  CHAROLA_COMIDA CHAROLA_COMIDA[]
+}
+
+model FRAS {
+  frassId         Int      @id @default(autoincrement())
+  gramosGenerados Float    @db.Float
+  charolaId       Int?
+  CHAROLA         CHAROLA? @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "FRAS_ibfk_1")
+
+  @@index([charolaId], map: "charolaId")
+}
+
+model HIDRATACION {
+  hidratacionId       Int                   @id
+  nombre              String?               @db.VarChar(25)
+  descripcion         String?               @db.VarChar(200)
+  CHAROLA_HIDRATACION CHAROLA_HIDRATACION[]
+}
+
+model USUARIO {
+  usuarioId       Int               @id @default(autoincrement())
+  user            String            @db.VarChar(50)
+  contrasena      String            @db.VarChar(80)
+  nombre          String            @db.VarChar(25)
+  apellido_m      String?           @db.VarChar(25)
+  apellido_p      String?           @db.VarChar(25)
+  ADMINISTRADOR   ADMINISTRADOR[]
+  USUARIO_CHAROLA USUARIO_CHAROLA[]
+}
+
+model USUARIO_CHAROLA {
+  usuarioId Int
+  charolaId Int
+  USUARIO   USUARIO @relation(fields: [usuarioId], references: [usuarioId], onDelete: Cascade, onUpdate: Restrict, map: "USUARIO_CHAROLA_ibfk_1")
+  CHAROLA   CHAROLA @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "USUARIO_CHAROLA_ibfk_2")
+
+  @@id([usuarioId, charolaId])
+  @@index([charolaId], map: "charolaId")
 }

@@ -93,9 +93,117 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.ADMINISTRADORScalarFieldEnum = {
+  adminId: 'adminId',
+  usuarioId: 'usuarioId'
+};
+
+exports.Prisma.CHAROLAScalarFieldEnum = {
+  charolaId: 'charolaId',
+  nombreCharola: 'nombreCharola',
+  comidaCiclo: 'comidaCiclo',
+  hidratacionCiclo: 'hidratacionCiclo',
+  fechaActualizacion: 'fechaActualizacion',
+  estado: 'estado',
+  densidadLarva: 'densidadLarva',
+  fechaCreacion: 'fechaCreacion',
+  pesoCharola: 'pesoCharola'
+};
+
+exports.Prisma.CHAROLA_CHAROLAScalarFieldEnum = {
+  charolaHija: 'charolaHija',
+  charolaAncestro: 'charolaAncestro'
+};
+
+exports.Prisma.CHAROLA_COMIDAScalarFieldEnum = {
+  charolaId: 'charolaId',
+  comidaId: 'comidaId',
+  cantidadOtorgada: 'cantidadOtorgada'
+};
+
+exports.Prisma.CHAROLA_HIDRATACIONScalarFieldEnum = {
+  charolaId: 'charolaId',
+  hidratacionId: 'hidratacionId',
+  cantidadOtorgada: 'cantidadOtorgada'
+};
+
+exports.Prisma.COMIDAScalarFieldEnum = {
+  comidaId: 'comidaId',
+  nombre: 'nombre',
+  descripcion: 'descripcion'
+};
+
+exports.Prisma.FRASScalarFieldEnum = {
+  frassId: 'frassId',
+  gramosGenerados: 'gramosGenerados',
+  charolaId: 'charolaId'
+};
+
+exports.Prisma.HIDRATACIONScalarFieldEnum = {
+  hidratacionId: 'hidratacionId',
+  nombre: 'nombre',
+  descripcion: 'descripcion'
+};
+
+exports.Prisma.USUARIOScalarFieldEnum = {
+  usuarioId: 'usuarioId',
+  user: 'user',
+  contrasena: 'contrasena',
+  nombre: 'nombre',
+  apellido_m: 'apellido_m',
+  apellido_p: 'apellido_p'
+};
+
+exports.Prisma.USUARIO_CHAROLAScalarFieldEnum = {
+  usuarioId: 'usuarioId',
+  charolaId: 'charolaId'
+};
+
+exports.Prisma.SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
+exports.Prisma.CHAROLAOrderByRelevanceFieldEnum = {
+  nombreCharola: 'nombreCharola',
+  estado: 'estado'
+};
+
+exports.Prisma.COMIDAOrderByRelevanceFieldEnum = {
+  nombre: 'nombre',
+  descripcion: 'descripcion'
+};
+
+exports.Prisma.HIDRATACIONOrderByRelevanceFieldEnum = {
+  nombre: 'nombre',
+  descripcion: 'descripcion'
+};
+
+exports.Prisma.USUARIOOrderByRelevanceFieldEnum = {
+  user: 'user',
+  contrasena: 'contrasena',
+  nombre: 'nombre',
+  apellido_m: 'apellido_m',
+  apellido_p: 'apellido_p'
+};
+
 
 exports.Prisma.ModelName = {
-
+  ADMINISTRADOR: 'ADMINISTRADOR',
+  CHAROLA: 'CHAROLA',
+  CHAROLA_CHAROLA: 'CHAROLA_CHAROLA',
+  CHAROLA_COMIDA: 'CHAROLA_COMIDA',
+  CHAROLA_HIDRATACION: 'CHAROLA_HIDRATACION',
+  COMIDA: 'COMIDA',
+  FRAS: 'FRAS',
+  HIDRATACION: 'HIDRATACION',
+  USUARIO: 'USUARIO',
+  USUARIO_CHAROLA: 'USUARIO_CHAROLA'
 };
 /**
  * Create the Client
@@ -108,7 +216,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/mike/Desktop/TECH-NEBRIOS/TECH-NEBRIOS-BACKEND/generated/prisma",
+      "value": "/Users/lapto/Desktop/zuustento/TECH-NEBRIOS-BACKEND/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -122,11 +230,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/mike/Desktop/TECH-NEBRIOS/TECH-NEBRIOS-BACKEND/prisma/schema.prisma",
+    "sourceFilePath": "/Users/lapto/Desktop/zuustento/TECH-NEBRIOS-BACKEND/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../../prisma",
@@ -136,7 +244,7 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
-  "postinstall": false,
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -145,8 +253,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n",
-  "inlineSchemaHash": "0e2276e8eb6f1fb9b42ed76f3331e9688d5e46051466aa65787de05954f40deb",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel ADMINISTRADOR {\n  adminId   Int      @id @default(autoincrement())\n  usuarioId Int?\n  USUARIO   USUARIO? @relation(fields: [usuarioId], references: [usuarioId], onDelete: Cascade, onUpdate: Restrict, map: \"ADMINISTRADOR_ibfk_1\")\n\n  @@index([usuarioId], map: \"usuarioId\")\n}\n\nmodel CHAROLA {\n  charolaId                                                Int                   @id @default(autoincrement())\n  nombreCharola                                            String?               @db.VarChar(20)\n  comidaCiclo                                              Float                 @db.Float\n  hidratacionCiclo                                         Float                 @db.Float\n  fechaActualizacion                                       DateTime?             @db.Date\n  estado                                                   String?               @db.VarChar(25)\n  densidadLarva                                            Float?                @db.Float\n  fechaCreacion                                            DateTime?             @db.Date\n  pesoCharola                                              Float?                @db.Float\n  CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA     CHAROLA_CHAROLA[]     @relation(\"CHAROLA_CHAROLA_charolaHijaToCHAROLA\")\n  CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA CHAROLA_CHAROLA[]     @relation(\"CHAROLA_CHAROLA_charolaAncestroToCHAROLA\")\n  CHAROLA_COMIDA                                           CHAROLA_COMIDA[]\n  CHAROLA_HIDRATACION                                      CHAROLA_HIDRATACION[]\n  FRAS                                                     FRAS[]\n  USUARIO_CHAROLA                                          USUARIO_CHAROLA[]\n}\n\nmodel CHAROLA_CHAROLA {\n  charolaHija                                      Int\n  charolaAncestro                                  Int\n  CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA     CHAROLA @relation(\"CHAROLA_CHAROLA_charolaHijaToCHAROLA\", fields: [charolaHija], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: \"CHAROLA_CHAROLA_ibfk_1\")\n  CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA CHAROLA @relation(\"CHAROLA_CHAROLA_charolaAncestroToCHAROLA\", fields: [charolaAncestro], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: \"CHAROLA_CHAROLA_ibfk_2\")\n\n  @@id([charolaHija, charolaAncestro])\n  @@index([charolaAncestro], map: \"charolaAncestro\")\n}\n\nmodel CHAROLA_COMIDA {\n  charolaId        Int\n  comidaId         Int\n  cantidadOtorgada Float   @db.Float\n  CHAROLA          CHAROLA @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: \"CHAROLA_COMIDA_ibfk_1\")\n  COMIDA           COMIDA  @relation(fields: [comidaId], references: [comidaId], onDelete: Cascade, onUpdate: Restrict, map: \"CHAROLA_COMIDA_ibfk_2\")\n\n  @@id([charolaId, comidaId])\n  @@index([comidaId], map: \"comidaId\")\n}\n\nmodel CHAROLA_HIDRATACION {\n  charolaId        Int\n  hidratacionId    Int\n  cantidadOtorgada Float?      @db.Float\n  CHAROLA          CHAROLA     @relation(fields: [charolaId], references: [charolaId], onUpdate: Restrict, map: \"CHAROLA_HIDRATACION_ibfk_1\")\n  HIDRATACION      HIDRATACION @relation(fields: [hidratacionId], references: [hidratacionId], onUpdate: Restrict, map: \"CHAROLA_HIDRATACION_ibfk_2\")\n\n  @@id([charolaId, hidratacionId])\n  @@index([hidratacionId], map: \"hidratacionId\")\n}\n\nmodel COMIDA {\n  comidaId       Int              @id @default(autoincrement())\n  nombre         String           @db.VarChar(25)\n  descripcion    String?          @db.VarChar(200)\n  CHAROLA_COMIDA CHAROLA_COMIDA[]\n}\n\nmodel FRAS {\n  frassId         Int      @id @default(autoincrement())\n  gramosGenerados Float    @db.Float\n  charolaId       Int?\n  CHAROLA         CHAROLA? @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: \"FRAS_ibfk_1\")\n\n  @@index([charolaId], map: \"charolaId\")\n}\n\nmodel HIDRATACION {\n  hidratacionId       Int                   @id\n  nombre              String?               @db.VarChar(25)\n  descripcion         String?               @db.VarChar(200)\n  CHAROLA_HIDRATACION CHAROLA_HIDRATACION[]\n}\n\nmodel USUARIO {\n  usuarioId       Int               @id @default(autoincrement())\n  user            String            @db.VarChar(50)\n  contrasena      String            @db.VarChar(80)\n  nombre          String            @db.VarChar(25)\n  apellido_m      String?           @db.VarChar(25)\n  apellido_p      String?           @db.VarChar(25)\n  ADMINISTRADOR   ADMINISTRADOR[]\n  USUARIO_CHAROLA USUARIO_CHAROLA[]\n}\n\nmodel USUARIO_CHAROLA {\n  usuarioId Int\n  charolaId Int\n  USUARIO   USUARIO @relation(fields: [usuarioId], references: [usuarioId], onDelete: Cascade, onUpdate: Restrict, map: \"USUARIO_CHAROLA_ibfk_1\")\n  CHAROLA   CHAROLA @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: \"USUARIO_CHAROLA_ibfk_2\")\n\n  @@id([usuarioId, charolaId])\n  @@index([charolaId], map: \"charolaId\")\n}\n",
+  "inlineSchemaHash": "650194ab810441e65e5358d77af7a6db95a58774fb52f8d6a6be2c4e500edeb9",
   "copyEngine": true
 }
 
@@ -167,7 +275,7 @@ if (!fs.existsSync(path.join(__dirname, 'schema.prisma'))) {
   config.isBundled = true
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"ADMINISTRADOR\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"adminId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"nativeType\":null,\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"usuarioId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"USUARIO\",\"kind\":\"object\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"USUARIO\",\"nativeType\":null,\"relationName\":\"ADMINISTRADORToUSUARIO\",\"relationFromFields\":[\"usuarioId\"],\"relationToFields\":[\"usuarioId\"],\"relationOnDelete\":\"Cascade\",\"relationOnUpdate\":\"Restrict\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"CHAROLA\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"charolaId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"nativeType\":null,\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"nombreCharola\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":[\"VarChar\",[\"20\"]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"comidaCiclo\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Float\",\"nativeType\":[\"Float\",[]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"hidratacionCiclo\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Float\",\"nativeType\":[\"Float\",[]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"fechaActualizacion\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"DateTime\",\"nativeType\":[\"Date\",[]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"estado\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":[\"VarChar\",[\"25\"]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"densidadLarva\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Float\",\"nativeType\":[\"Float\",[]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"fechaCreacion\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"DateTime\",\"nativeType\":[\"Date\",[]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"pesoCharola\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Float\",\"nativeType\":[\"Float\",[]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CHAROLA_CHAROLA\",\"nativeType\":null,\"relationName\":\"CHAROLA_CHAROLA_charolaHijaToCHAROLA\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CHAROLA_CHAROLA\",\"nativeType\":null,\"relationName\":\"CHAROLA_CHAROLA_charolaAncestroToCHAROLA\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"CHAROLA_COMIDA\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CHAROLA_COMIDA\",\"nativeType\":null,\"relationName\":\"CHAROLAToCHAROLA_COMIDA\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"CHAROLA_HIDRATACION\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CHAROLA_HIDRATACION\",\"nativeType\":null,\"relationName\":\"CHAROLAToCHAROLA_HIDRATACION\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"FRAS\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"FRAS\",\"nativeType\":null,\"relationName\":\"CHAROLAToFRAS\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"USUARIO_CHAROLA\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"USUARIO_CHAROLA\",\"nativeType\":null,\"relationName\":\"CHAROLAToUSUARIO_CHAROLA\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"CHAROLA_CHAROLA\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"charolaHija\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"charolaAncestro\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CHAROLA\",\"nativeType\":null,\"relationName\":\"CHAROLA_CHAROLA_charolaHijaToCHAROLA\",\"relationFromFields\":[\"charolaHija\"],\"relationToFields\":[\"charolaId\"],\"relationOnDelete\":\"Cascade\",\"relationOnUpdate\":\"Restrict\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CHAROLA\",\"nativeType\":null,\"relationName\":\"CHAROLA_CHAROLA_charolaAncestroToCHAROLA\",\"relationFromFields\":[\"charolaAncestro\"],\"relationToFields\":[\"charolaId\"],\"relationOnDelete\":\"Cascade\",\"relationOnUpdate\":\"Restrict\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":{\"name\":null,\"fields\":[\"charolaHija\",\"charolaAncestro\"]},\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"CHAROLA_COMIDA\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"charolaId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"comidaId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"cantidadOtorgada\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Float\",\"nativeType\":[\"Float\",[]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"CHAROLA\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CHAROLA\",\"nativeType\":null,\"relationName\":\"CHAROLAToCHAROLA_COMIDA\",\"relationFromFields\":[\"charolaId\"],\"relationToFields\":[\"charolaId\"],\"relationOnDelete\":\"Cascade\",\"relationOnUpdate\":\"Restrict\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"COMIDA\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"COMIDA\",\"nativeType\":null,\"relationName\":\"CHAROLA_COMIDAToCOMIDA\",\"relationFromFields\":[\"comidaId\"],\"relationToFields\":[\"comidaId\"],\"relationOnDelete\":\"Cascade\",\"relationOnUpdate\":\"Restrict\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":{\"name\":null,\"fields\":[\"charolaId\",\"comidaId\"]},\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"CHAROLA_HIDRATACION\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"charolaId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"hidratacionId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"cantidadOtorgada\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Float\",\"nativeType\":[\"Float\",[]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"CHAROLA\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CHAROLA\",\"nativeType\":null,\"relationName\":\"CHAROLAToCHAROLA_HIDRATACION\",\"relationFromFields\":[\"charolaId\"],\"relationToFields\":[\"charolaId\"],\"relationOnUpdate\":\"Restrict\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"HIDRATACION\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"HIDRATACION\",\"nativeType\":null,\"relationName\":\"CHAROLA_HIDRATACIONToHIDRATACION\",\"relationFromFields\":[\"hidratacionId\"],\"relationToFields\":[\"hidratacionId\"],\"relationOnUpdate\":\"Restrict\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":{\"name\":null,\"fields\":[\"charolaId\",\"hidratacionId\"]},\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"COMIDA\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"comidaId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"nativeType\":null,\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"nombre\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":[\"VarChar\",[\"25\"]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"descripcion\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":[\"VarChar\",[\"200\"]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"CHAROLA_COMIDA\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CHAROLA_COMIDA\",\"nativeType\":null,\"relationName\":\"CHAROLA_COMIDAToCOMIDA\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"FRAS\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"frassId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"nativeType\":null,\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"gramosGenerados\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Float\",\"nativeType\":[\"Float\",[]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"charolaId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"CHAROLA\",\"kind\":\"object\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CHAROLA\",\"nativeType\":null,\"relationName\":\"CHAROLAToFRAS\",\"relationFromFields\":[\"charolaId\"],\"relationToFields\":[\"charolaId\"],\"relationOnDelete\":\"Cascade\",\"relationOnUpdate\":\"Restrict\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"HIDRATACION\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"hidratacionId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"nombre\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":[\"VarChar\",[\"25\"]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"descripcion\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":[\"VarChar\",[\"200\"]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"CHAROLA_HIDRATACION\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CHAROLA_HIDRATACION\",\"nativeType\":null,\"relationName\":\"CHAROLA_HIDRATACIONToHIDRATACION\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"USUARIO\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"usuarioId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":true,\"isReadOnly\":false,\"hasDefaultValue\":true,\"type\":\"Int\",\"nativeType\":null,\"default\":{\"name\":\"autoincrement\",\"args\":[]},\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"user\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":[\"VarChar\",[\"50\"]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"contrasena\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":[\"VarChar\",[\"80\"]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"nombre\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":[\"VarChar\",[\"25\"]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"apellido_m\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":[\"VarChar\",[\"25\"]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"apellido_p\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":false,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"String\",\"nativeType\":[\"VarChar\",[\"25\"]],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"ADMINISTRADOR\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"ADMINISTRADOR\",\"nativeType\":null,\"relationName\":\"ADMINISTRADORToUSUARIO\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"USUARIO_CHAROLA\",\"kind\":\"object\",\"isList\":true,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"USUARIO_CHAROLA\",\"nativeType\":null,\"relationName\":\"USUARIOToUSUARIO_CHAROLA\",\"relationFromFields\":[],\"relationToFields\":[],\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":null,\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false},\"USUARIO_CHAROLA\":{\"dbName\":null,\"schema\":null,\"fields\":[{\"name\":\"usuarioId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"charolaId\",\"kind\":\"scalar\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":true,\"hasDefaultValue\":false,\"type\":\"Int\",\"nativeType\":null,\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"USUARIO\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"USUARIO\",\"nativeType\":null,\"relationName\":\"USUARIOToUSUARIO_CHAROLA\",\"relationFromFields\":[\"usuarioId\"],\"relationToFields\":[\"usuarioId\"],\"relationOnDelete\":\"Cascade\",\"relationOnUpdate\":\"Restrict\",\"isGenerated\":false,\"isUpdatedAt\":false},{\"name\":\"CHAROLA\",\"kind\":\"object\",\"isList\":false,\"isRequired\":true,\"isUnique\":false,\"isId\":false,\"isReadOnly\":false,\"hasDefaultValue\":false,\"type\":\"CHAROLA\",\"nativeType\":null,\"relationName\":\"CHAROLAToUSUARIO_CHAROLA\",\"relationFromFields\":[\"charolaId\"],\"relationToFields\":[\"charolaId\"],\"relationOnDelete\":\"Cascade\",\"relationOnUpdate\":\"Restrict\",\"isGenerated\":false,\"isUpdatedAt\":false}],\"primaryKey\":{\"name\":null,\"fields\":[\"usuarioId\",\"charolaId\"]},\"uniqueFields\":[],\"uniqueIndexes\":[],\"isGenerated\":false}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = undefined
 config.compilerWasm = undefined

@@ -6,7 +6,6 @@ module.exports.obtenerAlimentos = async (req, res) => {
         const alimentos = await alimento.obtener();
         res.json(alimentos);
     } catch (error) {
-        console.error("Error al obtener alimentos:", error);
         res.status(500).send("Error al obtener alimentos");
     }
 }
@@ -20,7 +19,6 @@ module.exports.editarAlimento = async (req, res) => {
         await alimento.actualizar();
         res.json({ success: true, message: "Alimento actualizado" });
     } catch (error) {
-        console.error("Error al editar alimento:", error);
         res.status(500).send("Error al editar alimento");
     }
 }

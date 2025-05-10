@@ -15,7 +15,6 @@ module.exports.Alimento = class {
             await connection.release();
             return resultado;
         } catch (error) {
-            console.error('Error al obtener alimentos:', error);
             throw error;
         }
     }
@@ -27,7 +26,6 @@ module.exports.Alimento = class {
             await connection.query(query, [this.nombreAlimento, this.descripcionAlimento, this.idAlimento]);
             await connection.release();
         } catch (error) {
-            console.error('Error al actualizar alimento:', error);
             throw error;
         }
     }

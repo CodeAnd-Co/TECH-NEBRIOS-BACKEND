@@ -1,6 +1,7 @@
 /* Dependencias */
 const express = require("express");
 const router = express.Router();
+const { obtenerCharolas } = require('../controllers/menu_charolas.controller');
 /* ------------ */
 
 router.use(express.json());

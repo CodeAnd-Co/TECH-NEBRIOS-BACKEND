@@ -22,6 +22,7 @@ const Charola = {
   getCharolasPaginadas: async (limit, offset) => {
     const rows = await prisma.CHAROLA.findMany({
       select: {
+        charolaId: true,
         nombreCharola: true,
         fechaCreacion: true
       },

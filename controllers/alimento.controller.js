@@ -1,4 +1,4 @@
-//RF24: Editar un tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF24
+//RF25: Eliminar un tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF25
 
 /**
  * Controlador de Alimentos.
@@ -27,20 +27,19 @@ module.exports.obtenerAlimentos = async (req, res) => {
 /**
  * Edita un alimento existente en la base de datos.
  * @async
- * @function editarAlimento
+ * @function eliminarAlimento
  * @param {import('express').Request} req - Objeto de solicitud HTTP, contiene params y body.
  * @param {import('express').Response} res - Objeto de respuesta HTTP.
  * @returns {Promise<void>}
  */
-module.exports.editarAlimento = async (req, res) => {
+module.exports.eliminarAlimento = async (req, res) => {
     const { idAlimento } = req.params;
-    const { nombreAlimento, descripcionAlimento } = req.body;
 
     try {
-        const alimento = new Alimento(idAlimento, nombreAlimento, descripcionAlimento);
-        await alimento.actualizar();
-        res.json({ success: true, message: "Alimento actualizado" });
+        const alimento = new Alimento(idAlimento);
+        await alimento.eliminar();
+        res.json({ success: true, message: "Alimento eliminado" });
     } catch (error) {
-        res.status(500).send("Error al editar alimento");
+        res.status(500).send("Error al eliminar alimento");
     }
 };

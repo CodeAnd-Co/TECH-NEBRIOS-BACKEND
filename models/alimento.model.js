@@ -1,4 +1,4 @@
-//RF24: Editar un tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF24
+//RF25: Eliminar un tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF25
 
 const db = require('../utils/database.js');
 
@@ -42,19 +42,15 @@ module.exports.Alimento = class {
     /**
      * Actualiza los datos del alimento en la base de datos.
      * @async
-     * @method actualizar
+     * @method eliminar
      * @returns {Promise<void>}
      * @throws {Error} Si ocurre un error al ejecutar la actualización.
      */
-    async actualizar() {
+    async eliminar() {
         try {
             const connection = await db();
-            const query = `UPDATE COMIDA SET nombre = ?, descripcion = ? WHERE comidaId = ?`;
-            await connection.query(query, [
-                this.nombreAlimento,
-                this.descripcionAlimento,
-                this.idAlimento,
-            ]);
+            const query = `DELETE FROM COMIDA WHERE comidaId = ?`;
+            await connection.query(query, [this.idAlimento]);
             await connection.release();
         } catch (error) {
             throw error;

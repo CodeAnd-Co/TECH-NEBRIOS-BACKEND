@@ -3,13 +3,16 @@ const router = express.Router();
 /* ------------ */
 
 /* INCLUDE CONTROLLERS */
-const controlador = require("../controllers/tablaCharola.controller");
-const controladorDetalle = require("../controllers/charola.controller");
+const controlador = require('../controllers/tablaCharola.controller');
+const controladorDetalle = require('../controllers/charola.controller');
+const controladorResumen = require('../controllers/menu_charolas.controller');
 /* ------------------- */
 
 /* GET METHODS */
 
 router.get('/consultarCharola/:id', controladorDetalle.consultarCharola);
+
+router.get('/charolas', controladorResumen.obtenerCharolas);
 
 router.get("/getTablaCharolas", controlador.getTablasCharolas);
 

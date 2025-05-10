@@ -20,7 +20,6 @@ const usuarioRoutes = require("./routes/usuario.routes");
 /* Rutas de la API */
 app.use("/charola", charolaRoutes);
 app.use("/usuario", usuarioRoutes);
-app.use("/charolas", menucharolaRoutes);
 /* ----- */
 
 /* Conexion a la base de datos*/

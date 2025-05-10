@@ -96,7 +96,45 @@ module.exports = class Charola {
     }
   }
 
-  static async eliminarCharola(charolaID){
+  static async eliminarCharola(charolaID) {
+    const connection = await db();
 
+    try {
+      // Eliminar relaciones con hidratación
+      await connection.query(
+        'DELETE FROM CHAROLA_HIDRATACION WHERE charolaId = ?',
+        [charolaID]
+      );
+
+      // Eliminar relaciones con comida
+      await connection.query(
+        'DELETE FROM CHAROLA_COMIDA WHERE charolaId = ?',
+        [charolaID]
+      );
+
+      // Eliminar la charola
+      const [result] = await connection.query(
+        'DELETE FROM CHAROLA WHERE charolaId = ?',
+        [charolaID]
+      );
+
+      console.log('Resultado delete:', result)
+
+      if (result.affectedRows === 0) {
+        return { error: 'No se encontró la charola para eliminar.' };
+      }
+
+      return {
+        mensaje: 'Charola eliminada correctamente',
+        idEliminado: charolaID
+      };
+
+    } catch (error) {
+      console.error('Error al eliminar la charola:', error);
+      return { error: 'Error al eliminar la charola' };
+    } finally {
+      connection.release();
+    }
   }
+
 };

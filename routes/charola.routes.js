@@ -23,6 +23,7 @@ router.post("/registrarCharola", controlador.registrarCharola);
 /* ----------- */
 
 /* DELETE METHODS */
+router.delete("/eliminarCharola/:id", controlador.eliminarCharola);
 
 /* ----------- */
 

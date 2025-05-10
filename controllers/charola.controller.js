@@ -36,6 +36,8 @@ const registrarCharola = async (req, res) => {};
 const eliminarCharola = async (req, res) => {
   const { id } = req.params;
 
+  console.log('Intentando eliminar charola con ID:', id);
+
   if (!id) {
     return res.status(400).json({ error: 'Falta id' });
   }
@@ -49,14 +51,12 @@ const eliminarCharola = async (req, res) => {
 
     res.status(200).json({
       data: charola
-    });2
+    });
 
   } catch (err) {
     console.error('Error al eliminar la charola:', err);
     res.status(500).json({ error: 'Error al eliminar la charola' });
     
-  } finally {
-    if (connection) connection.release();
   }
 };
 

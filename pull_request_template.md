@@ -1,5 +1,5 @@
 ## Plantilla PR BackEnd
-Última actualización 28/04/25
+Última actualización 10/05/25
 
 ---
 
@@ -16,13 +16,6 @@ Incluye un resumen del cambio y el problema que se ha solucionado. También prop
 - [ ] Cambio disruptivo (rompe compatibilidad o modifica comportamiento actual )
 - [ ] Actualización de documentación requerida
 - [ ] Cambio mínimo (cambio visual o estructural que no afecta la lógica del sistema)
-
----
-
-# ¿Qué archivo fue el que modifique?
-Ejemplo:
-- UserController.js
-- api.js
 
 ---
 
@@ -53,10 +46,7 @@ Describe berevemente cómo se probó esta funcionalidad. Ejemplo:
 
 # Lista de Verificación de Pruebas
 - [ ] Las pruebas unitarias nuevas y existentes pasan correctamente con mis cambios
-- [ ] Las pruebas de seguridad nuevas y existentes pasan correctamente con mis cambios
-- [ ] Las pruebas de regresión nuevas y existentes pasan correctamente con mis cambios
 - [ ] Las pruebas de integración nuevas y existentes pasan correctamente con mis cambios
-- [ ] Las pruebas heurísticas nuevas y existentes pasan correctamente con mis cambios
 
 ---
 

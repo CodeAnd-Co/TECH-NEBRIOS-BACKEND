@@ -1,7 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  output        = "../generated/prisma"
   binaryTargets = ["native", "windows"]
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -30,7 +30,9 @@ model CHAROLA {
   CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA     CHAROLA_CHAROLA[]     @relation("CHAROLA_CHAROLA_charolaHijaToCHAROLA")
   CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA CHAROLA_CHAROLA[]     @relation("CHAROLA_CHAROLA_charolaAncestroToCHAROLA")
   CHAROLA_COMIDA                                           CHAROLA_COMIDA[]
+  CHAROLA_FRAS                                             CHAROLA_FRAS[]
   CHAROLA_HIDRATACION                                      CHAROLA_HIDRATACION[]
+  CHAROLA_PUPA                                             CHAROLA_PUPA[]
   FRAS                                                     FRAS[]
   USUARIO_CHAROLA                                          USUARIO_CHAROLA[]
 }
@@ -46,25 +48,27 @@ model CHAROLA_CHAROLA {
 }
 
 model CHAROLA_COMIDA {
-  charolaId        Int
-  comidaId         Int
-  cantidadOtorgada Float   @db.Float
-  CHAROLA          CHAROLA @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_COMIDA_ibfk_1")
-  COMIDA           COMIDA  @relation(fields: [comidaId], references: [comidaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_COMIDA_ibfk_2")
+  id               Int      @id @default(autoincrement())
+  charolaId        Int?
+  comidaId         Int?
+  cantidadOtorgada Float    @db.Float
+  CHAROLA          CHAROLA? @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_COMIDA_ibfk_1")
+  COMIDA           COMIDA?  @relation(fields: [comidaId], references: [comidaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_COMIDA_ibfk_2")
 
-  @@id([charolaId, comidaId])
   @@index([comidaId], map: "comidaId")
+  @@index([charolaId], map: "charolaId")
 }
 
 model CHAROLA_HIDRATACION {
-  charolaId        Int
-  hidratacionId    Int
-  cantidadOtorgada Float?      @db.Float
-  CHAROLA          CHAROLA     @relation(fields: [charolaId], references: [charolaId], onUpdate: Restrict, map: "CHAROLA_HIDRATACION_ibfk_1")
-  HIDRATACION      HIDRATACION @relation(fields: [hidratacionId], references: [hidratacionId], onUpdate: Restrict, map: "CHAROLA_HIDRATACION_ibfk_2")
+  id               Int          @id @default(autoincrement())
+  charolaId        Int?
+  hidratacionId    Int?
+  cantidadOtorgada Float        @db.Float
+  CHAROLA          CHAROLA?     @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_HIDRATACION_ibfk_1")
+  HIDRATACION      HIDRATACION? @relation(fields: [hidratacionId], references: [hidratacionId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_HIDRATACION_ibfk_2")
 
-  @@id([charolaId, hidratacionId])
   @@index([hidratacionId], map: "hidratacionId")
+  @@index([charolaId], map: "charolaId")
 }
 
 model COMIDA {
@@ -75,10 +79,11 @@ model COMIDA {
 }
 
 model FRAS {
-  frassId         Int      @id @default(autoincrement())
-  gramosGenerados Float    @db.Float
+  frasId          Int            @id @default(autoincrement())
+  gramosGenerados Float          @db.Float
   charolaId       Int?
-  CHAROLA         CHAROLA? @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "FRAS_ibfk_1")
+  CHAROLA_FRAS    CHAROLA_FRAS[]
+  CHAROLA         CHAROLA?       @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "FRAS_ibfk_1")
 
   @@index([charolaId], map: "charolaId")
 }
@@ -109,4 +114,31 @@ model USUARIO_CHAROLA {
 
   @@id([usuarioId, charolaId])
   @@index([charolaId], map: "charolaId")
+}
+
+model CHAROLA_FRAS {
+  charolaId Int
+  frasId    Int
+  CHAROLA   CHAROLA @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_FRAS_ibfk_1")
+  FRAS      FRAS    @relation(fields: [frasId], references: [frasId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_FRAS_ibfk_2")
+
+  @@id([charolaId, frasId])
+  @@index([frasId], map: "frasId")
+}
+
+model CHAROLA_PUPA {
+  charolaId Int
+  pupaId    Int
+  CHAROLA   CHAROLA @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_PUPA_ibfk_1")
+  PUPA      PUPA    @relation(fields: [pupaId], references: [pupaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_PUPA_ibfk_2")
+
+  @@id([charolaId, pupaId])
+  @@index([pupaId], map: "pupaId")
+}
+
+model PUPA {
+  pupaId           Int            @id @default(autoincrement())
+  fechaRegistro    DateTime?      @db.Date
+  cantidadObtenida Int?
+  CHAROLA_PUPA     CHAROLA_PUPA[]
 }

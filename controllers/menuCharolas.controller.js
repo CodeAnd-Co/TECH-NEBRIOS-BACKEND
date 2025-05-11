@@ -4,44 +4,49 @@
 const Charola = require('../models/menuCharolas.model');
 
 /**
- * Controlador seguro para obtener todas las charolas paginadas.
+ * Controlador seguro para obtener todas las charolas paginadas con filtro opcional por estado.
  *
- * Realiza validación de parámetros, control de límite máximo y evita exposición de errores internos.
+ * Realiza validación de parámetros, control de límite máximo, y evita exposición de errores internos.
  *
  * @async
  * @function obtenerCharolas
- * @param {import('express').Request} req - Objeto de solicitud HTTP con `page` y `limit` opcionales.
+ * @param {import('express').Request} req - Objeto de solicitud HTTP con `page`, `limit` y `estado` opcionales.
  * @param {import('express').Response} res - Objeto de respuesta HTTP.
  * @returns {Promise<void>}
  */
 const obtenerCharolas = async (req, res) => {
   try {
-    // Validación de parámetros de entrada
     const rawPage = req.query.page;
     const rawLimit = req.query.limit;
+    const estado = req.query.estado; // estado opcional: "activa" o "pasada"
 
     const page = parseInt(rawPage, 10);
     const limit = parseInt(rawLimit, 10);
 
-    // Validar que sean números válidos
+    // Validación de page y limit
     if (isNaN(page) || isNaN(limit) || page < 1 || limit < 1) {
       return res.status(400).json({
         mensaje: 'Parámetros inválidos: page y limit deben ser enteros positivos'
       });
     }
 
-    // Límite máximo razonable
-    const MAX_LIMIT = 20;
+    // Validación opcional del estado
+    const estadosValidos = ['activa', 'pasada'];
+    if (estado && !estadosValidos.includes(estado)) {
+      return res.status(400).json({
+        mensaje: `Estado inválido. Usa 'activa' o 'pasada'.`
+      });
+    }
+
+    const MAX_LIMIT = 1000; // Aumentado para scroll infinito
     const safeLimit = Math.min(limit, MAX_LIMIT);
     const offset = (page - 1) * safeLimit;
 
-    // Obtener datos y total
-    const datos = await Charola.getCharolasPaginadas(safeLimit, offset);
-    const total = await Charola.getCantidadTotal();
-    const totalNumber = Number(total);
-    const totalPages = Math.ceil(totalNumber / safeLimit);
+    // Consulta al modelo
+    const datos = await Charola.getCharolasPaginadas(safeLimit, offset, estado);
+    const total = await Charola.getCantidadTotal(estado);
+    const totalPages = Math.ceil(total / safeLimit);
 
-    // Validar que la página solicitada no exceda el total
     if (page > totalPages && totalPages > 0) {
       return res.status(400).json({
         mensaje: `La página solicitada (${page}) excede el total de páginas disponibles (${totalPages}).`
@@ -50,14 +55,14 @@ const obtenerCharolas = async (req, res) => {
 
     // Respuesta exitosa
     res.status(200).json({
-      total: totalNumber,
+      total,
       page,
       limit: safeLimit,
       totalPages,
       data: datos
     });
 
-    console.log("✔️ Consulta exitosa: Charolas obtenidas.");
+    console.log(`✔️ Charolas obtenidas con estado='${estado || 'todos'}'. Página ${page}/${totalPages}`);
   } catch (error) {
     console.error('❌ Error al obtener charolas:', error);
     res.status(500).json({ mensaje: 'Error interno del servidor' });

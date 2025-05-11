@@ -11,18 +11,20 @@ const prisma = new PrismaClient();
 const Charola = {
   /**
    * Obtiene una lista paginada de charolas ordenadas por fecha de creación descendente.
+   * Puede incluir un filtro opcional por estado.
    *
    * @async
    * @function getCharolasPaginadas
    * @memberof Charola
    * @param {number} limit - Número máximo de registros a obtener.
    * @param {number} offset - Número de registros a omitir (para paginación).
+   * @param {string} [estado] - Estado opcional para filtrar ("activa" o "pasada").
    * @returns {Promise<Object[]>} Lista de objetos que contienen `nombreCharola` y `fechaCreacion`.
    */
-  getCharolasPaginadas: async (limit, offset) => {
+  getCharolasPaginadas: async (limit, offset, estado) => {
     const rows = await prisma.CHAROLA.findMany({
+      where: estado ? { estado } : undefined,
       select: {
-        charolaId: true,
         nombreCharola: true,
         fechaCreacion: true
       },
@@ -36,15 +38,18 @@ const Charola = {
   },
 
   /**
-   * Obtiene el número total de charolas en la base de datos.
+   * Obtiene el número total de charolas en la base de datos, con un filtro opcional por estado.
    *
    * @async
    * @function getCantidadTotal
    * @memberof Charola
-   * @returns {Promise<number>} Total de registros en la tabla CHAROLA.
+   * @param {string} [estado] - Estado opcional para filtrar ("activa" o "pasada").
+   * @returns {Promise<number>} Total de registros (con o sin filtro por estado).
    */
-  getCantidadTotal: async () => {
-    const total = await prisma.CHAROLA.count();
+  getCantidadTotal: async (estado) => {
+    const total = await prisma.CHAROLA.count({
+      where: estado ? { estado } : undefined
+    });
     return total;
   }
 };

@@ -4,11 +4,13 @@ const Charola = require("../models/charola.model.js");
  * @description Consultar charola ontiene todos los datos correspondientes de una charola con su ID.
  * @param {*} req - Solicitud HTTP que contiene la ID de la charola.
  * @param {*} res - Respuesta HTTP que se usa para enviar el resultado.
- * @returns {JSON} Código de respuesta y token de sesión
+ * @returns {JSON} Código de respuesta.
  */
 
 const consultarCharola = async (req, res) => {
   const { id } = req.params;
+
+  console.log('Consultando charola con ID:', id);
 
   if (!id) {
     return res.status(400).json({ error: 'Falta id' });
@@ -33,10 +35,17 @@ const consultarCharola = async (req, res) => {
 
 const registrarCharola = async (req, res) => {};
 
+/**
+ * @description Eliminar charola elimina todos los datos correspondientes de una charola con su ID.
+ * @param {*} req - Solicitud HTTP que contiene la ID de la charola.
+ * @param {*} res - Respuesta HTTP que se usa para enviar el resultado.
+ * @returns {JSON} Código de respuesta.
+ */
+
 const eliminarCharola = async (req, res) => {
   const { id } = req.params;
 
-  console.log('Intentando eliminar charola con ID:', id);
+  console.log('Eliminando charola con ID:', id);
 
   if (!id) {
     return res.status(400).json({ error: 'Falta id' });

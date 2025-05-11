@@ -96,6 +96,15 @@ module.exports = class Charola {
     }
   }
 
+/**
+ * Obtiene todos los datos correspondientes a una charola a partir de su ID y los elimina.
+ * @async
+ * @function
+ * @param {number|string} charolaID - ID de la charola a eliminar.
+ * @returns {Promise<Object>} Un objeto JSON que contiene la información de la charola, hidratación y comida asociadas,
+ * o un objeto con un mensaje de error si no se encuentra la charola.
+ */
+
   static async eliminarCharola(charolaID) {
     const connection = await db();
 
@@ -113,7 +122,7 @@ module.exports = class Charola {
       );
 
       // Eliminar la charola
-      const [result] = await connection.query(
+      const result = await connection.query(
         'DELETE FROM CHAROLA WHERE charolaId = ?',
         [charolaID]
       );

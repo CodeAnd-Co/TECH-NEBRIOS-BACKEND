@@ -27,7 +27,7 @@ router.post("/postArchivoExcel", controlador.postDescargarExcel);
 /* ----------- */
 
 /* DELETE METHODS */
-router.delete("/eliminarCharola/:id", controlador.eliminarCharola);
+router.delete("/eliminarCharola/:id", controladorDetalle.eliminarCharola);
 
 /* ----------- */
 

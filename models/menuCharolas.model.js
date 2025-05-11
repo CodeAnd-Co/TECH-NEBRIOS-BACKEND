@@ -25,6 +25,7 @@ const Charola = {
     const rows = await prisma.CHAROLA.findMany({
       where: estado ? { estado } : undefined,
       select: {
+        charolaId: true,
         nombreCharola: true,
         fechaCreacion: true
       },

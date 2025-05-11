@@ -1,22 +1,25 @@
-/* Dependencias */
 const express = require("express");
-const bodyParser = require("body-parser");
 const router = express.Router();
 /* ------------ */
 
-router.use(bodyParser.urlencoded({ extended: true }));
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
-
 /* INCLUDE CONTROLLERS */
-const controlador = require("../controllers/charola.controller");
+const controlador = require('../controllers/tablaCharola.controller');
+const controladorDetalle = require('../controllers/charola.controller');
+const controladorResumen = require('../controllers/menuCharolas.controller');
 /* ------------------- */
 
 /* GET METHODS */
+
+router.get('/consultarCharola/:id', controladorDetalle.consultarCharola);
+
+router.get('/charolas', controladorResumen.obtenerCharolas);
+
+router.get("/getTablaCharolas", controlador.getTablasCharolas);
+
 /* ----------- */
 
 /* POST METHODS */
-router.post("/registrarCharola", controlador.registrarCharola);
+router.post("/postArchivoExcel", controlador.postDescargarExcel);
 /* ----------- */
 
 /* PUT METHODS */

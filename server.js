@@ -13,7 +13,6 @@ const sesionActiva = require("./utils/middlewares/sesionActiva");
 
 /* Rutas */
 const charolaRoutes = require('./routes/charola.routes');
-const menucharolaRoutes = require('./routes/menu_charolas.routes')
 const usuarioRoutes = require("./routes/usuario.routes");
 /* ----- */
 

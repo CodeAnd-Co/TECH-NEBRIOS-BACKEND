@@ -1,7 +1,7 @@
 // RF16 Visualizar todas las charolas registradas en el sistema
 // Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
 
-const Charola = require('../models/menu_charolas.model');
+const Charola = require('../models/menuCharolas.model');
 
 /**
  * Controlador seguro para obtener todas las charolas paginadas.

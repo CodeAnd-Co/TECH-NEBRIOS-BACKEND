@@ -120,9 +120,117 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.ADMINISTRADORScalarFieldEnum = {
+  adminId: 'adminId',
+  usuarioId: 'usuarioId'
+};
+
+exports.Prisma.CHAROLAScalarFieldEnum = {
+  charolaId: 'charolaId',
+  nombreCharola: 'nombreCharola',
+  comidaCiclo: 'comidaCiclo',
+  hidratacionCiclo: 'hidratacionCiclo',
+  fechaActualizacion: 'fechaActualizacion',
+  estado: 'estado',
+  densidadLarva: 'densidadLarva',
+  fechaCreacion: 'fechaCreacion',
+  pesoCharola: 'pesoCharola'
+};
+
+exports.Prisma.CHAROLA_CHAROLAScalarFieldEnum = {
+  charolaHija: 'charolaHija',
+  charolaAncestro: 'charolaAncestro'
+};
+
+exports.Prisma.CHAROLA_COMIDAScalarFieldEnum = {
+  charolaId: 'charolaId',
+  comidaId: 'comidaId',
+  cantidadOtorgada: 'cantidadOtorgada'
+};
+
+exports.Prisma.CHAROLA_HIDRATACIONScalarFieldEnum = {
+  charolaId: 'charolaId',
+  hidratacionId: 'hidratacionId',
+  cantidadOtorgada: 'cantidadOtorgada'
+};
+
+exports.Prisma.COMIDAScalarFieldEnum = {
+  comidaId: 'comidaId',
+  nombre: 'nombre',
+  descripcion: 'descripcion'
+};
+
+exports.Prisma.FRASScalarFieldEnum = {
+  frassId: 'frassId',
+  gramosGenerados: 'gramosGenerados',
+  charolaId: 'charolaId'
+};
+
+exports.Prisma.HIDRATACIONScalarFieldEnum = {
+  hidratacionId: 'hidratacionId',
+  nombre: 'nombre',
+  descripcion: 'descripcion'
+};
+
+exports.Prisma.USUARIOScalarFieldEnum = {
+  usuarioId: 'usuarioId',
+  user: 'user',
+  contrasena: 'contrasena',
+  nombre: 'nombre',
+  apellido_m: 'apellido_m',
+  apellido_p: 'apellido_p'
+};
+
+exports.Prisma.USUARIO_CHAROLAScalarFieldEnum = {
+  usuarioId: 'usuarioId',
+  charolaId: 'charolaId'
+};
+
+exports.Prisma.SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
+exports.Prisma.CHAROLAOrderByRelevanceFieldEnum = {
+  nombreCharola: 'nombreCharola',
+  estado: 'estado'
+};
+
+exports.Prisma.COMIDAOrderByRelevanceFieldEnum = {
+  nombre: 'nombre',
+  descripcion: 'descripcion'
+};
+
+exports.Prisma.HIDRATACIONOrderByRelevanceFieldEnum = {
+  nombre: 'nombre',
+  descripcion: 'descripcion'
+};
+
+exports.Prisma.USUARIOOrderByRelevanceFieldEnum = {
+  user: 'user',
+  contrasena: 'contrasena',
+  nombre: 'nombre',
+  apellido_m: 'apellido_m',
+  apellido_p: 'apellido_p'
+};
+
 
 exports.Prisma.ModelName = {
-
+  ADMINISTRADOR: 'ADMINISTRADOR',
+  CHAROLA: 'CHAROLA',
+  CHAROLA_CHAROLA: 'CHAROLA_CHAROLA',
+  CHAROLA_COMIDA: 'CHAROLA_COMIDA',
+  CHAROLA_HIDRATACION: 'CHAROLA_HIDRATACION',
+  COMIDA: 'COMIDA',
+  FRAS: 'FRAS',
+  HIDRATACION: 'HIDRATACION',
+  USUARIO: 'USUARIO',
+  USUARIO_CHAROLA: 'USUARIO_CHAROLA'
 };
 
 /**

@@ -2,15 +2,17 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-const dotenv = require("dotenv");
 const session = require("express-session");
 const db = require("./utils/database");
 
 const app = express();
+
+const sesionActiva = require("./utils/middlewares/sesionActiva");
 /* ------------ */
 
+
 /* Rutas */
-const charolaRoutes = require("./routes/charola.routes");
+const charolaRoutes = require('./routes/charola.routes');
 const usuarioRoutes = require("./routes/usuario.routes");
 /* ----- */
 
@@ -36,6 +38,8 @@ testDB();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json()); 
+
 /* ----- */
 
 /* Route 404 Error */

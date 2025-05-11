@@ -1,4 +1,3 @@
-// __tests__/alimento.controller.test.js
 const controller = require('../controllers/alimento.controller');
 const { Alimento } = require('../models/alimento.model');
 

@@ -1,4 +1,3 @@
-// __tests__/alimento.model.test.js
 const { Alimento } = require('../models/alimento.model');
 
 jest.mock('../utils/database', () => {

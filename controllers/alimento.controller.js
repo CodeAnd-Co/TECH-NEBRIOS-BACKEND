@@ -1,4 +1,4 @@
-//RF25: Eliminar un tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF25
+//RF24: Editar un tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF24
 
 /**
  * Controlador de Alimentos.
@@ -34,9 +34,7 @@ module.exports.obtenerAlimentos = async (req, res) => {
  */
 module.exports.editarAlimento = async (req, res) => {
     const idAlimento = Number(req.params.idAlimento);
-    if (isNaN(idAlimento)) {
-        return res.status(400).send("ID de alimento inválido");
-    }
+    
     const { nombreAlimento, descripcionAlimento } = req.body;
 
     try {

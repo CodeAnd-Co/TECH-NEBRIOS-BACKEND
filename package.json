@@ -36,8 +36,8 @@
     "nodejs": "^0.0.0"
   },
   "devDependencies": {
-    "prisma": "^6.7.0",
     "jest": "^29.7.0",
-    "jsdoc": "^4.0.4"
+    "jsdoc": "^4.0.4",
+    "prisma": "^6.7.0"
   }
 }

@@ -77,3 +77,65 @@ describe('Controlador Charola - consultarCharola', () => {
     expect(res.json).toHaveBeenCalledWith({ error: 'Fallo inesperado' });
   });
 });
+
+describe('Controlador Charola - eliminarCharola', () => {
+  let req, res;
+
+  beforeEach(() => {
+    req = {
+      params: {}
+    };
+    res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn()
+    };
+    jest.clearAllMocks();
+  });
+
+  test('Debe eliminar correctamente una charola existente', async () => {
+    const fakeResponse = {
+      mensaje: 'Charola eliminada correctamente',
+      charolaId: 1004
+    };
+
+    req.params.id = '1004';
+    Charola.eliminarCharola.mockResolvedValue(fakeResponse);
+
+    await charolaController.eliminarCharola(req, res);
+
+    expect(Charola.eliminarCharola).toHaveBeenCalledWith(1004);
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith({ data: fakeResponse });
+  });
+
+  test('Debe retornar 404 si no se encuentra la charola', async () => {
+    req.params.id = '-1';
+    Charola.eliminarCharola.mockResolvedValue({ error: 'Charola no encontrada' });
+
+    await charolaController.eliminarCharola(req, res);
+
+    expect(Charola.eliminarCharola).toHaveBeenCalledWith(-1);
+    expect(res.status).toHaveBeenCalledWith(404);
+    expect(res.json).toHaveBeenCalledWith({ error: 'Charola no encontrada' });
+  });
+
+  test('Debe retornar 400 si no se proporciona el ID', async () => {
+    req.params.id = undefined;
+
+    await charolaController.eliminarCharola(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ error: 'Falta id' });
+  });
+
+  test('Debe retornar 500 si ocurre una excepción interna', async () => {
+    req.params.id = '123';
+    Charola.eliminarCharola.mockRejectedValue(new Error('Error de base de datos'));
+
+    await charolaController.eliminarCharola(req, res);
+
+    expect(Charola.eliminarCharola).toHaveBeenCalledWith(123);
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ error: 'Error al eliminar la charola' });
+  });
+});

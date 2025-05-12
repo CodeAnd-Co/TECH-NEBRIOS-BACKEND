@@ -20,8 +20,14 @@ const historialActividadModel = {
                   },
                 },
             });
-            
-            return resultado;
+
+            const resultadoFormateado = resultado.map(item => ({
+                cantidadOtorgada: item.cantidadOtorgada.toString(),
+                fechaOtorgada: format(new Date(item.fechaOtorgada), 'dd/MM/yyyy'),
+                nombre: item.COMIDA.nombre,
+            }));
+          
+            return resultadoFormateado;
         } catch (error) {
             console.error("[Model] Error al obtener el historial de alimentacion de la charola: ", error);
             throw error;      
@@ -45,7 +51,13 @@ const historialActividadModel = {
                 },
             });
 
-            return resultado;
+            const resultadoFormateado = resultado.map(item => ({
+                cantidadOtorgada: item.cantidadOtorgada.toString(),
+                fechaOtorgada: format(new Date(item.fechaOtorgada), 'dd/MM/yyyy'),
+                nombre: item.HIDRATACION.nombre,
+            }));
+          
+              return resultadoFormateado;
         } catch (error) {
             console.error("[Model] Error al obtener el historial de hidratacion de la charola: ", error);
             throw error;

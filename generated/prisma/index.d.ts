@@ -63,6 +63,21 @@ export type USUARIO = $Result.DefaultSelection<Prisma.$USUARIOPayload>
  * 
  */
 export type USUARIO_CHAROLA = $Result.DefaultSelection<Prisma.$USUARIO_CHAROLAPayload>
+/**
+ * Model CHAROLA_FRAS
+ * 
+ */
+export type CHAROLA_FRAS = $Result.DefaultSelection<Prisma.$CHAROLA_FRASPayload>
+/**
+ * Model CHAROLA_PUPA
+ * 
+ */
+export type CHAROLA_PUPA = $Result.DefaultSelection<Prisma.$CHAROLA_PUPAPayload>
+/**
+ * Model PUPA
+ * 
+ */
+export type PUPA = $Result.DefaultSelection<Prisma.$PUPAPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -288,6 +303,36 @@ export class PrismaClient<
     * ```
     */
   get uSUARIO_CHAROLA(): Prisma.USUARIO_CHAROLADelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.cHAROLA_FRAS`: Exposes CRUD operations for the **CHAROLA_FRAS** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CHAROLA_FRAS
+    * const cHAROLA_FRAS = await prisma.cHAROLA_FRAS.findMany()
+    * ```
+    */
+  get cHAROLA_FRAS(): Prisma.CHAROLA_FRASDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.cHAROLA_PUPA`: Exposes CRUD operations for the **CHAROLA_PUPA** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CHAROLA_PUPAS
+    * const cHAROLA_PUPAS = await prisma.cHAROLA_PUPA.findMany()
+    * ```
+    */
+  get cHAROLA_PUPA(): Prisma.CHAROLA_PUPADelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pUPA`: Exposes CRUD operations for the **PUPA** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PUPAS
+    * const pUPAS = await prisma.pUPA.findMany()
+    * ```
+    */
+  get pUPA(): Prisma.PUPADelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -737,7 +782,10 @@ export namespace Prisma {
     FRAS: 'FRAS',
     HIDRATACION: 'HIDRATACION',
     USUARIO: 'USUARIO',
-    USUARIO_CHAROLA: 'USUARIO_CHAROLA'
+    USUARIO_CHAROLA: 'USUARIO_CHAROLA',
+    CHAROLA_FRAS: 'CHAROLA_FRAS',
+    CHAROLA_PUPA: 'CHAROLA_PUPA',
+    PUPA: 'PUPA'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -756,7 +804,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "aDMINISTRADOR" | "cHAROLA" | "cHAROLA_CHAROLA" | "cHAROLA_COMIDA" | "cHAROLA_HIDRATACION" | "cOMIDA" | "fRAS" | "hIDRATACION" | "uSUARIO" | "uSUARIO_CHAROLA"
+      modelProps: "aDMINISTRADOR" | "cHAROLA" | "cHAROLA_CHAROLA" | "cHAROLA_COMIDA" | "cHAROLA_HIDRATACION" | "cOMIDA" | "fRAS" | "hIDRATACION" | "uSUARIO" | "uSUARIO_CHAROLA" | "cHAROLA_FRAS" | "cHAROLA_PUPA" | "pUPA"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1420,6 +1468,204 @@ export namespace Prisma {
           }
         }
       }
+      CHAROLA_FRAS: {
+        payload: Prisma.$CHAROLA_FRASPayload<ExtArgs>
+        fields: Prisma.CHAROLA_FRASFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CHAROLA_FRASFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_FRASPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CHAROLA_FRASFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_FRASPayload>
+          }
+          findFirst: {
+            args: Prisma.CHAROLA_FRASFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_FRASPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CHAROLA_FRASFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_FRASPayload>
+          }
+          findMany: {
+            args: Prisma.CHAROLA_FRASFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_FRASPayload>[]
+          }
+          create: {
+            args: Prisma.CHAROLA_FRASCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_FRASPayload>
+          }
+          createMany: {
+            args: Prisma.CHAROLA_FRASCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.CHAROLA_FRASDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_FRASPayload>
+          }
+          update: {
+            args: Prisma.CHAROLA_FRASUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_FRASPayload>
+          }
+          deleteMany: {
+            args: Prisma.CHAROLA_FRASDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CHAROLA_FRASUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.CHAROLA_FRASUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_FRASPayload>
+          }
+          aggregate: {
+            args: Prisma.CHAROLA_FRASAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCHAROLA_FRAS>
+          }
+          groupBy: {
+            args: Prisma.CHAROLA_FRASGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CHAROLA_FRASGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CHAROLA_FRASCountArgs<ExtArgs>
+            result: $Utils.Optional<CHAROLA_FRASCountAggregateOutputType> | number
+          }
+        }
+      }
+      CHAROLA_PUPA: {
+        payload: Prisma.$CHAROLA_PUPAPayload<ExtArgs>
+        fields: Prisma.CHAROLA_PUPAFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CHAROLA_PUPAFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_PUPAPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CHAROLA_PUPAFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_PUPAPayload>
+          }
+          findFirst: {
+            args: Prisma.CHAROLA_PUPAFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_PUPAPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CHAROLA_PUPAFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_PUPAPayload>
+          }
+          findMany: {
+            args: Prisma.CHAROLA_PUPAFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_PUPAPayload>[]
+          }
+          create: {
+            args: Prisma.CHAROLA_PUPACreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_PUPAPayload>
+          }
+          createMany: {
+            args: Prisma.CHAROLA_PUPACreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.CHAROLA_PUPADeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_PUPAPayload>
+          }
+          update: {
+            args: Prisma.CHAROLA_PUPAUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_PUPAPayload>
+          }
+          deleteMany: {
+            args: Prisma.CHAROLA_PUPADeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CHAROLA_PUPAUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.CHAROLA_PUPAUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CHAROLA_PUPAPayload>
+          }
+          aggregate: {
+            args: Prisma.CHAROLA_PUPAAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCHAROLA_PUPA>
+          }
+          groupBy: {
+            args: Prisma.CHAROLA_PUPAGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CHAROLA_PUPAGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CHAROLA_PUPACountArgs<ExtArgs>
+            result: $Utils.Optional<CHAROLA_PUPACountAggregateOutputType> | number
+          }
+        }
+      }
+      PUPA: {
+        payload: Prisma.$PUPAPayload<ExtArgs>
+        fields: Prisma.PUPAFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PUPAFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PUPAPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PUPAFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PUPAPayload>
+          }
+          findFirst: {
+            args: Prisma.PUPAFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PUPAPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PUPAFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PUPAPayload>
+          }
+          findMany: {
+            args: Prisma.PUPAFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PUPAPayload>[]
+          }
+          create: {
+            args: Prisma.PUPACreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PUPAPayload>
+          }
+          createMany: {
+            args: Prisma.PUPACreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.PUPADeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PUPAPayload>
+          }
+          update: {
+            args: Prisma.PUPAUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PUPAPayload>
+          }
+          deleteMany: {
+            args: Prisma.PUPADeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PUPAUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PUPAUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PUPAPayload>
+          }
+          aggregate: {
+            args: Prisma.PUPAAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePUPA>
+          }
+          groupBy: {
+            args: Prisma.PUPAGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PUPAGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PUPACountArgs<ExtArgs>
+            result: $Utils.Optional<PUPACountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1514,6 +1760,9 @@ export namespace Prisma {
     hIDRATACION?: HIDRATACIONOmit
     uSUARIO?: USUARIOOmit
     uSUARIO_CHAROLA?: USUARIO_CHAROLAOmit
+    cHAROLA_FRAS?: CHAROLA_FRASOmit
+    cHAROLA_PUPA?: CHAROLA_PUPAOmit
+    pUPA?: PUPAOmit
   }
 
   /* Types for Logging */
@@ -1611,7 +1860,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA: number
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA: number
     CHAROLA_COMIDA: number
+    CHAROLA_FRAS: number
     CHAROLA_HIDRATACION: number
+    CHAROLA_PUPA: number
     FRAS: number
     USUARIO_CHAROLA: number
   }
@@ -1620,7 +1871,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: boolean | CHAROLACountOutputTypeCountCHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAArgs
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: boolean | CHAROLACountOutputTypeCountCHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAArgs
     CHAROLA_COMIDA?: boolean | CHAROLACountOutputTypeCountCHAROLA_COMIDAArgs
+    CHAROLA_FRAS?: boolean | CHAROLACountOutputTypeCountCHAROLA_FRASArgs
     CHAROLA_HIDRATACION?: boolean | CHAROLACountOutputTypeCountCHAROLA_HIDRATACIONArgs
+    CHAROLA_PUPA?: boolean | CHAROLACountOutputTypeCountCHAROLA_PUPAArgs
     FRAS?: boolean | CHAROLACountOutputTypeCountFRASArgs
     USUARIO_CHAROLA?: boolean | CHAROLACountOutputTypeCountUSUARIO_CHAROLAArgs
   }
@@ -1660,8 +1913,22 @@ export namespace Prisma {
   /**
    * CHAROLACountOutputType without action
    */
+  export type CHAROLACountOutputTypeCountCHAROLA_FRASArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CHAROLA_FRASWhereInput
+  }
+
+  /**
+   * CHAROLACountOutputType without action
+   */
   export type CHAROLACountOutputTypeCountCHAROLA_HIDRATACIONArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CHAROLA_HIDRATACIONWhereInput
+  }
+
+  /**
+   * CHAROLACountOutputType without action
+   */
+  export type CHAROLACountOutputTypeCountCHAROLA_PUPAArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CHAROLA_PUPAWhereInput
   }
 
   /**
@@ -1707,6 +1974,37 @@ export namespace Prisma {
    */
   export type COMIDACountOutputTypeCountCHAROLA_COMIDAArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CHAROLA_COMIDAWhereInput
+  }
+
+
+  /**
+   * Count Type FRASCountOutputType
+   */
+
+  export type FRASCountOutputType = {
+    CHAROLA_FRAS: number
+  }
+
+  export type FRASCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    CHAROLA_FRAS?: boolean | FRASCountOutputTypeCountCHAROLA_FRASArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * FRASCountOutputType without action
+   */
+  export type FRASCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FRASCountOutputType
+     */
+    select?: FRASCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * FRASCountOutputType without action
+   */
+  export type FRASCountOutputTypeCountCHAROLA_FRASArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CHAROLA_FRASWhereInput
   }
 
 
@@ -1778,6 +2076,37 @@ export namespace Prisma {
    */
   export type USUARIOCountOutputTypeCountUSUARIO_CHAROLAArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: USUARIO_CHAROLAWhereInput
+  }
+
+
+  /**
+   * Count Type PUPACountOutputType
+   */
+
+  export type PUPACountOutputType = {
+    CHAROLA_PUPA: number
+  }
+
+  export type PUPACountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    CHAROLA_PUPA?: boolean | PUPACountOutputTypeCountCHAROLA_PUPAArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PUPACountOutputType without action
+   */
+  export type PUPACountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PUPACountOutputType
+     */
+    select?: PUPACountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PUPACountOutputType without action
+   */
+  export type PUPACountOutputTypeCountCHAROLA_PUPAArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CHAROLA_PUPAWhereInput
   }
 
 
@@ -2987,7 +3316,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: boolean | CHAROLA$CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAArgs<ExtArgs>
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: boolean | CHAROLA$CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAArgs<ExtArgs>
     CHAROLA_COMIDA?: boolean | CHAROLA$CHAROLA_COMIDAArgs<ExtArgs>
+    CHAROLA_FRAS?: boolean | CHAROLA$CHAROLA_FRASArgs<ExtArgs>
     CHAROLA_HIDRATACION?: boolean | CHAROLA$CHAROLA_HIDRATACIONArgs<ExtArgs>
+    CHAROLA_PUPA?: boolean | CHAROLA$CHAROLA_PUPAArgs<ExtArgs>
     FRAS?: boolean | CHAROLA$FRASArgs<ExtArgs>
     USUARIO_CHAROLA?: boolean | CHAROLA$USUARIO_CHAROLAArgs<ExtArgs>
     _count?: boolean | CHAROLACountOutputTypeDefaultArgs<ExtArgs>
@@ -3012,7 +3343,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: boolean | CHAROLA$CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAArgs<ExtArgs>
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: boolean | CHAROLA$CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAArgs<ExtArgs>
     CHAROLA_COMIDA?: boolean | CHAROLA$CHAROLA_COMIDAArgs<ExtArgs>
+    CHAROLA_FRAS?: boolean | CHAROLA$CHAROLA_FRASArgs<ExtArgs>
     CHAROLA_HIDRATACION?: boolean | CHAROLA$CHAROLA_HIDRATACIONArgs<ExtArgs>
+    CHAROLA_PUPA?: boolean | CHAROLA$CHAROLA_PUPAArgs<ExtArgs>
     FRAS?: boolean | CHAROLA$FRASArgs<ExtArgs>
     USUARIO_CHAROLA?: boolean | CHAROLA$USUARIO_CHAROLAArgs<ExtArgs>
     _count?: boolean | CHAROLACountOutputTypeDefaultArgs<ExtArgs>
@@ -3024,7 +3357,9 @@ export namespace Prisma {
       CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA: Prisma.$CHAROLA_CHAROLAPayload<ExtArgs>[]
       CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA: Prisma.$CHAROLA_CHAROLAPayload<ExtArgs>[]
       CHAROLA_COMIDA: Prisma.$CHAROLA_COMIDAPayload<ExtArgs>[]
+      CHAROLA_FRAS: Prisma.$CHAROLA_FRASPayload<ExtArgs>[]
       CHAROLA_HIDRATACION: Prisma.$CHAROLA_HIDRATACIONPayload<ExtArgs>[]
+      CHAROLA_PUPA: Prisma.$CHAROLA_PUPAPayload<ExtArgs>[]
       FRAS: Prisma.$FRASPayload<ExtArgs>[]
       USUARIO_CHAROLA: Prisma.$USUARIO_CHAROLAPayload<ExtArgs>[]
     }
@@ -3381,7 +3716,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA<T extends CHAROLA$CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLA$CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CHAROLA_CHAROLAPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA<T extends CHAROLA$CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLA$CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CHAROLA_CHAROLAPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     CHAROLA_COMIDA<T extends CHAROLA$CHAROLA_COMIDAArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLA$CHAROLA_COMIDAArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CHAROLA_COMIDAPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    CHAROLA_FRAS<T extends CHAROLA$CHAROLA_FRASArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLA$CHAROLA_FRASArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CHAROLA_FRASPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     CHAROLA_HIDRATACION<T extends CHAROLA$CHAROLA_HIDRATACIONArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLA$CHAROLA_HIDRATACIONArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CHAROLA_HIDRATACIONPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    CHAROLA_PUPA<T extends CHAROLA$CHAROLA_PUPAArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLA$CHAROLA_PUPAArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CHAROLA_PUPAPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     FRAS<T extends CHAROLA$FRASArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLA$FRASArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FRASPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     USUARIO_CHAROLA<T extends CHAROLA$USUARIO_CHAROLAArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLA$USUARIO_CHAROLAArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$USUARIO_CHAROLAPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -3837,6 +4174,30 @@ export namespace Prisma {
   }
 
   /**
+   * CHAROLA.CHAROLA_FRAS
+   */
+  export type CHAROLA$CHAROLA_FRASArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_FRAS
+     */
+    select?: CHAROLA_FRASSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_FRAS
+     */
+    omit?: CHAROLA_FRASOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_FRASInclude<ExtArgs> | null
+    where?: CHAROLA_FRASWhereInput
+    orderBy?: CHAROLA_FRASOrderByWithRelationInput | CHAROLA_FRASOrderByWithRelationInput[]
+    cursor?: CHAROLA_FRASWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CHAROLA_FRASScalarFieldEnum | CHAROLA_FRASScalarFieldEnum[]
+  }
+
+  /**
    * CHAROLA.CHAROLA_HIDRATACION
    */
   export type CHAROLA$CHAROLA_HIDRATACIONArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3858,6 +4219,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CHAROLA_HIDRATACIONScalarFieldEnum | CHAROLA_HIDRATACIONScalarFieldEnum[]
+  }
+
+  /**
+   * CHAROLA.CHAROLA_PUPA
+   */
+  export type CHAROLA$CHAROLA_PUPAArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_PUPA
+     */
+    select?: CHAROLA_PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_PUPA
+     */
+    omit?: CHAROLA_PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_PUPAInclude<ExtArgs> | null
+    where?: CHAROLA_PUPAWhereInput
+    orderBy?: CHAROLA_PUPAOrderByWithRelationInput | CHAROLA_PUPAOrderByWithRelationInput[]
+    cursor?: CHAROLA_PUPAWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CHAROLA_PUPAScalarFieldEnum | CHAROLA_PUPAScalarFieldEnum[]
   }
 
   /**
@@ -4878,65 +5263,81 @@ export namespace Prisma {
   }
 
   export type CHAROLA_COMIDAAvgAggregateOutputType = {
+    id: number | null
     charolaId: number | null
     comidaId: number | null
     cantidadOtorgada: number | null
   }
 
   export type CHAROLA_COMIDASumAggregateOutputType = {
+    id: number | null
     charolaId: number | null
     comidaId: number | null
     cantidadOtorgada: number | null
   }
 
   export type CHAROLA_COMIDAMinAggregateOutputType = {
+    id: number | null
     charolaId: number | null
     comidaId: number | null
     cantidadOtorgada: number | null
+    fechaOtorgada: Date | null
   }
 
   export type CHAROLA_COMIDAMaxAggregateOutputType = {
+    id: number | null
     charolaId: number | null
     comidaId: number | null
     cantidadOtorgada: number | null
+    fechaOtorgada: Date | null
   }
 
   export type CHAROLA_COMIDACountAggregateOutputType = {
+    id: number
     charolaId: number
     comidaId: number
     cantidadOtorgada: number
+    fechaOtorgada: number
     _all: number
   }
 
 
   export type CHAROLA_COMIDAAvgAggregateInputType = {
+    id?: true
     charolaId?: true
     comidaId?: true
     cantidadOtorgada?: true
   }
 
   export type CHAROLA_COMIDASumAggregateInputType = {
+    id?: true
     charolaId?: true
     comidaId?: true
     cantidadOtorgada?: true
   }
 
   export type CHAROLA_COMIDAMinAggregateInputType = {
+    id?: true
     charolaId?: true
     comidaId?: true
     cantidadOtorgada?: true
+    fechaOtorgada?: true
   }
 
   export type CHAROLA_COMIDAMaxAggregateInputType = {
+    id?: true
     charolaId?: true
     comidaId?: true
     cantidadOtorgada?: true
+    fechaOtorgada?: true
   }
 
   export type CHAROLA_COMIDACountAggregateInputType = {
+    id?: true
     charolaId?: true
     comidaId?: true
     cantidadOtorgada?: true
+    fechaOtorgada?: true
     _all?: true
   }
 
@@ -5027,9 +5428,11 @@ export namespace Prisma {
   }
 
   export type CHAROLA_COMIDAGroupByOutputType = {
-    charolaId: number
-    comidaId: number
+    id: number
+    charolaId: number | null
+    comidaId: number | null
     cantidadOtorgada: number
+    fechaOtorgada: Date
     _count: CHAROLA_COMIDACountAggregateOutputType | null
     _avg: CHAROLA_COMIDAAvgAggregateOutputType | null
     _sum: CHAROLA_COMIDASumAggregateOutputType | null
@@ -5052,37 +5455,43 @@ export namespace Prisma {
 
 
   export type CHAROLA_COMIDASelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     charolaId?: boolean
     comidaId?: boolean
     cantidadOtorgada?: boolean
-    CHAROLA?: boolean | CHAROLADefaultArgs<ExtArgs>
-    COMIDA?: boolean | COMIDADefaultArgs<ExtArgs>
+    fechaOtorgada?: boolean
+    CHAROLA?: boolean | CHAROLA_COMIDA$CHAROLAArgs<ExtArgs>
+    COMIDA?: boolean | CHAROLA_COMIDA$COMIDAArgs<ExtArgs>
   }, ExtArgs["result"]["cHAROLA_COMIDA"]>
 
 
 
   export type CHAROLA_COMIDASelectScalar = {
+    id?: boolean
     charolaId?: boolean
     comidaId?: boolean
     cantidadOtorgada?: boolean
+    fechaOtorgada?: boolean
   }
 
-  export type CHAROLA_COMIDAOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"charolaId" | "comidaId" | "cantidadOtorgada", ExtArgs["result"]["cHAROLA_COMIDA"]>
+  export type CHAROLA_COMIDAOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "charolaId" | "comidaId" | "cantidadOtorgada" | "fechaOtorgada", ExtArgs["result"]["cHAROLA_COMIDA"]>
   export type CHAROLA_COMIDAInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    CHAROLA?: boolean | CHAROLADefaultArgs<ExtArgs>
-    COMIDA?: boolean | COMIDADefaultArgs<ExtArgs>
+    CHAROLA?: boolean | CHAROLA_COMIDA$CHAROLAArgs<ExtArgs>
+    COMIDA?: boolean | CHAROLA_COMIDA$COMIDAArgs<ExtArgs>
   }
 
   export type $CHAROLA_COMIDAPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "CHAROLA_COMIDA"
     objects: {
-      CHAROLA: Prisma.$CHAROLAPayload<ExtArgs>
-      COMIDA: Prisma.$COMIDAPayload<ExtArgs>
+      CHAROLA: Prisma.$CHAROLAPayload<ExtArgs> | null
+      COMIDA: Prisma.$COMIDAPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
-      charolaId: number
-      comidaId: number
+      id: number
+      charolaId: number | null
+      comidaId: number | null
       cantidadOtorgada: number
+      fechaOtorgada: Date
     }, ExtArgs["result"]["cHAROLA_COMIDA"]>
     composites: {}
   }
@@ -5166,8 +5575,8 @@ export namespace Prisma {
      * // Get first 10 CHAROLA_COMIDAS
      * const cHAROLA_COMIDAS = await prisma.cHAROLA_COMIDA.findMany({ take: 10 })
      * 
-     * // Only select the `charolaId`
-     * const cHAROLA_COMIDAWithCharolaIdOnly = await prisma.cHAROLA_COMIDA.findMany({ select: { charolaId: true } })
+     * // Only select the `id`
+     * const cHAROLA_COMIDAWithIdOnly = await prisma.cHAROLA_COMIDA.findMany({ select: { id: true } })
      * 
      */
     findMany<T extends CHAROLA_COMIDAFindManyArgs>(args?: SelectSubset<T, CHAROLA_COMIDAFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CHAROLA_COMIDAPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -5423,8 +5832,8 @@ export namespace Prisma {
    */
   export interface Prisma__CHAROLA_COMIDAClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    CHAROLA<T extends CHAROLADefaultArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLADefaultArgs<ExtArgs>>): Prisma__CHAROLAClient<$Result.GetResult<Prisma.$CHAROLAPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    COMIDA<T extends COMIDADefaultArgs<ExtArgs> = {}>(args?: Subset<T, COMIDADefaultArgs<ExtArgs>>): Prisma__COMIDAClient<$Result.GetResult<Prisma.$COMIDAPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    CHAROLA<T extends CHAROLA_COMIDA$CHAROLAArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLA_COMIDA$CHAROLAArgs<ExtArgs>>): Prisma__CHAROLAClient<$Result.GetResult<Prisma.$CHAROLAPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    COMIDA<T extends CHAROLA_COMIDA$COMIDAArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLA_COMIDA$COMIDAArgs<ExtArgs>>): Prisma__COMIDAClient<$Result.GetResult<Prisma.$COMIDAPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5454,9 +5863,11 @@ export namespace Prisma {
    * Fields of the CHAROLA_COMIDA model
    */
   interface CHAROLA_COMIDAFieldRefs {
+    readonly id: FieldRef<"CHAROLA_COMIDA", 'Int'>
     readonly charolaId: FieldRef<"CHAROLA_COMIDA", 'Int'>
     readonly comidaId: FieldRef<"CHAROLA_COMIDA", 'Int'>
     readonly cantidadOtorgada: FieldRef<"CHAROLA_COMIDA", 'Float'>
+    readonly fechaOtorgada: FieldRef<"CHAROLA_COMIDA", 'DateTime'>
   }
     
 
@@ -5800,6 +6211,44 @@ export namespace Prisma {
   }
 
   /**
+   * CHAROLA_COMIDA.CHAROLA
+   */
+  export type CHAROLA_COMIDA$CHAROLAArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA
+     */
+    select?: CHAROLASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA
+     */
+    omit?: CHAROLAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLAInclude<ExtArgs> | null
+    where?: CHAROLAWhereInput
+  }
+
+  /**
+   * CHAROLA_COMIDA.COMIDA
+   */
+  export type CHAROLA_COMIDA$COMIDAArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the COMIDA
+     */
+    select?: COMIDASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the COMIDA
+     */
+    omit?: COMIDAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: COMIDAInclude<ExtArgs> | null
+    where?: COMIDAWhereInput
+  }
+
+  /**
    * CHAROLA_COMIDA without action
    */
   export type CHAROLA_COMIDADefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5831,65 +6280,81 @@ export namespace Prisma {
   }
 
   export type CHAROLA_HIDRATACIONAvgAggregateOutputType = {
+    id: number | null
     charolaId: number | null
     hidratacionId: number | null
     cantidadOtorgada: number | null
   }
 
   export type CHAROLA_HIDRATACIONSumAggregateOutputType = {
+    id: number | null
     charolaId: number | null
     hidratacionId: number | null
     cantidadOtorgada: number | null
   }
 
   export type CHAROLA_HIDRATACIONMinAggregateOutputType = {
+    id: number | null
     charolaId: number | null
     hidratacionId: number | null
     cantidadOtorgada: number | null
+    fechaOtorgada: Date | null
   }
 
   export type CHAROLA_HIDRATACIONMaxAggregateOutputType = {
+    id: number | null
     charolaId: number | null
     hidratacionId: number | null
     cantidadOtorgada: number | null
+    fechaOtorgada: Date | null
   }
 
   export type CHAROLA_HIDRATACIONCountAggregateOutputType = {
+    id: number
     charolaId: number
     hidratacionId: number
     cantidadOtorgada: number
+    fechaOtorgada: number
     _all: number
   }
 
 
   export type CHAROLA_HIDRATACIONAvgAggregateInputType = {
+    id?: true
     charolaId?: true
     hidratacionId?: true
     cantidadOtorgada?: true
   }
 
   export type CHAROLA_HIDRATACIONSumAggregateInputType = {
+    id?: true
     charolaId?: true
     hidratacionId?: true
     cantidadOtorgada?: true
   }
 
   export type CHAROLA_HIDRATACIONMinAggregateInputType = {
+    id?: true
     charolaId?: true
     hidratacionId?: true
     cantidadOtorgada?: true
+    fechaOtorgada?: true
   }
 
   export type CHAROLA_HIDRATACIONMaxAggregateInputType = {
+    id?: true
     charolaId?: true
     hidratacionId?: true
     cantidadOtorgada?: true
+    fechaOtorgada?: true
   }
 
   export type CHAROLA_HIDRATACIONCountAggregateInputType = {
+    id?: true
     charolaId?: true
     hidratacionId?: true
     cantidadOtorgada?: true
+    fechaOtorgada?: true
     _all?: true
   }
 
@@ -5980,9 +6445,11 @@ export namespace Prisma {
   }
 
   export type CHAROLA_HIDRATACIONGroupByOutputType = {
-    charolaId: number
-    hidratacionId: number
-    cantidadOtorgada: number | null
+    id: number
+    charolaId: number | null
+    hidratacionId: number | null
+    cantidadOtorgada: number
+    fechaOtorgada: Date
     _count: CHAROLA_HIDRATACIONCountAggregateOutputType | null
     _avg: CHAROLA_HIDRATACIONAvgAggregateOutputType | null
     _sum: CHAROLA_HIDRATACIONSumAggregateOutputType | null
@@ -6005,37 +6472,43 @@ export namespace Prisma {
 
 
   export type CHAROLA_HIDRATACIONSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     charolaId?: boolean
     hidratacionId?: boolean
     cantidadOtorgada?: boolean
-    CHAROLA?: boolean | CHAROLADefaultArgs<ExtArgs>
-    HIDRATACION?: boolean | HIDRATACIONDefaultArgs<ExtArgs>
+    fechaOtorgada?: boolean
+    CHAROLA?: boolean | CHAROLA_HIDRATACION$CHAROLAArgs<ExtArgs>
+    HIDRATACION?: boolean | CHAROLA_HIDRATACION$HIDRATACIONArgs<ExtArgs>
   }, ExtArgs["result"]["cHAROLA_HIDRATACION"]>
 
 
 
   export type CHAROLA_HIDRATACIONSelectScalar = {
+    id?: boolean
     charolaId?: boolean
     hidratacionId?: boolean
     cantidadOtorgada?: boolean
+    fechaOtorgada?: boolean
   }
 
-  export type CHAROLA_HIDRATACIONOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"charolaId" | "hidratacionId" | "cantidadOtorgada", ExtArgs["result"]["cHAROLA_HIDRATACION"]>
+  export type CHAROLA_HIDRATACIONOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "charolaId" | "hidratacionId" | "cantidadOtorgada" | "fechaOtorgada", ExtArgs["result"]["cHAROLA_HIDRATACION"]>
   export type CHAROLA_HIDRATACIONInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    CHAROLA?: boolean | CHAROLADefaultArgs<ExtArgs>
-    HIDRATACION?: boolean | HIDRATACIONDefaultArgs<ExtArgs>
+    CHAROLA?: boolean | CHAROLA_HIDRATACION$CHAROLAArgs<ExtArgs>
+    HIDRATACION?: boolean | CHAROLA_HIDRATACION$HIDRATACIONArgs<ExtArgs>
   }
 
   export type $CHAROLA_HIDRATACIONPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "CHAROLA_HIDRATACION"
     objects: {
-      CHAROLA: Prisma.$CHAROLAPayload<ExtArgs>
-      HIDRATACION: Prisma.$HIDRATACIONPayload<ExtArgs>
+      CHAROLA: Prisma.$CHAROLAPayload<ExtArgs> | null
+      HIDRATACION: Prisma.$HIDRATACIONPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
-      charolaId: number
-      hidratacionId: number
-      cantidadOtorgada: number | null
+      id: number
+      charolaId: number | null
+      hidratacionId: number | null
+      cantidadOtorgada: number
+      fechaOtorgada: Date
     }, ExtArgs["result"]["cHAROLA_HIDRATACION"]>
     composites: {}
   }
@@ -6119,8 +6592,8 @@ export namespace Prisma {
      * // Get first 10 CHAROLA_HIDRATACIONS
      * const cHAROLA_HIDRATACIONS = await prisma.cHAROLA_HIDRATACION.findMany({ take: 10 })
      * 
-     * // Only select the `charolaId`
-     * const cHAROLA_HIDRATACIONWithCharolaIdOnly = await prisma.cHAROLA_HIDRATACION.findMany({ select: { charolaId: true } })
+     * // Only select the `id`
+     * const cHAROLA_HIDRATACIONWithIdOnly = await prisma.cHAROLA_HIDRATACION.findMany({ select: { id: true } })
      * 
      */
     findMany<T extends CHAROLA_HIDRATACIONFindManyArgs>(args?: SelectSubset<T, CHAROLA_HIDRATACIONFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CHAROLA_HIDRATACIONPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -6376,8 +6849,8 @@ export namespace Prisma {
    */
   export interface Prisma__CHAROLA_HIDRATACIONClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    CHAROLA<T extends CHAROLADefaultArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLADefaultArgs<ExtArgs>>): Prisma__CHAROLAClient<$Result.GetResult<Prisma.$CHAROLAPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    HIDRATACION<T extends HIDRATACIONDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HIDRATACIONDefaultArgs<ExtArgs>>): Prisma__HIDRATACIONClient<$Result.GetResult<Prisma.$HIDRATACIONPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    CHAROLA<T extends CHAROLA_HIDRATACION$CHAROLAArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLA_HIDRATACION$CHAROLAArgs<ExtArgs>>): Prisma__CHAROLAClient<$Result.GetResult<Prisma.$CHAROLAPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    HIDRATACION<T extends CHAROLA_HIDRATACION$HIDRATACIONArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLA_HIDRATACION$HIDRATACIONArgs<ExtArgs>>): Prisma__HIDRATACIONClient<$Result.GetResult<Prisma.$HIDRATACIONPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6407,9 +6880,11 @@ export namespace Prisma {
    * Fields of the CHAROLA_HIDRATACION model
    */
   interface CHAROLA_HIDRATACIONFieldRefs {
+    readonly id: FieldRef<"CHAROLA_HIDRATACION", 'Int'>
     readonly charolaId: FieldRef<"CHAROLA_HIDRATACION", 'Int'>
     readonly hidratacionId: FieldRef<"CHAROLA_HIDRATACION", 'Int'>
     readonly cantidadOtorgada: FieldRef<"CHAROLA_HIDRATACION", 'Float'>
+    readonly fechaOtorgada: FieldRef<"CHAROLA_HIDRATACION", 'DateTime'>
   }
     
 
@@ -6750,6 +7225,44 @@ export namespace Prisma {
      * Limit how many CHAROLA_HIDRATACIONS to delete.
      */
     limit?: number
+  }
+
+  /**
+   * CHAROLA_HIDRATACION.CHAROLA
+   */
+  export type CHAROLA_HIDRATACION$CHAROLAArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA
+     */
+    select?: CHAROLASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA
+     */
+    omit?: CHAROLAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLAInclude<ExtArgs> | null
+    where?: CHAROLAWhereInput
+  }
+
+  /**
+   * CHAROLA_HIDRATACION.HIDRATACION
+   */
+  export type CHAROLA_HIDRATACION$HIDRATACIONArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HIDRATACION
+     */
+    select?: HIDRATACIONSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HIDRATACION
+     */
+    omit?: HIDRATACIONOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HIDRATACIONInclude<ExtArgs> | null
+    where?: HIDRATACIONWhereInput
   }
 
   /**
@@ -7751,31 +8264,31 @@ export namespace Prisma {
   }
 
   export type FRASAvgAggregateOutputType = {
-    frassId: number | null
+    frasId: number | null
     gramosGenerados: number | null
     charolaId: number | null
   }
 
   export type FRASSumAggregateOutputType = {
-    frassId: number | null
+    frasId: number | null
     gramosGenerados: number | null
     charolaId: number | null
   }
 
   export type FRASMinAggregateOutputType = {
-    frassId: number | null
+    frasId: number | null
     gramosGenerados: number | null
     charolaId: number | null
   }
 
   export type FRASMaxAggregateOutputType = {
-    frassId: number | null
+    frasId: number | null
     gramosGenerados: number | null
     charolaId: number | null
   }
 
   export type FRASCountAggregateOutputType = {
-    frassId: number
+    frasId: number
     gramosGenerados: number
     charolaId: number
     _all: number
@@ -7783,31 +8296,31 @@ export namespace Prisma {
 
 
   export type FRASAvgAggregateInputType = {
-    frassId?: true
+    frasId?: true
     gramosGenerados?: true
     charolaId?: true
   }
 
   export type FRASSumAggregateInputType = {
-    frassId?: true
+    frasId?: true
     gramosGenerados?: true
     charolaId?: true
   }
 
   export type FRASMinAggregateInputType = {
-    frassId?: true
+    frasId?: true
     gramosGenerados?: true
     charolaId?: true
   }
 
   export type FRASMaxAggregateInputType = {
-    frassId?: true
+    frasId?: true
     gramosGenerados?: true
     charolaId?: true
   }
 
   export type FRASCountAggregateInputType = {
-    frassId?: true
+    frasId?: true
     gramosGenerados?: true
     charolaId?: true
     _all?: true
@@ -7900,7 +8413,7 @@ export namespace Prisma {
   }
 
   export type FRASGroupByOutputType = {
-    frassId: number
+    frasId: number
     gramosGenerados: number
     charolaId: number | null
     _count: FRASCountAggregateOutputType | null
@@ -7925,32 +8438,37 @@ export namespace Prisma {
 
 
   export type FRASSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    frassId?: boolean
+    frasId?: boolean
     gramosGenerados?: boolean
     charolaId?: boolean
+    CHAROLA_FRAS?: boolean | FRAS$CHAROLA_FRASArgs<ExtArgs>
     CHAROLA?: boolean | FRAS$CHAROLAArgs<ExtArgs>
+    _count?: boolean | FRASCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["fRAS"]>
 
 
 
   export type FRASSelectScalar = {
-    frassId?: boolean
+    frasId?: boolean
     gramosGenerados?: boolean
     charolaId?: boolean
   }
 
-  export type FRASOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"frassId" | "gramosGenerados" | "charolaId", ExtArgs["result"]["fRAS"]>
+  export type FRASOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"frasId" | "gramosGenerados" | "charolaId", ExtArgs["result"]["fRAS"]>
   export type FRASInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    CHAROLA_FRAS?: boolean | FRAS$CHAROLA_FRASArgs<ExtArgs>
     CHAROLA?: boolean | FRAS$CHAROLAArgs<ExtArgs>
+    _count?: boolean | FRASCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $FRASPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "FRAS"
     objects: {
+      CHAROLA_FRAS: Prisma.$CHAROLA_FRASPayload<ExtArgs>[]
       CHAROLA: Prisma.$CHAROLAPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
-      frassId: number
+      frasId: number
       gramosGenerados: number
       charolaId: number | null
     }, ExtArgs["result"]["fRAS"]>
@@ -8036,8 +8554,8 @@ export namespace Prisma {
      * // Get first 10 FRAS
      * const fRAS = await prisma.fRAS.findMany({ take: 10 })
      * 
-     * // Only select the `frassId`
-     * const fRASWithFrassIdOnly = await prisma.fRAS.findMany({ select: { frassId: true } })
+     * // Only select the `frasId`
+     * const fRASWithFrasIdOnly = await prisma.fRAS.findMany({ select: { frasId: true } })
      * 
      */
     findMany<T extends FRASFindManyArgs>(args?: SelectSubset<T, FRASFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FRASPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -8293,6 +8811,7 @@ export namespace Prisma {
    */
   export interface Prisma__FRASClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    CHAROLA_FRAS<T extends FRAS$CHAROLA_FRASArgs<ExtArgs> = {}>(args?: Subset<T, FRAS$CHAROLA_FRASArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CHAROLA_FRASPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     CHAROLA<T extends FRAS$CHAROLAArgs<ExtArgs> = {}>(args?: Subset<T, FRAS$CHAROLAArgs<ExtArgs>>): Prisma__CHAROLAClient<$Result.GetResult<Prisma.$CHAROLAPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -8323,7 +8842,7 @@ export namespace Prisma {
    * Fields of the FRAS model
    */
   interface FRASFieldRefs {
-    readonly frassId: FieldRef<"FRAS", 'Int'>
+    readonly frasId: FieldRef<"FRAS", 'Int'>
     readonly gramosGenerados: FieldRef<"FRAS", 'Float'>
     readonly charolaId: FieldRef<"FRAS", 'Int'>
   }
@@ -8666,6 +9185,30 @@ export namespace Prisma {
      * Limit how many FRAS to delete.
      */
     limit?: number
+  }
+
+  /**
+   * FRAS.CHAROLA_FRAS
+   */
+  export type FRAS$CHAROLA_FRASArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_FRAS
+     */
+    select?: CHAROLA_FRASSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_FRAS
+     */
+    omit?: CHAROLA_FRASOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_FRASInclude<ExtArgs> | null
+    where?: CHAROLA_FRASWhereInput
+    orderBy?: CHAROLA_FRASOrderByWithRelationInput | CHAROLA_FRASOrderByWithRelationInput[]
+    cursor?: CHAROLA_FRASWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CHAROLA_FRASScalarFieldEnum | CHAROLA_FRASScalarFieldEnum[]
   }
 
   /**
@@ -11640,6 +12183,2853 @@ export namespace Prisma {
 
 
   /**
+   * Model CHAROLA_FRAS
+   */
+
+  export type AggregateCHAROLA_FRAS = {
+    _count: CHAROLA_FRASCountAggregateOutputType | null
+    _avg: CHAROLA_FRASAvgAggregateOutputType | null
+    _sum: CHAROLA_FRASSumAggregateOutputType | null
+    _min: CHAROLA_FRASMinAggregateOutputType | null
+    _max: CHAROLA_FRASMaxAggregateOutputType | null
+  }
+
+  export type CHAROLA_FRASAvgAggregateOutputType = {
+    charolaId: number | null
+    frasId: number | null
+  }
+
+  export type CHAROLA_FRASSumAggregateOutputType = {
+    charolaId: number | null
+    frasId: number | null
+  }
+
+  export type CHAROLA_FRASMinAggregateOutputType = {
+    charolaId: number | null
+    frasId: number | null
+  }
+
+  export type CHAROLA_FRASMaxAggregateOutputType = {
+    charolaId: number | null
+    frasId: number | null
+  }
+
+  export type CHAROLA_FRASCountAggregateOutputType = {
+    charolaId: number
+    frasId: number
+    _all: number
+  }
+
+
+  export type CHAROLA_FRASAvgAggregateInputType = {
+    charolaId?: true
+    frasId?: true
+  }
+
+  export type CHAROLA_FRASSumAggregateInputType = {
+    charolaId?: true
+    frasId?: true
+  }
+
+  export type CHAROLA_FRASMinAggregateInputType = {
+    charolaId?: true
+    frasId?: true
+  }
+
+  export type CHAROLA_FRASMaxAggregateInputType = {
+    charolaId?: true
+    frasId?: true
+  }
+
+  export type CHAROLA_FRASCountAggregateInputType = {
+    charolaId?: true
+    frasId?: true
+    _all?: true
+  }
+
+  export type CHAROLA_FRASAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CHAROLA_FRAS to aggregate.
+     */
+    where?: CHAROLA_FRASWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CHAROLA_FRAS to fetch.
+     */
+    orderBy?: CHAROLA_FRASOrderByWithRelationInput | CHAROLA_FRASOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CHAROLA_FRASWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CHAROLA_FRAS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CHAROLA_FRAS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CHAROLA_FRAS
+    **/
+    _count?: true | CHAROLA_FRASCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CHAROLA_FRASAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CHAROLA_FRASSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CHAROLA_FRASMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CHAROLA_FRASMaxAggregateInputType
+  }
+
+  export type GetCHAROLA_FRASAggregateType<T extends CHAROLA_FRASAggregateArgs> = {
+        [P in keyof T & keyof AggregateCHAROLA_FRAS]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCHAROLA_FRAS[P]>
+      : GetScalarType<T[P], AggregateCHAROLA_FRAS[P]>
+  }
+
+
+
+
+  export type CHAROLA_FRASGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CHAROLA_FRASWhereInput
+    orderBy?: CHAROLA_FRASOrderByWithAggregationInput | CHAROLA_FRASOrderByWithAggregationInput[]
+    by: CHAROLA_FRASScalarFieldEnum[] | CHAROLA_FRASScalarFieldEnum
+    having?: CHAROLA_FRASScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CHAROLA_FRASCountAggregateInputType | true
+    _avg?: CHAROLA_FRASAvgAggregateInputType
+    _sum?: CHAROLA_FRASSumAggregateInputType
+    _min?: CHAROLA_FRASMinAggregateInputType
+    _max?: CHAROLA_FRASMaxAggregateInputType
+  }
+
+  export type CHAROLA_FRASGroupByOutputType = {
+    charolaId: number
+    frasId: number
+    _count: CHAROLA_FRASCountAggregateOutputType | null
+    _avg: CHAROLA_FRASAvgAggregateOutputType | null
+    _sum: CHAROLA_FRASSumAggregateOutputType | null
+    _min: CHAROLA_FRASMinAggregateOutputType | null
+    _max: CHAROLA_FRASMaxAggregateOutputType | null
+  }
+
+  type GetCHAROLA_FRASGroupByPayload<T extends CHAROLA_FRASGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CHAROLA_FRASGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CHAROLA_FRASGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CHAROLA_FRASGroupByOutputType[P]>
+            : GetScalarType<T[P], CHAROLA_FRASGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CHAROLA_FRASSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    charolaId?: boolean
+    frasId?: boolean
+    CHAROLA?: boolean | CHAROLADefaultArgs<ExtArgs>
+    FRAS?: boolean | FRASDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["cHAROLA_FRAS"]>
+
+
+
+  export type CHAROLA_FRASSelectScalar = {
+    charolaId?: boolean
+    frasId?: boolean
+  }
+
+  export type CHAROLA_FRASOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"charolaId" | "frasId", ExtArgs["result"]["cHAROLA_FRAS"]>
+  export type CHAROLA_FRASInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    CHAROLA?: boolean | CHAROLADefaultArgs<ExtArgs>
+    FRAS?: boolean | FRASDefaultArgs<ExtArgs>
+  }
+
+  export type $CHAROLA_FRASPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CHAROLA_FRAS"
+    objects: {
+      CHAROLA: Prisma.$CHAROLAPayload<ExtArgs>
+      FRAS: Prisma.$FRASPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      charolaId: number
+      frasId: number
+    }, ExtArgs["result"]["cHAROLA_FRAS"]>
+    composites: {}
+  }
+
+  type CHAROLA_FRASGetPayload<S extends boolean | null | undefined | CHAROLA_FRASDefaultArgs> = $Result.GetResult<Prisma.$CHAROLA_FRASPayload, S>
+
+  type CHAROLA_FRASCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CHAROLA_FRASFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CHAROLA_FRASCountAggregateInputType | true
+    }
+
+  export interface CHAROLA_FRASDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CHAROLA_FRAS'], meta: { name: 'CHAROLA_FRAS' } }
+    /**
+     * Find zero or one CHAROLA_FRAS that matches the filter.
+     * @param {CHAROLA_FRASFindUniqueArgs} args - Arguments to find a CHAROLA_FRAS
+     * @example
+     * // Get one CHAROLA_FRAS
+     * const cHAROLA_FRAS = await prisma.cHAROLA_FRAS.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CHAROLA_FRASFindUniqueArgs>(args: SelectSubset<T, CHAROLA_FRASFindUniqueArgs<ExtArgs>>): Prisma__CHAROLA_FRASClient<$Result.GetResult<Prisma.$CHAROLA_FRASPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CHAROLA_FRAS that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CHAROLA_FRASFindUniqueOrThrowArgs} args - Arguments to find a CHAROLA_FRAS
+     * @example
+     * // Get one CHAROLA_FRAS
+     * const cHAROLA_FRAS = await prisma.cHAROLA_FRAS.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CHAROLA_FRASFindUniqueOrThrowArgs>(args: SelectSubset<T, CHAROLA_FRASFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CHAROLA_FRASClient<$Result.GetResult<Prisma.$CHAROLA_FRASPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CHAROLA_FRAS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CHAROLA_FRASFindFirstArgs} args - Arguments to find a CHAROLA_FRAS
+     * @example
+     * // Get one CHAROLA_FRAS
+     * const cHAROLA_FRAS = await prisma.cHAROLA_FRAS.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CHAROLA_FRASFindFirstArgs>(args?: SelectSubset<T, CHAROLA_FRASFindFirstArgs<ExtArgs>>): Prisma__CHAROLA_FRASClient<$Result.GetResult<Prisma.$CHAROLA_FRASPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CHAROLA_FRAS that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CHAROLA_FRASFindFirstOrThrowArgs} args - Arguments to find a CHAROLA_FRAS
+     * @example
+     * // Get one CHAROLA_FRAS
+     * const cHAROLA_FRAS = await prisma.cHAROLA_FRAS.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CHAROLA_FRASFindFirstOrThrowArgs>(args?: SelectSubset<T, CHAROLA_FRASFindFirstOrThrowArgs<ExtArgs>>): Prisma__CHAROLA_FRASClient<$Result.GetResult<Prisma.$CHAROLA_FRASPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CHAROLA_FRAS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CHAROLA_FRASFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CHAROLA_FRAS
+     * const cHAROLA_FRAS = await prisma.cHAROLA_FRAS.findMany()
+     * 
+     * // Get first 10 CHAROLA_FRAS
+     * const cHAROLA_FRAS = await prisma.cHAROLA_FRAS.findMany({ take: 10 })
+     * 
+     * // Only select the `charolaId`
+     * const cHAROLA_FRASWithCharolaIdOnly = await prisma.cHAROLA_FRAS.findMany({ select: { charolaId: true } })
+     * 
+     */
+    findMany<T extends CHAROLA_FRASFindManyArgs>(args?: SelectSubset<T, CHAROLA_FRASFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CHAROLA_FRASPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CHAROLA_FRAS.
+     * @param {CHAROLA_FRASCreateArgs} args - Arguments to create a CHAROLA_FRAS.
+     * @example
+     * // Create one CHAROLA_FRAS
+     * const CHAROLA_FRAS = await prisma.cHAROLA_FRAS.create({
+     *   data: {
+     *     // ... data to create a CHAROLA_FRAS
+     *   }
+     * })
+     * 
+     */
+    create<T extends CHAROLA_FRASCreateArgs>(args: SelectSubset<T, CHAROLA_FRASCreateArgs<ExtArgs>>): Prisma__CHAROLA_FRASClient<$Result.GetResult<Prisma.$CHAROLA_FRASPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CHAROLA_FRAS.
+     * @param {CHAROLA_FRASCreateManyArgs} args - Arguments to create many CHAROLA_FRAS.
+     * @example
+     * // Create many CHAROLA_FRAS
+     * const cHAROLA_FRAS = await prisma.cHAROLA_FRAS.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CHAROLA_FRASCreateManyArgs>(args?: SelectSubset<T, CHAROLA_FRASCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a CHAROLA_FRAS.
+     * @param {CHAROLA_FRASDeleteArgs} args - Arguments to delete one CHAROLA_FRAS.
+     * @example
+     * // Delete one CHAROLA_FRAS
+     * const CHAROLA_FRAS = await prisma.cHAROLA_FRAS.delete({
+     *   where: {
+     *     // ... filter to delete one CHAROLA_FRAS
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CHAROLA_FRASDeleteArgs>(args: SelectSubset<T, CHAROLA_FRASDeleteArgs<ExtArgs>>): Prisma__CHAROLA_FRASClient<$Result.GetResult<Prisma.$CHAROLA_FRASPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CHAROLA_FRAS.
+     * @param {CHAROLA_FRASUpdateArgs} args - Arguments to update one CHAROLA_FRAS.
+     * @example
+     * // Update one CHAROLA_FRAS
+     * const cHAROLA_FRAS = await prisma.cHAROLA_FRAS.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CHAROLA_FRASUpdateArgs>(args: SelectSubset<T, CHAROLA_FRASUpdateArgs<ExtArgs>>): Prisma__CHAROLA_FRASClient<$Result.GetResult<Prisma.$CHAROLA_FRASPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CHAROLA_FRAS.
+     * @param {CHAROLA_FRASDeleteManyArgs} args - Arguments to filter CHAROLA_FRAS to delete.
+     * @example
+     * // Delete a few CHAROLA_FRAS
+     * const { count } = await prisma.cHAROLA_FRAS.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CHAROLA_FRASDeleteManyArgs>(args?: SelectSubset<T, CHAROLA_FRASDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CHAROLA_FRAS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CHAROLA_FRASUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CHAROLA_FRAS
+     * const cHAROLA_FRAS = await prisma.cHAROLA_FRAS.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CHAROLA_FRASUpdateManyArgs>(args: SelectSubset<T, CHAROLA_FRASUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one CHAROLA_FRAS.
+     * @param {CHAROLA_FRASUpsertArgs} args - Arguments to update or create a CHAROLA_FRAS.
+     * @example
+     * // Update or create a CHAROLA_FRAS
+     * const cHAROLA_FRAS = await prisma.cHAROLA_FRAS.upsert({
+     *   create: {
+     *     // ... data to create a CHAROLA_FRAS
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CHAROLA_FRAS we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CHAROLA_FRASUpsertArgs>(args: SelectSubset<T, CHAROLA_FRASUpsertArgs<ExtArgs>>): Prisma__CHAROLA_FRASClient<$Result.GetResult<Prisma.$CHAROLA_FRASPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CHAROLA_FRAS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CHAROLA_FRASCountArgs} args - Arguments to filter CHAROLA_FRAS to count.
+     * @example
+     * // Count the number of CHAROLA_FRAS
+     * const count = await prisma.cHAROLA_FRAS.count({
+     *   where: {
+     *     // ... the filter for the CHAROLA_FRAS we want to count
+     *   }
+     * })
+    **/
+    count<T extends CHAROLA_FRASCountArgs>(
+      args?: Subset<T, CHAROLA_FRASCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CHAROLA_FRASCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CHAROLA_FRAS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CHAROLA_FRASAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CHAROLA_FRASAggregateArgs>(args: Subset<T, CHAROLA_FRASAggregateArgs>): Prisma.PrismaPromise<GetCHAROLA_FRASAggregateType<T>>
+
+    /**
+     * Group by CHAROLA_FRAS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CHAROLA_FRASGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CHAROLA_FRASGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CHAROLA_FRASGroupByArgs['orderBy'] }
+        : { orderBy?: CHAROLA_FRASGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CHAROLA_FRASGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCHAROLA_FRASGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CHAROLA_FRAS model
+   */
+  readonly fields: CHAROLA_FRASFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CHAROLA_FRAS.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CHAROLA_FRASClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    CHAROLA<T extends CHAROLADefaultArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLADefaultArgs<ExtArgs>>): Prisma__CHAROLAClient<$Result.GetResult<Prisma.$CHAROLAPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    FRAS<T extends FRASDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FRASDefaultArgs<ExtArgs>>): Prisma__FRASClient<$Result.GetResult<Prisma.$FRASPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CHAROLA_FRAS model
+   */
+  interface CHAROLA_FRASFieldRefs {
+    readonly charolaId: FieldRef<"CHAROLA_FRAS", 'Int'>
+    readonly frasId: FieldRef<"CHAROLA_FRAS", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CHAROLA_FRAS findUnique
+   */
+  export type CHAROLA_FRASFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_FRAS
+     */
+    select?: CHAROLA_FRASSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_FRAS
+     */
+    omit?: CHAROLA_FRASOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_FRASInclude<ExtArgs> | null
+    /**
+     * Filter, which CHAROLA_FRAS to fetch.
+     */
+    where: CHAROLA_FRASWhereUniqueInput
+  }
+
+  /**
+   * CHAROLA_FRAS findUniqueOrThrow
+   */
+  export type CHAROLA_FRASFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_FRAS
+     */
+    select?: CHAROLA_FRASSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_FRAS
+     */
+    omit?: CHAROLA_FRASOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_FRASInclude<ExtArgs> | null
+    /**
+     * Filter, which CHAROLA_FRAS to fetch.
+     */
+    where: CHAROLA_FRASWhereUniqueInput
+  }
+
+  /**
+   * CHAROLA_FRAS findFirst
+   */
+  export type CHAROLA_FRASFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_FRAS
+     */
+    select?: CHAROLA_FRASSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_FRAS
+     */
+    omit?: CHAROLA_FRASOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_FRASInclude<ExtArgs> | null
+    /**
+     * Filter, which CHAROLA_FRAS to fetch.
+     */
+    where?: CHAROLA_FRASWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CHAROLA_FRAS to fetch.
+     */
+    orderBy?: CHAROLA_FRASOrderByWithRelationInput | CHAROLA_FRASOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CHAROLA_FRAS.
+     */
+    cursor?: CHAROLA_FRASWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CHAROLA_FRAS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CHAROLA_FRAS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CHAROLA_FRAS.
+     */
+    distinct?: CHAROLA_FRASScalarFieldEnum | CHAROLA_FRASScalarFieldEnum[]
+  }
+
+  /**
+   * CHAROLA_FRAS findFirstOrThrow
+   */
+  export type CHAROLA_FRASFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_FRAS
+     */
+    select?: CHAROLA_FRASSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_FRAS
+     */
+    omit?: CHAROLA_FRASOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_FRASInclude<ExtArgs> | null
+    /**
+     * Filter, which CHAROLA_FRAS to fetch.
+     */
+    where?: CHAROLA_FRASWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CHAROLA_FRAS to fetch.
+     */
+    orderBy?: CHAROLA_FRASOrderByWithRelationInput | CHAROLA_FRASOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CHAROLA_FRAS.
+     */
+    cursor?: CHAROLA_FRASWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CHAROLA_FRAS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CHAROLA_FRAS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CHAROLA_FRAS.
+     */
+    distinct?: CHAROLA_FRASScalarFieldEnum | CHAROLA_FRASScalarFieldEnum[]
+  }
+
+  /**
+   * CHAROLA_FRAS findMany
+   */
+  export type CHAROLA_FRASFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_FRAS
+     */
+    select?: CHAROLA_FRASSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_FRAS
+     */
+    omit?: CHAROLA_FRASOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_FRASInclude<ExtArgs> | null
+    /**
+     * Filter, which CHAROLA_FRAS to fetch.
+     */
+    where?: CHAROLA_FRASWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CHAROLA_FRAS to fetch.
+     */
+    orderBy?: CHAROLA_FRASOrderByWithRelationInput | CHAROLA_FRASOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CHAROLA_FRAS.
+     */
+    cursor?: CHAROLA_FRASWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CHAROLA_FRAS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CHAROLA_FRAS.
+     */
+    skip?: number
+    distinct?: CHAROLA_FRASScalarFieldEnum | CHAROLA_FRASScalarFieldEnum[]
+  }
+
+  /**
+   * CHAROLA_FRAS create
+   */
+  export type CHAROLA_FRASCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_FRAS
+     */
+    select?: CHAROLA_FRASSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_FRAS
+     */
+    omit?: CHAROLA_FRASOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_FRASInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CHAROLA_FRAS.
+     */
+    data: XOR<CHAROLA_FRASCreateInput, CHAROLA_FRASUncheckedCreateInput>
+  }
+
+  /**
+   * CHAROLA_FRAS createMany
+   */
+  export type CHAROLA_FRASCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CHAROLA_FRAS.
+     */
+    data: CHAROLA_FRASCreateManyInput | CHAROLA_FRASCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CHAROLA_FRAS update
+   */
+  export type CHAROLA_FRASUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_FRAS
+     */
+    select?: CHAROLA_FRASSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_FRAS
+     */
+    omit?: CHAROLA_FRASOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_FRASInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CHAROLA_FRAS.
+     */
+    data: XOR<CHAROLA_FRASUpdateInput, CHAROLA_FRASUncheckedUpdateInput>
+    /**
+     * Choose, which CHAROLA_FRAS to update.
+     */
+    where: CHAROLA_FRASWhereUniqueInput
+  }
+
+  /**
+   * CHAROLA_FRAS updateMany
+   */
+  export type CHAROLA_FRASUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CHAROLA_FRAS.
+     */
+    data: XOR<CHAROLA_FRASUpdateManyMutationInput, CHAROLA_FRASUncheckedUpdateManyInput>
+    /**
+     * Filter which CHAROLA_FRAS to update
+     */
+    where?: CHAROLA_FRASWhereInput
+    /**
+     * Limit how many CHAROLA_FRAS to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CHAROLA_FRAS upsert
+   */
+  export type CHAROLA_FRASUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_FRAS
+     */
+    select?: CHAROLA_FRASSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_FRAS
+     */
+    omit?: CHAROLA_FRASOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_FRASInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CHAROLA_FRAS to update in case it exists.
+     */
+    where: CHAROLA_FRASWhereUniqueInput
+    /**
+     * In case the CHAROLA_FRAS found by the `where` argument doesn't exist, create a new CHAROLA_FRAS with this data.
+     */
+    create: XOR<CHAROLA_FRASCreateInput, CHAROLA_FRASUncheckedCreateInput>
+    /**
+     * In case the CHAROLA_FRAS was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CHAROLA_FRASUpdateInput, CHAROLA_FRASUncheckedUpdateInput>
+  }
+
+  /**
+   * CHAROLA_FRAS delete
+   */
+  export type CHAROLA_FRASDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_FRAS
+     */
+    select?: CHAROLA_FRASSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_FRAS
+     */
+    omit?: CHAROLA_FRASOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_FRASInclude<ExtArgs> | null
+    /**
+     * Filter which CHAROLA_FRAS to delete.
+     */
+    where: CHAROLA_FRASWhereUniqueInput
+  }
+
+  /**
+   * CHAROLA_FRAS deleteMany
+   */
+  export type CHAROLA_FRASDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CHAROLA_FRAS to delete
+     */
+    where?: CHAROLA_FRASWhereInput
+    /**
+     * Limit how many CHAROLA_FRAS to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CHAROLA_FRAS without action
+   */
+  export type CHAROLA_FRASDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_FRAS
+     */
+    select?: CHAROLA_FRASSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_FRAS
+     */
+    omit?: CHAROLA_FRASOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_FRASInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CHAROLA_PUPA
+   */
+
+  export type AggregateCHAROLA_PUPA = {
+    _count: CHAROLA_PUPACountAggregateOutputType | null
+    _avg: CHAROLA_PUPAAvgAggregateOutputType | null
+    _sum: CHAROLA_PUPASumAggregateOutputType | null
+    _min: CHAROLA_PUPAMinAggregateOutputType | null
+    _max: CHAROLA_PUPAMaxAggregateOutputType | null
+  }
+
+  export type CHAROLA_PUPAAvgAggregateOutputType = {
+    charolaId: number | null
+    pupaId: number | null
+  }
+
+  export type CHAROLA_PUPASumAggregateOutputType = {
+    charolaId: number | null
+    pupaId: number | null
+  }
+
+  export type CHAROLA_PUPAMinAggregateOutputType = {
+    charolaId: number | null
+    pupaId: number | null
+  }
+
+  export type CHAROLA_PUPAMaxAggregateOutputType = {
+    charolaId: number | null
+    pupaId: number | null
+  }
+
+  export type CHAROLA_PUPACountAggregateOutputType = {
+    charolaId: number
+    pupaId: number
+    _all: number
+  }
+
+
+  export type CHAROLA_PUPAAvgAggregateInputType = {
+    charolaId?: true
+    pupaId?: true
+  }
+
+  export type CHAROLA_PUPASumAggregateInputType = {
+    charolaId?: true
+    pupaId?: true
+  }
+
+  export type CHAROLA_PUPAMinAggregateInputType = {
+    charolaId?: true
+    pupaId?: true
+  }
+
+  export type CHAROLA_PUPAMaxAggregateInputType = {
+    charolaId?: true
+    pupaId?: true
+  }
+
+  export type CHAROLA_PUPACountAggregateInputType = {
+    charolaId?: true
+    pupaId?: true
+    _all?: true
+  }
+
+  export type CHAROLA_PUPAAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CHAROLA_PUPA to aggregate.
+     */
+    where?: CHAROLA_PUPAWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CHAROLA_PUPAS to fetch.
+     */
+    orderBy?: CHAROLA_PUPAOrderByWithRelationInput | CHAROLA_PUPAOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CHAROLA_PUPAWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CHAROLA_PUPAS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CHAROLA_PUPAS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CHAROLA_PUPAS
+    **/
+    _count?: true | CHAROLA_PUPACountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CHAROLA_PUPAAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CHAROLA_PUPASumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CHAROLA_PUPAMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CHAROLA_PUPAMaxAggregateInputType
+  }
+
+  export type GetCHAROLA_PUPAAggregateType<T extends CHAROLA_PUPAAggregateArgs> = {
+        [P in keyof T & keyof AggregateCHAROLA_PUPA]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCHAROLA_PUPA[P]>
+      : GetScalarType<T[P], AggregateCHAROLA_PUPA[P]>
+  }
+
+
+
+
+  export type CHAROLA_PUPAGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CHAROLA_PUPAWhereInput
+    orderBy?: CHAROLA_PUPAOrderByWithAggregationInput | CHAROLA_PUPAOrderByWithAggregationInput[]
+    by: CHAROLA_PUPAScalarFieldEnum[] | CHAROLA_PUPAScalarFieldEnum
+    having?: CHAROLA_PUPAScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CHAROLA_PUPACountAggregateInputType | true
+    _avg?: CHAROLA_PUPAAvgAggregateInputType
+    _sum?: CHAROLA_PUPASumAggregateInputType
+    _min?: CHAROLA_PUPAMinAggregateInputType
+    _max?: CHAROLA_PUPAMaxAggregateInputType
+  }
+
+  export type CHAROLA_PUPAGroupByOutputType = {
+    charolaId: number
+    pupaId: number
+    _count: CHAROLA_PUPACountAggregateOutputType | null
+    _avg: CHAROLA_PUPAAvgAggregateOutputType | null
+    _sum: CHAROLA_PUPASumAggregateOutputType | null
+    _min: CHAROLA_PUPAMinAggregateOutputType | null
+    _max: CHAROLA_PUPAMaxAggregateOutputType | null
+  }
+
+  type GetCHAROLA_PUPAGroupByPayload<T extends CHAROLA_PUPAGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CHAROLA_PUPAGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CHAROLA_PUPAGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CHAROLA_PUPAGroupByOutputType[P]>
+            : GetScalarType<T[P], CHAROLA_PUPAGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CHAROLA_PUPASelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    charolaId?: boolean
+    pupaId?: boolean
+    CHAROLA?: boolean | CHAROLADefaultArgs<ExtArgs>
+    PUPA?: boolean | PUPADefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["cHAROLA_PUPA"]>
+
+
+
+  export type CHAROLA_PUPASelectScalar = {
+    charolaId?: boolean
+    pupaId?: boolean
+  }
+
+  export type CHAROLA_PUPAOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"charolaId" | "pupaId", ExtArgs["result"]["cHAROLA_PUPA"]>
+  export type CHAROLA_PUPAInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    CHAROLA?: boolean | CHAROLADefaultArgs<ExtArgs>
+    PUPA?: boolean | PUPADefaultArgs<ExtArgs>
+  }
+
+  export type $CHAROLA_PUPAPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CHAROLA_PUPA"
+    objects: {
+      CHAROLA: Prisma.$CHAROLAPayload<ExtArgs>
+      PUPA: Prisma.$PUPAPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      charolaId: number
+      pupaId: number
+    }, ExtArgs["result"]["cHAROLA_PUPA"]>
+    composites: {}
+  }
+
+  type CHAROLA_PUPAGetPayload<S extends boolean | null | undefined | CHAROLA_PUPADefaultArgs> = $Result.GetResult<Prisma.$CHAROLA_PUPAPayload, S>
+
+  type CHAROLA_PUPACountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CHAROLA_PUPAFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CHAROLA_PUPACountAggregateInputType | true
+    }
+
+  export interface CHAROLA_PUPADelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CHAROLA_PUPA'], meta: { name: 'CHAROLA_PUPA' } }
+    /**
+     * Find zero or one CHAROLA_PUPA that matches the filter.
+     * @param {CHAROLA_PUPAFindUniqueArgs} args - Arguments to find a CHAROLA_PUPA
+     * @example
+     * // Get one CHAROLA_PUPA
+     * const cHAROLA_PUPA = await prisma.cHAROLA_PUPA.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CHAROLA_PUPAFindUniqueArgs>(args: SelectSubset<T, CHAROLA_PUPAFindUniqueArgs<ExtArgs>>): Prisma__CHAROLA_PUPAClient<$Result.GetResult<Prisma.$CHAROLA_PUPAPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CHAROLA_PUPA that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CHAROLA_PUPAFindUniqueOrThrowArgs} args - Arguments to find a CHAROLA_PUPA
+     * @example
+     * // Get one CHAROLA_PUPA
+     * const cHAROLA_PUPA = await prisma.cHAROLA_PUPA.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CHAROLA_PUPAFindUniqueOrThrowArgs>(args: SelectSubset<T, CHAROLA_PUPAFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CHAROLA_PUPAClient<$Result.GetResult<Prisma.$CHAROLA_PUPAPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CHAROLA_PUPA that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CHAROLA_PUPAFindFirstArgs} args - Arguments to find a CHAROLA_PUPA
+     * @example
+     * // Get one CHAROLA_PUPA
+     * const cHAROLA_PUPA = await prisma.cHAROLA_PUPA.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CHAROLA_PUPAFindFirstArgs>(args?: SelectSubset<T, CHAROLA_PUPAFindFirstArgs<ExtArgs>>): Prisma__CHAROLA_PUPAClient<$Result.GetResult<Prisma.$CHAROLA_PUPAPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CHAROLA_PUPA that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CHAROLA_PUPAFindFirstOrThrowArgs} args - Arguments to find a CHAROLA_PUPA
+     * @example
+     * // Get one CHAROLA_PUPA
+     * const cHAROLA_PUPA = await prisma.cHAROLA_PUPA.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CHAROLA_PUPAFindFirstOrThrowArgs>(args?: SelectSubset<T, CHAROLA_PUPAFindFirstOrThrowArgs<ExtArgs>>): Prisma__CHAROLA_PUPAClient<$Result.GetResult<Prisma.$CHAROLA_PUPAPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CHAROLA_PUPAS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CHAROLA_PUPAFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CHAROLA_PUPAS
+     * const cHAROLA_PUPAS = await prisma.cHAROLA_PUPA.findMany()
+     * 
+     * // Get first 10 CHAROLA_PUPAS
+     * const cHAROLA_PUPAS = await prisma.cHAROLA_PUPA.findMany({ take: 10 })
+     * 
+     * // Only select the `charolaId`
+     * const cHAROLA_PUPAWithCharolaIdOnly = await prisma.cHAROLA_PUPA.findMany({ select: { charolaId: true } })
+     * 
+     */
+    findMany<T extends CHAROLA_PUPAFindManyArgs>(args?: SelectSubset<T, CHAROLA_PUPAFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CHAROLA_PUPAPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CHAROLA_PUPA.
+     * @param {CHAROLA_PUPACreateArgs} args - Arguments to create a CHAROLA_PUPA.
+     * @example
+     * // Create one CHAROLA_PUPA
+     * const CHAROLA_PUPA = await prisma.cHAROLA_PUPA.create({
+     *   data: {
+     *     // ... data to create a CHAROLA_PUPA
+     *   }
+     * })
+     * 
+     */
+    create<T extends CHAROLA_PUPACreateArgs>(args: SelectSubset<T, CHAROLA_PUPACreateArgs<ExtArgs>>): Prisma__CHAROLA_PUPAClient<$Result.GetResult<Prisma.$CHAROLA_PUPAPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CHAROLA_PUPAS.
+     * @param {CHAROLA_PUPACreateManyArgs} args - Arguments to create many CHAROLA_PUPAS.
+     * @example
+     * // Create many CHAROLA_PUPAS
+     * const cHAROLA_PUPA = await prisma.cHAROLA_PUPA.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CHAROLA_PUPACreateManyArgs>(args?: SelectSubset<T, CHAROLA_PUPACreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a CHAROLA_PUPA.
+     * @param {CHAROLA_PUPADeleteArgs} args - Arguments to delete one CHAROLA_PUPA.
+     * @example
+     * // Delete one CHAROLA_PUPA
+     * const CHAROLA_PUPA = await prisma.cHAROLA_PUPA.delete({
+     *   where: {
+     *     // ... filter to delete one CHAROLA_PUPA
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CHAROLA_PUPADeleteArgs>(args: SelectSubset<T, CHAROLA_PUPADeleteArgs<ExtArgs>>): Prisma__CHAROLA_PUPAClient<$Result.GetResult<Prisma.$CHAROLA_PUPAPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CHAROLA_PUPA.
+     * @param {CHAROLA_PUPAUpdateArgs} args - Arguments to update one CHAROLA_PUPA.
+     * @example
+     * // Update one CHAROLA_PUPA
+     * const cHAROLA_PUPA = await prisma.cHAROLA_PUPA.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CHAROLA_PUPAUpdateArgs>(args: SelectSubset<T, CHAROLA_PUPAUpdateArgs<ExtArgs>>): Prisma__CHAROLA_PUPAClient<$Result.GetResult<Prisma.$CHAROLA_PUPAPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CHAROLA_PUPAS.
+     * @param {CHAROLA_PUPADeleteManyArgs} args - Arguments to filter CHAROLA_PUPAS to delete.
+     * @example
+     * // Delete a few CHAROLA_PUPAS
+     * const { count } = await prisma.cHAROLA_PUPA.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CHAROLA_PUPADeleteManyArgs>(args?: SelectSubset<T, CHAROLA_PUPADeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CHAROLA_PUPAS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CHAROLA_PUPAUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CHAROLA_PUPAS
+     * const cHAROLA_PUPA = await prisma.cHAROLA_PUPA.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CHAROLA_PUPAUpdateManyArgs>(args: SelectSubset<T, CHAROLA_PUPAUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one CHAROLA_PUPA.
+     * @param {CHAROLA_PUPAUpsertArgs} args - Arguments to update or create a CHAROLA_PUPA.
+     * @example
+     * // Update or create a CHAROLA_PUPA
+     * const cHAROLA_PUPA = await prisma.cHAROLA_PUPA.upsert({
+     *   create: {
+     *     // ... data to create a CHAROLA_PUPA
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CHAROLA_PUPA we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CHAROLA_PUPAUpsertArgs>(args: SelectSubset<T, CHAROLA_PUPAUpsertArgs<ExtArgs>>): Prisma__CHAROLA_PUPAClient<$Result.GetResult<Prisma.$CHAROLA_PUPAPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CHAROLA_PUPAS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CHAROLA_PUPACountArgs} args - Arguments to filter CHAROLA_PUPAS to count.
+     * @example
+     * // Count the number of CHAROLA_PUPAS
+     * const count = await prisma.cHAROLA_PUPA.count({
+     *   where: {
+     *     // ... the filter for the CHAROLA_PUPAS we want to count
+     *   }
+     * })
+    **/
+    count<T extends CHAROLA_PUPACountArgs>(
+      args?: Subset<T, CHAROLA_PUPACountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CHAROLA_PUPACountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CHAROLA_PUPA.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CHAROLA_PUPAAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CHAROLA_PUPAAggregateArgs>(args: Subset<T, CHAROLA_PUPAAggregateArgs>): Prisma.PrismaPromise<GetCHAROLA_PUPAAggregateType<T>>
+
+    /**
+     * Group by CHAROLA_PUPA.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CHAROLA_PUPAGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CHAROLA_PUPAGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CHAROLA_PUPAGroupByArgs['orderBy'] }
+        : { orderBy?: CHAROLA_PUPAGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CHAROLA_PUPAGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCHAROLA_PUPAGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CHAROLA_PUPA model
+   */
+  readonly fields: CHAROLA_PUPAFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CHAROLA_PUPA.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CHAROLA_PUPAClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    CHAROLA<T extends CHAROLADefaultArgs<ExtArgs> = {}>(args?: Subset<T, CHAROLADefaultArgs<ExtArgs>>): Prisma__CHAROLAClient<$Result.GetResult<Prisma.$CHAROLAPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    PUPA<T extends PUPADefaultArgs<ExtArgs> = {}>(args?: Subset<T, PUPADefaultArgs<ExtArgs>>): Prisma__PUPAClient<$Result.GetResult<Prisma.$PUPAPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CHAROLA_PUPA model
+   */
+  interface CHAROLA_PUPAFieldRefs {
+    readonly charolaId: FieldRef<"CHAROLA_PUPA", 'Int'>
+    readonly pupaId: FieldRef<"CHAROLA_PUPA", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CHAROLA_PUPA findUnique
+   */
+  export type CHAROLA_PUPAFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_PUPA
+     */
+    select?: CHAROLA_PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_PUPA
+     */
+    omit?: CHAROLA_PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_PUPAInclude<ExtArgs> | null
+    /**
+     * Filter, which CHAROLA_PUPA to fetch.
+     */
+    where: CHAROLA_PUPAWhereUniqueInput
+  }
+
+  /**
+   * CHAROLA_PUPA findUniqueOrThrow
+   */
+  export type CHAROLA_PUPAFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_PUPA
+     */
+    select?: CHAROLA_PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_PUPA
+     */
+    omit?: CHAROLA_PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_PUPAInclude<ExtArgs> | null
+    /**
+     * Filter, which CHAROLA_PUPA to fetch.
+     */
+    where: CHAROLA_PUPAWhereUniqueInput
+  }
+
+  /**
+   * CHAROLA_PUPA findFirst
+   */
+  export type CHAROLA_PUPAFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_PUPA
+     */
+    select?: CHAROLA_PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_PUPA
+     */
+    omit?: CHAROLA_PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_PUPAInclude<ExtArgs> | null
+    /**
+     * Filter, which CHAROLA_PUPA to fetch.
+     */
+    where?: CHAROLA_PUPAWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CHAROLA_PUPAS to fetch.
+     */
+    orderBy?: CHAROLA_PUPAOrderByWithRelationInput | CHAROLA_PUPAOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CHAROLA_PUPAS.
+     */
+    cursor?: CHAROLA_PUPAWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CHAROLA_PUPAS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CHAROLA_PUPAS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CHAROLA_PUPAS.
+     */
+    distinct?: CHAROLA_PUPAScalarFieldEnum | CHAROLA_PUPAScalarFieldEnum[]
+  }
+
+  /**
+   * CHAROLA_PUPA findFirstOrThrow
+   */
+  export type CHAROLA_PUPAFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_PUPA
+     */
+    select?: CHAROLA_PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_PUPA
+     */
+    omit?: CHAROLA_PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_PUPAInclude<ExtArgs> | null
+    /**
+     * Filter, which CHAROLA_PUPA to fetch.
+     */
+    where?: CHAROLA_PUPAWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CHAROLA_PUPAS to fetch.
+     */
+    orderBy?: CHAROLA_PUPAOrderByWithRelationInput | CHAROLA_PUPAOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CHAROLA_PUPAS.
+     */
+    cursor?: CHAROLA_PUPAWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CHAROLA_PUPAS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CHAROLA_PUPAS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CHAROLA_PUPAS.
+     */
+    distinct?: CHAROLA_PUPAScalarFieldEnum | CHAROLA_PUPAScalarFieldEnum[]
+  }
+
+  /**
+   * CHAROLA_PUPA findMany
+   */
+  export type CHAROLA_PUPAFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_PUPA
+     */
+    select?: CHAROLA_PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_PUPA
+     */
+    omit?: CHAROLA_PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_PUPAInclude<ExtArgs> | null
+    /**
+     * Filter, which CHAROLA_PUPAS to fetch.
+     */
+    where?: CHAROLA_PUPAWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CHAROLA_PUPAS to fetch.
+     */
+    orderBy?: CHAROLA_PUPAOrderByWithRelationInput | CHAROLA_PUPAOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CHAROLA_PUPAS.
+     */
+    cursor?: CHAROLA_PUPAWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CHAROLA_PUPAS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CHAROLA_PUPAS.
+     */
+    skip?: number
+    distinct?: CHAROLA_PUPAScalarFieldEnum | CHAROLA_PUPAScalarFieldEnum[]
+  }
+
+  /**
+   * CHAROLA_PUPA create
+   */
+  export type CHAROLA_PUPACreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_PUPA
+     */
+    select?: CHAROLA_PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_PUPA
+     */
+    omit?: CHAROLA_PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_PUPAInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CHAROLA_PUPA.
+     */
+    data: XOR<CHAROLA_PUPACreateInput, CHAROLA_PUPAUncheckedCreateInput>
+  }
+
+  /**
+   * CHAROLA_PUPA createMany
+   */
+  export type CHAROLA_PUPACreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CHAROLA_PUPAS.
+     */
+    data: CHAROLA_PUPACreateManyInput | CHAROLA_PUPACreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CHAROLA_PUPA update
+   */
+  export type CHAROLA_PUPAUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_PUPA
+     */
+    select?: CHAROLA_PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_PUPA
+     */
+    omit?: CHAROLA_PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_PUPAInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CHAROLA_PUPA.
+     */
+    data: XOR<CHAROLA_PUPAUpdateInput, CHAROLA_PUPAUncheckedUpdateInput>
+    /**
+     * Choose, which CHAROLA_PUPA to update.
+     */
+    where: CHAROLA_PUPAWhereUniqueInput
+  }
+
+  /**
+   * CHAROLA_PUPA updateMany
+   */
+  export type CHAROLA_PUPAUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CHAROLA_PUPAS.
+     */
+    data: XOR<CHAROLA_PUPAUpdateManyMutationInput, CHAROLA_PUPAUncheckedUpdateManyInput>
+    /**
+     * Filter which CHAROLA_PUPAS to update
+     */
+    where?: CHAROLA_PUPAWhereInput
+    /**
+     * Limit how many CHAROLA_PUPAS to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CHAROLA_PUPA upsert
+   */
+  export type CHAROLA_PUPAUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_PUPA
+     */
+    select?: CHAROLA_PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_PUPA
+     */
+    omit?: CHAROLA_PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_PUPAInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CHAROLA_PUPA to update in case it exists.
+     */
+    where: CHAROLA_PUPAWhereUniqueInput
+    /**
+     * In case the CHAROLA_PUPA found by the `where` argument doesn't exist, create a new CHAROLA_PUPA with this data.
+     */
+    create: XOR<CHAROLA_PUPACreateInput, CHAROLA_PUPAUncheckedCreateInput>
+    /**
+     * In case the CHAROLA_PUPA was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CHAROLA_PUPAUpdateInput, CHAROLA_PUPAUncheckedUpdateInput>
+  }
+
+  /**
+   * CHAROLA_PUPA delete
+   */
+  export type CHAROLA_PUPADeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_PUPA
+     */
+    select?: CHAROLA_PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_PUPA
+     */
+    omit?: CHAROLA_PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_PUPAInclude<ExtArgs> | null
+    /**
+     * Filter which CHAROLA_PUPA to delete.
+     */
+    where: CHAROLA_PUPAWhereUniqueInput
+  }
+
+  /**
+   * CHAROLA_PUPA deleteMany
+   */
+  export type CHAROLA_PUPADeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CHAROLA_PUPAS to delete
+     */
+    where?: CHAROLA_PUPAWhereInput
+    /**
+     * Limit how many CHAROLA_PUPAS to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CHAROLA_PUPA without action
+   */
+  export type CHAROLA_PUPADefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_PUPA
+     */
+    select?: CHAROLA_PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_PUPA
+     */
+    omit?: CHAROLA_PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_PUPAInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PUPA
+   */
+
+  export type AggregatePUPA = {
+    _count: PUPACountAggregateOutputType | null
+    _avg: PUPAAvgAggregateOutputType | null
+    _sum: PUPASumAggregateOutputType | null
+    _min: PUPAMinAggregateOutputType | null
+    _max: PUPAMaxAggregateOutputType | null
+  }
+
+  export type PUPAAvgAggregateOutputType = {
+    pupaId: number | null
+    cantidadObtenida: number | null
+  }
+
+  export type PUPASumAggregateOutputType = {
+    pupaId: number | null
+    cantidadObtenida: number | null
+  }
+
+  export type PUPAMinAggregateOutputType = {
+    pupaId: number | null
+    fechaRegistro: Date | null
+    cantidadObtenida: number | null
+  }
+
+  export type PUPAMaxAggregateOutputType = {
+    pupaId: number | null
+    fechaRegistro: Date | null
+    cantidadObtenida: number | null
+  }
+
+  export type PUPACountAggregateOutputType = {
+    pupaId: number
+    fechaRegistro: number
+    cantidadObtenida: number
+    _all: number
+  }
+
+
+  export type PUPAAvgAggregateInputType = {
+    pupaId?: true
+    cantidadObtenida?: true
+  }
+
+  export type PUPASumAggregateInputType = {
+    pupaId?: true
+    cantidadObtenida?: true
+  }
+
+  export type PUPAMinAggregateInputType = {
+    pupaId?: true
+    fechaRegistro?: true
+    cantidadObtenida?: true
+  }
+
+  export type PUPAMaxAggregateInputType = {
+    pupaId?: true
+    fechaRegistro?: true
+    cantidadObtenida?: true
+  }
+
+  export type PUPACountAggregateInputType = {
+    pupaId?: true
+    fechaRegistro?: true
+    cantidadObtenida?: true
+    _all?: true
+  }
+
+  export type PUPAAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PUPA to aggregate.
+     */
+    where?: PUPAWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PUPAS to fetch.
+     */
+    orderBy?: PUPAOrderByWithRelationInput | PUPAOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PUPAWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PUPAS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PUPAS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PUPAS
+    **/
+    _count?: true | PUPACountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PUPAAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PUPASumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PUPAMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PUPAMaxAggregateInputType
+  }
+
+  export type GetPUPAAggregateType<T extends PUPAAggregateArgs> = {
+        [P in keyof T & keyof AggregatePUPA]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePUPA[P]>
+      : GetScalarType<T[P], AggregatePUPA[P]>
+  }
+
+
+
+
+  export type PUPAGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PUPAWhereInput
+    orderBy?: PUPAOrderByWithAggregationInput | PUPAOrderByWithAggregationInput[]
+    by: PUPAScalarFieldEnum[] | PUPAScalarFieldEnum
+    having?: PUPAScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PUPACountAggregateInputType | true
+    _avg?: PUPAAvgAggregateInputType
+    _sum?: PUPASumAggregateInputType
+    _min?: PUPAMinAggregateInputType
+    _max?: PUPAMaxAggregateInputType
+  }
+
+  export type PUPAGroupByOutputType = {
+    pupaId: number
+    fechaRegistro: Date | null
+    cantidadObtenida: number | null
+    _count: PUPACountAggregateOutputType | null
+    _avg: PUPAAvgAggregateOutputType | null
+    _sum: PUPASumAggregateOutputType | null
+    _min: PUPAMinAggregateOutputType | null
+    _max: PUPAMaxAggregateOutputType | null
+  }
+
+  type GetPUPAGroupByPayload<T extends PUPAGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PUPAGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PUPAGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PUPAGroupByOutputType[P]>
+            : GetScalarType<T[P], PUPAGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PUPASelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    pupaId?: boolean
+    fechaRegistro?: boolean
+    cantidadObtenida?: boolean
+    CHAROLA_PUPA?: boolean | PUPA$CHAROLA_PUPAArgs<ExtArgs>
+    _count?: boolean | PUPACountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pUPA"]>
+
+
+
+  export type PUPASelectScalar = {
+    pupaId?: boolean
+    fechaRegistro?: boolean
+    cantidadObtenida?: boolean
+  }
+
+  export type PUPAOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"pupaId" | "fechaRegistro" | "cantidadObtenida", ExtArgs["result"]["pUPA"]>
+  export type PUPAInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    CHAROLA_PUPA?: boolean | PUPA$CHAROLA_PUPAArgs<ExtArgs>
+    _count?: boolean | PUPACountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $PUPAPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PUPA"
+    objects: {
+      CHAROLA_PUPA: Prisma.$CHAROLA_PUPAPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      pupaId: number
+      fechaRegistro: Date | null
+      cantidadObtenida: number | null
+    }, ExtArgs["result"]["pUPA"]>
+    composites: {}
+  }
+
+  type PUPAGetPayload<S extends boolean | null | undefined | PUPADefaultArgs> = $Result.GetResult<Prisma.$PUPAPayload, S>
+
+  type PUPACountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PUPAFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PUPACountAggregateInputType | true
+    }
+
+  export interface PUPADelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PUPA'], meta: { name: 'PUPA' } }
+    /**
+     * Find zero or one PUPA that matches the filter.
+     * @param {PUPAFindUniqueArgs} args - Arguments to find a PUPA
+     * @example
+     * // Get one PUPA
+     * const pUPA = await prisma.pUPA.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PUPAFindUniqueArgs>(args: SelectSubset<T, PUPAFindUniqueArgs<ExtArgs>>): Prisma__PUPAClient<$Result.GetResult<Prisma.$PUPAPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PUPA that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PUPAFindUniqueOrThrowArgs} args - Arguments to find a PUPA
+     * @example
+     * // Get one PUPA
+     * const pUPA = await prisma.pUPA.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PUPAFindUniqueOrThrowArgs>(args: SelectSubset<T, PUPAFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PUPAClient<$Result.GetResult<Prisma.$PUPAPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PUPA that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PUPAFindFirstArgs} args - Arguments to find a PUPA
+     * @example
+     * // Get one PUPA
+     * const pUPA = await prisma.pUPA.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PUPAFindFirstArgs>(args?: SelectSubset<T, PUPAFindFirstArgs<ExtArgs>>): Prisma__PUPAClient<$Result.GetResult<Prisma.$PUPAPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PUPA that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PUPAFindFirstOrThrowArgs} args - Arguments to find a PUPA
+     * @example
+     * // Get one PUPA
+     * const pUPA = await prisma.pUPA.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PUPAFindFirstOrThrowArgs>(args?: SelectSubset<T, PUPAFindFirstOrThrowArgs<ExtArgs>>): Prisma__PUPAClient<$Result.GetResult<Prisma.$PUPAPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PUPAS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PUPAFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PUPAS
+     * const pUPAS = await prisma.pUPA.findMany()
+     * 
+     * // Get first 10 PUPAS
+     * const pUPAS = await prisma.pUPA.findMany({ take: 10 })
+     * 
+     * // Only select the `pupaId`
+     * const pUPAWithPupaIdOnly = await prisma.pUPA.findMany({ select: { pupaId: true } })
+     * 
+     */
+    findMany<T extends PUPAFindManyArgs>(args?: SelectSubset<T, PUPAFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PUPAPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PUPA.
+     * @param {PUPACreateArgs} args - Arguments to create a PUPA.
+     * @example
+     * // Create one PUPA
+     * const PUPA = await prisma.pUPA.create({
+     *   data: {
+     *     // ... data to create a PUPA
+     *   }
+     * })
+     * 
+     */
+    create<T extends PUPACreateArgs>(args: SelectSubset<T, PUPACreateArgs<ExtArgs>>): Prisma__PUPAClient<$Result.GetResult<Prisma.$PUPAPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PUPAS.
+     * @param {PUPACreateManyArgs} args - Arguments to create many PUPAS.
+     * @example
+     * // Create many PUPAS
+     * const pUPA = await prisma.pUPA.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PUPACreateManyArgs>(args?: SelectSubset<T, PUPACreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a PUPA.
+     * @param {PUPADeleteArgs} args - Arguments to delete one PUPA.
+     * @example
+     * // Delete one PUPA
+     * const PUPA = await prisma.pUPA.delete({
+     *   where: {
+     *     // ... filter to delete one PUPA
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PUPADeleteArgs>(args: SelectSubset<T, PUPADeleteArgs<ExtArgs>>): Prisma__PUPAClient<$Result.GetResult<Prisma.$PUPAPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PUPA.
+     * @param {PUPAUpdateArgs} args - Arguments to update one PUPA.
+     * @example
+     * // Update one PUPA
+     * const pUPA = await prisma.pUPA.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PUPAUpdateArgs>(args: SelectSubset<T, PUPAUpdateArgs<ExtArgs>>): Prisma__PUPAClient<$Result.GetResult<Prisma.$PUPAPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PUPAS.
+     * @param {PUPADeleteManyArgs} args - Arguments to filter PUPAS to delete.
+     * @example
+     * // Delete a few PUPAS
+     * const { count } = await prisma.pUPA.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PUPADeleteManyArgs>(args?: SelectSubset<T, PUPADeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PUPAS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PUPAUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PUPAS
+     * const pUPA = await prisma.pUPA.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PUPAUpdateManyArgs>(args: SelectSubset<T, PUPAUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one PUPA.
+     * @param {PUPAUpsertArgs} args - Arguments to update or create a PUPA.
+     * @example
+     * // Update or create a PUPA
+     * const pUPA = await prisma.pUPA.upsert({
+     *   create: {
+     *     // ... data to create a PUPA
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PUPA we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PUPAUpsertArgs>(args: SelectSubset<T, PUPAUpsertArgs<ExtArgs>>): Prisma__PUPAClient<$Result.GetResult<Prisma.$PUPAPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PUPAS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PUPACountArgs} args - Arguments to filter PUPAS to count.
+     * @example
+     * // Count the number of PUPAS
+     * const count = await prisma.pUPA.count({
+     *   where: {
+     *     // ... the filter for the PUPAS we want to count
+     *   }
+     * })
+    **/
+    count<T extends PUPACountArgs>(
+      args?: Subset<T, PUPACountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PUPACountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PUPA.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PUPAAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PUPAAggregateArgs>(args: Subset<T, PUPAAggregateArgs>): Prisma.PrismaPromise<GetPUPAAggregateType<T>>
+
+    /**
+     * Group by PUPA.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PUPAGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PUPAGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PUPAGroupByArgs['orderBy'] }
+        : { orderBy?: PUPAGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PUPAGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPUPAGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PUPA model
+   */
+  readonly fields: PUPAFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PUPA.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PUPAClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    CHAROLA_PUPA<T extends PUPA$CHAROLA_PUPAArgs<ExtArgs> = {}>(args?: Subset<T, PUPA$CHAROLA_PUPAArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CHAROLA_PUPAPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PUPA model
+   */
+  interface PUPAFieldRefs {
+    readonly pupaId: FieldRef<"PUPA", 'Int'>
+    readonly fechaRegistro: FieldRef<"PUPA", 'DateTime'>
+    readonly cantidadObtenida: FieldRef<"PUPA", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PUPA findUnique
+   */
+  export type PUPAFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PUPA
+     */
+    select?: PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PUPA
+     */
+    omit?: PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PUPAInclude<ExtArgs> | null
+    /**
+     * Filter, which PUPA to fetch.
+     */
+    where: PUPAWhereUniqueInput
+  }
+
+  /**
+   * PUPA findUniqueOrThrow
+   */
+  export type PUPAFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PUPA
+     */
+    select?: PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PUPA
+     */
+    omit?: PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PUPAInclude<ExtArgs> | null
+    /**
+     * Filter, which PUPA to fetch.
+     */
+    where: PUPAWhereUniqueInput
+  }
+
+  /**
+   * PUPA findFirst
+   */
+  export type PUPAFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PUPA
+     */
+    select?: PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PUPA
+     */
+    omit?: PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PUPAInclude<ExtArgs> | null
+    /**
+     * Filter, which PUPA to fetch.
+     */
+    where?: PUPAWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PUPAS to fetch.
+     */
+    orderBy?: PUPAOrderByWithRelationInput | PUPAOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PUPAS.
+     */
+    cursor?: PUPAWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PUPAS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PUPAS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PUPAS.
+     */
+    distinct?: PUPAScalarFieldEnum | PUPAScalarFieldEnum[]
+  }
+
+  /**
+   * PUPA findFirstOrThrow
+   */
+  export type PUPAFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PUPA
+     */
+    select?: PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PUPA
+     */
+    omit?: PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PUPAInclude<ExtArgs> | null
+    /**
+     * Filter, which PUPA to fetch.
+     */
+    where?: PUPAWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PUPAS to fetch.
+     */
+    orderBy?: PUPAOrderByWithRelationInput | PUPAOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PUPAS.
+     */
+    cursor?: PUPAWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PUPAS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PUPAS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PUPAS.
+     */
+    distinct?: PUPAScalarFieldEnum | PUPAScalarFieldEnum[]
+  }
+
+  /**
+   * PUPA findMany
+   */
+  export type PUPAFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PUPA
+     */
+    select?: PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PUPA
+     */
+    omit?: PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PUPAInclude<ExtArgs> | null
+    /**
+     * Filter, which PUPAS to fetch.
+     */
+    where?: PUPAWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PUPAS to fetch.
+     */
+    orderBy?: PUPAOrderByWithRelationInput | PUPAOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PUPAS.
+     */
+    cursor?: PUPAWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PUPAS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PUPAS.
+     */
+    skip?: number
+    distinct?: PUPAScalarFieldEnum | PUPAScalarFieldEnum[]
+  }
+
+  /**
+   * PUPA create
+   */
+  export type PUPACreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PUPA
+     */
+    select?: PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PUPA
+     */
+    omit?: PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PUPAInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PUPA.
+     */
+    data?: XOR<PUPACreateInput, PUPAUncheckedCreateInput>
+  }
+
+  /**
+   * PUPA createMany
+   */
+  export type PUPACreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PUPAS.
+     */
+    data: PUPACreateManyInput | PUPACreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PUPA update
+   */
+  export type PUPAUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PUPA
+     */
+    select?: PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PUPA
+     */
+    omit?: PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PUPAInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PUPA.
+     */
+    data: XOR<PUPAUpdateInput, PUPAUncheckedUpdateInput>
+    /**
+     * Choose, which PUPA to update.
+     */
+    where: PUPAWhereUniqueInput
+  }
+
+  /**
+   * PUPA updateMany
+   */
+  export type PUPAUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PUPAS.
+     */
+    data: XOR<PUPAUpdateManyMutationInput, PUPAUncheckedUpdateManyInput>
+    /**
+     * Filter which PUPAS to update
+     */
+    where?: PUPAWhereInput
+    /**
+     * Limit how many PUPAS to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PUPA upsert
+   */
+  export type PUPAUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PUPA
+     */
+    select?: PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PUPA
+     */
+    omit?: PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PUPAInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PUPA to update in case it exists.
+     */
+    where: PUPAWhereUniqueInput
+    /**
+     * In case the PUPA found by the `where` argument doesn't exist, create a new PUPA with this data.
+     */
+    create: XOR<PUPACreateInput, PUPAUncheckedCreateInput>
+    /**
+     * In case the PUPA was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PUPAUpdateInput, PUPAUncheckedUpdateInput>
+  }
+
+  /**
+   * PUPA delete
+   */
+  export type PUPADeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PUPA
+     */
+    select?: PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PUPA
+     */
+    omit?: PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PUPAInclude<ExtArgs> | null
+    /**
+     * Filter which PUPA to delete.
+     */
+    where: PUPAWhereUniqueInput
+  }
+
+  /**
+   * PUPA deleteMany
+   */
+  export type PUPADeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PUPAS to delete
+     */
+    where?: PUPAWhereInput
+    /**
+     * Limit how many PUPAS to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PUPA.CHAROLA_PUPA
+   */
+  export type PUPA$CHAROLA_PUPAArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CHAROLA_PUPA
+     */
+    select?: CHAROLA_PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CHAROLA_PUPA
+     */
+    omit?: CHAROLA_PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CHAROLA_PUPAInclude<ExtArgs> | null
+    where?: CHAROLA_PUPAWhereInput
+    orderBy?: CHAROLA_PUPAOrderByWithRelationInput | CHAROLA_PUPAOrderByWithRelationInput[]
+    cursor?: CHAROLA_PUPAWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CHAROLA_PUPAScalarFieldEnum | CHAROLA_PUPAScalarFieldEnum[]
+  }
+
+  /**
+   * PUPA without action
+   */
+  export type PUPADefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PUPA
+     */
+    select?: PUPASelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PUPA
+     */
+    omit?: PUPAOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PUPAInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -11685,18 +15075,22 @@ export namespace Prisma {
 
 
   export const CHAROLA_COMIDAScalarFieldEnum: {
+    id: 'id',
     charolaId: 'charolaId',
     comidaId: 'comidaId',
-    cantidadOtorgada: 'cantidadOtorgada'
+    cantidadOtorgada: 'cantidadOtorgada',
+    fechaOtorgada: 'fechaOtorgada'
   };
 
   export type CHAROLA_COMIDAScalarFieldEnum = (typeof CHAROLA_COMIDAScalarFieldEnum)[keyof typeof CHAROLA_COMIDAScalarFieldEnum]
 
 
   export const CHAROLA_HIDRATACIONScalarFieldEnum: {
+    id: 'id',
     charolaId: 'charolaId',
     hidratacionId: 'hidratacionId',
-    cantidadOtorgada: 'cantidadOtorgada'
+    cantidadOtorgada: 'cantidadOtorgada',
+    fechaOtorgada: 'fechaOtorgada'
   };
 
   export type CHAROLA_HIDRATACIONScalarFieldEnum = (typeof CHAROLA_HIDRATACIONScalarFieldEnum)[keyof typeof CHAROLA_HIDRATACIONScalarFieldEnum]
@@ -11712,7 +15106,7 @@ export namespace Prisma {
 
 
   export const FRASScalarFieldEnum: {
-    frassId: 'frassId',
+    frasId: 'frasId',
     gramosGenerados: 'gramosGenerados',
     charolaId: 'charolaId'
   };
@@ -11747,6 +15141,31 @@ export namespace Prisma {
   };
 
   export type USUARIO_CHAROLAScalarFieldEnum = (typeof USUARIO_CHAROLAScalarFieldEnum)[keyof typeof USUARIO_CHAROLAScalarFieldEnum]
+
+
+  export const CHAROLA_FRASScalarFieldEnum: {
+    charolaId: 'charolaId',
+    frasId: 'frasId'
+  };
+
+  export type CHAROLA_FRASScalarFieldEnum = (typeof CHAROLA_FRASScalarFieldEnum)[keyof typeof CHAROLA_FRASScalarFieldEnum]
+
+
+  export const CHAROLA_PUPAScalarFieldEnum: {
+    charolaId: 'charolaId',
+    pupaId: 'pupaId'
+  };
+
+  export type CHAROLA_PUPAScalarFieldEnum = (typeof CHAROLA_PUPAScalarFieldEnum)[keyof typeof CHAROLA_PUPAScalarFieldEnum]
+
+
+  export const PUPAScalarFieldEnum: {
+    pupaId: 'pupaId',
+    fechaRegistro: 'fechaRegistro',
+    cantidadObtenida: 'cantidadObtenida'
+  };
+
+  export type PUPAScalarFieldEnum = (typeof PUPAScalarFieldEnum)[keyof typeof PUPAScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -11894,7 +15313,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAListRelationFilter
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAListRelationFilter
     CHAROLA_COMIDA?: CHAROLA_COMIDAListRelationFilter
+    CHAROLA_FRAS?: CHAROLA_FRASListRelationFilter
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONListRelationFilter
+    CHAROLA_PUPA?: CHAROLA_PUPAListRelationFilter
     FRAS?: FRASListRelationFilter
     USUARIO_CHAROLA?: USUARIO_CHAROLAListRelationFilter
   }
@@ -11912,7 +15333,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAOrderByRelationAggregateInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAOrderByRelationAggregateInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAOrderByRelationAggregateInput
+    CHAROLA_FRAS?: CHAROLA_FRASOrderByRelationAggregateInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONOrderByRelationAggregateInput
+    CHAROLA_PUPA?: CHAROLA_PUPAOrderByRelationAggregateInput
     FRAS?: FRASOrderByRelationAggregateInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAOrderByRelationAggregateInput
     _relevance?: CHAROLAOrderByRelevanceInput
@@ -11934,7 +15357,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAListRelationFilter
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAListRelationFilter
     CHAROLA_COMIDA?: CHAROLA_COMIDAListRelationFilter
+    CHAROLA_FRAS?: CHAROLA_FRASListRelationFilter
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONListRelationFilter
+    CHAROLA_PUPA?: CHAROLA_PUPAListRelationFilter
     FRAS?: FRASListRelationFilter
     USUARIO_CHAROLA?: USUARIO_CHAROLAListRelationFilter
   }, "charolaId">
@@ -12021,37 +15446,44 @@ export namespace Prisma {
     AND?: CHAROLA_COMIDAWhereInput | CHAROLA_COMIDAWhereInput[]
     OR?: CHAROLA_COMIDAWhereInput[]
     NOT?: CHAROLA_COMIDAWhereInput | CHAROLA_COMIDAWhereInput[]
-    charolaId?: IntFilter<"CHAROLA_COMIDA"> | number
-    comidaId?: IntFilter<"CHAROLA_COMIDA"> | number
+    id?: IntFilter<"CHAROLA_COMIDA"> | number
+    charolaId?: IntNullableFilter<"CHAROLA_COMIDA"> | number | null
+    comidaId?: IntNullableFilter<"CHAROLA_COMIDA"> | number | null
     cantidadOtorgada?: FloatFilter<"CHAROLA_COMIDA"> | number
-    CHAROLA?: XOR<CHAROLAScalarRelationFilter, CHAROLAWhereInput>
-    COMIDA?: XOR<COMIDAScalarRelationFilter, COMIDAWhereInput>
+    fechaOtorgada?: DateTimeFilter<"CHAROLA_COMIDA"> | Date | string
+    CHAROLA?: XOR<CHAROLANullableScalarRelationFilter, CHAROLAWhereInput> | null
+    COMIDA?: XOR<COMIDANullableScalarRelationFilter, COMIDAWhereInput> | null
   }
 
   export type CHAROLA_COMIDAOrderByWithRelationInput = {
-    charolaId?: SortOrder
-    comidaId?: SortOrder
+    id?: SortOrder
+    charolaId?: SortOrderInput | SortOrder
+    comidaId?: SortOrderInput | SortOrder
     cantidadOtorgada?: SortOrder
+    fechaOtorgada?: SortOrder
     CHAROLA?: CHAROLAOrderByWithRelationInput
     COMIDA?: COMIDAOrderByWithRelationInput
   }
 
   export type CHAROLA_COMIDAWhereUniqueInput = Prisma.AtLeast<{
-    charolaId_comidaId?: CHAROLA_COMIDACharolaIdComidaIdCompoundUniqueInput
+    id?: number
     AND?: CHAROLA_COMIDAWhereInput | CHAROLA_COMIDAWhereInput[]
     OR?: CHAROLA_COMIDAWhereInput[]
     NOT?: CHAROLA_COMIDAWhereInput | CHAROLA_COMIDAWhereInput[]
-    charolaId?: IntFilter<"CHAROLA_COMIDA"> | number
-    comidaId?: IntFilter<"CHAROLA_COMIDA"> | number
+    charolaId?: IntNullableFilter<"CHAROLA_COMIDA"> | number | null
+    comidaId?: IntNullableFilter<"CHAROLA_COMIDA"> | number | null
     cantidadOtorgada?: FloatFilter<"CHAROLA_COMIDA"> | number
-    CHAROLA?: XOR<CHAROLAScalarRelationFilter, CHAROLAWhereInput>
-    COMIDA?: XOR<COMIDAScalarRelationFilter, COMIDAWhereInput>
-  }, "charolaId_comidaId">
+    fechaOtorgada?: DateTimeFilter<"CHAROLA_COMIDA"> | Date | string
+    CHAROLA?: XOR<CHAROLANullableScalarRelationFilter, CHAROLAWhereInput> | null
+    COMIDA?: XOR<COMIDANullableScalarRelationFilter, COMIDAWhereInput> | null
+  }, "id">
 
   export type CHAROLA_COMIDAOrderByWithAggregationInput = {
-    charolaId?: SortOrder
-    comidaId?: SortOrder
+    id?: SortOrder
+    charolaId?: SortOrderInput | SortOrder
+    comidaId?: SortOrderInput | SortOrder
     cantidadOtorgada?: SortOrder
+    fechaOtorgada?: SortOrder
     _count?: CHAROLA_COMIDACountOrderByAggregateInput
     _avg?: CHAROLA_COMIDAAvgOrderByAggregateInput
     _max?: CHAROLA_COMIDAMaxOrderByAggregateInput
@@ -12063,46 +15495,55 @@ export namespace Prisma {
     AND?: CHAROLA_COMIDAScalarWhereWithAggregatesInput | CHAROLA_COMIDAScalarWhereWithAggregatesInput[]
     OR?: CHAROLA_COMIDAScalarWhereWithAggregatesInput[]
     NOT?: CHAROLA_COMIDAScalarWhereWithAggregatesInput | CHAROLA_COMIDAScalarWhereWithAggregatesInput[]
-    charolaId?: IntWithAggregatesFilter<"CHAROLA_COMIDA"> | number
-    comidaId?: IntWithAggregatesFilter<"CHAROLA_COMIDA"> | number
+    id?: IntWithAggregatesFilter<"CHAROLA_COMIDA"> | number
+    charolaId?: IntNullableWithAggregatesFilter<"CHAROLA_COMIDA"> | number | null
+    comidaId?: IntNullableWithAggregatesFilter<"CHAROLA_COMIDA"> | number | null
     cantidadOtorgada?: FloatWithAggregatesFilter<"CHAROLA_COMIDA"> | number
+    fechaOtorgada?: DateTimeWithAggregatesFilter<"CHAROLA_COMIDA"> | Date | string
   }
 
   export type CHAROLA_HIDRATACIONWhereInput = {
     AND?: CHAROLA_HIDRATACIONWhereInput | CHAROLA_HIDRATACIONWhereInput[]
     OR?: CHAROLA_HIDRATACIONWhereInput[]
     NOT?: CHAROLA_HIDRATACIONWhereInput | CHAROLA_HIDRATACIONWhereInput[]
-    charolaId?: IntFilter<"CHAROLA_HIDRATACION"> | number
-    hidratacionId?: IntFilter<"CHAROLA_HIDRATACION"> | number
-    cantidadOtorgada?: FloatNullableFilter<"CHAROLA_HIDRATACION"> | number | null
-    CHAROLA?: XOR<CHAROLAScalarRelationFilter, CHAROLAWhereInput>
-    HIDRATACION?: XOR<HIDRATACIONScalarRelationFilter, HIDRATACIONWhereInput>
+    id?: IntFilter<"CHAROLA_HIDRATACION"> | number
+    charolaId?: IntNullableFilter<"CHAROLA_HIDRATACION"> | number | null
+    hidratacionId?: IntNullableFilter<"CHAROLA_HIDRATACION"> | number | null
+    cantidadOtorgada?: FloatFilter<"CHAROLA_HIDRATACION"> | number
+    fechaOtorgada?: DateTimeFilter<"CHAROLA_HIDRATACION"> | Date | string
+    CHAROLA?: XOR<CHAROLANullableScalarRelationFilter, CHAROLAWhereInput> | null
+    HIDRATACION?: XOR<HIDRATACIONNullableScalarRelationFilter, HIDRATACIONWhereInput> | null
   }
 
   export type CHAROLA_HIDRATACIONOrderByWithRelationInput = {
-    charolaId?: SortOrder
-    hidratacionId?: SortOrder
-    cantidadOtorgada?: SortOrderInput | SortOrder
+    id?: SortOrder
+    charolaId?: SortOrderInput | SortOrder
+    hidratacionId?: SortOrderInput | SortOrder
+    cantidadOtorgada?: SortOrder
+    fechaOtorgada?: SortOrder
     CHAROLA?: CHAROLAOrderByWithRelationInput
     HIDRATACION?: HIDRATACIONOrderByWithRelationInput
   }
 
   export type CHAROLA_HIDRATACIONWhereUniqueInput = Prisma.AtLeast<{
-    charolaId_hidratacionId?: CHAROLA_HIDRATACIONCharolaIdHidratacionIdCompoundUniqueInput
+    id?: number
     AND?: CHAROLA_HIDRATACIONWhereInput | CHAROLA_HIDRATACIONWhereInput[]
     OR?: CHAROLA_HIDRATACIONWhereInput[]
     NOT?: CHAROLA_HIDRATACIONWhereInput | CHAROLA_HIDRATACIONWhereInput[]
-    charolaId?: IntFilter<"CHAROLA_HIDRATACION"> | number
-    hidratacionId?: IntFilter<"CHAROLA_HIDRATACION"> | number
-    cantidadOtorgada?: FloatNullableFilter<"CHAROLA_HIDRATACION"> | number | null
-    CHAROLA?: XOR<CHAROLAScalarRelationFilter, CHAROLAWhereInput>
-    HIDRATACION?: XOR<HIDRATACIONScalarRelationFilter, HIDRATACIONWhereInput>
-  }, "charolaId_hidratacionId">
+    charolaId?: IntNullableFilter<"CHAROLA_HIDRATACION"> | number | null
+    hidratacionId?: IntNullableFilter<"CHAROLA_HIDRATACION"> | number | null
+    cantidadOtorgada?: FloatFilter<"CHAROLA_HIDRATACION"> | number
+    fechaOtorgada?: DateTimeFilter<"CHAROLA_HIDRATACION"> | Date | string
+    CHAROLA?: XOR<CHAROLANullableScalarRelationFilter, CHAROLAWhereInput> | null
+    HIDRATACION?: XOR<HIDRATACIONNullableScalarRelationFilter, HIDRATACIONWhereInput> | null
+  }, "id">
 
   export type CHAROLA_HIDRATACIONOrderByWithAggregationInput = {
-    charolaId?: SortOrder
-    hidratacionId?: SortOrder
-    cantidadOtorgada?: SortOrderInput | SortOrder
+    id?: SortOrder
+    charolaId?: SortOrderInput | SortOrder
+    hidratacionId?: SortOrderInput | SortOrder
+    cantidadOtorgada?: SortOrder
+    fechaOtorgada?: SortOrder
     _count?: CHAROLA_HIDRATACIONCountOrderByAggregateInput
     _avg?: CHAROLA_HIDRATACIONAvgOrderByAggregateInput
     _max?: CHAROLA_HIDRATACIONMaxOrderByAggregateInput
@@ -12114,9 +15555,11 @@ export namespace Prisma {
     AND?: CHAROLA_HIDRATACIONScalarWhereWithAggregatesInput | CHAROLA_HIDRATACIONScalarWhereWithAggregatesInput[]
     OR?: CHAROLA_HIDRATACIONScalarWhereWithAggregatesInput[]
     NOT?: CHAROLA_HIDRATACIONScalarWhereWithAggregatesInput | CHAROLA_HIDRATACIONScalarWhereWithAggregatesInput[]
-    charolaId?: IntWithAggregatesFilter<"CHAROLA_HIDRATACION"> | number
-    hidratacionId?: IntWithAggregatesFilter<"CHAROLA_HIDRATACION"> | number
-    cantidadOtorgada?: FloatNullableWithAggregatesFilter<"CHAROLA_HIDRATACION"> | number | null
+    id?: IntWithAggregatesFilter<"CHAROLA_HIDRATACION"> | number
+    charolaId?: IntNullableWithAggregatesFilter<"CHAROLA_HIDRATACION"> | number | null
+    hidratacionId?: IntNullableWithAggregatesFilter<"CHAROLA_HIDRATACION"> | number | null
+    cantidadOtorgada?: FloatWithAggregatesFilter<"CHAROLA_HIDRATACION"> | number
+    fechaOtorgada?: DateTimeWithAggregatesFilter<"CHAROLA_HIDRATACION"> | Date | string
   }
 
   export type COMIDAWhereInput = {
@@ -12171,31 +15614,34 @@ export namespace Prisma {
     AND?: FRASWhereInput | FRASWhereInput[]
     OR?: FRASWhereInput[]
     NOT?: FRASWhereInput | FRASWhereInput[]
-    frassId?: IntFilter<"FRAS"> | number
+    frasId?: IntFilter<"FRAS"> | number
     gramosGenerados?: FloatFilter<"FRAS"> | number
     charolaId?: IntNullableFilter<"FRAS"> | number | null
+    CHAROLA_FRAS?: CHAROLA_FRASListRelationFilter
     CHAROLA?: XOR<CHAROLANullableScalarRelationFilter, CHAROLAWhereInput> | null
   }
 
   export type FRASOrderByWithRelationInput = {
-    frassId?: SortOrder
+    frasId?: SortOrder
     gramosGenerados?: SortOrder
     charolaId?: SortOrderInput | SortOrder
+    CHAROLA_FRAS?: CHAROLA_FRASOrderByRelationAggregateInput
     CHAROLA?: CHAROLAOrderByWithRelationInput
   }
 
   export type FRASWhereUniqueInput = Prisma.AtLeast<{
-    frassId?: number
+    frasId?: number
     AND?: FRASWhereInput | FRASWhereInput[]
     OR?: FRASWhereInput[]
     NOT?: FRASWhereInput | FRASWhereInput[]
     gramosGenerados?: FloatFilter<"FRAS"> | number
     charolaId?: IntNullableFilter<"FRAS"> | number | null
+    CHAROLA_FRAS?: CHAROLA_FRASListRelationFilter
     CHAROLA?: XOR<CHAROLANullableScalarRelationFilter, CHAROLAWhereInput> | null
-  }, "frassId">
+  }, "frasId">
 
   export type FRASOrderByWithAggregationInput = {
-    frassId?: SortOrder
+    frasId?: SortOrder
     gramosGenerados?: SortOrder
     charolaId?: SortOrderInput | SortOrder
     _count?: FRASCountOrderByAggregateInput
@@ -12209,7 +15655,7 @@ export namespace Prisma {
     AND?: FRASScalarWhereWithAggregatesInput | FRASScalarWhereWithAggregatesInput[]
     OR?: FRASScalarWhereWithAggregatesInput[]
     NOT?: FRASScalarWhereWithAggregatesInput | FRASScalarWhereWithAggregatesInput[]
-    frassId?: IntWithAggregatesFilter<"FRAS"> | number
+    frasId?: IntWithAggregatesFilter<"FRAS"> | number
     gramosGenerados?: FloatWithAggregatesFilter<"FRAS"> | number
     charolaId?: IntNullableWithAggregatesFilter<"FRAS"> | number | null
   }
@@ -12374,6 +15820,145 @@ export namespace Prisma {
     charolaId?: IntWithAggregatesFilter<"USUARIO_CHAROLA"> | number
   }
 
+  export type CHAROLA_FRASWhereInput = {
+    AND?: CHAROLA_FRASWhereInput | CHAROLA_FRASWhereInput[]
+    OR?: CHAROLA_FRASWhereInput[]
+    NOT?: CHAROLA_FRASWhereInput | CHAROLA_FRASWhereInput[]
+    charolaId?: IntFilter<"CHAROLA_FRAS"> | number
+    frasId?: IntFilter<"CHAROLA_FRAS"> | number
+    CHAROLA?: XOR<CHAROLAScalarRelationFilter, CHAROLAWhereInput>
+    FRAS?: XOR<FRASScalarRelationFilter, FRASWhereInput>
+  }
+
+  export type CHAROLA_FRASOrderByWithRelationInput = {
+    charolaId?: SortOrder
+    frasId?: SortOrder
+    CHAROLA?: CHAROLAOrderByWithRelationInput
+    FRAS?: FRASOrderByWithRelationInput
+  }
+
+  export type CHAROLA_FRASWhereUniqueInput = Prisma.AtLeast<{
+    charolaId_frasId?: CHAROLA_FRASCharolaIdFrasIdCompoundUniqueInput
+    AND?: CHAROLA_FRASWhereInput | CHAROLA_FRASWhereInput[]
+    OR?: CHAROLA_FRASWhereInput[]
+    NOT?: CHAROLA_FRASWhereInput | CHAROLA_FRASWhereInput[]
+    charolaId?: IntFilter<"CHAROLA_FRAS"> | number
+    frasId?: IntFilter<"CHAROLA_FRAS"> | number
+    CHAROLA?: XOR<CHAROLAScalarRelationFilter, CHAROLAWhereInput>
+    FRAS?: XOR<FRASScalarRelationFilter, FRASWhereInput>
+  }, "charolaId_frasId">
+
+  export type CHAROLA_FRASOrderByWithAggregationInput = {
+    charolaId?: SortOrder
+    frasId?: SortOrder
+    _count?: CHAROLA_FRASCountOrderByAggregateInput
+    _avg?: CHAROLA_FRASAvgOrderByAggregateInput
+    _max?: CHAROLA_FRASMaxOrderByAggregateInput
+    _min?: CHAROLA_FRASMinOrderByAggregateInput
+    _sum?: CHAROLA_FRASSumOrderByAggregateInput
+  }
+
+  export type CHAROLA_FRASScalarWhereWithAggregatesInput = {
+    AND?: CHAROLA_FRASScalarWhereWithAggregatesInput | CHAROLA_FRASScalarWhereWithAggregatesInput[]
+    OR?: CHAROLA_FRASScalarWhereWithAggregatesInput[]
+    NOT?: CHAROLA_FRASScalarWhereWithAggregatesInput | CHAROLA_FRASScalarWhereWithAggregatesInput[]
+    charolaId?: IntWithAggregatesFilter<"CHAROLA_FRAS"> | number
+    frasId?: IntWithAggregatesFilter<"CHAROLA_FRAS"> | number
+  }
+
+  export type CHAROLA_PUPAWhereInput = {
+    AND?: CHAROLA_PUPAWhereInput | CHAROLA_PUPAWhereInput[]
+    OR?: CHAROLA_PUPAWhereInput[]
+    NOT?: CHAROLA_PUPAWhereInput | CHAROLA_PUPAWhereInput[]
+    charolaId?: IntFilter<"CHAROLA_PUPA"> | number
+    pupaId?: IntFilter<"CHAROLA_PUPA"> | number
+    CHAROLA?: XOR<CHAROLAScalarRelationFilter, CHAROLAWhereInput>
+    PUPA?: XOR<PUPAScalarRelationFilter, PUPAWhereInput>
+  }
+
+  export type CHAROLA_PUPAOrderByWithRelationInput = {
+    charolaId?: SortOrder
+    pupaId?: SortOrder
+    CHAROLA?: CHAROLAOrderByWithRelationInput
+    PUPA?: PUPAOrderByWithRelationInput
+  }
+
+  export type CHAROLA_PUPAWhereUniqueInput = Prisma.AtLeast<{
+    charolaId_pupaId?: CHAROLA_PUPACharolaIdPupaIdCompoundUniqueInput
+    AND?: CHAROLA_PUPAWhereInput | CHAROLA_PUPAWhereInput[]
+    OR?: CHAROLA_PUPAWhereInput[]
+    NOT?: CHAROLA_PUPAWhereInput | CHAROLA_PUPAWhereInput[]
+    charolaId?: IntFilter<"CHAROLA_PUPA"> | number
+    pupaId?: IntFilter<"CHAROLA_PUPA"> | number
+    CHAROLA?: XOR<CHAROLAScalarRelationFilter, CHAROLAWhereInput>
+    PUPA?: XOR<PUPAScalarRelationFilter, PUPAWhereInput>
+  }, "charolaId_pupaId">
+
+  export type CHAROLA_PUPAOrderByWithAggregationInput = {
+    charolaId?: SortOrder
+    pupaId?: SortOrder
+    _count?: CHAROLA_PUPACountOrderByAggregateInput
+    _avg?: CHAROLA_PUPAAvgOrderByAggregateInput
+    _max?: CHAROLA_PUPAMaxOrderByAggregateInput
+    _min?: CHAROLA_PUPAMinOrderByAggregateInput
+    _sum?: CHAROLA_PUPASumOrderByAggregateInput
+  }
+
+  export type CHAROLA_PUPAScalarWhereWithAggregatesInput = {
+    AND?: CHAROLA_PUPAScalarWhereWithAggregatesInput | CHAROLA_PUPAScalarWhereWithAggregatesInput[]
+    OR?: CHAROLA_PUPAScalarWhereWithAggregatesInput[]
+    NOT?: CHAROLA_PUPAScalarWhereWithAggregatesInput | CHAROLA_PUPAScalarWhereWithAggregatesInput[]
+    charolaId?: IntWithAggregatesFilter<"CHAROLA_PUPA"> | number
+    pupaId?: IntWithAggregatesFilter<"CHAROLA_PUPA"> | number
+  }
+
+  export type PUPAWhereInput = {
+    AND?: PUPAWhereInput | PUPAWhereInput[]
+    OR?: PUPAWhereInput[]
+    NOT?: PUPAWhereInput | PUPAWhereInput[]
+    pupaId?: IntFilter<"PUPA"> | number
+    fechaRegistro?: DateTimeNullableFilter<"PUPA"> | Date | string | null
+    cantidadObtenida?: IntNullableFilter<"PUPA"> | number | null
+    CHAROLA_PUPA?: CHAROLA_PUPAListRelationFilter
+  }
+
+  export type PUPAOrderByWithRelationInput = {
+    pupaId?: SortOrder
+    fechaRegistro?: SortOrderInput | SortOrder
+    cantidadObtenida?: SortOrderInput | SortOrder
+    CHAROLA_PUPA?: CHAROLA_PUPAOrderByRelationAggregateInput
+  }
+
+  export type PUPAWhereUniqueInput = Prisma.AtLeast<{
+    pupaId?: number
+    AND?: PUPAWhereInput | PUPAWhereInput[]
+    OR?: PUPAWhereInput[]
+    NOT?: PUPAWhereInput | PUPAWhereInput[]
+    fechaRegistro?: DateTimeNullableFilter<"PUPA"> | Date | string | null
+    cantidadObtenida?: IntNullableFilter<"PUPA"> | number | null
+    CHAROLA_PUPA?: CHAROLA_PUPAListRelationFilter
+  }, "pupaId">
+
+  export type PUPAOrderByWithAggregationInput = {
+    pupaId?: SortOrder
+    fechaRegistro?: SortOrderInput | SortOrder
+    cantidadObtenida?: SortOrderInput | SortOrder
+    _count?: PUPACountOrderByAggregateInput
+    _avg?: PUPAAvgOrderByAggregateInput
+    _max?: PUPAMaxOrderByAggregateInput
+    _min?: PUPAMinOrderByAggregateInput
+    _sum?: PUPASumOrderByAggregateInput
+  }
+
+  export type PUPAScalarWhereWithAggregatesInput = {
+    AND?: PUPAScalarWhereWithAggregatesInput | PUPAScalarWhereWithAggregatesInput[]
+    OR?: PUPAScalarWhereWithAggregatesInput[]
+    NOT?: PUPAScalarWhereWithAggregatesInput | PUPAScalarWhereWithAggregatesInput[]
+    pupaId?: IntWithAggregatesFilter<"PUPA"> | number
+    fechaRegistro?: DateTimeNullableWithAggregatesFilter<"PUPA"> | Date | string | null
+    cantidadObtenida?: IntNullableWithAggregatesFilter<"PUPA"> | number | null
+  }
+
   export type ADMINISTRADORCreateInput = {
     USUARIO?: USUARIOCreateNestedOneWithoutADMINISTRADORInput
   }
@@ -12418,7 +16003,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDACreateNestedManyWithoutCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASCreateNestedManyWithoutCHAROLAInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPACreateNestedManyWithoutCHAROLAInput
     FRAS?: FRASCreateNestedManyWithoutCHAROLAInput
     USUARIO_CHAROLA?: USUARIO_CHAROLACreateNestedManyWithoutCHAROLAInput
   }
@@ -12436,7 +16023,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedCreateNestedManyWithoutCHAROLAInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedCreateNestedManyWithoutCHAROLAInput
     FRAS?: FRASUncheckedCreateNestedManyWithoutCHAROLAInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedCreateNestedManyWithoutCHAROLAInput
   }
@@ -12453,7 +16042,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUpdateManyWithoutCHAROLANestedInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUpdateManyWithoutCHAROLANestedInput
     FRAS?: FRASUpdateManyWithoutCHAROLANestedInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUpdateManyWithoutCHAROLANestedInput
   }
@@ -12471,7 +16062,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLANestedInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedUpdateManyWithoutCHAROLANestedInput
     FRAS?: FRASUncheckedUpdateManyWithoutCHAROLANestedInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedUpdateManyWithoutCHAROLANestedInput
   }
@@ -12547,82 +16140,104 @@ export namespace Prisma {
 
   export type CHAROLA_COMIDACreateInput = {
     cantidadOtorgada: number
-    CHAROLA: CHAROLACreateNestedOneWithoutCHAROLA_COMIDAInput
-    COMIDA: COMIDACreateNestedOneWithoutCHAROLA_COMIDAInput
+    fechaOtorgada: Date | string
+    CHAROLA?: CHAROLACreateNestedOneWithoutCHAROLA_COMIDAInput
+    COMIDA?: COMIDACreateNestedOneWithoutCHAROLA_COMIDAInput
   }
 
   export type CHAROLA_COMIDAUncheckedCreateInput = {
-    charolaId: number
-    comidaId: number
+    id?: number
+    charolaId?: number | null
+    comidaId?: number | null
     cantidadOtorgada: number
+    fechaOtorgada: Date | string
   }
 
   export type CHAROLA_COMIDAUpdateInput = {
     cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
-    CHAROLA?: CHAROLAUpdateOneRequiredWithoutCHAROLA_COMIDANestedInput
-    COMIDA?: COMIDAUpdateOneRequiredWithoutCHAROLA_COMIDANestedInput
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
+    CHAROLA?: CHAROLAUpdateOneWithoutCHAROLA_COMIDANestedInput
+    COMIDA?: COMIDAUpdateOneWithoutCHAROLA_COMIDANestedInput
   }
 
   export type CHAROLA_COMIDAUncheckedUpdateInput = {
-    charolaId?: IntFieldUpdateOperationsInput | number
-    comidaId?: IntFieldUpdateOperationsInput | number
+    id?: IntFieldUpdateOperationsInput | number
+    charolaId?: NullableIntFieldUpdateOperationsInput | number | null
+    comidaId?: NullableIntFieldUpdateOperationsInput | number | null
     cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CHAROLA_COMIDACreateManyInput = {
-    charolaId: number
-    comidaId: number
+    id?: number
+    charolaId?: number | null
+    comidaId?: number | null
     cantidadOtorgada: number
+    fechaOtorgada: Date | string
   }
 
   export type CHAROLA_COMIDAUpdateManyMutationInput = {
     cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CHAROLA_COMIDAUncheckedUpdateManyInput = {
-    charolaId?: IntFieldUpdateOperationsInput | number
-    comidaId?: IntFieldUpdateOperationsInput | number
+    id?: IntFieldUpdateOperationsInput | number
+    charolaId?: NullableIntFieldUpdateOperationsInput | number | null
+    comidaId?: NullableIntFieldUpdateOperationsInput | number | null
     cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CHAROLA_HIDRATACIONCreateInput = {
-    cantidadOtorgada?: number | null
-    CHAROLA: CHAROLACreateNestedOneWithoutCHAROLA_HIDRATACIONInput
-    HIDRATACION: HIDRATACIONCreateNestedOneWithoutCHAROLA_HIDRATACIONInput
+    cantidadOtorgada: number
+    fechaOtorgada: Date | string
+    CHAROLA?: CHAROLACreateNestedOneWithoutCHAROLA_HIDRATACIONInput
+    HIDRATACION?: HIDRATACIONCreateNestedOneWithoutCHAROLA_HIDRATACIONInput
   }
 
   export type CHAROLA_HIDRATACIONUncheckedCreateInput = {
-    charolaId: number
-    hidratacionId: number
-    cantidadOtorgada?: number | null
+    id?: number
+    charolaId?: number | null
+    hidratacionId?: number | null
+    cantidadOtorgada: number
+    fechaOtorgada: Date | string
   }
 
   export type CHAROLA_HIDRATACIONUpdateInput = {
-    cantidadOtorgada?: NullableFloatFieldUpdateOperationsInput | number | null
-    CHAROLA?: CHAROLAUpdateOneRequiredWithoutCHAROLA_HIDRATACIONNestedInput
-    HIDRATACION?: HIDRATACIONUpdateOneRequiredWithoutCHAROLA_HIDRATACIONNestedInput
+    cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
+    CHAROLA?: CHAROLAUpdateOneWithoutCHAROLA_HIDRATACIONNestedInput
+    HIDRATACION?: HIDRATACIONUpdateOneWithoutCHAROLA_HIDRATACIONNestedInput
   }
 
   export type CHAROLA_HIDRATACIONUncheckedUpdateInput = {
-    charolaId?: IntFieldUpdateOperationsInput | number
-    hidratacionId?: IntFieldUpdateOperationsInput | number
-    cantidadOtorgada?: NullableFloatFieldUpdateOperationsInput | number | null
+    id?: IntFieldUpdateOperationsInput | number
+    charolaId?: NullableIntFieldUpdateOperationsInput | number | null
+    hidratacionId?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CHAROLA_HIDRATACIONCreateManyInput = {
-    charolaId: number
-    hidratacionId: number
-    cantidadOtorgada?: number | null
+    id?: number
+    charolaId?: number | null
+    hidratacionId?: number | null
+    cantidadOtorgada: number
+    fechaOtorgada: Date | string
   }
 
   export type CHAROLA_HIDRATACIONUpdateManyMutationInput = {
-    cantidadOtorgada?: NullableFloatFieldUpdateOperationsInput | number | null
+    cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CHAROLA_HIDRATACIONUncheckedUpdateManyInput = {
-    charolaId?: IntFieldUpdateOperationsInput | number
-    hidratacionId?: IntFieldUpdateOperationsInput | number
-    cantidadOtorgada?: NullableFloatFieldUpdateOperationsInput | number | null
+    id?: IntFieldUpdateOperationsInput | number
+    charolaId?: NullableIntFieldUpdateOperationsInput | number | null
+    hidratacionId?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type COMIDACreateInput = {
@@ -12670,28 +16285,32 @@ export namespace Prisma {
 
   export type FRASCreateInput = {
     gramosGenerados: number
+    CHAROLA_FRAS?: CHAROLA_FRASCreateNestedManyWithoutFRASInput
     CHAROLA?: CHAROLACreateNestedOneWithoutFRASInput
   }
 
   export type FRASUncheckedCreateInput = {
-    frassId?: number
+    frasId?: number
     gramosGenerados: number
     charolaId?: number | null
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedCreateNestedManyWithoutFRASInput
   }
 
   export type FRASUpdateInput = {
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
+    CHAROLA_FRAS?: CHAROLA_FRASUpdateManyWithoutFRASNestedInput
     CHAROLA?: CHAROLAUpdateOneWithoutFRASNestedInput
   }
 
   export type FRASUncheckedUpdateInput = {
-    frassId?: IntFieldUpdateOperationsInput | number
+    frasId?: IntFieldUpdateOperationsInput | number
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
     charolaId?: NullableIntFieldUpdateOperationsInput | number | null
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedUpdateManyWithoutFRASNestedInput
   }
 
   export type FRASCreateManyInput = {
-    frassId?: number
+    frasId?: number
     gramosGenerados: number
     charolaId?: number | null
   }
@@ -12701,7 +16320,7 @@ export namespace Prisma {
   }
 
   export type FRASUncheckedUpdateManyInput = {
-    frassId?: IntFieldUpdateOperationsInput | number
+    frasId?: IntFieldUpdateOperationsInput | number
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
     charolaId?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -12854,6 +16473,117 @@ export namespace Prisma {
     charolaId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type CHAROLA_FRASCreateInput = {
+    CHAROLA: CHAROLACreateNestedOneWithoutCHAROLA_FRASInput
+    FRAS: FRASCreateNestedOneWithoutCHAROLA_FRASInput
+  }
+
+  export type CHAROLA_FRASUncheckedCreateInput = {
+    charolaId: number
+    frasId: number
+  }
+
+  export type CHAROLA_FRASUpdateInput = {
+    CHAROLA?: CHAROLAUpdateOneRequiredWithoutCHAROLA_FRASNestedInput
+    FRAS?: FRASUpdateOneRequiredWithoutCHAROLA_FRASNestedInput
+  }
+
+  export type CHAROLA_FRASUncheckedUpdateInput = {
+    charolaId?: IntFieldUpdateOperationsInput | number
+    frasId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CHAROLA_FRASCreateManyInput = {
+    charolaId: number
+    frasId: number
+  }
+
+  export type CHAROLA_FRASUpdateManyMutationInput = {
+
+  }
+
+  export type CHAROLA_FRASUncheckedUpdateManyInput = {
+    charolaId?: IntFieldUpdateOperationsInput | number
+    frasId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CHAROLA_PUPACreateInput = {
+    CHAROLA: CHAROLACreateNestedOneWithoutCHAROLA_PUPAInput
+    PUPA: PUPACreateNestedOneWithoutCHAROLA_PUPAInput
+  }
+
+  export type CHAROLA_PUPAUncheckedCreateInput = {
+    charolaId: number
+    pupaId: number
+  }
+
+  export type CHAROLA_PUPAUpdateInput = {
+    CHAROLA?: CHAROLAUpdateOneRequiredWithoutCHAROLA_PUPANestedInput
+    PUPA?: PUPAUpdateOneRequiredWithoutCHAROLA_PUPANestedInput
+  }
+
+  export type CHAROLA_PUPAUncheckedUpdateInput = {
+    charolaId?: IntFieldUpdateOperationsInput | number
+    pupaId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CHAROLA_PUPACreateManyInput = {
+    charolaId: number
+    pupaId: number
+  }
+
+  export type CHAROLA_PUPAUpdateManyMutationInput = {
+
+  }
+
+  export type CHAROLA_PUPAUncheckedUpdateManyInput = {
+    charolaId?: IntFieldUpdateOperationsInput | number
+    pupaId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PUPACreateInput = {
+    fechaRegistro?: Date | string | null
+    cantidadObtenida?: number | null
+    CHAROLA_PUPA?: CHAROLA_PUPACreateNestedManyWithoutPUPAInput
+  }
+
+  export type PUPAUncheckedCreateInput = {
+    pupaId?: number
+    fechaRegistro?: Date | string | null
+    cantidadObtenida?: number | null
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedCreateNestedManyWithoutPUPAInput
+  }
+
+  export type PUPAUpdateInput = {
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    CHAROLA_PUPA?: CHAROLA_PUPAUpdateManyWithoutPUPANestedInput
+  }
+
+  export type PUPAUncheckedUpdateInput = {
+    pupaId?: IntFieldUpdateOperationsInput | number
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedUpdateManyWithoutPUPANestedInput
+  }
+
+  export type PUPACreateManyInput = {
+    pupaId?: number
+    fechaRegistro?: Date | string | null
+    cantidadObtenida?: number | null
+  }
+
+  export type PUPAUpdateManyMutationInput = {
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type PUPAUncheckedUpdateManyInput = {
+    pupaId?: IntFieldUpdateOperationsInput | number
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -13003,10 +16733,22 @@ export namespace Prisma {
     none?: CHAROLA_COMIDAWhereInput
   }
 
+  export type CHAROLA_FRASListRelationFilter = {
+    every?: CHAROLA_FRASWhereInput
+    some?: CHAROLA_FRASWhereInput
+    none?: CHAROLA_FRASWhereInput
+  }
+
   export type CHAROLA_HIDRATACIONListRelationFilter = {
     every?: CHAROLA_HIDRATACIONWhereInput
     some?: CHAROLA_HIDRATACIONWhereInput
     none?: CHAROLA_HIDRATACIONWhereInput
+  }
+
+  export type CHAROLA_PUPAListRelationFilter = {
+    every?: CHAROLA_PUPAWhereInput
+    some?: CHAROLA_PUPAWhereInput
+    none?: CHAROLA_PUPAWhereInput
   }
 
   export type FRASListRelationFilter = {
@@ -13029,7 +16771,15 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type CHAROLA_FRASOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type CHAROLA_HIDRATACIONOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CHAROLA_PUPAOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13198,81 +16948,117 @@ export namespace Prisma {
     charolaAncestro?: SortOrder
   }
 
-  export type COMIDAScalarRelationFilter = {
-    is?: COMIDAWhereInput
-    isNot?: COMIDAWhereInput
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type CHAROLA_COMIDACharolaIdComidaIdCompoundUniqueInput = {
-    charolaId: number
-    comidaId: number
+  export type CHAROLANullableScalarRelationFilter = {
+    is?: CHAROLAWhereInput | null
+    isNot?: CHAROLAWhereInput | null
+  }
+
+  export type COMIDANullableScalarRelationFilter = {
+    is?: COMIDAWhereInput | null
+    isNot?: COMIDAWhereInput | null
   }
 
   export type CHAROLA_COMIDACountOrderByAggregateInput = {
+    id?: SortOrder
     charolaId?: SortOrder
     comidaId?: SortOrder
     cantidadOtorgada?: SortOrder
+    fechaOtorgada?: SortOrder
   }
 
   export type CHAROLA_COMIDAAvgOrderByAggregateInput = {
+    id?: SortOrder
     charolaId?: SortOrder
     comidaId?: SortOrder
     cantidadOtorgada?: SortOrder
   }
 
   export type CHAROLA_COMIDAMaxOrderByAggregateInput = {
+    id?: SortOrder
     charolaId?: SortOrder
     comidaId?: SortOrder
     cantidadOtorgada?: SortOrder
+    fechaOtorgada?: SortOrder
   }
 
   export type CHAROLA_COMIDAMinOrderByAggregateInput = {
+    id?: SortOrder
     charolaId?: SortOrder
     comidaId?: SortOrder
     cantidadOtorgada?: SortOrder
+    fechaOtorgada?: SortOrder
   }
 
   export type CHAROLA_COMIDASumOrderByAggregateInput = {
+    id?: SortOrder
     charolaId?: SortOrder
     comidaId?: SortOrder
     cantidadOtorgada?: SortOrder
   }
 
-  export type HIDRATACIONScalarRelationFilter = {
-    is?: HIDRATACIONWhereInput
-    isNot?: HIDRATACIONWhereInput
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type CHAROLA_HIDRATACIONCharolaIdHidratacionIdCompoundUniqueInput = {
-    charolaId: number
-    hidratacionId: number
+  export type HIDRATACIONNullableScalarRelationFilter = {
+    is?: HIDRATACIONWhereInput | null
+    isNot?: HIDRATACIONWhereInput | null
   }
 
   export type CHAROLA_HIDRATACIONCountOrderByAggregateInput = {
+    id?: SortOrder
     charolaId?: SortOrder
     hidratacionId?: SortOrder
     cantidadOtorgada?: SortOrder
+    fechaOtorgada?: SortOrder
   }
 
   export type CHAROLA_HIDRATACIONAvgOrderByAggregateInput = {
+    id?: SortOrder
     charolaId?: SortOrder
     hidratacionId?: SortOrder
     cantidadOtorgada?: SortOrder
   }
 
   export type CHAROLA_HIDRATACIONMaxOrderByAggregateInput = {
+    id?: SortOrder
     charolaId?: SortOrder
     hidratacionId?: SortOrder
     cantidadOtorgada?: SortOrder
+    fechaOtorgada?: SortOrder
   }
 
   export type CHAROLA_HIDRATACIONMinOrderByAggregateInput = {
+    id?: SortOrder
     charolaId?: SortOrder
     hidratacionId?: SortOrder
     cantidadOtorgada?: SortOrder
+    fechaOtorgada?: SortOrder
   }
 
   export type CHAROLA_HIDRATACIONSumOrderByAggregateInput = {
+    id?: SortOrder
     charolaId?: SortOrder
     hidratacionId?: SortOrder
     cantidadOtorgada?: SortOrder
@@ -13343,37 +17129,32 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type CHAROLANullableScalarRelationFilter = {
-    is?: CHAROLAWhereInput | null
-    isNot?: CHAROLAWhereInput | null
-  }
-
   export type FRASCountOrderByAggregateInput = {
-    frassId?: SortOrder
+    frasId?: SortOrder
     gramosGenerados?: SortOrder
     charolaId?: SortOrder
   }
 
   export type FRASAvgOrderByAggregateInput = {
-    frassId?: SortOrder
+    frasId?: SortOrder
     gramosGenerados?: SortOrder
     charolaId?: SortOrder
   }
 
   export type FRASMaxOrderByAggregateInput = {
-    frassId?: SortOrder
+    frasId?: SortOrder
     gramosGenerados?: SortOrder
     charolaId?: SortOrder
   }
 
   export type FRASMinOrderByAggregateInput = {
-    frassId?: SortOrder
+    frasId?: SortOrder
     gramosGenerados?: SortOrder
     charolaId?: SortOrder
   }
 
   export type FRASSumOrderByAggregateInput = {
-    frassId?: SortOrder
+    frasId?: SortOrder
     gramosGenerados?: SortOrder
     charolaId?: SortOrder
   }
@@ -13496,6 +17277,104 @@ export namespace Prisma {
     charolaId?: SortOrder
   }
 
+  export type FRASScalarRelationFilter = {
+    is?: FRASWhereInput
+    isNot?: FRASWhereInput
+  }
+
+  export type CHAROLA_FRASCharolaIdFrasIdCompoundUniqueInput = {
+    charolaId: number
+    frasId: number
+  }
+
+  export type CHAROLA_FRASCountOrderByAggregateInput = {
+    charolaId?: SortOrder
+    frasId?: SortOrder
+  }
+
+  export type CHAROLA_FRASAvgOrderByAggregateInput = {
+    charolaId?: SortOrder
+    frasId?: SortOrder
+  }
+
+  export type CHAROLA_FRASMaxOrderByAggregateInput = {
+    charolaId?: SortOrder
+    frasId?: SortOrder
+  }
+
+  export type CHAROLA_FRASMinOrderByAggregateInput = {
+    charolaId?: SortOrder
+    frasId?: SortOrder
+  }
+
+  export type CHAROLA_FRASSumOrderByAggregateInput = {
+    charolaId?: SortOrder
+    frasId?: SortOrder
+  }
+
+  export type PUPAScalarRelationFilter = {
+    is?: PUPAWhereInput
+    isNot?: PUPAWhereInput
+  }
+
+  export type CHAROLA_PUPACharolaIdPupaIdCompoundUniqueInput = {
+    charolaId: number
+    pupaId: number
+  }
+
+  export type CHAROLA_PUPACountOrderByAggregateInput = {
+    charolaId?: SortOrder
+    pupaId?: SortOrder
+  }
+
+  export type CHAROLA_PUPAAvgOrderByAggregateInput = {
+    charolaId?: SortOrder
+    pupaId?: SortOrder
+  }
+
+  export type CHAROLA_PUPAMaxOrderByAggregateInput = {
+    charolaId?: SortOrder
+    pupaId?: SortOrder
+  }
+
+  export type CHAROLA_PUPAMinOrderByAggregateInput = {
+    charolaId?: SortOrder
+    pupaId?: SortOrder
+  }
+
+  export type CHAROLA_PUPASumOrderByAggregateInput = {
+    charolaId?: SortOrder
+    pupaId?: SortOrder
+  }
+
+  export type PUPACountOrderByAggregateInput = {
+    pupaId?: SortOrder
+    fechaRegistro?: SortOrder
+    cantidadObtenida?: SortOrder
+  }
+
+  export type PUPAAvgOrderByAggregateInput = {
+    pupaId?: SortOrder
+    cantidadObtenida?: SortOrder
+  }
+
+  export type PUPAMaxOrderByAggregateInput = {
+    pupaId?: SortOrder
+    fechaRegistro?: SortOrder
+    cantidadObtenida?: SortOrder
+  }
+
+  export type PUPAMinOrderByAggregateInput = {
+    pupaId?: SortOrder
+    fechaRegistro?: SortOrder
+    cantidadObtenida?: SortOrder
+  }
+
+  export type PUPASumOrderByAggregateInput = {
+    pupaId?: SortOrder
+    cantidadObtenida?: SortOrder
+  }
+
   export type USUARIOCreateNestedOneWithoutADMINISTRADORInput = {
     create?: XOR<USUARIOCreateWithoutADMINISTRADORInput, USUARIOUncheckedCreateWithoutADMINISTRADORInput>
     connectOrCreate?: USUARIOCreateOrConnectWithoutADMINISTRADORInput
@@ -13549,11 +17428,25 @@ export namespace Prisma {
     connect?: CHAROLA_COMIDAWhereUniqueInput | CHAROLA_COMIDAWhereUniqueInput[]
   }
 
+  export type CHAROLA_FRASCreateNestedManyWithoutCHAROLAInput = {
+    create?: XOR<CHAROLA_FRASCreateWithoutCHAROLAInput, CHAROLA_FRASUncheckedCreateWithoutCHAROLAInput> | CHAROLA_FRASCreateWithoutCHAROLAInput[] | CHAROLA_FRASUncheckedCreateWithoutCHAROLAInput[]
+    connectOrCreate?: CHAROLA_FRASCreateOrConnectWithoutCHAROLAInput | CHAROLA_FRASCreateOrConnectWithoutCHAROLAInput[]
+    createMany?: CHAROLA_FRASCreateManyCHAROLAInputEnvelope
+    connect?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+  }
+
   export type CHAROLA_HIDRATACIONCreateNestedManyWithoutCHAROLAInput = {
     create?: XOR<CHAROLA_HIDRATACIONCreateWithoutCHAROLAInput, CHAROLA_HIDRATACIONUncheckedCreateWithoutCHAROLAInput> | CHAROLA_HIDRATACIONCreateWithoutCHAROLAInput[] | CHAROLA_HIDRATACIONUncheckedCreateWithoutCHAROLAInput[]
     connectOrCreate?: CHAROLA_HIDRATACIONCreateOrConnectWithoutCHAROLAInput | CHAROLA_HIDRATACIONCreateOrConnectWithoutCHAROLAInput[]
     createMany?: CHAROLA_HIDRATACIONCreateManyCHAROLAInputEnvelope
     connect?: CHAROLA_HIDRATACIONWhereUniqueInput | CHAROLA_HIDRATACIONWhereUniqueInput[]
+  }
+
+  export type CHAROLA_PUPACreateNestedManyWithoutCHAROLAInput = {
+    create?: XOR<CHAROLA_PUPACreateWithoutCHAROLAInput, CHAROLA_PUPAUncheckedCreateWithoutCHAROLAInput> | CHAROLA_PUPACreateWithoutCHAROLAInput[] | CHAROLA_PUPAUncheckedCreateWithoutCHAROLAInput[]
+    connectOrCreate?: CHAROLA_PUPACreateOrConnectWithoutCHAROLAInput | CHAROLA_PUPACreateOrConnectWithoutCHAROLAInput[]
+    createMany?: CHAROLA_PUPACreateManyCHAROLAInputEnvelope
+    connect?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
   }
 
   export type FRASCreateNestedManyWithoutCHAROLAInput = {
@@ -13591,11 +17484,25 @@ export namespace Prisma {
     connect?: CHAROLA_COMIDAWhereUniqueInput | CHAROLA_COMIDAWhereUniqueInput[]
   }
 
+  export type CHAROLA_FRASUncheckedCreateNestedManyWithoutCHAROLAInput = {
+    create?: XOR<CHAROLA_FRASCreateWithoutCHAROLAInput, CHAROLA_FRASUncheckedCreateWithoutCHAROLAInput> | CHAROLA_FRASCreateWithoutCHAROLAInput[] | CHAROLA_FRASUncheckedCreateWithoutCHAROLAInput[]
+    connectOrCreate?: CHAROLA_FRASCreateOrConnectWithoutCHAROLAInput | CHAROLA_FRASCreateOrConnectWithoutCHAROLAInput[]
+    createMany?: CHAROLA_FRASCreateManyCHAROLAInputEnvelope
+    connect?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+  }
+
   export type CHAROLA_HIDRATACIONUncheckedCreateNestedManyWithoutCHAROLAInput = {
     create?: XOR<CHAROLA_HIDRATACIONCreateWithoutCHAROLAInput, CHAROLA_HIDRATACIONUncheckedCreateWithoutCHAROLAInput> | CHAROLA_HIDRATACIONCreateWithoutCHAROLAInput[] | CHAROLA_HIDRATACIONUncheckedCreateWithoutCHAROLAInput[]
     connectOrCreate?: CHAROLA_HIDRATACIONCreateOrConnectWithoutCHAROLAInput | CHAROLA_HIDRATACIONCreateOrConnectWithoutCHAROLAInput[]
     createMany?: CHAROLA_HIDRATACIONCreateManyCHAROLAInputEnvelope
     connect?: CHAROLA_HIDRATACIONWhereUniqueInput | CHAROLA_HIDRATACIONWhereUniqueInput[]
+  }
+
+  export type CHAROLA_PUPAUncheckedCreateNestedManyWithoutCHAROLAInput = {
+    create?: XOR<CHAROLA_PUPACreateWithoutCHAROLAInput, CHAROLA_PUPAUncheckedCreateWithoutCHAROLAInput> | CHAROLA_PUPACreateWithoutCHAROLAInput[] | CHAROLA_PUPAUncheckedCreateWithoutCHAROLAInput[]
+    connectOrCreate?: CHAROLA_PUPACreateOrConnectWithoutCHAROLAInput | CHAROLA_PUPACreateOrConnectWithoutCHAROLAInput[]
+    createMany?: CHAROLA_PUPACreateManyCHAROLAInputEnvelope
+    connect?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
   }
 
   export type FRASUncheckedCreateNestedManyWithoutCHAROLAInput = {
@@ -13678,6 +17585,20 @@ export namespace Prisma {
     deleteMany?: CHAROLA_COMIDAScalarWhereInput | CHAROLA_COMIDAScalarWhereInput[]
   }
 
+  export type CHAROLA_FRASUpdateManyWithoutCHAROLANestedInput = {
+    create?: XOR<CHAROLA_FRASCreateWithoutCHAROLAInput, CHAROLA_FRASUncheckedCreateWithoutCHAROLAInput> | CHAROLA_FRASCreateWithoutCHAROLAInput[] | CHAROLA_FRASUncheckedCreateWithoutCHAROLAInput[]
+    connectOrCreate?: CHAROLA_FRASCreateOrConnectWithoutCHAROLAInput | CHAROLA_FRASCreateOrConnectWithoutCHAROLAInput[]
+    upsert?: CHAROLA_FRASUpsertWithWhereUniqueWithoutCHAROLAInput | CHAROLA_FRASUpsertWithWhereUniqueWithoutCHAROLAInput[]
+    createMany?: CHAROLA_FRASCreateManyCHAROLAInputEnvelope
+    set?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    disconnect?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    delete?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    connect?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    update?: CHAROLA_FRASUpdateWithWhereUniqueWithoutCHAROLAInput | CHAROLA_FRASUpdateWithWhereUniqueWithoutCHAROLAInput[]
+    updateMany?: CHAROLA_FRASUpdateManyWithWhereWithoutCHAROLAInput | CHAROLA_FRASUpdateManyWithWhereWithoutCHAROLAInput[]
+    deleteMany?: CHAROLA_FRASScalarWhereInput | CHAROLA_FRASScalarWhereInput[]
+  }
+
   export type CHAROLA_HIDRATACIONUpdateManyWithoutCHAROLANestedInput = {
     create?: XOR<CHAROLA_HIDRATACIONCreateWithoutCHAROLAInput, CHAROLA_HIDRATACIONUncheckedCreateWithoutCHAROLAInput> | CHAROLA_HIDRATACIONCreateWithoutCHAROLAInput[] | CHAROLA_HIDRATACIONUncheckedCreateWithoutCHAROLAInput[]
     connectOrCreate?: CHAROLA_HIDRATACIONCreateOrConnectWithoutCHAROLAInput | CHAROLA_HIDRATACIONCreateOrConnectWithoutCHAROLAInput[]
@@ -13690,6 +17611,20 @@ export namespace Prisma {
     update?: CHAROLA_HIDRATACIONUpdateWithWhereUniqueWithoutCHAROLAInput | CHAROLA_HIDRATACIONUpdateWithWhereUniqueWithoutCHAROLAInput[]
     updateMany?: CHAROLA_HIDRATACIONUpdateManyWithWhereWithoutCHAROLAInput | CHAROLA_HIDRATACIONUpdateManyWithWhereWithoutCHAROLAInput[]
     deleteMany?: CHAROLA_HIDRATACIONScalarWhereInput | CHAROLA_HIDRATACIONScalarWhereInput[]
+  }
+
+  export type CHAROLA_PUPAUpdateManyWithoutCHAROLANestedInput = {
+    create?: XOR<CHAROLA_PUPACreateWithoutCHAROLAInput, CHAROLA_PUPAUncheckedCreateWithoutCHAROLAInput> | CHAROLA_PUPACreateWithoutCHAROLAInput[] | CHAROLA_PUPAUncheckedCreateWithoutCHAROLAInput[]
+    connectOrCreate?: CHAROLA_PUPACreateOrConnectWithoutCHAROLAInput | CHAROLA_PUPACreateOrConnectWithoutCHAROLAInput[]
+    upsert?: CHAROLA_PUPAUpsertWithWhereUniqueWithoutCHAROLAInput | CHAROLA_PUPAUpsertWithWhereUniqueWithoutCHAROLAInput[]
+    createMany?: CHAROLA_PUPACreateManyCHAROLAInputEnvelope
+    set?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    disconnect?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    delete?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    connect?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    update?: CHAROLA_PUPAUpdateWithWhereUniqueWithoutCHAROLAInput | CHAROLA_PUPAUpdateWithWhereUniqueWithoutCHAROLAInput[]
+    updateMany?: CHAROLA_PUPAUpdateManyWithWhereWithoutCHAROLAInput | CHAROLA_PUPAUpdateManyWithWhereWithoutCHAROLAInput[]
+    deleteMany?: CHAROLA_PUPAScalarWhereInput | CHAROLA_PUPAScalarWhereInput[]
   }
 
   export type FRASUpdateManyWithoutCHAROLANestedInput = {
@@ -13762,6 +17697,20 @@ export namespace Prisma {
     deleteMany?: CHAROLA_COMIDAScalarWhereInput | CHAROLA_COMIDAScalarWhereInput[]
   }
 
+  export type CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLANestedInput = {
+    create?: XOR<CHAROLA_FRASCreateWithoutCHAROLAInput, CHAROLA_FRASUncheckedCreateWithoutCHAROLAInput> | CHAROLA_FRASCreateWithoutCHAROLAInput[] | CHAROLA_FRASUncheckedCreateWithoutCHAROLAInput[]
+    connectOrCreate?: CHAROLA_FRASCreateOrConnectWithoutCHAROLAInput | CHAROLA_FRASCreateOrConnectWithoutCHAROLAInput[]
+    upsert?: CHAROLA_FRASUpsertWithWhereUniqueWithoutCHAROLAInput | CHAROLA_FRASUpsertWithWhereUniqueWithoutCHAROLAInput[]
+    createMany?: CHAROLA_FRASCreateManyCHAROLAInputEnvelope
+    set?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    disconnect?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    delete?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    connect?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    update?: CHAROLA_FRASUpdateWithWhereUniqueWithoutCHAROLAInput | CHAROLA_FRASUpdateWithWhereUniqueWithoutCHAROLAInput[]
+    updateMany?: CHAROLA_FRASUpdateManyWithWhereWithoutCHAROLAInput | CHAROLA_FRASUpdateManyWithWhereWithoutCHAROLAInput[]
+    deleteMany?: CHAROLA_FRASScalarWhereInput | CHAROLA_FRASScalarWhereInput[]
+  }
+
   export type CHAROLA_HIDRATACIONUncheckedUpdateManyWithoutCHAROLANestedInput = {
     create?: XOR<CHAROLA_HIDRATACIONCreateWithoutCHAROLAInput, CHAROLA_HIDRATACIONUncheckedCreateWithoutCHAROLAInput> | CHAROLA_HIDRATACIONCreateWithoutCHAROLAInput[] | CHAROLA_HIDRATACIONUncheckedCreateWithoutCHAROLAInput[]
     connectOrCreate?: CHAROLA_HIDRATACIONCreateOrConnectWithoutCHAROLAInput | CHAROLA_HIDRATACIONCreateOrConnectWithoutCHAROLAInput[]
@@ -13774,6 +17723,20 @@ export namespace Prisma {
     update?: CHAROLA_HIDRATACIONUpdateWithWhereUniqueWithoutCHAROLAInput | CHAROLA_HIDRATACIONUpdateWithWhereUniqueWithoutCHAROLAInput[]
     updateMany?: CHAROLA_HIDRATACIONUpdateManyWithWhereWithoutCHAROLAInput | CHAROLA_HIDRATACIONUpdateManyWithWhereWithoutCHAROLAInput[]
     deleteMany?: CHAROLA_HIDRATACIONScalarWhereInput | CHAROLA_HIDRATACIONScalarWhereInput[]
+  }
+
+  export type CHAROLA_PUPAUncheckedUpdateManyWithoutCHAROLANestedInput = {
+    create?: XOR<CHAROLA_PUPACreateWithoutCHAROLAInput, CHAROLA_PUPAUncheckedCreateWithoutCHAROLAInput> | CHAROLA_PUPACreateWithoutCHAROLAInput[] | CHAROLA_PUPAUncheckedCreateWithoutCHAROLAInput[]
+    connectOrCreate?: CHAROLA_PUPACreateOrConnectWithoutCHAROLAInput | CHAROLA_PUPACreateOrConnectWithoutCHAROLAInput[]
+    upsert?: CHAROLA_PUPAUpsertWithWhereUniqueWithoutCHAROLAInput | CHAROLA_PUPAUpsertWithWhereUniqueWithoutCHAROLAInput[]
+    createMany?: CHAROLA_PUPACreateManyCHAROLAInputEnvelope
+    set?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    disconnect?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    delete?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    connect?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    update?: CHAROLA_PUPAUpdateWithWhereUniqueWithoutCHAROLAInput | CHAROLA_PUPAUpdateWithWhereUniqueWithoutCHAROLAInput[]
+    updateMany?: CHAROLA_PUPAUpdateManyWithWhereWithoutCHAROLAInput | CHAROLA_PUPAUpdateManyWithWhereWithoutCHAROLAInput[]
+    deleteMany?: CHAROLA_PUPAScalarWhereInput | CHAROLA_PUPAScalarWhereInput[]
   }
 
   export type FRASUncheckedUpdateManyWithoutCHAROLANestedInput = {
@@ -13844,18 +17807,26 @@ export namespace Prisma {
     connect?: COMIDAWhereUniqueInput
   }
 
-  export type CHAROLAUpdateOneRequiredWithoutCHAROLA_COMIDANestedInput = {
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type CHAROLAUpdateOneWithoutCHAROLA_COMIDANestedInput = {
     create?: XOR<CHAROLACreateWithoutCHAROLA_COMIDAInput, CHAROLAUncheckedCreateWithoutCHAROLA_COMIDAInput>
     connectOrCreate?: CHAROLACreateOrConnectWithoutCHAROLA_COMIDAInput
     upsert?: CHAROLAUpsertWithoutCHAROLA_COMIDAInput
+    disconnect?: CHAROLAWhereInput | boolean
+    delete?: CHAROLAWhereInput | boolean
     connect?: CHAROLAWhereUniqueInput
     update?: XOR<XOR<CHAROLAUpdateToOneWithWhereWithoutCHAROLA_COMIDAInput, CHAROLAUpdateWithoutCHAROLA_COMIDAInput>, CHAROLAUncheckedUpdateWithoutCHAROLA_COMIDAInput>
   }
 
-  export type COMIDAUpdateOneRequiredWithoutCHAROLA_COMIDANestedInput = {
+  export type COMIDAUpdateOneWithoutCHAROLA_COMIDANestedInput = {
     create?: XOR<COMIDACreateWithoutCHAROLA_COMIDAInput, COMIDAUncheckedCreateWithoutCHAROLA_COMIDAInput>
     connectOrCreate?: COMIDACreateOrConnectWithoutCHAROLA_COMIDAInput
     upsert?: COMIDAUpsertWithoutCHAROLA_COMIDAInput
+    disconnect?: COMIDAWhereInput | boolean
+    delete?: COMIDAWhereInput | boolean
     connect?: COMIDAWhereUniqueInput
     update?: XOR<XOR<COMIDAUpdateToOneWithWhereWithoutCHAROLA_COMIDAInput, COMIDAUpdateWithoutCHAROLA_COMIDAInput>, COMIDAUncheckedUpdateWithoutCHAROLA_COMIDAInput>
   }
@@ -13872,18 +17843,22 @@ export namespace Prisma {
     connect?: HIDRATACIONWhereUniqueInput
   }
 
-  export type CHAROLAUpdateOneRequiredWithoutCHAROLA_HIDRATACIONNestedInput = {
+  export type CHAROLAUpdateOneWithoutCHAROLA_HIDRATACIONNestedInput = {
     create?: XOR<CHAROLACreateWithoutCHAROLA_HIDRATACIONInput, CHAROLAUncheckedCreateWithoutCHAROLA_HIDRATACIONInput>
     connectOrCreate?: CHAROLACreateOrConnectWithoutCHAROLA_HIDRATACIONInput
     upsert?: CHAROLAUpsertWithoutCHAROLA_HIDRATACIONInput
+    disconnect?: CHAROLAWhereInput | boolean
+    delete?: CHAROLAWhereInput | boolean
     connect?: CHAROLAWhereUniqueInput
     update?: XOR<XOR<CHAROLAUpdateToOneWithWhereWithoutCHAROLA_HIDRATACIONInput, CHAROLAUpdateWithoutCHAROLA_HIDRATACIONInput>, CHAROLAUncheckedUpdateWithoutCHAROLA_HIDRATACIONInput>
   }
 
-  export type HIDRATACIONUpdateOneRequiredWithoutCHAROLA_HIDRATACIONNestedInput = {
+  export type HIDRATACIONUpdateOneWithoutCHAROLA_HIDRATACIONNestedInput = {
     create?: XOR<HIDRATACIONCreateWithoutCHAROLA_HIDRATACIONInput, HIDRATACIONUncheckedCreateWithoutCHAROLA_HIDRATACIONInput>
     connectOrCreate?: HIDRATACIONCreateOrConnectWithoutCHAROLA_HIDRATACIONInput
     upsert?: HIDRATACIONUpsertWithoutCHAROLA_HIDRATACIONInput
+    disconnect?: HIDRATACIONWhereInput | boolean
+    delete?: HIDRATACIONWhereInput | boolean
     connect?: HIDRATACIONWhereUniqueInput
     update?: XOR<XOR<HIDRATACIONUpdateToOneWithWhereWithoutCHAROLA_HIDRATACIONInput, HIDRATACIONUpdateWithoutCHAROLA_HIDRATACIONInput>, HIDRATACIONUncheckedUpdateWithoutCHAROLA_HIDRATACIONInput>
   }
@@ -13934,10 +17909,38 @@ export namespace Prisma {
     deleteMany?: CHAROLA_COMIDAScalarWhereInput | CHAROLA_COMIDAScalarWhereInput[]
   }
 
+  export type CHAROLA_FRASCreateNestedManyWithoutFRASInput = {
+    create?: XOR<CHAROLA_FRASCreateWithoutFRASInput, CHAROLA_FRASUncheckedCreateWithoutFRASInput> | CHAROLA_FRASCreateWithoutFRASInput[] | CHAROLA_FRASUncheckedCreateWithoutFRASInput[]
+    connectOrCreate?: CHAROLA_FRASCreateOrConnectWithoutFRASInput | CHAROLA_FRASCreateOrConnectWithoutFRASInput[]
+    createMany?: CHAROLA_FRASCreateManyFRASInputEnvelope
+    connect?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+  }
+
   export type CHAROLACreateNestedOneWithoutFRASInput = {
     create?: XOR<CHAROLACreateWithoutFRASInput, CHAROLAUncheckedCreateWithoutFRASInput>
     connectOrCreate?: CHAROLACreateOrConnectWithoutFRASInput
     connect?: CHAROLAWhereUniqueInput
+  }
+
+  export type CHAROLA_FRASUncheckedCreateNestedManyWithoutFRASInput = {
+    create?: XOR<CHAROLA_FRASCreateWithoutFRASInput, CHAROLA_FRASUncheckedCreateWithoutFRASInput> | CHAROLA_FRASCreateWithoutFRASInput[] | CHAROLA_FRASUncheckedCreateWithoutFRASInput[]
+    connectOrCreate?: CHAROLA_FRASCreateOrConnectWithoutFRASInput | CHAROLA_FRASCreateOrConnectWithoutFRASInput[]
+    createMany?: CHAROLA_FRASCreateManyFRASInputEnvelope
+    connect?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+  }
+
+  export type CHAROLA_FRASUpdateManyWithoutFRASNestedInput = {
+    create?: XOR<CHAROLA_FRASCreateWithoutFRASInput, CHAROLA_FRASUncheckedCreateWithoutFRASInput> | CHAROLA_FRASCreateWithoutFRASInput[] | CHAROLA_FRASUncheckedCreateWithoutFRASInput[]
+    connectOrCreate?: CHAROLA_FRASCreateOrConnectWithoutFRASInput | CHAROLA_FRASCreateOrConnectWithoutFRASInput[]
+    upsert?: CHAROLA_FRASUpsertWithWhereUniqueWithoutFRASInput | CHAROLA_FRASUpsertWithWhereUniqueWithoutFRASInput[]
+    createMany?: CHAROLA_FRASCreateManyFRASInputEnvelope
+    set?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    disconnect?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    delete?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    connect?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    update?: CHAROLA_FRASUpdateWithWhereUniqueWithoutFRASInput | CHAROLA_FRASUpdateWithWhereUniqueWithoutFRASInput[]
+    updateMany?: CHAROLA_FRASUpdateManyWithWhereWithoutFRASInput | CHAROLA_FRASUpdateManyWithWhereWithoutFRASInput[]
+    deleteMany?: CHAROLA_FRASScalarWhereInput | CHAROLA_FRASScalarWhereInput[]
   }
 
   export type CHAROLAUpdateOneWithoutFRASNestedInput = {
@@ -13948,6 +17951,20 @@ export namespace Prisma {
     delete?: CHAROLAWhereInput | boolean
     connect?: CHAROLAWhereUniqueInput
     update?: XOR<XOR<CHAROLAUpdateToOneWithWhereWithoutFRASInput, CHAROLAUpdateWithoutFRASInput>, CHAROLAUncheckedUpdateWithoutFRASInput>
+  }
+
+  export type CHAROLA_FRASUncheckedUpdateManyWithoutFRASNestedInput = {
+    create?: XOR<CHAROLA_FRASCreateWithoutFRASInput, CHAROLA_FRASUncheckedCreateWithoutFRASInput> | CHAROLA_FRASCreateWithoutFRASInput[] | CHAROLA_FRASUncheckedCreateWithoutFRASInput[]
+    connectOrCreate?: CHAROLA_FRASCreateOrConnectWithoutFRASInput | CHAROLA_FRASCreateOrConnectWithoutFRASInput[]
+    upsert?: CHAROLA_FRASUpsertWithWhereUniqueWithoutFRASInput | CHAROLA_FRASUpsertWithWhereUniqueWithoutFRASInput[]
+    createMany?: CHAROLA_FRASCreateManyFRASInputEnvelope
+    set?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    disconnect?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    delete?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    connect?: CHAROLA_FRASWhereUniqueInput | CHAROLA_FRASWhereUniqueInput[]
+    update?: CHAROLA_FRASUpdateWithWhereUniqueWithoutFRASInput | CHAROLA_FRASUpdateWithWhereUniqueWithoutFRASInput[]
+    updateMany?: CHAROLA_FRASUpdateManyWithWhereWithoutFRASInput | CHAROLA_FRASUpdateManyWithWhereWithoutFRASInput[]
+    deleteMany?: CHAROLA_FRASScalarWhereInput | CHAROLA_FRASScalarWhereInput[]
   }
 
   export type CHAROLA_HIDRATACIONCreateNestedManyWithoutHIDRATACIONInput = {
@@ -14102,6 +18119,104 @@ export namespace Prisma {
     upsert?: CHAROLAUpsertWithoutUSUARIO_CHAROLAInput
     connect?: CHAROLAWhereUniqueInput
     update?: XOR<XOR<CHAROLAUpdateToOneWithWhereWithoutUSUARIO_CHAROLAInput, CHAROLAUpdateWithoutUSUARIO_CHAROLAInput>, CHAROLAUncheckedUpdateWithoutUSUARIO_CHAROLAInput>
+  }
+
+  export type CHAROLACreateNestedOneWithoutCHAROLA_FRASInput = {
+    create?: XOR<CHAROLACreateWithoutCHAROLA_FRASInput, CHAROLAUncheckedCreateWithoutCHAROLA_FRASInput>
+    connectOrCreate?: CHAROLACreateOrConnectWithoutCHAROLA_FRASInput
+    connect?: CHAROLAWhereUniqueInput
+  }
+
+  export type FRASCreateNestedOneWithoutCHAROLA_FRASInput = {
+    create?: XOR<FRASCreateWithoutCHAROLA_FRASInput, FRASUncheckedCreateWithoutCHAROLA_FRASInput>
+    connectOrCreate?: FRASCreateOrConnectWithoutCHAROLA_FRASInput
+    connect?: FRASWhereUniqueInput
+  }
+
+  export type CHAROLAUpdateOneRequiredWithoutCHAROLA_FRASNestedInput = {
+    create?: XOR<CHAROLACreateWithoutCHAROLA_FRASInput, CHAROLAUncheckedCreateWithoutCHAROLA_FRASInput>
+    connectOrCreate?: CHAROLACreateOrConnectWithoutCHAROLA_FRASInput
+    upsert?: CHAROLAUpsertWithoutCHAROLA_FRASInput
+    connect?: CHAROLAWhereUniqueInput
+    update?: XOR<XOR<CHAROLAUpdateToOneWithWhereWithoutCHAROLA_FRASInput, CHAROLAUpdateWithoutCHAROLA_FRASInput>, CHAROLAUncheckedUpdateWithoutCHAROLA_FRASInput>
+  }
+
+  export type FRASUpdateOneRequiredWithoutCHAROLA_FRASNestedInput = {
+    create?: XOR<FRASCreateWithoutCHAROLA_FRASInput, FRASUncheckedCreateWithoutCHAROLA_FRASInput>
+    connectOrCreate?: FRASCreateOrConnectWithoutCHAROLA_FRASInput
+    upsert?: FRASUpsertWithoutCHAROLA_FRASInput
+    connect?: FRASWhereUniqueInput
+    update?: XOR<XOR<FRASUpdateToOneWithWhereWithoutCHAROLA_FRASInput, FRASUpdateWithoutCHAROLA_FRASInput>, FRASUncheckedUpdateWithoutCHAROLA_FRASInput>
+  }
+
+  export type CHAROLACreateNestedOneWithoutCHAROLA_PUPAInput = {
+    create?: XOR<CHAROLACreateWithoutCHAROLA_PUPAInput, CHAROLAUncheckedCreateWithoutCHAROLA_PUPAInput>
+    connectOrCreate?: CHAROLACreateOrConnectWithoutCHAROLA_PUPAInput
+    connect?: CHAROLAWhereUniqueInput
+  }
+
+  export type PUPACreateNestedOneWithoutCHAROLA_PUPAInput = {
+    create?: XOR<PUPACreateWithoutCHAROLA_PUPAInput, PUPAUncheckedCreateWithoutCHAROLA_PUPAInput>
+    connectOrCreate?: PUPACreateOrConnectWithoutCHAROLA_PUPAInput
+    connect?: PUPAWhereUniqueInput
+  }
+
+  export type CHAROLAUpdateOneRequiredWithoutCHAROLA_PUPANestedInput = {
+    create?: XOR<CHAROLACreateWithoutCHAROLA_PUPAInput, CHAROLAUncheckedCreateWithoutCHAROLA_PUPAInput>
+    connectOrCreate?: CHAROLACreateOrConnectWithoutCHAROLA_PUPAInput
+    upsert?: CHAROLAUpsertWithoutCHAROLA_PUPAInput
+    connect?: CHAROLAWhereUniqueInput
+    update?: XOR<XOR<CHAROLAUpdateToOneWithWhereWithoutCHAROLA_PUPAInput, CHAROLAUpdateWithoutCHAROLA_PUPAInput>, CHAROLAUncheckedUpdateWithoutCHAROLA_PUPAInput>
+  }
+
+  export type PUPAUpdateOneRequiredWithoutCHAROLA_PUPANestedInput = {
+    create?: XOR<PUPACreateWithoutCHAROLA_PUPAInput, PUPAUncheckedCreateWithoutCHAROLA_PUPAInput>
+    connectOrCreate?: PUPACreateOrConnectWithoutCHAROLA_PUPAInput
+    upsert?: PUPAUpsertWithoutCHAROLA_PUPAInput
+    connect?: PUPAWhereUniqueInput
+    update?: XOR<XOR<PUPAUpdateToOneWithWhereWithoutCHAROLA_PUPAInput, PUPAUpdateWithoutCHAROLA_PUPAInput>, PUPAUncheckedUpdateWithoutCHAROLA_PUPAInput>
+  }
+
+  export type CHAROLA_PUPACreateNestedManyWithoutPUPAInput = {
+    create?: XOR<CHAROLA_PUPACreateWithoutPUPAInput, CHAROLA_PUPAUncheckedCreateWithoutPUPAInput> | CHAROLA_PUPACreateWithoutPUPAInput[] | CHAROLA_PUPAUncheckedCreateWithoutPUPAInput[]
+    connectOrCreate?: CHAROLA_PUPACreateOrConnectWithoutPUPAInput | CHAROLA_PUPACreateOrConnectWithoutPUPAInput[]
+    createMany?: CHAROLA_PUPACreateManyPUPAInputEnvelope
+    connect?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+  }
+
+  export type CHAROLA_PUPAUncheckedCreateNestedManyWithoutPUPAInput = {
+    create?: XOR<CHAROLA_PUPACreateWithoutPUPAInput, CHAROLA_PUPAUncheckedCreateWithoutPUPAInput> | CHAROLA_PUPACreateWithoutPUPAInput[] | CHAROLA_PUPAUncheckedCreateWithoutPUPAInput[]
+    connectOrCreate?: CHAROLA_PUPACreateOrConnectWithoutPUPAInput | CHAROLA_PUPACreateOrConnectWithoutPUPAInput[]
+    createMany?: CHAROLA_PUPACreateManyPUPAInputEnvelope
+    connect?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+  }
+
+  export type CHAROLA_PUPAUpdateManyWithoutPUPANestedInput = {
+    create?: XOR<CHAROLA_PUPACreateWithoutPUPAInput, CHAROLA_PUPAUncheckedCreateWithoutPUPAInput> | CHAROLA_PUPACreateWithoutPUPAInput[] | CHAROLA_PUPAUncheckedCreateWithoutPUPAInput[]
+    connectOrCreate?: CHAROLA_PUPACreateOrConnectWithoutPUPAInput | CHAROLA_PUPACreateOrConnectWithoutPUPAInput[]
+    upsert?: CHAROLA_PUPAUpsertWithWhereUniqueWithoutPUPAInput | CHAROLA_PUPAUpsertWithWhereUniqueWithoutPUPAInput[]
+    createMany?: CHAROLA_PUPACreateManyPUPAInputEnvelope
+    set?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    disconnect?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    delete?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    connect?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    update?: CHAROLA_PUPAUpdateWithWhereUniqueWithoutPUPAInput | CHAROLA_PUPAUpdateWithWhereUniqueWithoutPUPAInput[]
+    updateMany?: CHAROLA_PUPAUpdateManyWithWhereWithoutPUPAInput | CHAROLA_PUPAUpdateManyWithWhereWithoutPUPAInput[]
+    deleteMany?: CHAROLA_PUPAScalarWhereInput | CHAROLA_PUPAScalarWhereInput[]
+  }
+
+  export type CHAROLA_PUPAUncheckedUpdateManyWithoutPUPANestedInput = {
+    create?: XOR<CHAROLA_PUPACreateWithoutPUPAInput, CHAROLA_PUPAUncheckedCreateWithoutPUPAInput> | CHAROLA_PUPACreateWithoutPUPAInput[] | CHAROLA_PUPAUncheckedCreateWithoutPUPAInput[]
+    connectOrCreate?: CHAROLA_PUPACreateOrConnectWithoutPUPAInput | CHAROLA_PUPACreateOrConnectWithoutPUPAInput[]
+    upsert?: CHAROLA_PUPAUpsertWithWhereUniqueWithoutPUPAInput | CHAROLA_PUPAUpsertWithWhereUniqueWithoutPUPAInput[]
+    createMany?: CHAROLA_PUPACreateManyPUPAInputEnvelope
+    set?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    disconnect?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    delete?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    connect?: CHAROLA_PUPAWhereUniqueInput | CHAROLA_PUPAWhereUniqueInput[]
+    update?: CHAROLA_PUPAUpdateWithWhereUniqueWithoutPUPAInput | CHAROLA_PUPAUpdateWithWhereUniqueWithoutPUPAInput[]
+    updateMany?: CHAROLA_PUPAUpdateManyWithWhereWithoutPUPAInput | CHAROLA_PUPAUpdateManyWithWhereWithoutPUPAInput[]
+    deleteMany?: CHAROLA_PUPAScalarWhereInput | CHAROLA_PUPAScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -14270,6 +18385,31 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -14395,12 +18535,15 @@ export namespace Prisma {
 
   export type CHAROLA_COMIDACreateWithoutCHAROLAInput = {
     cantidadOtorgada: number
-    COMIDA: COMIDACreateNestedOneWithoutCHAROLA_COMIDAInput
+    fechaOtorgada: Date | string
+    COMIDA?: COMIDACreateNestedOneWithoutCHAROLA_COMIDAInput
   }
 
   export type CHAROLA_COMIDAUncheckedCreateWithoutCHAROLAInput = {
-    comidaId: number
+    id?: number
+    comidaId?: number | null
     cantidadOtorgada: number
+    fechaOtorgada: Date | string
   }
 
   export type CHAROLA_COMIDACreateOrConnectWithoutCHAROLAInput = {
@@ -14413,14 +18556,35 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CHAROLA_FRASCreateWithoutCHAROLAInput = {
+    FRAS: FRASCreateNestedOneWithoutCHAROLA_FRASInput
+  }
+
+  export type CHAROLA_FRASUncheckedCreateWithoutCHAROLAInput = {
+    frasId: number
+  }
+
+  export type CHAROLA_FRASCreateOrConnectWithoutCHAROLAInput = {
+    where: CHAROLA_FRASWhereUniqueInput
+    create: XOR<CHAROLA_FRASCreateWithoutCHAROLAInput, CHAROLA_FRASUncheckedCreateWithoutCHAROLAInput>
+  }
+
+  export type CHAROLA_FRASCreateManyCHAROLAInputEnvelope = {
+    data: CHAROLA_FRASCreateManyCHAROLAInput | CHAROLA_FRASCreateManyCHAROLAInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CHAROLA_HIDRATACIONCreateWithoutCHAROLAInput = {
-    cantidadOtorgada?: number | null
-    HIDRATACION: HIDRATACIONCreateNestedOneWithoutCHAROLA_HIDRATACIONInput
+    cantidadOtorgada: number
+    fechaOtorgada: Date | string
+    HIDRATACION?: HIDRATACIONCreateNestedOneWithoutCHAROLA_HIDRATACIONInput
   }
 
   export type CHAROLA_HIDRATACIONUncheckedCreateWithoutCHAROLAInput = {
-    hidratacionId: number
-    cantidadOtorgada?: number | null
+    id?: number
+    hidratacionId?: number | null
+    cantidadOtorgada: number
+    fechaOtorgada: Date | string
   }
 
   export type CHAROLA_HIDRATACIONCreateOrConnectWithoutCHAROLAInput = {
@@ -14433,13 +18597,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CHAROLA_PUPACreateWithoutCHAROLAInput = {
+    PUPA: PUPACreateNestedOneWithoutCHAROLA_PUPAInput
+  }
+
+  export type CHAROLA_PUPAUncheckedCreateWithoutCHAROLAInput = {
+    pupaId: number
+  }
+
+  export type CHAROLA_PUPACreateOrConnectWithoutCHAROLAInput = {
+    where: CHAROLA_PUPAWhereUniqueInput
+    create: XOR<CHAROLA_PUPACreateWithoutCHAROLAInput, CHAROLA_PUPAUncheckedCreateWithoutCHAROLAInput>
+  }
+
+  export type CHAROLA_PUPACreateManyCHAROLAInputEnvelope = {
+    data: CHAROLA_PUPACreateManyCHAROLAInput | CHAROLA_PUPACreateManyCHAROLAInput[]
+    skipDuplicates?: boolean
+  }
+
   export type FRASCreateWithoutCHAROLAInput = {
     gramosGenerados: number
+    CHAROLA_FRAS?: CHAROLA_FRASCreateNestedManyWithoutFRASInput
   }
 
   export type FRASUncheckedCreateWithoutCHAROLAInput = {
-    frassId?: number
+    frasId?: number
     gramosGenerados: number
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedCreateNestedManyWithoutFRASInput
   }
 
   export type FRASCreateOrConnectWithoutCHAROLAInput = {
@@ -14530,9 +18714,35 @@ export namespace Prisma {
     AND?: CHAROLA_COMIDAScalarWhereInput | CHAROLA_COMIDAScalarWhereInput[]
     OR?: CHAROLA_COMIDAScalarWhereInput[]
     NOT?: CHAROLA_COMIDAScalarWhereInput | CHAROLA_COMIDAScalarWhereInput[]
-    charolaId?: IntFilter<"CHAROLA_COMIDA"> | number
-    comidaId?: IntFilter<"CHAROLA_COMIDA"> | number
+    id?: IntFilter<"CHAROLA_COMIDA"> | number
+    charolaId?: IntNullableFilter<"CHAROLA_COMIDA"> | number | null
+    comidaId?: IntNullableFilter<"CHAROLA_COMIDA"> | number | null
     cantidadOtorgada?: FloatFilter<"CHAROLA_COMIDA"> | number
+    fechaOtorgada?: DateTimeFilter<"CHAROLA_COMIDA"> | Date | string
+  }
+
+  export type CHAROLA_FRASUpsertWithWhereUniqueWithoutCHAROLAInput = {
+    where: CHAROLA_FRASWhereUniqueInput
+    update: XOR<CHAROLA_FRASUpdateWithoutCHAROLAInput, CHAROLA_FRASUncheckedUpdateWithoutCHAROLAInput>
+    create: XOR<CHAROLA_FRASCreateWithoutCHAROLAInput, CHAROLA_FRASUncheckedCreateWithoutCHAROLAInput>
+  }
+
+  export type CHAROLA_FRASUpdateWithWhereUniqueWithoutCHAROLAInput = {
+    where: CHAROLA_FRASWhereUniqueInput
+    data: XOR<CHAROLA_FRASUpdateWithoutCHAROLAInput, CHAROLA_FRASUncheckedUpdateWithoutCHAROLAInput>
+  }
+
+  export type CHAROLA_FRASUpdateManyWithWhereWithoutCHAROLAInput = {
+    where: CHAROLA_FRASScalarWhereInput
+    data: XOR<CHAROLA_FRASUpdateManyMutationInput, CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLAInput>
+  }
+
+  export type CHAROLA_FRASScalarWhereInput = {
+    AND?: CHAROLA_FRASScalarWhereInput | CHAROLA_FRASScalarWhereInput[]
+    OR?: CHAROLA_FRASScalarWhereInput[]
+    NOT?: CHAROLA_FRASScalarWhereInput | CHAROLA_FRASScalarWhereInput[]
+    charolaId?: IntFilter<"CHAROLA_FRAS"> | number
+    frasId?: IntFilter<"CHAROLA_FRAS"> | number
   }
 
   export type CHAROLA_HIDRATACIONUpsertWithWhereUniqueWithoutCHAROLAInput = {
@@ -14555,9 +18765,35 @@ export namespace Prisma {
     AND?: CHAROLA_HIDRATACIONScalarWhereInput | CHAROLA_HIDRATACIONScalarWhereInput[]
     OR?: CHAROLA_HIDRATACIONScalarWhereInput[]
     NOT?: CHAROLA_HIDRATACIONScalarWhereInput | CHAROLA_HIDRATACIONScalarWhereInput[]
-    charolaId?: IntFilter<"CHAROLA_HIDRATACION"> | number
-    hidratacionId?: IntFilter<"CHAROLA_HIDRATACION"> | number
-    cantidadOtorgada?: FloatNullableFilter<"CHAROLA_HIDRATACION"> | number | null
+    id?: IntFilter<"CHAROLA_HIDRATACION"> | number
+    charolaId?: IntNullableFilter<"CHAROLA_HIDRATACION"> | number | null
+    hidratacionId?: IntNullableFilter<"CHAROLA_HIDRATACION"> | number | null
+    cantidadOtorgada?: FloatFilter<"CHAROLA_HIDRATACION"> | number
+    fechaOtorgada?: DateTimeFilter<"CHAROLA_HIDRATACION"> | Date | string
+  }
+
+  export type CHAROLA_PUPAUpsertWithWhereUniqueWithoutCHAROLAInput = {
+    where: CHAROLA_PUPAWhereUniqueInput
+    update: XOR<CHAROLA_PUPAUpdateWithoutCHAROLAInput, CHAROLA_PUPAUncheckedUpdateWithoutCHAROLAInput>
+    create: XOR<CHAROLA_PUPACreateWithoutCHAROLAInput, CHAROLA_PUPAUncheckedCreateWithoutCHAROLAInput>
+  }
+
+  export type CHAROLA_PUPAUpdateWithWhereUniqueWithoutCHAROLAInput = {
+    where: CHAROLA_PUPAWhereUniqueInput
+    data: XOR<CHAROLA_PUPAUpdateWithoutCHAROLAInput, CHAROLA_PUPAUncheckedUpdateWithoutCHAROLAInput>
+  }
+
+  export type CHAROLA_PUPAUpdateManyWithWhereWithoutCHAROLAInput = {
+    where: CHAROLA_PUPAScalarWhereInput
+    data: XOR<CHAROLA_PUPAUpdateManyMutationInput, CHAROLA_PUPAUncheckedUpdateManyWithoutCHAROLAInput>
+  }
+
+  export type CHAROLA_PUPAScalarWhereInput = {
+    AND?: CHAROLA_PUPAScalarWhereInput | CHAROLA_PUPAScalarWhereInput[]
+    OR?: CHAROLA_PUPAScalarWhereInput[]
+    NOT?: CHAROLA_PUPAScalarWhereInput | CHAROLA_PUPAScalarWhereInput[]
+    charolaId?: IntFilter<"CHAROLA_PUPA"> | number
+    pupaId?: IntFilter<"CHAROLA_PUPA"> | number
   }
 
   export type FRASUpsertWithWhereUniqueWithoutCHAROLAInput = {
@@ -14580,7 +18816,7 @@ export namespace Prisma {
     AND?: FRASScalarWhereInput | FRASScalarWhereInput[]
     OR?: FRASScalarWhereInput[]
     NOT?: FRASScalarWhereInput | FRASScalarWhereInput[]
-    frassId?: IntFilter<"FRAS"> | number
+    frasId?: IntFilter<"FRAS"> | number
     gramosGenerados?: FloatFilter<"FRAS"> | number
     charolaId?: IntNullableFilter<"FRAS"> | number | null
   }
@@ -14620,7 +18856,9 @@ export namespace Prisma {
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDACreateNestedManyWithoutCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASCreateNestedManyWithoutCHAROLAInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPACreateNestedManyWithoutCHAROLAInput
     FRAS?: FRASCreateNestedManyWithoutCHAROLAInput
     USUARIO_CHAROLA?: USUARIO_CHAROLACreateNestedManyWithoutCHAROLAInput
   }
@@ -14637,7 +18875,9 @@ export namespace Prisma {
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedCreateNestedManyWithoutCHAROLAInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedCreateNestedManyWithoutCHAROLAInput
     FRAS?: FRASUncheckedCreateNestedManyWithoutCHAROLAInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedCreateNestedManyWithoutCHAROLAInput
   }
@@ -14658,7 +18898,9 @@ export namespace Prisma {
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDACreateNestedManyWithoutCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASCreateNestedManyWithoutCHAROLAInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPACreateNestedManyWithoutCHAROLAInput
     FRAS?: FRASCreateNestedManyWithoutCHAROLAInput
     USUARIO_CHAROLA?: USUARIO_CHAROLACreateNestedManyWithoutCHAROLAInput
   }
@@ -14675,7 +18917,9 @@ export namespace Prisma {
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedCreateNestedManyWithoutCHAROLAInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedCreateNestedManyWithoutCHAROLAInput
     FRAS?: FRASUncheckedCreateNestedManyWithoutCHAROLAInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedCreateNestedManyWithoutCHAROLAInput
   }
@@ -14707,7 +18951,9 @@ export namespace Prisma {
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUpdateManyWithoutCHAROLANestedInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUpdateManyWithoutCHAROLANestedInput
     FRAS?: FRASUpdateManyWithoutCHAROLANestedInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUpdateManyWithoutCHAROLANestedInput
   }
@@ -14724,7 +18970,9 @@ export namespace Prisma {
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLANestedInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedUpdateManyWithoutCHAROLANestedInput
     FRAS?: FRASUncheckedUpdateManyWithoutCHAROLANestedInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedUpdateManyWithoutCHAROLANestedInput
   }
@@ -14751,7 +18999,9 @@ export namespace Prisma {
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUpdateManyWithoutCHAROLANestedInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUpdateManyWithoutCHAROLANestedInput
     FRAS?: FRASUpdateManyWithoutCHAROLANestedInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUpdateManyWithoutCHAROLANestedInput
   }
@@ -14768,7 +19018,9 @@ export namespace Prisma {
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLANestedInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedUpdateManyWithoutCHAROLANestedInput
     FRAS?: FRASUncheckedUpdateManyWithoutCHAROLANestedInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedUpdateManyWithoutCHAROLANestedInput
   }
@@ -14784,7 +19036,9 @@ export namespace Prisma {
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASCreateNestedManyWithoutCHAROLAInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPACreateNestedManyWithoutCHAROLAInput
     FRAS?: FRASCreateNestedManyWithoutCHAROLAInput
     USUARIO_CHAROLA?: USUARIO_CHAROLACreateNestedManyWithoutCHAROLAInput
   }
@@ -14801,7 +19055,9 @@ export namespace Prisma {
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedCreateNestedManyWithoutCHAROLAInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedCreateNestedManyWithoutCHAROLAInput
     FRAS?: FRASUncheckedCreateNestedManyWithoutCHAROLAInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedCreateNestedManyWithoutCHAROLAInput
   }
@@ -14849,7 +19105,9 @@ export namespace Prisma {
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUpdateManyWithoutCHAROLANestedInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUpdateManyWithoutCHAROLANestedInput
     FRAS?: FRASUpdateManyWithoutCHAROLANestedInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUpdateManyWithoutCHAROLANestedInput
   }
@@ -14866,7 +19124,9 @@ export namespace Prisma {
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLANestedInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedUpdateManyWithoutCHAROLANestedInput
     FRAS?: FRASUncheckedUpdateManyWithoutCHAROLANestedInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedUpdateManyWithoutCHAROLANestedInput
   }
@@ -14905,6 +19165,8 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDACreateNestedManyWithoutCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPACreateNestedManyWithoutCHAROLAInput
     FRAS?: FRASCreateNestedManyWithoutCHAROLAInput
     USUARIO_CHAROLA?: USUARIO_CHAROLACreateNestedManyWithoutCHAROLAInput
   }
@@ -14922,6 +19184,8 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedCreateNestedManyWithoutCHAROLAInput
     FRAS?: FRASUncheckedCreateNestedManyWithoutCHAROLAInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedCreateNestedManyWithoutCHAROLAInput
   }
@@ -14971,6 +19235,8 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUpdateManyWithoutCHAROLANestedInput
     FRAS?: FRASUpdateManyWithoutCHAROLANestedInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUpdateManyWithoutCHAROLANestedInput
   }
@@ -14988,6 +19254,8 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedUpdateManyWithoutCHAROLANestedInput
     FRAS?: FRASUncheckedUpdateManyWithoutCHAROLANestedInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedUpdateManyWithoutCHAROLANestedInput
   }
@@ -15017,12 +19285,15 @@ export namespace Prisma {
 
   export type CHAROLA_COMIDACreateWithoutCOMIDAInput = {
     cantidadOtorgada: number
-    CHAROLA: CHAROLACreateNestedOneWithoutCHAROLA_COMIDAInput
+    fechaOtorgada: Date | string
+    CHAROLA?: CHAROLACreateNestedOneWithoutCHAROLA_COMIDAInput
   }
 
   export type CHAROLA_COMIDAUncheckedCreateWithoutCOMIDAInput = {
-    charolaId: number
+    id?: number
+    charolaId?: number | null
     cantidadOtorgada: number
+    fechaOtorgada: Date | string
   }
 
   export type CHAROLA_COMIDACreateOrConnectWithoutCOMIDAInput = {
@@ -15051,6 +19322,24 @@ export namespace Prisma {
     data: XOR<CHAROLA_COMIDAUpdateManyMutationInput, CHAROLA_COMIDAUncheckedUpdateManyWithoutCOMIDAInput>
   }
 
+  export type CHAROLA_FRASCreateWithoutFRASInput = {
+    CHAROLA: CHAROLACreateNestedOneWithoutCHAROLA_FRASInput
+  }
+
+  export type CHAROLA_FRASUncheckedCreateWithoutFRASInput = {
+    charolaId: number
+  }
+
+  export type CHAROLA_FRASCreateOrConnectWithoutFRASInput = {
+    where: CHAROLA_FRASWhereUniqueInput
+    create: XOR<CHAROLA_FRASCreateWithoutFRASInput, CHAROLA_FRASUncheckedCreateWithoutFRASInput>
+  }
+
+  export type CHAROLA_FRASCreateManyFRASInputEnvelope = {
+    data: CHAROLA_FRASCreateManyFRASInput | CHAROLA_FRASCreateManyFRASInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CHAROLACreateWithoutFRASInput = {
     nombreCharola?: string | null
     comidaCiclo: number
@@ -15063,7 +19352,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDACreateNestedManyWithoutCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASCreateNestedManyWithoutCHAROLAInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPACreateNestedManyWithoutCHAROLAInput
     USUARIO_CHAROLA?: USUARIO_CHAROLACreateNestedManyWithoutCHAROLAInput
   }
 
@@ -15080,13 +19371,31 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedCreateNestedManyWithoutCHAROLAInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedCreateNestedManyWithoutCHAROLAInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedCreateNestedManyWithoutCHAROLAInput
   }
 
   export type CHAROLACreateOrConnectWithoutFRASInput = {
     where: CHAROLAWhereUniqueInput
     create: XOR<CHAROLACreateWithoutFRASInput, CHAROLAUncheckedCreateWithoutFRASInput>
+  }
+
+  export type CHAROLA_FRASUpsertWithWhereUniqueWithoutFRASInput = {
+    where: CHAROLA_FRASWhereUniqueInput
+    update: XOR<CHAROLA_FRASUpdateWithoutFRASInput, CHAROLA_FRASUncheckedUpdateWithoutFRASInput>
+    create: XOR<CHAROLA_FRASCreateWithoutFRASInput, CHAROLA_FRASUncheckedCreateWithoutFRASInput>
+  }
+
+  export type CHAROLA_FRASUpdateWithWhereUniqueWithoutFRASInput = {
+    where: CHAROLA_FRASWhereUniqueInput
+    data: XOR<CHAROLA_FRASUpdateWithoutFRASInput, CHAROLA_FRASUncheckedUpdateWithoutFRASInput>
+  }
+
+  export type CHAROLA_FRASUpdateManyWithWhereWithoutFRASInput = {
+    where: CHAROLA_FRASScalarWhereInput
+    data: XOR<CHAROLA_FRASUpdateManyMutationInput, CHAROLA_FRASUncheckedUpdateManyWithoutFRASInput>
   }
 
   export type CHAROLAUpsertWithoutFRASInput = {
@@ -15112,7 +19421,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUpdateManyWithoutCHAROLANestedInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUpdateManyWithoutCHAROLANestedInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUpdateManyWithoutCHAROLANestedInput
   }
 
@@ -15129,18 +19440,23 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLANestedInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedUpdateManyWithoutCHAROLANestedInput
     USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedUpdateManyWithoutCHAROLANestedInput
   }
 
   export type CHAROLA_HIDRATACIONCreateWithoutHIDRATACIONInput = {
-    cantidadOtorgada?: number | null
-    CHAROLA: CHAROLACreateNestedOneWithoutCHAROLA_HIDRATACIONInput
+    cantidadOtorgada: number
+    fechaOtorgada: Date | string
+    CHAROLA?: CHAROLACreateNestedOneWithoutCHAROLA_HIDRATACIONInput
   }
 
   export type CHAROLA_HIDRATACIONUncheckedCreateWithoutHIDRATACIONInput = {
-    charolaId: number
-    cantidadOtorgada?: number | null
+    id?: number
+    charolaId?: number | null
+    cantidadOtorgada: number
+    fechaOtorgada: Date | string
   }
 
   export type CHAROLA_HIDRATACIONCreateOrConnectWithoutHIDRATACIONInput = {
@@ -15281,7 +19597,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDACreateNestedManyWithoutCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASCreateNestedManyWithoutCHAROLAInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPACreateNestedManyWithoutCHAROLAInput
     FRAS?: FRASCreateNestedManyWithoutCHAROLAInput
   }
 
@@ -15298,7 +19616,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedCreateNestedManyWithoutCHAROLAInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedCreateNestedManyWithoutCHAROLAInput
     FRAS?: FRASUncheckedCreateNestedManyWithoutCHAROLAInput
   }
 
@@ -15360,7 +19680,9 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUpdateManyWithoutCHAROLANestedInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUpdateManyWithoutCHAROLANestedInput
     FRAS?: FRASUpdateManyWithoutCHAROLANestedInput
   }
 
@@ -15377,8 +19699,300 @@ export namespace Prisma {
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedUpdateManyWithoutCHAROLANestedInput
+    FRAS?: FRASUncheckedUpdateManyWithoutCHAROLANestedInput
+  }
+
+  export type CHAROLACreateWithoutCHAROLA_FRASInput = {
+    nombreCharola?: string | null
+    comidaCiclo: number
+    hidratacionCiclo: number
+    fechaActualizacion?: Date | string | null
+    estado?: string | null
+    densidadLarva?: number | null
+    fechaCreacion?: Date | string | null
+    pesoCharola?: number | null
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
+    CHAROLA_COMIDA?: CHAROLA_COMIDACreateNestedManyWithoutCHAROLAInput
+    CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPACreateNestedManyWithoutCHAROLAInput
+    FRAS?: FRASCreateNestedManyWithoutCHAROLAInput
+    USUARIO_CHAROLA?: USUARIO_CHAROLACreateNestedManyWithoutCHAROLAInput
+  }
+
+  export type CHAROLAUncheckedCreateWithoutCHAROLA_FRASInput = {
+    charolaId?: number
+    nombreCharola?: string | null
+    comidaCiclo: number
+    hidratacionCiclo: number
+    fechaActualizacion?: Date | string | null
+    estado?: string | null
+    densidadLarva?: number | null
+    fechaCreacion?: Date | string | null
+    pesoCharola?: number | null
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
+    CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedCreateNestedManyWithoutCHAROLAInput
+    FRAS?: FRASUncheckedCreateNestedManyWithoutCHAROLAInput
+    USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedCreateNestedManyWithoutCHAROLAInput
+  }
+
+  export type CHAROLACreateOrConnectWithoutCHAROLA_FRASInput = {
+    where: CHAROLAWhereUniqueInput
+    create: XOR<CHAROLACreateWithoutCHAROLA_FRASInput, CHAROLAUncheckedCreateWithoutCHAROLA_FRASInput>
+  }
+
+  export type FRASCreateWithoutCHAROLA_FRASInput = {
+    gramosGenerados: number
+    CHAROLA?: CHAROLACreateNestedOneWithoutFRASInput
+  }
+
+  export type FRASUncheckedCreateWithoutCHAROLA_FRASInput = {
+    frasId?: number
+    gramosGenerados: number
+    charolaId?: number | null
+  }
+
+  export type FRASCreateOrConnectWithoutCHAROLA_FRASInput = {
+    where: FRASWhereUniqueInput
+    create: XOR<FRASCreateWithoutCHAROLA_FRASInput, FRASUncheckedCreateWithoutCHAROLA_FRASInput>
+  }
+
+  export type CHAROLAUpsertWithoutCHAROLA_FRASInput = {
+    update: XOR<CHAROLAUpdateWithoutCHAROLA_FRASInput, CHAROLAUncheckedUpdateWithoutCHAROLA_FRASInput>
+    create: XOR<CHAROLACreateWithoutCHAROLA_FRASInput, CHAROLAUncheckedCreateWithoutCHAROLA_FRASInput>
+    where?: CHAROLAWhereInput
+  }
+
+  export type CHAROLAUpdateToOneWithWhereWithoutCHAROLA_FRASInput = {
+    where?: CHAROLAWhereInput
+    data: XOR<CHAROLAUpdateWithoutCHAROLA_FRASInput, CHAROLAUncheckedUpdateWithoutCHAROLA_FRASInput>
+  }
+
+  export type CHAROLAUpdateWithoutCHAROLA_FRASInput = {
+    nombreCharola?: NullableStringFieldUpdateOperationsInput | string | null
+    comidaCiclo?: FloatFieldUpdateOperationsInput | number
+    hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
+    fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
+    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
+    CHAROLA_COMIDA?: CHAROLA_COMIDAUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUpdateManyWithoutCHAROLANestedInput
+    FRAS?: FRASUpdateManyWithoutCHAROLANestedInput
+    USUARIO_CHAROLA?: USUARIO_CHAROLAUpdateManyWithoutCHAROLANestedInput
+  }
+
+  export type CHAROLAUncheckedUpdateWithoutCHAROLA_FRASInput = {
+    charolaId?: IntFieldUpdateOperationsInput | number
+    nombreCharola?: NullableStringFieldUpdateOperationsInput | string | null
+    comidaCiclo?: FloatFieldUpdateOperationsInput | number
+    hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
+    fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
+    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
+    CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_PUPA?: CHAROLA_PUPAUncheckedUpdateManyWithoutCHAROLANestedInput
+    FRAS?: FRASUncheckedUpdateManyWithoutCHAROLANestedInput
+    USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedUpdateManyWithoutCHAROLANestedInput
+  }
+
+  export type FRASUpsertWithoutCHAROLA_FRASInput = {
+    update: XOR<FRASUpdateWithoutCHAROLA_FRASInput, FRASUncheckedUpdateWithoutCHAROLA_FRASInput>
+    create: XOR<FRASCreateWithoutCHAROLA_FRASInput, FRASUncheckedCreateWithoutCHAROLA_FRASInput>
+    where?: FRASWhereInput
+  }
+
+  export type FRASUpdateToOneWithWhereWithoutCHAROLA_FRASInput = {
+    where?: FRASWhereInput
+    data: XOR<FRASUpdateWithoutCHAROLA_FRASInput, FRASUncheckedUpdateWithoutCHAROLA_FRASInput>
+  }
+
+  export type FRASUpdateWithoutCHAROLA_FRASInput = {
+    gramosGenerados?: FloatFieldUpdateOperationsInput | number
+    CHAROLA?: CHAROLAUpdateOneWithoutFRASNestedInput
+  }
+
+  export type FRASUncheckedUpdateWithoutCHAROLA_FRASInput = {
+    frasId?: IntFieldUpdateOperationsInput | number
+    gramosGenerados?: FloatFieldUpdateOperationsInput | number
+    charolaId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type CHAROLACreateWithoutCHAROLA_PUPAInput = {
+    nombreCharola?: string | null
+    comidaCiclo: number
+    hidratacionCiclo: number
+    fechaActualizacion?: Date | string | null
+    estado?: string | null
+    densidadLarva?: number | null
+    fechaCreacion?: Date | string | null
+    pesoCharola?: number | null
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
+    CHAROLA_COMIDA?: CHAROLA_COMIDACreateNestedManyWithoutCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONCreateNestedManyWithoutCHAROLAInput
+    FRAS?: FRASCreateNestedManyWithoutCHAROLAInput
+    USUARIO_CHAROLA?: USUARIO_CHAROLACreateNestedManyWithoutCHAROLAInput
+  }
+
+  export type CHAROLAUncheckedCreateWithoutCHAROLA_PUPAInput = {
+    charolaId?: number
+    nombreCharola?: string | null
+    comidaCiclo: number
+    hidratacionCiclo: number
+    fechaActualizacion?: Date | string | null
+    estado?: string | null
+    densidadLarva?: number | null
+    fechaCreacion?: Date | string | null
+    pesoCharola?: number | null
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
+    CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedCreateNestedManyWithoutCHAROLAInput
+    CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedCreateNestedManyWithoutCHAROLAInput
+    FRAS?: FRASUncheckedCreateNestedManyWithoutCHAROLAInput
+    USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedCreateNestedManyWithoutCHAROLAInput
+  }
+
+  export type CHAROLACreateOrConnectWithoutCHAROLA_PUPAInput = {
+    where: CHAROLAWhereUniqueInput
+    create: XOR<CHAROLACreateWithoutCHAROLA_PUPAInput, CHAROLAUncheckedCreateWithoutCHAROLA_PUPAInput>
+  }
+
+  export type PUPACreateWithoutCHAROLA_PUPAInput = {
+    fechaRegistro?: Date | string | null
+    cantidadObtenida?: number | null
+  }
+
+  export type PUPAUncheckedCreateWithoutCHAROLA_PUPAInput = {
+    pupaId?: number
+    fechaRegistro?: Date | string | null
+    cantidadObtenida?: number | null
+  }
+
+  export type PUPACreateOrConnectWithoutCHAROLA_PUPAInput = {
+    where: PUPAWhereUniqueInput
+    create: XOR<PUPACreateWithoutCHAROLA_PUPAInput, PUPAUncheckedCreateWithoutCHAROLA_PUPAInput>
+  }
+
+  export type CHAROLAUpsertWithoutCHAROLA_PUPAInput = {
+    update: XOR<CHAROLAUpdateWithoutCHAROLA_PUPAInput, CHAROLAUncheckedUpdateWithoutCHAROLA_PUPAInput>
+    create: XOR<CHAROLACreateWithoutCHAROLA_PUPAInput, CHAROLAUncheckedCreateWithoutCHAROLA_PUPAInput>
+    where?: CHAROLAWhereInput
+  }
+
+  export type CHAROLAUpdateToOneWithWhereWithoutCHAROLA_PUPAInput = {
+    where?: CHAROLAWhereInput
+    data: XOR<CHAROLAUpdateWithoutCHAROLA_PUPAInput, CHAROLAUncheckedUpdateWithoutCHAROLA_PUPAInput>
+  }
+
+  export type CHAROLAUpdateWithoutCHAROLA_PUPAInput = {
+    nombreCharola?: NullableStringFieldUpdateOperationsInput | string | null
+    comidaCiclo?: FloatFieldUpdateOperationsInput | number
+    hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
+    fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
+    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
+    CHAROLA_COMIDA?: CHAROLA_COMIDAUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUpdateManyWithoutCHAROLANestedInput
+    FRAS?: FRASUpdateManyWithoutCHAROLANestedInput
+    USUARIO_CHAROLA?: USUARIO_CHAROLAUpdateManyWithoutCHAROLANestedInput
+  }
+
+  export type CHAROLAUncheckedUpdateWithoutCHAROLA_PUPAInput = {
+    charolaId?: IntFieldUpdateOperationsInput | number
+    nombreCharola?: NullableStringFieldUpdateOperationsInput | string | null
+    comidaCiclo?: FloatFieldUpdateOperationsInput | number
+    hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
+    fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
+    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
+    CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
+    CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedUpdateManyWithoutCHAROLANestedInput
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLANestedInput
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedUpdateManyWithoutCHAROLANestedInput
     FRAS?: FRASUncheckedUpdateManyWithoutCHAROLANestedInput
+    USUARIO_CHAROLA?: USUARIO_CHAROLAUncheckedUpdateManyWithoutCHAROLANestedInput
+  }
+
+  export type PUPAUpsertWithoutCHAROLA_PUPAInput = {
+    update: XOR<PUPAUpdateWithoutCHAROLA_PUPAInput, PUPAUncheckedUpdateWithoutCHAROLA_PUPAInput>
+    create: XOR<PUPACreateWithoutCHAROLA_PUPAInput, PUPAUncheckedCreateWithoutCHAROLA_PUPAInput>
+    where?: PUPAWhereInput
+  }
+
+  export type PUPAUpdateToOneWithWhereWithoutCHAROLA_PUPAInput = {
+    where?: PUPAWhereInput
+    data: XOR<PUPAUpdateWithoutCHAROLA_PUPAInput, PUPAUncheckedUpdateWithoutCHAROLA_PUPAInput>
+  }
+
+  export type PUPAUpdateWithoutCHAROLA_PUPAInput = {
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type PUPAUncheckedUpdateWithoutCHAROLA_PUPAInput = {
+    pupaId?: IntFieldUpdateOperationsInput | number
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type CHAROLA_PUPACreateWithoutPUPAInput = {
+    CHAROLA: CHAROLACreateNestedOneWithoutCHAROLA_PUPAInput
+  }
+
+  export type CHAROLA_PUPAUncheckedCreateWithoutPUPAInput = {
+    charolaId: number
+  }
+
+  export type CHAROLA_PUPACreateOrConnectWithoutPUPAInput = {
+    where: CHAROLA_PUPAWhereUniqueInput
+    create: XOR<CHAROLA_PUPACreateWithoutPUPAInput, CHAROLA_PUPAUncheckedCreateWithoutPUPAInput>
+  }
+
+  export type CHAROLA_PUPACreateManyPUPAInputEnvelope = {
+    data: CHAROLA_PUPACreateManyPUPAInput | CHAROLA_PUPACreateManyPUPAInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CHAROLA_PUPAUpsertWithWhereUniqueWithoutPUPAInput = {
+    where: CHAROLA_PUPAWhereUniqueInput
+    update: XOR<CHAROLA_PUPAUpdateWithoutPUPAInput, CHAROLA_PUPAUncheckedUpdateWithoutPUPAInput>
+    create: XOR<CHAROLA_PUPACreateWithoutPUPAInput, CHAROLA_PUPAUncheckedCreateWithoutPUPAInput>
+  }
+
+  export type CHAROLA_PUPAUpdateWithWhereUniqueWithoutPUPAInput = {
+    where: CHAROLA_PUPAWhereUniqueInput
+    data: XOR<CHAROLA_PUPAUpdateWithoutPUPAInput, CHAROLA_PUPAUncheckedUpdateWithoutPUPAInput>
+  }
+
+  export type CHAROLA_PUPAUpdateManyWithWhereWithoutPUPAInput = {
+    where: CHAROLA_PUPAScalarWhereInput
+    data: XOR<CHAROLA_PUPAUpdateManyMutationInput, CHAROLA_PUPAUncheckedUpdateManyWithoutPUPAInput>
   }
 
   export type CHAROLA_CHAROLACreateManyCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput = {
@@ -15390,17 +20004,29 @@ export namespace Prisma {
   }
 
   export type CHAROLA_COMIDACreateManyCHAROLAInput = {
-    comidaId: number
+    id?: number
+    comidaId?: number | null
     cantidadOtorgada: number
+    fechaOtorgada: Date | string
+  }
+
+  export type CHAROLA_FRASCreateManyCHAROLAInput = {
+    frasId: number
   }
 
   export type CHAROLA_HIDRATACIONCreateManyCHAROLAInput = {
-    hidratacionId: number
-    cantidadOtorgada?: number | null
+    id?: number
+    hidratacionId?: number | null
+    cantidadOtorgada: number
+    fechaOtorgada: Date | string
+  }
+
+  export type CHAROLA_PUPACreateManyCHAROLAInput = {
+    pupaId: number
   }
 
   export type FRASCreateManyCHAROLAInput = {
-    frassId?: number
+    frasId?: number
     gramosGenerados: number
   }
 
@@ -15434,45 +20060,81 @@ export namespace Prisma {
 
   export type CHAROLA_COMIDAUpdateWithoutCHAROLAInput = {
     cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
-    COMIDA?: COMIDAUpdateOneRequiredWithoutCHAROLA_COMIDANestedInput
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
+    COMIDA?: COMIDAUpdateOneWithoutCHAROLA_COMIDANestedInput
   }
 
   export type CHAROLA_COMIDAUncheckedUpdateWithoutCHAROLAInput = {
-    comidaId?: IntFieldUpdateOperationsInput | number
+    id?: IntFieldUpdateOperationsInput | number
+    comidaId?: NullableIntFieldUpdateOperationsInput | number | null
     cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CHAROLA_COMIDAUncheckedUpdateManyWithoutCHAROLAInput = {
-    comidaId?: IntFieldUpdateOperationsInput | number
+    id?: IntFieldUpdateOperationsInput | number
+    comidaId?: NullableIntFieldUpdateOperationsInput | number | null
     cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CHAROLA_FRASUpdateWithoutCHAROLAInput = {
+    FRAS?: FRASUpdateOneRequiredWithoutCHAROLA_FRASNestedInput
+  }
+
+  export type CHAROLA_FRASUncheckedUpdateWithoutCHAROLAInput = {
+    frasId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLAInput = {
+    frasId?: IntFieldUpdateOperationsInput | number
   }
 
   export type CHAROLA_HIDRATACIONUpdateWithoutCHAROLAInput = {
-    cantidadOtorgada?: NullableFloatFieldUpdateOperationsInput | number | null
-    HIDRATACION?: HIDRATACIONUpdateOneRequiredWithoutCHAROLA_HIDRATACIONNestedInput
+    cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
+    HIDRATACION?: HIDRATACIONUpdateOneWithoutCHAROLA_HIDRATACIONNestedInput
   }
 
   export type CHAROLA_HIDRATACIONUncheckedUpdateWithoutCHAROLAInput = {
-    hidratacionId?: IntFieldUpdateOperationsInput | number
-    cantidadOtorgada?: NullableFloatFieldUpdateOperationsInput | number | null
+    id?: IntFieldUpdateOperationsInput | number
+    hidratacionId?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CHAROLA_HIDRATACIONUncheckedUpdateManyWithoutCHAROLAInput = {
-    hidratacionId?: IntFieldUpdateOperationsInput | number
-    cantidadOtorgada?: NullableFloatFieldUpdateOperationsInput | number | null
+    id?: IntFieldUpdateOperationsInput | number
+    hidratacionId?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CHAROLA_PUPAUpdateWithoutCHAROLAInput = {
+    PUPA?: PUPAUpdateOneRequiredWithoutCHAROLA_PUPANestedInput
+  }
+
+  export type CHAROLA_PUPAUncheckedUpdateWithoutCHAROLAInput = {
+    pupaId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CHAROLA_PUPAUncheckedUpdateManyWithoutCHAROLAInput = {
+    pupaId?: IntFieldUpdateOperationsInput | number
   }
 
   export type FRASUpdateWithoutCHAROLAInput = {
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
+    CHAROLA_FRAS?: CHAROLA_FRASUpdateManyWithoutFRASNestedInput
   }
 
   export type FRASUncheckedUpdateWithoutCHAROLAInput = {
-    frassId?: IntFieldUpdateOperationsInput | number
+    frasId?: IntFieldUpdateOperationsInput | number
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
+    CHAROLA_FRAS?: CHAROLA_FRASUncheckedUpdateManyWithoutFRASNestedInput
   }
 
   export type FRASUncheckedUpdateManyWithoutCHAROLAInput = {
-    frassId?: IntFieldUpdateOperationsInput | number
+    frasId?: IntFieldUpdateOperationsInput | number
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
   }
 
@@ -15489,43 +20151,73 @@ export namespace Prisma {
   }
 
   export type CHAROLA_COMIDACreateManyCOMIDAInput = {
-    charolaId: number
+    id?: number
+    charolaId?: number | null
     cantidadOtorgada: number
+    fechaOtorgada: Date | string
   }
 
   export type CHAROLA_COMIDAUpdateWithoutCOMIDAInput = {
     cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
-    CHAROLA?: CHAROLAUpdateOneRequiredWithoutCHAROLA_COMIDANestedInput
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
+    CHAROLA?: CHAROLAUpdateOneWithoutCHAROLA_COMIDANestedInput
   }
 
   export type CHAROLA_COMIDAUncheckedUpdateWithoutCOMIDAInput = {
-    charolaId?: IntFieldUpdateOperationsInput | number
+    id?: IntFieldUpdateOperationsInput | number
+    charolaId?: NullableIntFieldUpdateOperationsInput | number | null
     cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CHAROLA_COMIDAUncheckedUpdateManyWithoutCOMIDAInput = {
-    charolaId?: IntFieldUpdateOperationsInput | number
+    id?: IntFieldUpdateOperationsInput | number
+    charolaId?: NullableIntFieldUpdateOperationsInput | number | null
     cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CHAROLA_FRASCreateManyFRASInput = {
+    charolaId: number
+  }
+
+  export type CHAROLA_FRASUpdateWithoutFRASInput = {
+    CHAROLA?: CHAROLAUpdateOneRequiredWithoutCHAROLA_FRASNestedInput
+  }
+
+  export type CHAROLA_FRASUncheckedUpdateWithoutFRASInput = {
+    charolaId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CHAROLA_FRASUncheckedUpdateManyWithoutFRASInput = {
+    charolaId?: IntFieldUpdateOperationsInput | number
   }
 
   export type CHAROLA_HIDRATACIONCreateManyHIDRATACIONInput = {
-    charolaId: number
-    cantidadOtorgada?: number | null
+    id?: number
+    charolaId?: number | null
+    cantidadOtorgada: number
+    fechaOtorgada: Date | string
   }
 
   export type CHAROLA_HIDRATACIONUpdateWithoutHIDRATACIONInput = {
-    cantidadOtorgada?: NullableFloatFieldUpdateOperationsInput | number | null
-    CHAROLA?: CHAROLAUpdateOneRequiredWithoutCHAROLA_HIDRATACIONNestedInput
+    cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
+    CHAROLA?: CHAROLAUpdateOneWithoutCHAROLA_HIDRATACIONNestedInput
   }
 
   export type CHAROLA_HIDRATACIONUncheckedUpdateWithoutHIDRATACIONInput = {
-    charolaId?: IntFieldUpdateOperationsInput | number
-    cantidadOtorgada?: NullableFloatFieldUpdateOperationsInput | number | null
+    id?: IntFieldUpdateOperationsInput | number
+    charolaId?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CHAROLA_HIDRATACIONUncheckedUpdateManyWithoutHIDRATACIONInput = {
-    charolaId?: IntFieldUpdateOperationsInput | number
-    cantidadOtorgada?: NullableFloatFieldUpdateOperationsInput | number | null
+    id?: IntFieldUpdateOperationsInput | number
+    charolaId?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
+    fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ADMINISTRADORCreateManyUSUARIOInput = {
@@ -15557,6 +20249,22 @@ export namespace Prisma {
   }
 
   export type USUARIO_CHAROLAUncheckedUpdateManyWithoutUSUARIOInput = {
+    charolaId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CHAROLA_PUPACreateManyPUPAInput = {
+    charolaId: number
+  }
+
+  export type CHAROLA_PUPAUpdateWithoutPUPAInput = {
+    CHAROLA?: CHAROLAUpdateOneRequiredWithoutCHAROLA_PUPANestedInput
+  }
+
+  export type CHAROLA_PUPAUncheckedUpdateWithoutPUPAInput = {
+    charolaId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CHAROLA_PUPAUncheckedUpdateManyWithoutPUPAInput = {
     charolaId?: IntFieldUpdateOperationsInput | number
   }
 

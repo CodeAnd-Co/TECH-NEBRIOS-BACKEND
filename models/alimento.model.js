@@ -1,80 +1,84 @@
-/**
- * @file Modelo que representa y gestiona operaciones de alimentos en la base de datos.
- * @module models/Alimento
- */
+//RF23: Registrar un nuevo tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF23
 
-const db = require('../utils/database.js');
+const { PrismaClient } = require('../generated/prisma');
+const prisma = new PrismaClient();
 
 /**
- * Clase que representa un alimento y sus operaciones CRUD.
+ * Modelo Alimento usando Prisma.
+ * @module models/alimento
  */
-module.exports.Alimento = class {
-      /**
-   * Crea una nueva instancia de Alimento.
-   * @constructor
-   * @param {?number} idAlimento - ID único del alimento. Puede ser null si es un nuevo alimento.
-   * @param {string} nombreAlimento - Nombre del alimento.
-   * @param {string} descripcionAlimento - Descripción del alimento.
-   */
+class Alimento {
+    /**
+     * Crea una nueva instancia de Alimento.
+     * @constructor
+     * @param {number} idAlimento - Identificador del alimento.
+     * @param {string} nombreAlimento - Nombre descriptivo del alimento.
+     * @param {string} descripcionAlimento - Descripción del alimento.
+     */
     constructor(idAlimento, nombreAlimento, descripcionAlimento) {
-        this.idAlimento = idAlimento;
-        this.nombreAlimento = nombreAlimento;
-        this.descripcionAlimento = descripcionAlimento;
+      this.idAlimento = idAlimento;
+      this.nombreAlimento = nombreAlimento;
+      this.descripcionAlimento = descripcionAlimento;
     }
-
-      /**
-   * Obtiene todos los alimentos desde la base de datos.
-   * @async
-   * @returns {Promise<Object[]>} Lista de alimentos.
-   * @throws Lanza un error si falla la consulta a la base de datos.
-   */
+  
+    /**
+     * Obtiene todos los alimentos de la tabla COMIDA.
+     * @async
+     * @method obtener
+     * @returns {Promise<Array<Object>>} Lista de registros de alimentos.
+     * @throws {Error} Si ocurre un error de consulta o conexión.
+     */
     async obtener() {
-        try {
-            const connection = await db();
-            const query = `SELECT comidaId, nombre, descripcion FROM COMIDA`;
-            const resultado = await connection.query(query);
-            await connection.release();
-            return resultado;
-        } catch (error) {
-            console.error('Error al obtener alimentos:', error);
-            throw error;
-        }
+      try {
+        return await prisma.COMIDA.findMany();
+      } catch (error) {
+        throw error;
+      }
+    }
+  
+      /**
+       * Actualiza un alimento existente en la tabla COMIDA.
+       * @async
+       * @method actualizar
+       * @returns {Promise<Object>} Registro actualizado del alimento.
+       * @throws {Error} Si ocurre un error de consulta o conexión.
+       */
+    async actualizar() {
+      try {
+        const actualizado = await prisma.COMIDA.update({
+          where: { comidaId: this.idAlimento },
+          data: {
+            nombre:      this.nombreAlimento,
+            descripcion: this.descripcionAlimento,
+          },
+        });
+        return actualizado;
+      } catch (error) {
+        throw error;
+      }
     }
 
     /**
-   * Elimina este alimento de la base de datos.
-   * @async
-   * @returns {Promise<void>}
-   * @throws Lanza un error si la eliminación falla.
-   */
-    async eliminar() {
-        try {
-            const connection = await db();
-            const query = `DELETE FROM COMIDA WHERE comidaId = ?`;
-            await connection.query(query, [this.idAlimento]);
-            await connection.release();
-        } catch (error) {
-            console.error('Error al eliminar alimento:', error);
-            throw error;
-        }
-    }
-
-    /**
-   * Agrega este alimento a la base de datos.
-   * @async
-   * @returns {Promise<void>}
-   * @throws Lanza un error si la inserción falla.
-   */
+     * Agrega un nuevo alimento a la tabla COMIDA.
+     * @async
+     * @method agregar
+     * @returns {Promise<Object>} Registro insertado del alimento.
+     * @throws {Error} Si ocurre un error de inserción.
+     */
     async agregar() {
         try {
-            const connection = await db();
-            const query = `INSERT INTO COMIDA(nombre, descripcion) VALUES (?, ?)`;
-            await connection.query(query, [this.nombreAlimento, this.descripcionAlimento]);
-            await connection.release();
+         const nuevo = await prisma.COMIDA.create({
+            data: {
+            nombre: this.nombreAlimento,
+            descripcion: this.descripcionAlimento,
+         },
+        });
+          return nuevo;
         } catch (error) {
-            console.error('Error al agregar alimento:', error);
-            throw error;
+          throw error;
         }
     }
-    
 }
+
+module.exports = { Alimento };
+

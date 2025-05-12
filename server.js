@@ -15,14 +15,14 @@ const sesionActiva = require("./utils/middlewares/sesionActiva");
 /* Rutas */
 const charolaRoutes = require("./routes/charola.routes");
 const usuarioRoutes = require("./routes/usuario.routes");
-const alimentacionRoutes = require("./routes/alimentacion.routes");
+const alimentacionRoutes = require("./routes/alimento.routes");
 
 /* ----- */
 
 /* Rutas de la API */
 app.use("/charola", charolaRoutes);
 app.use("/usuario", usuarioRoutes);
-app.use("/comida", alimentacionRoutes);
+app.use("/alimentacion", alimentacionRoutes);
 /* ----- */
 
 /* Conexion a la base de datos*/

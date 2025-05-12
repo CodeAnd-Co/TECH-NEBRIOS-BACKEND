@@ -35,7 +35,7 @@ describe('Modelo Usuario', () => {
   });
   test('Debe lanzar error si la contraseña es incorrecta', async() => {
     const contrasenaIncorrecta = {
-      usuario: 'EmiV',
+      usuario: 'EmiVa',
       contrasena: 'asadsada',
     };
     // Se espera que se regrese un error

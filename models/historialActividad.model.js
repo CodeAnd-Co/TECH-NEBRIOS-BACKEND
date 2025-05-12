@@ -3,7 +3,13 @@ const { format } = require('date-fns');
 
 const prisma = new PrismaClient();
 
+//RF18 Historial de actividad: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF18
 const historialActividadModel = {
+    /**
+     * @description Método para obtener el historial de la alimentación de una charola.
+     * @param {*} charolaId 
+     * @returns {Array} - Lista con todos los registros de la alimentación que se le ha otorgado.
+     */
     historialAlimentacion: async (charolaId) => {
         try{
             const resultado = await prisma.CHAROLA_COMIDA.findMany({
@@ -34,6 +40,11 @@ const historialActividadModel = {
         }
     },
 
+    /**
+     * @description Método para obtener el historial de la hidratación de una charola.
+     * @param {*} charolaId 
+     * @returns {Array} - Lista con todos los registros de la alimentación que se le ha otorgado.
+     */
     historialHidratacion: async (charolaId) => {
         try{
             const resultado = await prisma.CHAROLA_HIDRATACION.findMany({
@@ -64,6 +75,11 @@ const historialActividadModel = {
         }
     },
 
+    /**
+     * @description Método para obtener el estado de una charola y su última fecha de modificación.
+     * @param {*} charolaId 
+     * @returns {JSON} - Json con la información solicitada de la charola.
+     */
     estadoCharola: async (charolaId) => {
         try{
             const resultado = await prisma.CHAROLA.findUnique({
@@ -75,8 +91,6 @@ const historialActividadModel = {
                     fechaActualizacion: true,
                 },
             });
-            
-            if (!resultado) return [];
 
             const resultadoFormateado = {
               ...resultado,

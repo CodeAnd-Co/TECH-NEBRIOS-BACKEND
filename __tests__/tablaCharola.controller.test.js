@@ -1,8 +1,8 @@
 // RF11 Descargar datos:
 // https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF11
 
-const  tablaCharolaController  = require('../controllers/tablaCharola.controller');
-const tablaCharolaModel = require('../models/tablaCharola.model');
+const  tablaCharolaController  = require('../controllers/tablaCharola.controller.js');
+const tablaCharolaModel = require('../models/tablaCharola.model.js');
 const excelUtils = require('../utils/excelGenerador.js');
 
 

@@ -1,4 +1,4 @@
-//RF25: Eliminar un tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF25
+//RF24: Editar un tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF24
 
 /* Dependencias */
 const express = require("express");
@@ -26,17 +26,17 @@ router.get('/', alimentoController.obtenerAlimentos);
 /* ----------- */
 
 /* PUT METHODS */
-
-/* ----------- */
-
-/* DELETE METHODS */
 /**
- * DELETE /:idAlimento - Elimina un alimento por su ID.
- * @name DELETE/:idAlimento
+ * PUT /editar/:idAlimento - Edita un alimento existente.
+ * @name PUT/editar/:idAlimento
  * @function
  * @memberof module:routes/alimentoRoutes
  */
-router.delete('/eliminar/:idAlimento', alimentoController.eliminarAlimento);
+router.put('/editar/:idAlimento', alimentoController.editarAlimento);
+/* ----------- */
+
+/* DELETE METHODS */
+
 /* ----------- */
 
 module.exports = router;

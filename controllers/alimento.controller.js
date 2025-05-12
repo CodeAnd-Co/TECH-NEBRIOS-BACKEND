@@ -27,19 +27,24 @@ module.exports.obtenerAlimentos = async (req, res) => {
 /**
  * Edita un alimento existente en la base de datos.
  * @async
- * @function eliminarAlimento
+ * @function editarAlimento
  * @param {import('express').Request} req - Objeto de solicitud HTTP, contiene params y body.
  * @param {import('express').Response} res - Objeto de respuesta HTTP.
  * @returns {Promise<void>}
  */
-module.exports.eliminarAlimento = async (req, res) => {
-    const { idAlimento } = req.params;
+module.exports.editarAlimento = async (req, res) => {
+    const idAlimento = Number(req.params.idAlimento);
+    if (isNaN(idAlimento)) {
+        return res.status(400).send("ID de alimento inválido");
+    }
+    const { nombreAlimento, descripcionAlimento } = req.body;
 
     try {
-        const alimento = new Alimento(idAlimento);
-        await alimento.eliminar();
-        res.json({ success: true, message: "Alimento eliminado" });
+        const alimento = new Alimento(idAlimento, nombreAlimento, descripcionAlimento);
+        await alimento.actualizar();
+        res.json({ success: true, message: "Alimento actualizado" });
     } catch (error) {
-        res.status(500).send("Error al eliminar alimento");
+        res.status(500).send("Error al editar alimento");
     }
 };
+

@@ -18,7 +18,7 @@ describe('Controlador Alimento', () => {
   beforeEach(() => {
     instanciaMock = {
       obtener: jest.fn().mockResolvedValue([{ comidaId: 1 }]),
-      eliminar: jest.fn().mockResolvedValue()
+      actualizar: jest.fn().mockResolvedValue()
     };
     Alimento.mockImplementation((id) => instanciaMock);
 
@@ -48,24 +48,33 @@ describe('Controlador Alimento', () => {
     });
   });
 
-  describe('eliminarAlimento', () => {
-    it('debe responder con éxito al eliminar', async () => {
-      await controller.eliminarAlimento(req, res);
-
-      expect(Alimento).toHaveBeenCalledWith('1');
-      expect(instanciaMock.eliminar).toHaveBeenCalled();
-      expect(res.json).toHaveBeenCalledWith({
-        success: true,
-        message: 'Alimento eliminado'
-      });
+  describe('editarAlimento', () => {
+    beforeEach(() => {
+      req.body = { nombreAlimento: 'Pera', descripcionAlimento: 'Fruta verde' };
     });
 
-    it('debe responder 500 si falla el DELETE', async () => {
-      instanciaMock.eliminar.mockRejectedValue(new Error('delete error'));
-      await controller.eliminarAlimento(req, res);
+    it('debe editar un alimento y responder con éxito', async () => {
+      await controller.editarAlimento(req, res);
+
+      expect(Alimento).toHaveBeenCalledWith(1, 'Pera', 'Fruta verde');
+      expect(instanciaMock.actualizar).toHaveBeenCalled();
+      expect(res.json).toHaveBeenCalledWith({ success: true, message: 'Alimento actualizado' });
+    });
+
+    it('debe responder 400 si el ID no es válido', async () => {
+      req.params.idAlimento = 'invalid';
+      await controller.editarAlimento(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.send).toHaveBeenCalledWith('ID de alimento inválido');
+    });
+
+    it('debe responder 500 si falla la edición', async () => {
+      instanciaMock.actualizar.mockRejectedValue(new Error('fail'));
+      await controller.editarAlimento(req, res);
 
       expect(res.status).toHaveBeenCalledWith(500);
-      expect(res.send).toHaveBeenCalledWith('Error al eliminar alimento');
+      expect(res.send).toHaveBeenCalledWith('Error al editar alimento');
     });
   });
 });

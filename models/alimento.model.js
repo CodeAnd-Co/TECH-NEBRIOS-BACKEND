@@ -36,18 +36,23 @@ class Alimento {
     }
   }
 
-  /**
-   * Elimina el alimento con el ID especificado de la base de datos.
-   * @async
-   * @method eliminar
-   * @returns {Promise<Object>} Registro eliminado.
-   * @throws {Error} Si ocurre un error al ejecutar la eliminación.
-   */
-  async eliminar() {
+    /**
+     * Actualiza un alimento existente en la tabla COMIDA.
+     * @async
+     * @method actualizar
+     * @returns {Promise<Object>} Registro actualizado del alimento.
+     * @throws {Error} Si ocurre un error de consulta o conexión.
+     */
+  async actualizar() {
     try {
-      return await prisma.COMIDA.delete({
-        where: { comidaId: this.idAlimento }
+      const actualizado = await prisma.COMIDA.update({
+        where: { comidaId: this.idAlimento },
+        data: {
+          nombre:      this.nombreAlimento,
+          descripcion: this.descripcionAlimento,
+        },
       });
+      return actualizado;
     } catch (error) {
       throw error;
     }

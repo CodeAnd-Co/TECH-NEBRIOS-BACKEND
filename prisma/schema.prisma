@@ -52,6 +52,7 @@ model CHAROLA_COMIDA {
   charolaId        Int?
   comidaId         Int?
   cantidadOtorgada Float    @db.Float
+  fechaOtorgada    DateTime @db.Date
   CHAROLA          CHAROLA? @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_COMIDA_ibfk_1")
   COMIDA           COMIDA?  @relation(fields: [comidaId], references: [comidaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_COMIDA_ibfk_2")
 
@@ -64,6 +65,7 @@ model CHAROLA_HIDRATACION {
   charolaId        Int?
   hidratacionId    Int?
   cantidadOtorgada Float        @db.Float
+  fechaOtorgada    DateTime     @db.Date
   CHAROLA          CHAROLA?     @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_HIDRATACION_ibfk_1")
   HIDRATACION      HIDRATACION? @relation(fields: [hidratacionId], references: [hidratacionId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_HIDRATACION_ibfk_2")
 

@@ -1,0 +1,146 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../generated/prisma"
+  binaryTargets = ["native", "windows"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model ADMINISTRADOR {
+  adminId   Int      @id @default(autoincrement())
+  usuarioId Int?
+  USUARIO   USUARIO? @relation(fields: [usuarioId], references: [usuarioId], onDelete: Cascade, onUpdate: Restrict, map: "ADMINISTRADOR_ibfk_1")
+
+  @@index([usuarioId], map: "usuarioId")
+}
+
+model CHAROLA {
+  charolaId                                                Int                   @id @default(autoincrement())
+  nombreCharola                                            String?               @db.VarChar(20)
+  comidaCiclo                                              Float                 @db.Float
+  hidratacionCiclo                                         Float                 @db.Float
+  fechaActualizacion                                       DateTime?             @db.Date
+  estado                                                   String?               @db.VarChar(25)
+  densidadLarva                                            Float?                @db.Float
+  fechaCreacion                                            DateTime?             @db.Date
+  pesoCharola                                              Float?                @db.Float
+  CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA     CHAROLA_CHAROLA[]     @relation("CHAROLA_CHAROLA_charolaHijaToCHAROLA")
+  CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA CHAROLA_CHAROLA[]     @relation("CHAROLA_CHAROLA_charolaAncestroToCHAROLA")
+  CHAROLA_COMIDA                                           CHAROLA_COMIDA[]
+  CHAROLA_FRAS                                             CHAROLA_FRAS[]
+  CHAROLA_HIDRATACION                                      CHAROLA_HIDRATACION[]
+  CHAROLA_PUPA                                             CHAROLA_PUPA[]
+  FRAS                                                     FRAS[]
+  USUARIO_CHAROLA                                          USUARIO_CHAROLA[]
+}
+
+model CHAROLA_CHAROLA {
+  charolaHija                                      Int
+  charolaAncestro                                  Int
+  CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA     CHAROLA @relation("CHAROLA_CHAROLA_charolaHijaToCHAROLA", fields: [charolaHija], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_CHAROLA_ibfk_1")
+  CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA CHAROLA @relation("CHAROLA_CHAROLA_charolaAncestroToCHAROLA", fields: [charolaAncestro], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_CHAROLA_ibfk_2")
+
+  @@id([charolaHija, charolaAncestro])
+  @@index([charolaAncestro], map: "charolaAncestro")
+}
+
+model CHAROLA_COMIDA {
+  id               Int      @id @default(autoincrement())
+  charolaId        Int?
+  comidaId         Int?
+  cantidadOtorgada Float    @db.Float
+  fechaOtorgada    DateTime @db.Date
+  CHAROLA          CHAROLA? @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_COMIDA_ibfk_1")
+  COMIDA           COMIDA?  @relation(fields: [comidaId], references: [comidaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_COMIDA_ibfk_2")
+
+  @@index([comidaId], map: "comidaId")
+  @@index([charolaId], map: "charolaId")
+}
+
+model CHAROLA_HIDRATACION {
+  id               Int          @id @default(autoincrement())
+  charolaId        Int?
+  hidratacionId    Int?
+  cantidadOtorgada Float        @db.Float
+  fechaOtorgada    DateTime     @db.Date
+  CHAROLA          CHAROLA?     @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_HIDRATACION_ibfk_1")
+  HIDRATACION      HIDRATACION? @relation(fields: [hidratacionId], references: [hidratacionId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_HIDRATACION_ibfk_2")
+
+  @@index([hidratacionId], map: "hidratacionId")
+  @@index([charolaId], map: "charolaId")
+}
+
+model COMIDA {
+  comidaId       Int              @id @default(autoincrement())
+  nombre         String           @db.VarChar(25)
+  descripcion    String?          @db.VarChar(200)
+  CHAROLA_COMIDA CHAROLA_COMIDA[]
+}
+
+model FRAS {
+  frasId          Int            @id @default(autoincrement())
+  gramosGenerados Float          @db.Float
+  charolaId       Int?
+  CHAROLA_FRAS    CHAROLA_FRAS[]
+  CHAROLA         CHAROLA?       @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "FRAS_ibfk_1")
+
+  @@index([charolaId], map: "charolaId")
+}
+
+model HIDRATACION {
+  hidratacionId       Int                   @id
+  nombre              String?               @db.VarChar(25)
+  descripcion         String?               @db.VarChar(200)
+  CHAROLA_HIDRATACION CHAROLA_HIDRATACION[]
+}
+
+model USUARIO {
+  usuarioId       Int               @id @default(autoincrement())
+  user            String            @db.VarChar(50)
+  contrasena      String            @db.VarChar(80)
+  nombre          String            @db.VarChar(25)
+  apellido_m      String?           @db.VarChar(25)
+  apellido_p      String?           @db.VarChar(25)
+  ADMINISTRADOR   ADMINISTRADOR[]
+  USUARIO_CHAROLA USUARIO_CHAROLA[]
+}
+
+model USUARIO_CHAROLA {
+  usuarioId Int
+  charolaId Int
+  USUARIO   USUARIO @relation(fields: [usuarioId], references: [usuarioId], onDelete: Cascade, onUpdate: Restrict, map: "USUARIO_CHAROLA_ibfk_1")
+  CHAROLA   CHAROLA @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "USUARIO_CHAROLA_ibfk_2")
+
+  @@id([usuarioId, charolaId])
+  @@index([charolaId], map: "charolaId")
+}
+
+model CHAROLA_FRAS {
+  charolaId Int
+  frasId    Int
+  CHAROLA   CHAROLA @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_FRAS_ibfk_1")
+  FRAS      FRAS    @relation(fields: [frasId], references: [frasId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_FRAS_ibfk_2")
+
+  @@id([charolaId, frasId])
+  @@index([frasId], map: "frasId")
+}
+
+model CHAROLA_PUPA {
+  charolaId Int
+  pupaId    Int
+  CHAROLA   CHAROLA @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_PUPA_ibfk_1")
+  PUPA      PUPA    @relation(fields: [pupaId], references: [pupaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_PUPA_ibfk_2")
+
+  @@id([charolaId, pupaId])
+  @@index([pupaId], map: "pupaId")
+}
+
+model PUPA {
+  pupaId           Int            @id @default(autoincrement())
+  fechaRegistro    DateTime?      @db.Date
+  cantidadObtenida Int?
+  CHAROLA_PUPA     CHAROLA_PUPA[]
+}

@@ -7751,31 +7751,31 @@ export namespace Prisma {
   }
 
   export type FRASAvgAggregateOutputType = {
-    frassId: number | null
+    frasId: number | null
     gramosGenerados: number | null
     charolaId: number | null
   }
 
   export type FRASSumAggregateOutputType = {
-    frassId: number | null
+    frasId: number | null
     gramosGenerados: number | null
     charolaId: number | null
   }
 
   export type FRASMinAggregateOutputType = {
-    frassId: number | null
+    frasId: number | null
     gramosGenerados: number | null
     charolaId: number | null
   }
 
   export type FRASMaxAggregateOutputType = {
-    frassId: number | null
+    frasId: number | null
     gramosGenerados: number | null
     charolaId: number | null
   }
 
   export type FRASCountAggregateOutputType = {
-    frassId: number
+    frasId: number
     gramosGenerados: number
     charolaId: number
     _all: number
@@ -7783,31 +7783,31 @@ export namespace Prisma {
 
 
   export type FRASAvgAggregateInputType = {
-    frassId?: true
+    frasId?: true
     gramosGenerados?: true
     charolaId?: true
   }
 
   export type FRASSumAggregateInputType = {
-    frassId?: true
+    frasId?: true
     gramosGenerados?: true
     charolaId?: true
   }
 
   export type FRASMinAggregateInputType = {
-    frassId?: true
+    frasId?: true
     gramosGenerados?: true
     charolaId?: true
   }
 
   export type FRASMaxAggregateInputType = {
-    frassId?: true
+    frasId?: true
     gramosGenerados?: true
     charolaId?: true
   }
 
   export type FRASCountAggregateInputType = {
-    frassId?: true
+    frasId?: true
     gramosGenerados?: true
     charolaId?: true
     _all?: true
@@ -7900,7 +7900,7 @@ export namespace Prisma {
   }
 
   export type FRASGroupByOutputType = {
-    frassId: number
+    frasId: number
     gramosGenerados: number
     charolaId: number | null
     _count: FRASCountAggregateOutputType | null
@@ -7925,7 +7925,7 @@ export namespace Prisma {
 
 
   export type FRASSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    frassId?: boolean
+    frasId?: boolean
     gramosGenerados?: boolean
     charolaId?: boolean
     CHAROLA?: boolean | FRAS$CHAROLAArgs<ExtArgs>
@@ -7934,12 +7934,12 @@ export namespace Prisma {
 
 
   export type FRASSelectScalar = {
-    frassId?: boolean
+    frasId?: boolean
     gramosGenerados?: boolean
     charolaId?: boolean
   }
 
-  export type FRASOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"frassId" | "gramosGenerados" | "charolaId", ExtArgs["result"]["fRAS"]>
+  export type FRASOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"frasId" | "gramosGenerados" | "charolaId", ExtArgs["result"]["fRAS"]>
   export type FRASInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     CHAROLA?: boolean | FRAS$CHAROLAArgs<ExtArgs>
   }
@@ -7950,7 +7950,7 @@ export namespace Prisma {
       CHAROLA: Prisma.$CHAROLAPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
-      frassId: number
+      frasId: number
       gramosGenerados: number
       charolaId: number | null
     }, ExtArgs["result"]["fRAS"]>
@@ -8036,8 +8036,8 @@ export namespace Prisma {
      * // Get first 10 FRAS
      * const fRAS = await prisma.fRAS.findMany({ take: 10 })
      * 
-     * // Only select the `frassId`
-     * const fRASWithFrassIdOnly = await prisma.fRAS.findMany({ select: { frassId: true } })
+     * // Only select the `frasId`
+     * const fRASWithFrasIdOnly = await prisma.fRAS.findMany({ select: { frasId: true } })
      * 
      */
     findMany<T extends FRASFindManyArgs>(args?: SelectSubset<T, FRASFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FRASPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -8323,7 +8323,7 @@ export namespace Prisma {
    * Fields of the FRAS model
    */
   interface FRASFieldRefs {
-    readonly frassId: FieldRef<"FRAS", 'Int'>
+    readonly frasId: FieldRef<"FRAS", 'Int'>
     readonly gramosGenerados: FieldRef<"FRAS", 'Float'>
     readonly charolaId: FieldRef<"FRAS", 'Int'>
   }
@@ -11712,7 +11712,7 @@ export namespace Prisma {
 
 
   export const FRASScalarFieldEnum: {
-    frassId: 'frassId',
+    frasId: 'frasId',
     gramosGenerados: 'gramosGenerados',
     charolaId: 'charolaId'
   };
@@ -12171,31 +12171,31 @@ export namespace Prisma {
     AND?: FRASWhereInput | FRASWhereInput[]
     OR?: FRASWhereInput[]
     NOT?: FRASWhereInput | FRASWhereInput[]
-    frassId?: IntFilter<"FRAS"> | number
+    frasId?: IntFilter<"FRAS"> | number
     gramosGenerados?: FloatFilter<"FRAS"> | number
     charolaId?: IntNullableFilter<"FRAS"> | number | null
     CHAROLA?: XOR<CHAROLANullableScalarRelationFilter, CHAROLAWhereInput> | null
   }
 
   export type FRASOrderByWithRelationInput = {
-    frassId?: SortOrder
+    frasId?: SortOrder
     gramosGenerados?: SortOrder
     charolaId?: SortOrderInput | SortOrder
     CHAROLA?: CHAROLAOrderByWithRelationInput
   }
 
   export type FRASWhereUniqueInput = Prisma.AtLeast<{
-    frassId?: number
+    frasId?: number
     AND?: FRASWhereInput | FRASWhereInput[]
     OR?: FRASWhereInput[]
     NOT?: FRASWhereInput | FRASWhereInput[]
     gramosGenerados?: FloatFilter<"FRAS"> | number
     charolaId?: IntNullableFilter<"FRAS"> | number | null
     CHAROLA?: XOR<CHAROLANullableScalarRelationFilter, CHAROLAWhereInput> | null
-  }, "frassId">
+  }, "frasId">
 
   export type FRASOrderByWithAggregationInput = {
-    frassId?: SortOrder
+    frasId?: SortOrder
     gramosGenerados?: SortOrder
     charolaId?: SortOrderInput | SortOrder
     _count?: FRASCountOrderByAggregateInput
@@ -12209,7 +12209,7 @@ export namespace Prisma {
     AND?: FRASScalarWhereWithAggregatesInput | FRASScalarWhereWithAggregatesInput[]
     OR?: FRASScalarWhereWithAggregatesInput[]
     NOT?: FRASScalarWhereWithAggregatesInput | FRASScalarWhereWithAggregatesInput[]
-    frassId?: IntWithAggregatesFilter<"FRAS"> | number
+    frasId?: IntWithAggregatesFilter<"FRAS"> | number
     gramosGenerados?: FloatWithAggregatesFilter<"FRAS"> | number
     charolaId?: IntNullableWithAggregatesFilter<"FRAS"> | number | null
   }
@@ -12674,7 +12674,7 @@ export namespace Prisma {
   }
 
   export type FRASUncheckedCreateInput = {
-    frassId?: number
+    frasId?: number
     gramosGenerados: number
     charolaId?: number | null
   }
@@ -12685,13 +12685,13 @@ export namespace Prisma {
   }
 
   export type FRASUncheckedUpdateInput = {
-    frassId?: IntFieldUpdateOperationsInput | number
+    frasId?: IntFieldUpdateOperationsInput | number
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
     charolaId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type FRASCreateManyInput = {
-    frassId?: number
+    frasId?: number
     gramosGenerados: number
     charolaId?: number | null
   }
@@ -12701,7 +12701,7 @@ export namespace Prisma {
   }
 
   export type FRASUncheckedUpdateManyInput = {
-    frassId?: IntFieldUpdateOperationsInput | number
+    frasId?: IntFieldUpdateOperationsInput | number
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
     charolaId?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -13349,31 +13349,31 @@ export namespace Prisma {
   }
 
   export type FRASCountOrderByAggregateInput = {
-    frassId?: SortOrder
+    frasId?: SortOrder
     gramosGenerados?: SortOrder
     charolaId?: SortOrder
   }
 
   export type FRASAvgOrderByAggregateInput = {
-    frassId?: SortOrder
+    frasId?: SortOrder
     gramosGenerados?: SortOrder
     charolaId?: SortOrder
   }
 
   export type FRASMaxOrderByAggregateInput = {
-    frassId?: SortOrder
+    frasId?: SortOrder
     gramosGenerados?: SortOrder
     charolaId?: SortOrder
   }
 
   export type FRASMinOrderByAggregateInput = {
-    frassId?: SortOrder
+    frasId?: SortOrder
     gramosGenerados?: SortOrder
     charolaId?: SortOrder
   }
 
   export type FRASSumOrderByAggregateInput = {
-    frassId?: SortOrder
+    frasId?: SortOrder
     gramosGenerados?: SortOrder
     charolaId?: SortOrder
   }
@@ -14438,7 +14438,7 @@ export namespace Prisma {
   }
 
   export type FRASUncheckedCreateWithoutCHAROLAInput = {
-    frassId?: number
+    frasId?: number
     gramosGenerados: number
   }
 
@@ -14580,7 +14580,7 @@ export namespace Prisma {
     AND?: FRASScalarWhereInput | FRASScalarWhereInput[]
     OR?: FRASScalarWhereInput[]
     NOT?: FRASScalarWhereInput | FRASScalarWhereInput[]
-    frassId?: IntFilter<"FRAS"> | number
+    frasId?: IntFilter<"FRAS"> | number
     gramosGenerados?: FloatFilter<"FRAS"> | number
     charolaId?: IntNullableFilter<"FRAS"> | number | null
   }
@@ -15400,7 +15400,7 @@ export namespace Prisma {
   }
 
   export type FRASCreateManyCHAROLAInput = {
-    frassId?: number
+    frasId?: number
     gramosGenerados: number
   }
 
@@ -15467,12 +15467,12 @@ export namespace Prisma {
   }
 
   export type FRASUncheckedUpdateWithoutCHAROLAInput = {
-    frassId?: IntFieldUpdateOperationsInput | number
+    frasId?: IntFieldUpdateOperationsInput | number
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
   }
 
   export type FRASUncheckedUpdateManyWithoutCHAROLAInput = {
-    frassId?: IntFieldUpdateOperationsInput | number
+    frasId?: IntFieldUpdateOperationsInput | number
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
   }
 

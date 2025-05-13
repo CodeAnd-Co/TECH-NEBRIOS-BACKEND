@@ -75,7 +75,7 @@ model COMIDA {
 }
 
 model FRAS {
-  frassId         Int      @id @default(autoincrement())
+  frasId          Int      @id @default(autoincrement())
   gramosGenerados Float    @db.Float
   charolaId       Int?
   CHAROLA         CHAROLA? @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "FRAS_ibfk_1")

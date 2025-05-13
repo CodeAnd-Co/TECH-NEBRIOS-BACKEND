@@ -20,33 +20,10 @@ module.exports.obtenerAlimentos = async (req, res) => {
         const alimentos = await alimento.obtener();
         res.json(alimentos);
     } catch (error) {
-        console.error("Error al obtener alimentos:", error);
         res.status(500).send("Error al obtener alimentos");
     }
 };
 
-/**
- * Elimina un alimento por su ID proporcionado en los parámetros de la URL.
- *
- * @async
- * @function eliminarAlimento
- * @param {Object} req - Objeto de solicitud HTTP.
- * @param {Object} req.params - Contiene el parámetro `idAlimento`.
- * @param {Object} res - Objeto de respuesta HTTP.
- * @returns {void} Responde con éxito o error 500.
- */
-module.exports.eliminarAlimento = async (req, res) => {
-    const { idAlimento } = req.params;
-
-    try {
-        const alimento = new Alimento(idAlimento);
-        await alimento.eliminar();
-        res.json({ success: true, message: "Alimento eliminado" });
-    } catch (error) {
-        console.error("Error al eliminar alimento:", error);
-        res.status(500).send("Error al eliminar alimento");
-    }
-};
 
 /**
  * Registra un nuevo alimento en la base de datos.
@@ -86,3 +63,5 @@ module.exports.registrarAlimento = async (req, res) => {
         message: "Error del servidor al registrar alimento (error 500)"
     });
 };
+
+

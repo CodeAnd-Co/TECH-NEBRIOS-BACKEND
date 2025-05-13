@@ -12,7 +12,7 @@ router.use(express.urlencoded({ extended: true }));
 
 
 // Controladores
-const alimentacionController = require("../controllers/alimento.controller.js");
+const alimentoController = require("../controllers/alimento.controller.js");
 
 /**
  * GET /
@@ -20,7 +20,7 @@ const alimentacionController = require("../controllers/alimento.controller.js");
  * @returns {Object[]} Lista de alimentos
  */
 
-router.get('/', alimentacionController.obtenerAlimentos); 
+router.get('/', alimentoController.obtenerAlimentos); 
 
 /**
  * POST /agregar
@@ -29,15 +29,8 @@ router.get('/', alimentacionController.obtenerAlimentos);
  * @param {string} req.body.descripcion - Descripción del alimento
  * @returns {Object} Mensaje de éxito o error
  */
-router.post('/agregar', alimentacionController.registrarAlimento);
+router.post('/agregar', alimentoController.registrarAlimento);
 
-/**
- * DELETE /eliminar/:idAlimento
- * @description Elimina un alimento por ID
- * @param {string} req.params.idAlimento - ID del alimento a eliminar
- * @returns {Object} Resultado de la operación
- */
-router.delete('/eliminar/:idAlimento', alimentacionController.eliminarAlimento);
 
 
 module.exports = router;

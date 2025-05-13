@@ -4,8 +4,9 @@ const router = express.Router();
 
 /* INCLUDE CONTROLLERS */
 const controlador = require('../controllers/tablaCharola.controller');
-const controladorDetalle = require('../controllers/charola.controller');
+const controladorDetalle = require('../controllers/detalleCharola.controller');
 const controladorResumen = require('../controllers/menuCharolas.controller');
+const controladorEliminar = require('../controllers/eliminarCharola.controller');
 /* ------------------- */
 
 /* GET METHODS */
@@ -27,7 +28,7 @@ router.post("/postArchivoExcel", controlador.postDescargarExcel);
 /* ----------- */
 
 /* DELETE METHODS */
-router.delete("/eliminarCharola/:id", controladorDetalle.eliminarCharola);
+router.delete("/eliminarCharola/:id", controladorEliminar.eliminarCharola);
 
 /* ----------- */
 

@@ -40,10 +40,8 @@ module.exports = class Charola {
         "SELECT fechaCreacion FROM CHAROLA WHERE charolaId = ?",
         [charolaId]
       );
-      console.log(resultado);
       return resultado;
     } catch (err) {
-      console.error("[Model][obtenerFechaCreacion] error en query:", err);
       throw err;
     } finally {
       conexion.release();
@@ -62,7 +60,6 @@ module.exports = class Charola {
       
       return relaciones;
     } catch (error) {
-      console.error("[Model][obtenerAncestros] error general:", error);
       throw error;
     } finally {
       conexion.release();

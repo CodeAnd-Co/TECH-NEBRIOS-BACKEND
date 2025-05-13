@@ -1,10 +1,8 @@
 /* Dependencias */
 const express = require("express");
-const bodyParser = require("body-parser"); // ESTO VA EN LA RAÍZ DEL PROYECTO
 const router = express.Router();
 /* ------------ */
 
-router.use(bodyParser.urlencoded({ extended: true }));
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 

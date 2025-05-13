@@ -54,7 +54,6 @@ exports.obtenerHistorialAncestros = async (req, res) => {
         ancestros
       });
     } catch (err) {
-      console.error('[Controller][obtenerHistorialAncestros] error:', err);
       return res.status(500).json({ error: 'Error interno del servidor' });
     }
   };

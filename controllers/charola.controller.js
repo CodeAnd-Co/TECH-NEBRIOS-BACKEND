@@ -1,3 +1,18 @@
+// RF5 Registrar Charola
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF5
+// RF6 Buscar charola
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF6
+// RF7 Modificar datos generales Charola
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF7
+// RF8 Eliminar Charola
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF8
+// RF10 Consultar información detallada de una charola
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF10
+// RF16 Visualizar todas las charolas registradas en el sistema
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
+// RF21: Consultar charolas de cambios pasados
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
+
 const Charola = require("../models/charola.model.js");
 
 /**

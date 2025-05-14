@@ -8669,33 +8669,6 @@ export namespace Prisma {
   }
 
   /**
-<<<<<<< HEAD
-   * FRAS.CHAROLA_FRAS
-   */
-  export type FRAS$CHAROLA_FRASArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CHAROLA_FRAS
-     */
-    select?: CHAROLA_FRASSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CHAROLA_FRAS
-     */
-    omit?: CHAROLA_FRASOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CHAROLA_FRASInclude<ExtArgs> | null
-    where?: CHAROLA_FRASWhereInput
-    orderBy?: CHAROLA_FRASOrderByWithRelationInput | CHAROLA_FRASOrderByWithRelationInput[]
-    cursor?: CHAROLA_FRASWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CHAROLA_FRASScalarFieldEnum | CHAROLA_FRASScalarFieldEnum[]
-  }
-
-  /**
-=======
->>>>>>> develop
    * FRAS.CHAROLA
    */
   export type FRAS$CHAROLAArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {

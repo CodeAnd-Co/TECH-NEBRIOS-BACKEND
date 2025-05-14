@@ -1,3 +1,4 @@
+//RF23: Registrar un nuevo tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF23
 /**
  * @file Define las rutas relacionadas con la gestión de alimentos.
  * @module routes/alimentacion

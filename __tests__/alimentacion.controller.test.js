@@ -1,3 +1,4 @@
+//RF23: Registrar un nuevo tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF23
 /**
  * @file Pruebas unitarias del controlador registrarAlimento.
  * @description Verifica que el controlador maneje correctamente las solicitudes para agregar un alimento, incluyendo errores esperados.

@@ -10,9 +10,6 @@ const Usuario = require("../models/usuario.model.js");
  */
 exports.iniciarSesion = async (req, res) => {
     try{
-
-        console.log("Body: ", req.body);
-
         const sesion = await Usuario.iniciarSesion(req.body);
 
         if(sesion.error){

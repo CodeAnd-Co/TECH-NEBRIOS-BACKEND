@@ -89,7 +89,7 @@ module.exports = class Charola {
       const id = Number(charolaID);
   
       // Verificar que la charola exista antes de intentar borrar
-      const existe = await prisma.cHAROLA.findUnique({
+      const existe = await prisma.CHAROLA.findUnique({
         where: { charolaId: id }
       });
   

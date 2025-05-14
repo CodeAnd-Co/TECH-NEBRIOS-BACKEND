@@ -28,7 +28,6 @@ const consultarCharola = async (req, res) => {
       data: charola
     });
 
-    console.log("Se pudo conectar el front con el back :)");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -45,8 +44,6 @@ const registrarCharola = async (req, res) => {};
 
 const eliminarCharola = async (req, res) => {
   const { id } = req.params;
-
-  console.log('Eliminando charola con ID:', id);
 
   if (!id) {
     return res.status(400).json({ error: 'Falta id' });
@@ -128,8 +125,6 @@ const obtenerCharolas = async (req, res) => {
       totalPages,
       data: datos
     });
-
-    console.log(`✔️ Charolas obtenidas con estado='${estado || 'todos'}'. Página ${page}/${totalPages}`);
   } catch (error) {
     console.error('❌ Error al obtener charolas:', error);
     res.status(500).json({ mensaje: 'Error interno del servidor' });

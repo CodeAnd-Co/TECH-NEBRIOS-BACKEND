@@ -40,7 +40,6 @@ exports.getDatos = async (req, res) => {
 exports.postDescargarExcel = async (req, res) => {
     try{
         const datos = await Reporte.obtenerDatos();
-        console.log(datos);
 
         // Si no hay datos de las charolas en la BD no se devuelve un buffer con el archivo
         if (!datos || datos.length === 0) {

@@ -14,7 +14,7 @@ jest.mock('../models/alimento.model', () => {
     };
   });
   
-  const { registrarAlimento } = require('../controllers/agregar-alimentacion.controller');
+  const { registrarAlimento } = require('../controllers/alimento.controller');
   const { Alimento } = require('../models/alimento.model');
   
   describe('Controlador: registrarAlimento', () => {

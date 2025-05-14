@@ -1,9 +1,13 @@
 //RF23: Registrar un nuevo tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF23
+//RF24: Editar un tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF24
+
 /**
  * @file Define las rutas relacionadas con la gestión de alimentos.
  * @module routes/alimentacion
  */
 
+
+//Dependencias
 const express = require("express");
 const router = express.Router();
 
@@ -32,6 +36,14 @@ router.get('/', alimentoController.obtenerAlimentos);
  */
 router.post('/agregar', alimentoController.registrarAlimento);
 
+/* PUT METHODS */
+/**
+ * PUT /editar/:idAlimento - Edita un alimento existente.
+ * @name PUT/editar/:idAlimento
+ * @function
+ * @memberof module:routes/alimentoRoutes
+ */
+router.put('/editar/:idAlimento', alimentoController.editarAlimento);
 
 
 module.exports = router;

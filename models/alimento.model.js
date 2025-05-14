@@ -1,4 +1,5 @@
 //RF23: Registrar un nuevo tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF23
+//RF24: Editar un tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF24
 
 
 const { PrismaClient } = require('../generated/prisma');
@@ -57,6 +58,28 @@ class Alimento {
         } catch (error) {
           throw error;
         }
+    }
+
+    /**
+   * Actualiza un alimento existente en la tabla COMIDA.
+   * @async
+   * @method actualizar
+   * @returns {Promise<Object>} Registro actualizado del alimento.
+   * @throws {Error} Si ocurre un error de consulta o conexión.
+   */
+    async actualizar() {
+      try {
+        const actualizado = await prisma.COMIDA.update({
+          where: { comidaId: this.idAlimento },
+          data: {
+            nombre:      this.nombreAlimento,
+            descripcion: this.descripcionAlimento,
+          },
+        });
+        return actualizado;
+      } catch (error) {
+        throw error;
+      }
     }
 }
 

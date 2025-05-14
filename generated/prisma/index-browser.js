@@ -143,12 +143,14 @@ exports.Prisma.CHAROLA_CHAROLAScalarFieldEnum = {
 };
 
 exports.Prisma.CHAROLA_COMIDAScalarFieldEnum = {
+  id: 'id',
   charolaId: 'charolaId',
   comidaId: 'comidaId',
   cantidadOtorgada: 'cantidadOtorgada'
 };
 
 exports.Prisma.CHAROLA_HIDRATACIONScalarFieldEnum = {
+  id: 'id',
   charolaId: 'charolaId',
   hidratacionId: 'hidratacionId',
   cantidadOtorgada: 'cantidadOtorgada'
@@ -184,6 +186,22 @@ exports.Prisma.USUARIOScalarFieldEnum = {
 exports.Prisma.USUARIO_CHAROLAScalarFieldEnum = {
   usuarioId: 'usuarioId',
   charolaId: 'charolaId'
+};
+
+exports.Prisma.CHAROLA_FRASScalarFieldEnum = {
+  charolaId: 'charolaId',
+  frasId: 'frasId'
+};
+
+exports.Prisma.CHAROLA_PUPAScalarFieldEnum = {
+  charolaId: 'charolaId',
+  pupaId: 'pupaId'
+};
+
+exports.Prisma.PUPAScalarFieldEnum = {
+  pupaId: 'pupaId',
+  fechaRegistro: 'fechaRegistro',
+  cantidadObtenida: 'cantidadObtenida'
 };
 
 exports.Prisma.SortOrder = {
@@ -230,7 +248,10 @@ exports.Prisma.ModelName = {
   FRAS: 'FRAS',
   HIDRATACION: 'HIDRATACION',
   USUARIO: 'USUARIO',
-  USUARIO_CHAROLA: 'USUARIO_CHAROLA'
+  USUARIO_CHAROLA: 'USUARIO_CHAROLA',
+  CHAROLA_FRAS: 'CHAROLA_FRAS',
+  CHAROLA_PUPA: 'CHAROLA_PUPA',
+  PUPA: 'PUPA'
 };
 
 /**

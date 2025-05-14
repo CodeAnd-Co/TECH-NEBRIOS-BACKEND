@@ -1,4 +1,5 @@
 //RF23: Registrar un nuevo tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF23
+//RF24: Editar un tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF24
 /**
  * Controlador de Alimentos.
  * @module controllers/alimentoController
@@ -60,4 +61,30 @@ module.exports.registrarAlimento = async (req, res) => {
         success: false,
         message: "Error del servidor al registrar alimento (error 500)"
     });
+};
+
+/**
+ * Edita un alimento existente en la base de datos.
+ * @async
+ * @function editarAlimento
+ * @param {import('express').Request} req - Objeto de solicitud HTTP, contiene params y body.
+ * @param {import('express').Response} res - Objeto de respuesta HTTP.
+ * @returns {Promise<void>}
+ */
+module.exports.editarAlimento = async (req, res) => {
+    const idAlimento = Number(req.params.idAlimento);
+    
+    const { nombreAlimento, descripcionAlimento } = req.body;
+
+    if (!Number.isInteger(idAlimento) || idAlimento <= 0) {
+        return res.status(400).json({ error: "ID de alimento no válido" });
+      }
+
+    try {
+        const alimento = new Alimento(idAlimento, nombreAlimento, descripcionAlimento);
+        await alimento.actualizar();
+        res.json({ success: true, message: "Alimento actualizado" });
+    } catch (error) {
+        res.status(500).send("Error al editar alimento");
+    }
 };

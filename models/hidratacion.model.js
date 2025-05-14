@@ -1,19 +1,39 @@
-const db = require("../utils/database");
 
-module.exports = class Hidratacion {
-  static async obtenerHidratacion() {
-    const connection = await db();
+const { PrismaClient } = require('../generated/prisma');
+const prisma = new PrismaClient();
+
+/**
+ * Modelo Hidratación usando Prisma.
+ * @module models/hidratacion
+ */
+class Hidratacion {
+  /**
+   * Crea una nueva instancia de Hidratación.
+   * @constructor
+   * @param {number} idHidratacion - Identificador de Hidratación.
+   * @param {string} nombreHidratacion - Nombre descriptivo de Hidratación.
+   * @param {string} descripcionHidratacion - Descripción de Hidratación.
+   */
+  constructor(idHidratacion, nombreHidratacion, descripcionHidratacion) {
+    this.idHidratacion = idHidratacion;
+    this.nombreHidratacion = nombreHidratacion;
+    this.descripcionHidratacion = descripcionHidratacion;
+  }
+
+  /**
+   * Obtiene toda la hidtatación de la tabla HIDRATACION.
+   * @async
+   * @method obtener
+   * @returns {Promise<Array<Object>>} Lista de registros de hidtatación.
+   * @throws {Error} Si ocurre un error de consulta o conexión.
+   */
+  async obtener() {
     try {
-      const rows = await connection.query("SELECT NOMBRE FROM HIDRATACION");
-      if (rows.length === 0) {
-        throw new Error("No se encontraron registros de hidratación.");
-      }
-      return rows;
+      return await prisma.HIDRATACION.findMany();
     } catch (error) {
-      console.error("Error al obtener la comida:", error);
       throw error;
-    } finally {
-      connection.end();
     }
   }
-};
+}
+
+module.exports = { Hidratacion };

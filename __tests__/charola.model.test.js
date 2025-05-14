@@ -1,150 +1,104 @@
-const { describe, test, expect, beforeEach } = require("@jest/globals");
-const Charola = require("../models/charola.model");
-const db = require("../utils/database");
+// RF10 Consultar charola - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF10
+// Pruebas del modelo de charola
+// Se asegura que la creación del modelo con datos simulados
 
-jest.mock("../utils/database");
+const Charola = require('../models/charola.model');
+const mockDb = require('../utils/database');
 
-describe("Modelo Charola", () => {
-  let mockConnection;
+jest.mock('../utils/database');
+
+describe('Modelo Charola', () => {
+  let fakeConnection;
 
   beforeEach(() => {
-    jest.clearAllMocks();
-
-    mockConnection = {
-      beginTransaction: jest.fn(),
+    fakeConnection = {
       query: jest.fn(),
-      commit: jest.fn(),
-      rollback: jest.fn(),
-      end: jest.fn(),
+      release: jest.fn()
     };
-
-    db.mockResolvedValue(mockConnection);
+    mockDb.mockResolvedValue(fakeConnection);
   });
 
-  test("Debe registrar una charola correctamente con datos válidos", async () => {
-    const datos = {
-      nombre: "C-456",
-      comidaCiclo: 10,
-      hidratacionCiclo: 5,
-      estado: "activa",
-      pesoCharola: 0.5,
-      densidadLarva: "alta",
-      fechaCreacion: "2025-04-30",
-      nombreComida: "harina",
-      nombreHidratacion: "agua",
-    };
+  describe('getCharola', () => {
+    test('debe devolver un objeto con datos completos si existe la charola', async () => {
+        const charolaID = 1004;
 
-    // Simular respuestas esperadas de las queries
-    mockConnection.query
-      .mockResolvedValueOnce({ insertId: 123 }) // CHAROLA insert
-      .mockResolvedValueOnce([{ comidaId: 1 }]) // COMIDA lookup
-      .mockResolvedValueOnce({}) // CHAROLA_COMIDA insert
-      .mockResolvedValueOnce([{ hidratacionId: 2 }]) // HIDRATACION lookup
-      .mockResolvedValueOnce({}); // CHAROLA_HIDRATACION insert
+        fakeConnection.query
+            .mockResolvedValueOnce([[{
+                charolaId: 1004,
+                nombreCharola: 'testxd',
+                comidaCiclo: 10,
+                hidratacionCiclo: 15,
+                fechaActualizacion: null,
+                estado: 'activa',
+                densidadLarva: 10,
+                fechaCreacion: '2025-04-29T06:00:00.000Z',
+                pesoCharola: 10
+            }]]) // CHAROLA
+            .mockResolvedValueOnce([[{ 
+                charolaId: 1004, 
+                hidratacionId: 1, 
+                cantidadOtorgada: 15 
+            }]]) // CHAROLA_HIDRATACION
+            .mockResolvedValueOnce([[{ 
+                charolaId: 1004, 
+                comidaId: 1, 
+                cantidadOtorgada: 10 
+            }]]) // CHAROLA_COMIDA
+            .mockResolvedValueOnce([[{ 
+                hidratacionId: 1, 
+                nombre: 'Zanahoria', 
+                descripcion: 'Vegetal'
+            }]]) // HIDRATACION
+            .mockResolvedValueOnce([[{ 
+                comidaId: 1, 
+                nombre: 'Manzana', 
+                descripcion: 'fruta roja' 
+            }]]); // COMIDA
+      
+        const resultado = await Charola.getCharola(charolaID);
+      
+        expect(resultado).toEqual({
+            relacionComida: [{
+              charolaId : 1004,
+              comidaId: 1,
+              cantidadOtorgada: 10
+            }],
+            relacionHidratacion: [{
+              charolaId : 1004,
+              hidratacionId: 1,
+              cantidadOtorgada: 15
+            }],
+            charola: [{
+              charolaId: 1004,
+              nombreCharola: 'testxd',
+              comidaCiclo: 10,
+              hidratacionCiclo: 15,
+              fechaActualizacion: null,
+              estado: 'activa',
+              densidadLarva: 10,
+              fechaCreacion: '2025-04-29T06:00:00.000Z',
+              pesoCharola: 10
+            }],
+            hidratacion: [{
+              hidratacionId: 1,
+              nombre: 'Zanahoria',
+              descripcion: 'Vegetal'
+            }],
+            comida: [{
+              comidaId: 1,
+              nombre: 'Manzana',
+              descripcion: 'fruta roja'
+            }]
+          });
+    });
 
-    const resultado = await Charola.registrarCharola(datos);
+    test('debe devolver un mensaje de error si no se encuentra la charola', async () => {
+      fakeConnection.query.mockResolvedValueOnce([[]]);
 
-    expect(resultado).toEqual({ charolaId: 123 });
-    expect(mockConnection.beginTransaction).toHaveBeenCalled();
-    expect(mockConnection.commit).toHaveBeenCalled();
-    expect(mockConnection.rollback).not.toHaveBeenCalled();
-    expect(mockConnection.end).toHaveBeenCalled();
-  });
-
-  test("Debe hacer rollback si no se encuentra la comida", async () => {
-    const datos = {
-      nombre: "C-000",
-      comidaCiclo: 10,
-      hidratacionCiclo: 5,
-      estado: "activa",
-      pesoCharola: 0.5,
-      densidadLarva: "media",
-      fechaCreacion: "2025-04-30",
-      nombreComida: "no_existe",
-      nombreHidratacion: "agua",
-    };
-
-    mockConnection.query
-      .mockResolvedValueOnce({ insertId: 456 }) // CHAROLA insert
-      .mockResolvedValueOnce([]); // COMIDA lookup falla
-
-    await expect(Charola.registrarCharola(datos)).rejects.toThrow(
-      "No se encontró una comida con el nombre: no_existe"
-    );
-
-    expect(mockConnection.rollback).toHaveBeenCalled();
-    expect(mockConnection.end).toHaveBeenCalled();
-  });
-
-  test("Debe hacer rollback si no se encuentra la hidratación", async () => {
-    const datos = {
-      nombre: "C-001",
-      comidaCiclo: 10,
-      hidratacionCiclo: 5,
-      estado: "activa",
-      pesoCharola: 0.5,
-      densidadLarva: "media",
-      fechaCreacion: "2025-04-30",
-      nombreComida: "harina",
-      nombreHidratacion: "no_existe",
-    };
-
-    mockConnection.query
-      .mockResolvedValueOnce({ insertId: 789 }) // CHAROLA insert
-      .mockResolvedValueOnce([{ comidaId: 1 }]) // COMIDA lookup
-      .mockResolvedValueOnce({}) // CHAROLA_COMIDA insert
-      .mockResolvedValueOnce([]); // HIDRATACION lookup falla
-
-    await expect(Charola.registrarCharola(datos)).rejects.toThrow(
-      "No se encontró una hidratación con el nombre: no_existe"
-    );
-
-    expect(mockConnection.rollback).toHaveBeenCalled();
-    expect(mockConnection.end).toHaveBeenCalled();
-  });
-
-  test("Debe devolver true si el nombre ya existe en la base de datos", async () => {
-    // Simular que el nombre ya existe
-    mockConnection.query.mockResolvedValueOnce([{ count: 1 }]);
-
-    const resultado = await Charola.verificarNombre("Charola Existente");
-
-    expect(mockConnection.query).toHaveBeenCalledWith(
-      "SELECT COUNT(*) AS count FROM CHAROLA WHERE nombreCharola = ?",
-      ["Charola Existente"]
-    );
-    expect(resultado).toBe(true);
-    expect(mockConnection.end).toHaveBeenCalled();
-  });
-
-  test("Debe devolver false si el nombre no existe en la base de datos", async () => {
-    // Simular que el nombre no existe
-    mockConnection.query.mockResolvedValueOnce([{ count: 0 }]);
-
-    const resultado = await Charola.verificarNombre("Charola Nueva");
-
-    expect(mockConnection.query).toHaveBeenCalledWith(
-      "SELECT COUNT(*) AS count FROM CHAROLA WHERE nombreCharola = ?",
-      ["Charola Nueva"]
-    );
-    expect(resultado).toBe(false);
-    expect(mockConnection.end).toHaveBeenCalled();
-  });
-
-  test("Debe lanzar un error si ocurre un problema en la consulta", async () => {
-    // Simular un error en la consulta
-    mockConnection.query.mockRejectedValueOnce(
-      new Error("Error en la base de datos")
-    );
-
-    await expect(Charola.verificarNombre("Charola Error")).rejects.toThrow(
-      "Error en la base de datos"
-    );
-
-    expect(mockConnection.query).toHaveBeenCalledWith(
-      "SELECT COUNT(*) AS count FROM CHAROLA WHERE nombreCharola = ?",
-      ["Charola Error"]
-    );
-    expect(mockConnection.end).toHaveBeenCalled();
+      const resultado = await Charola.getCharola(-1);
+      expect(resultado).toEqual({
+        error: 'No se encontró la charola con el ID proporcionado.'
+      });
+    });
   });
 });

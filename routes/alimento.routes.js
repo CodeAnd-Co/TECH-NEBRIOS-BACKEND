@@ -1,36 +1,37 @@
+//RF23: Registrar un nuevo tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF23
+/**
+ * @file Define las rutas relacionadas con la gestión de alimentos.
+ * @module routes/alimentacion
+ */
 
-/* Dependencias */
 const express = require("express");
 const router = express.Router();
 
-router.use(express.json()); 
+// Middlewares
+router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-/* INCLUDE CONTROLLERS */
+
+// Controladores
 const alimentoController = require("../controllers/alimento.controller.js");
-/* ------------------- */
 
-/* GET METHODS */
 /**
- * GET / - Obtiene la lista de todos los alimentos.
- * @name GET/
- * @function
- * @memberof module:routes/alimentoRoutes
+ * GET /
+ * @description Obtiene todos los alimentos registrados
+ * @returns {Object[]} Lista de alimentos
  */
+
 router.get('/', alimentoController.obtenerAlimentos); 
-/* ----------- */
 
-/* POST METHODS */
-
-/* ----------- */
-
-/* PUT METHODS */
 /**
+ * POST /agregar
+ * @description Registra un nuevo alimento
+ * @param {string} req.body.nombre - Nombre del alimento
+ * @param {string} req.body.descripcion - Descripción del alimento
+ * @returns {Object} Mensaje de éxito o error
+ */
+router.post('/agregar', alimentoController.registrarAlimento);
 
-/* ----------- */
 
-/* DELETE METHODS */
-
-/* ----------- */
 
 module.exports = router;

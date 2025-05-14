@@ -53,6 +53,7 @@ app.use(express.json());
 /* ----- */
 
 /* Route 404 Error */
+
 app.use((req, res, next) => {
   res.status(404).render("404", { title: "404 - Not Found" });
 });

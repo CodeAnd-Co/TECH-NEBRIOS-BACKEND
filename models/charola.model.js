@@ -10,51 +10,44 @@ module.exports = class Charola {
    */
   static async getCharola(charolaID) {
     try {
-      const id = Number(charolaID);
       const charola = await prisma.CHAROLA.findUnique({
-        where: { charolaId: id },
+        where: { charolaId: Number(charolaID) },
         include: {
-          // Ajusta los nombres de estas relaciones según tu schema.prisma
-          charolaHidratacion: { include: { hidratacion: true } },
-          charolaComida:      { include: { comida:      true } }
+          CHAROLA_COMIDA: {
+            include: { COMIDA: true }
+          },
+          CHAROLA_HIDRATACION: {
+            include: { HIDRATACION: true }
+          }
         }
       });
-
+  
       if (!charola) {
         return { error: 'No se encontró la charola con el ID proporcionado.' };
       }
-
-      // Tomamos la primera relación (o un objeto default si no existe)
-      const relacionHidratacion = charola.charolaHidratacion[0] ?? {
-        charolaId: id,
-        hidratacionId: 0,
-        cantidadOtorgada: 0,
-        hidratacion: null
-      };
-      const relacionComida = charola.charolaComida[0] ?? {
-        charolaId: id,
+  
+      const relacionComida = charola.CHAROLA_COMIDA[0] || {
+        charolaId: 0,
         comidaId: 0,
-        cantidadOtorgada: 0,
-        comida: null
+        cantidadOtorgada: 0
       };
-
+  
+      const relacionHidratacion = charola.CHAROLA_HIDRATACION[0] || {
+        charolaId: 0,
+        hidratacionId: 0,
+        cantidadOtorgada: 0
+      };
+  
       return {
         charola,
-        relacionHidratacion: {
-          charolaId: relacionHidratacion.charolaId,
-          hidratacionId: relacionHidratacion.hidratacionId,
-          cantidadOtorgada: relacionHidratacion.cantidadOtorgada
-        },
-        hidratacion: relacionHidratacion.hidratacion,
-        relacionComida: {
-          charolaId: relacionComida.charolaId,
-          comidaId:    relacionComida.comidaId,
-          cantidadOtorgada: relacionComida.cantidadOtorgada
-        },
-        comida: relacionComida.comida
+        relacionComida,
+        comida: relacionComida.comida ?? null,
+        relacionHidratacion,
+        hidratacion: relacionHidratacion.hidratacion ?? null
       };
+  
     } catch (error) {
-      console.error("Error al obtener la charola:", error);
+      console.error("Error al obtener charola:", error);
       return { error: error.message };
     }
   }
@@ -92,9 +85,8 @@ module.exports = class Charola {
    * @param {number} offset - Número de registros a omitir (para paginación).
    * @returns {Promise<Object[]>} Lista de objetos que contienen `nombreCharola` y `fechaCreacion`.
    */
-  static async getCharolasPaginadas(limit, offset, estado) {
+  static async getCharolasPaginadas(limit, offset) {
     const rows = await prisma.CHAROLA.findMany({
-      where: estado ? { estado } : undefined,
       select: {
         charolaId: true,
         nombreCharola: true,
@@ -117,10 +109,8 @@ module.exports = class Charola {
    * @memberof Charola
    * @returns {Promise<number>} Total de registros en la tabla CHAROLA.
    */
-  static async getCantidadTotal(estado) {
-    const total = await prisma.CHAROLA.count({
-      where: estado ? { estado } : undefined
-    });
+  static async getCantidadTotal() {
+    const total = await prisma.CHAROLA.count();
     return total;
   } 
 };

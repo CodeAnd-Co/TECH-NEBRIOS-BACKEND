@@ -1,3 +1,5 @@
+//RF23: Registrar un nuevo tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF23
+
 
 const { PrismaClient } = require('../generated/prisma');
 const prisma = new PrismaClient();
@@ -7,7 +9,8 @@ const prisma = new PrismaClient();
  * @module models/alimento
  */
 class Alimento {
-  /**
+
+      /**
    * Crea una nueva instancia de Alimento.
    * @constructor
    * @param {number} idAlimento - Identificador del alimento.
@@ -34,6 +37,27 @@ class Alimento {
       throw error;
     }
   }
+
+    /**
+     * Agrega un nuevo alimento a la tabla COMIDA.
+     * @async
+     * @method agregar
+     * @returns {Promise<Object>} Registro insertado del alimento.
+     * @throws {Error} Si ocurre un error de inserción.
+     */
+    async agregar() {
+        try {
+         const nuevo = await prisma.COMIDA.create({
+            data: {
+            nombre: this.nombreAlimento,
+            descripcion: this.descripcionAlimento,
+         },
+        });
+          return nuevo;
+        } catch (error) {
+          throw error;
+        }
+    }
 }
 
 module.exports = { Alimento };

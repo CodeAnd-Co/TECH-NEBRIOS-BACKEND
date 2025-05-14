@@ -23,6 +23,7 @@ router.get('/charolas', charolaController.obtenerCharolas);
 /* ----------- */
 
 /* DELETE METHODS */
+router.delete("/eliminarCharola/:id", charolaController.eliminarCharola);
 
 /* ----------- */
 

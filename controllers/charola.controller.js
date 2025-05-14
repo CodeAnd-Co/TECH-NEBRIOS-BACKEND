@@ -1,17 +1,10 @@
-// RF5 Registrar Charola
-// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF5
-// RF6 Buscar charola
-// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF6
-// RF7 Modificar datos generales Charola
-// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF7
-// RF8 Eliminar Charola
-// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF8
-// RF10 Consultar información detallada de una charola
-// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF10
-// RF16 Visualizar todas las charolas registradas en el sistema
-// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
-// RF21: Consultar charolas de cambios pasados
-// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
+// RF5 Registrar Charola - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF5
+// RF6 Buscar charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF6
+// RF7 Modificar datos generales Charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF7
+// RF8 Eliminar Charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF8
+// RF10 Consultar información detallada de una charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF10
+// RF16 Visualizar todas las charolas registradas en el sistema - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
+// RF21: Consultar charolas de cambios pasados - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
 
 const Charola = require("../models/charola.model.js");
 
@@ -35,13 +28,44 @@ const consultarCharola = async (req, res) => {
       data: charola
     });
 
-    console.log("Se pudo conectar el front con el back :)");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
 const registrarCharola = async (req, res) => {};
+
+/**
+ * @description Eliminar charola elimina todos los datos correspondientes de una charola con su ID.
+ * @param {*} req - Solicitud HTTP que contiene la ID de la charola.
+ * @param {*} res - Respuesta HTTP que se usa para enviar el resultado.
+ * @returns {JSON} Código de respuesta.
+ */
+
+const eliminarCharola = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ error: 'Falta id' });
+  }
+
+  try {
+    const charola = await Charola.eliminarCharola(parseInt(id))
+
+    if (charola.error) {
+      return res.status(404).json({ error: charola.error });
+    }
+
+    res.status(200).json({
+      data: charola
+    });
+
+  } catch (err) {
+    console.error('Error al eliminar la charola:', err);
+    res.status(500).json({ error: 'Error al eliminar la charola' });
+    
+  }
+};
 
 /**
  * Controlador seguro para obtener todas las charolas paginadas.
@@ -101,8 +125,6 @@ const obtenerCharolas = async (req, res) => {
       totalPages,
       data: datos
     });
-
-    console.log(`✔️ Charolas obtenidas con estado='${estado || 'todos'}'. Página ${page}/${totalPages}`);
   } catch (error) {
     console.error('❌ Error al obtener charolas:', error);
     res.status(500).json({ mensaje: 'Error interno del servidor' });
@@ -111,7 +133,7 @@ const obtenerCharolas = async (req, res) => {
 
 module.exports = {
   consultarCharola,
+  eliminarCharola,
   registrarCharola,
   obtenerCharolas
 };
-

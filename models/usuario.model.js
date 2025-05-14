@@ -47,8 +47,8 @@ module.exports = class Usuario {
       );
 
       return token;
-    } catch (error) {
-      console.log("Error al iniciar sesión:", error);
+    } catch (err) {
+      console.err("Error al iniciar sesión:", error);
       throw error;
     }
   }

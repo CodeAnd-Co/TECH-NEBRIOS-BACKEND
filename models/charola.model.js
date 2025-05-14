@@ -1,17 +1,10 @@
-// RF5 Registrar Charola
-// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF5
-// RF6 Buscar charola
-// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF6
-// RF7 Modificar datos generales Charola
-// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF7
-// RF8 Eliminar Charola
-// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF8
-// RF10 Consultar información detallada de una charola
-// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF10
-// RF16 Visualizar todas las charolas registradas en el sistema
-// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
-// RF21: Consultar charolas de cambios pasados
-// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
+// RF5 Registrar Charola - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF5
+// RF6 Buscar charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF6
+// RF7 Modificar datos generales Charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF7
+// RF8 Eliminar Charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF8
+// RF10 Consultar información detallada de una charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF10
+// RF16 Visualizar todas las charolas registradas en el sistema - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
+// RF21: Consultar charolas de cambios pasados - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
 
 
 // models/charola.model.js
@@ -57,9 +50,9 @@ module.exports = class Charola {
       return {
         charola,
         relacionComida,
-        comida: relacionComida.comida ?? null,
+        comida: relacionComida.COMIDA ?? null,
         relacionHidratacion,
-        hidratacion: relacionHidratacion.hidratacion ?? null
+        hidratacion: relacionHidratacion.HIDRATACION ?? null
       };
   
     } catch (error) {
@@ -88,6 +81,45 @@ module.exports = class Charola {
     } catch (error) {
       console.error("Error al registrar la charola:", error);
       throw error;
+    }
+  }
+
+  static async eliminarCharola(charolaID) {
+    try {
+      const id = Number(charolaID);
+  
+      // Verificar que la charola exista antes de intentar borrar
+      const existe = await prisma.CHAROLA.findUnique({
+        where: { charolaId: id }
+      });
+  
+      if (!existe) {
+        return { error: 'No se encontró la charola para eliminar.' };
+      }
+  
+      // Eliminar relaciones con hidratación
+      await prisma.CHAROLA_HIDRATACION.deleteMany({
+        where: { charolaId: id }
+      });
+  
+      // Eliminar relaciones con comida
+      await prisma.CHAROLA_COMIDA.deleteMany({
+        where: { charolaId: id }
+      });
+  
+      // Eliminar la charola principal
+      await prisma.CHAROLA.delete({
+        where: { charolaId: id }
+      });
+  
+      return {
+        mensaje: 'Charola eliminada correctamente',
+        idEliminado: id
+      };
+  
+    } catch (error) {
+      console.error('Error al eliminar la charola:', error);
+      return { error: 'Error al eliminar la charola' };
     }
   }
 

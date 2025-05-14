@@ -3,14 +3,14 @@ const { format } = require('date-fns');
 
 const prisma = new PrismaClient();
  
-const Reporte = {
+const ReporteModel = {
   /**
    * @description Metodo para realizar la consulta de la información de las charolas.
    * @returns {Array} - Array con la informacion de la consulta de la BD
   */
   // RF11:
   // https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF11
-  async getDatos() {
+  async obtenerDatos() {
     try {
       // Consulta con ORM Prisma
       const resultado = await prisma.CHAROLA.findMany({
@@ -46,5 +46,5 @@ const Reporte = {
   }
 };
 
-module.exports = Reporte;
+module.exports = ReporteModel;
 

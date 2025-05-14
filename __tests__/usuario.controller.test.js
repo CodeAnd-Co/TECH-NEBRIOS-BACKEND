@@ -3,9 +3,11 @@
 // Se asegura que las funciones del controlador respondan correctamente a solicitudes válidas o inválidas.
 const { describe, test, expect, beforeEach} = require('@jest/globals');
 const jwt = require("jsonwebtoken");
-const usuarioController = require('../controllers/usuario.controller');
+const usuarioController = require('../controllers/autenticacion.controller');
 const Usuario = require('../models/usuario.model');
+
 jest.mock('../models/usuario.model');
+
 describe('Controlador de Usuarios', () => {
   let req, res;
   beforeEach(() => {

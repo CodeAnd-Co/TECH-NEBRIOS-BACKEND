@@ -1,104 +1,116 @@
-// RF11 Descargar datos:
-// https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF11
+// RF11 Descargar datos
+const tablaCharolaController = require('../controllers/reporte.controller');
+const tablaCharolaModel = require('../models/reporte.model');
+const excelUtils = require('../utils/excelGenerador');
 
-const  tablaCharolaController  = require('../controllers/tablaCharola.controller');
-const tablaCharolaModel = require('../models/tablaCharola.model');
-const excelUtils = require('../utils/excelGenerador.js');
+jest.mock('../models/reporte.model');
+jest.mock('../utils/excelGenerador');
 
-
-jest.mock('../models/tablaCharola.model');
-jest.mock('../utils/excelGenerador.js');
-
-/**
- * Pruebas unitarias para el controlador tablaCharola.
- * @group Tests - Controlador Charola
- */
 describe('Controlador tablaCharola', () => {
-    let req, res;
-    beforeEach(() => {
-        // Simulaciones básicas de req y res para probar controladores
-        req = {
-            body: {},
-            params: {},
-            query: {},
-        };
-        res = {
-            status: jest.fn().mockReturnThis(),
-            json: jest.fn(),
-            setHeader: jest.fn(),
-            send: jest.fn()
-        };
-    });
-    
-    test('[GET] Debe responder con código 200 y status ok cuando hay información de charolas', async () => {
-        const mockResultado = [{ nombreCharola: 'A', fechaCreacion: '2024-01-01', fechaActualizacion: '2024-01-02', pesoCharola: 100, comidaCiclo: 50, hidratacionCiclo: 20, estado: 'activo', densidadLarva: 10 }];
-        tablaCharolaModel.tablaCharolas.mockResolvedValue(mockResultado);
+  let req, res;
 
-        await tablaCharolaController.getTablasCharolas(req,res);
+  beforeEach(() => {
+    req = {
+      body: {},
+      params: {},
+      query: {},
+    };
+    res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+      setHeader: jest.fn(),
+      send: jest.fn(),
+    };
+  });
 
-        expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.json).toHaveBeenCalledWith({code: "Ok", resultado: mockResultado });
-    });
+  test('[GET] Debe responder con código 200 y status ok cuando hay información de charolas', async () => {
+    const mockResultado = [
+      {
+        nombreCharola: 'A',
+        fechaCreacion: '2024-01-01',
+        fechaActualizacion: '2024-01-02',
+        pesoCharola: 100,
+        comidaCiclo: 50,
+        hidratacionCiclo: 20,
+        estado: 'activo',
+        densidadLarva: 10,
+      },
+    ];
 
-    test('[GET] Debe responder con código 201 y status ok cuando NO hay información de charolas', async () => {
-        const mockResultado = [];
-        tablaCharolaModel.tablaCharolas.mockResolvedValue(mockResultado);
+    tablaCharolaModel.obtenerDatos.mockResolvedValue(mockResultado);
 
-        await tablaCharolaController.getTablasCharolas(req,res);
+    await tablaCharolaController.getDatos(req, res); // 👈 nombre real exportado
 
-        expect(res.status).toHaveBeenCalledWith(201);
-        expect(res.json).toHaveBeenCalledWith({code: "Ok", resultado: mockResultado });
-    });
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith({ code: 'Ok', resultado: mockResultado });
+  });
 
-    test('[GET] Debe responder con código 500 y error cuando ocurre algun tipo de error en el flujo', async () => {
-        tablaCharolaModel.tablaCharolas.mockRejectedValue(new Error('DB error'));
+  test('[GET] Debe responder con código 201 y status ok cuando NO hay información de charolas', async () => {
+    tablaCharolaModel.obtenerDatos.mockResolvedValue([]);
 
-        await tablaCharolaController.getTablasCharolas(req,res);
+    await tablaCharolaController.getDatos(req, res); // 👈 nombre real exportado
 
-        expect(res.status).toHaveBeenCalledWith(500);
-        expect(res.json).toHaveBeenCalledWith({error: expect.any(String)});
-    });
+    expect(res.status).toHaveBeenCalledWith(201);
+    expect(res.json).toHaveBeenCalledWith({ code: 'Ok', resultado: [] });
+  });
 
-    test('[POST] Debe responder 200 y enviar un archivo Excel cuando hay datos', async () => {
-        const datosMock = [
-            { nombreCharola: 'A', fechaCreacion: '2024-01-01', fechaActualizacion: '2024-01-02', pesoCharola: 100, comidaCiclo: 50, hidratacionCiclo: 20, estado: 'activo', densidadLarva: 10 }
-        ];
+  test('[GET] Debe responder con código 500 y error cuando ocurre algún tipo de error en el flujo', async () => {
+    tablaCharolaModel.obtenerDatos.mockRejectedValue(new Error('DB error'));
 
-        const bufferMock = Buffer.from('excel data');
+    await tablaCharolaController.getDatos(req, res); // 👈 nombre real exportado
 
-        tablaCharolaModel.tablaCharolas.mockResolvedValue(datosMock);
-        excelUtils.generarExcelDesdeDatos.mockResolvedValue(bufferMock);
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ error: expect.any(String) });
+  });
 
-        await tablaCharolaController.postDescargarExcel(req, res);
+  test('[POST] Debe responder 200 y enviar un archivo Excel cuando hay datos', async () => {
+    const datosMock = [
+      {
+        nombreCharola: 'A',
+        fechaCreacion: '2024-01-01',
+        fechaActualizacion: '2024-01-02',
+        pesoCharola: 100,
+        comidaCiclo: 50,
+        hidratacionCiclo: 20,
+        estado: 'activo',
+        densidadLarva: 10,
+      },
+    ];
+    const bufferMock = Buffer.from('excel data');
 
-        expect(res.setHeader).toHaveBeenCalledWith(
-            'Content-Type',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        );
-        expect(res.setHeader).toHaveBeenCalledWith(
-            'Content-Disposition',
-            'attachment; filename=charolas.xlsx'
-        );
-        expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.send).toHaveBeenCalledWith(expect.any(Buffer));
-    });
+    tablaCharolaModel.obtenerDatos.mockResolvedValue(datosMock);
+    excelUtils.generarExcelDesdeDatos.mockResolvedValue(bufferMock);
 
-    test('[Post] Debe responder 201 y con error si no hay datos', async () => {
-        tablaCharolaModel.tablaCharolas.mockResolvedValue([]);
+    await tablaCharolaController.postDescargarExcel(req, res);
 
-        await tablaCharolaController.postDescargarExcel(req, res);
+    expect(res.setHeader).toHaveBeenCalledWith(
+      'Content-Type',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    );
+    expect(res.setHeader).toHaveBeenCalledWith(
+      'Content-Disposition',
+      'attachment; filename=charolas.xlsx'
+    );
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.send).toHaveBeenCalledWith(expect.any(Buffer));
+  });
 
-        expect(res.status).toHaveBeenCalledWith(201);
-        expect(res.json).toHaveBeenCalledWith({ error: 'No hay datos de charolas' });
-        });
+  test('[POST] Debe responder 201 y con error si no hay datos', async () => {
+    tablaCharolaModel.obtenerDatos.mockResolvedValue([]);
+    excelUtils.generarExcelDesdeDatos.mockResolvedValue(Buffer.from('')); // evita que falle internamente
+  
+    await tablaCharolaController.postDescargarExcel(req, res);
+  
+    expect(res.status).toHaveBeenCalledWith(201);
+    expect(res.json).toHaveBeenCalledWith({ error: 'No hay datos de charolas' });
+  });  
 
-        test('[Post] Debe responder 500 y manejar errores del servidor', async () => {
-        tablaCharolaModel.tablaCharolas.mockRejectedValue(new Error('DB error'));
+  test('[POST] Debe responder 500 y manejar errores del servidor', async () => {
+    tablaCharolaModel.obtenerDatos.mockRejectedValue(new Error('DB error'));
 
-        await tablaCharolaController.postDescargarExcel(req, res);
+    await tablaCharolaController.postDescargarExcel(req, res);
 
-        expect(res.status).toHaveBeenCalledWith(500);
-        expect(res.json).toHaveBeenCalledWith({ Error: 'Ocurrio un error en el servidor' });
-    });
-})
-
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ Error: 'Ocurrio un error en el servidor' });
+  });
+});

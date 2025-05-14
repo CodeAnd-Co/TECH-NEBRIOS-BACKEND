@@ -161,7 +161,7 @@ exports.Prisma.COMIDAScalarFieldEnum = {
 };
 
 exports.Prisma.FRASScalarFieldEnum = {
-  frassId: 'frassId',
+  frasId: 'frasId',
   gramosGenerados: 'gramosGenerados',
   charolaId: 'charolaId'
 };

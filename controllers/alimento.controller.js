@@ -1,4 +1,3 @@
-
 /**
  * Controlador de Alimentos.
  * @module controllers/alimentoController

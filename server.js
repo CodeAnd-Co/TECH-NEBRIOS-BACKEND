@@ -10,8 +10,7 @@ const sesionActiva = require("./utils/middlewares/sesionActiva");
 
 
 /* Rutas */
-const charolaRoutes = require('./routes/charola.routes');
-const usuarioRoutes = require("./routes/usuario.routes");
+const charolaRoutes = require("./routes/charola.routes");
 const alimentoRoutes = require("./routes/alimento.routes");
 const hidratacionRoutes = require("./routes/hidratacion.routes");
 const frasRoutes = require("./routes/fras.routes");
@@ -22,7 +21,6 @@ const reporteRoutes = require("./routes/reporte.routes");
 
 /* Rutas de la API */
 app.use("/charola", charolaRoutes);
-app.use("/usuario", usuarioRoutes);
 app.use("/alimentacion", alimentoRoutes);
 app.use("/hidratacion", hidratacionRoutes);
 app.use("/fras", frasRoutes);

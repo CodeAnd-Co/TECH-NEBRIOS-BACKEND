@@ -1,10 +1,10 @@
 // RF16 Visualizar todas las charolas registradas en el sistema
 // Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
 
-const { obtenerCharolas } = require('../controllers/menuCharolas.controller');
-const Charola = require('../models/menuCharolas.model');
+const { obtenerCharolas } = require('../controllers/charola.controller');
+const Charola = require('../models/charola.model');
 
-jest.mock('../models/menuCharolas.model');
+jest.mock('../models/charola.model');
 
 /**
  * @group Tests - Controlador Charola

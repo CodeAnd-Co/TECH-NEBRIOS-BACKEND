@@ -1,4 +1,4 @@
-const Usuario = require("../../models/usuario.model.js"); 
+const Usuario = require("../../models/usuario.model"); 
 const jwt = require('jsonwebtoken')
 const dotenv = require("dotenv");
 dotenv.config();
@@ -16,6 +16,7 @@ async function verificarSesionActiva(req, res, next) {
         return res.status(401).json({code:401, msg: "Sin token de autorización"});
     }
     const token = autenticacion.split(' ')[1]; // Extraes token de "Bearer <token>"
+    console.log(token);
         if (!token) {
             return res.status(401).json({ message: "Token no válido" });
         }

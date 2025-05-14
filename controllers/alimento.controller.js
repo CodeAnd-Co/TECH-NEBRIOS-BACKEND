@@ -1,19 +1,16 @@
-//RF23: Registrar un nuevo tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF23
 /**
- * @file Controladores relacionados con operaciones de alimentos.
- * @module controllers/alimentacion
+ * Controlador de Alimentos.
+ * @module controllers/alimentoController
  */
-
 const { Alimento } = require("../models/alimento.model");
 
 /**
- * Obtiene todos los alimentos registrados en la base de datos.
- *
+ * Obtiene todos los alimentos de la base de datos.
  * @async
  * @function obtenerAlimentos
- * @param {Object} req - Objeto de solicitud HTTP.
- * @param {Object} res - Objeto de respuesta HTTP.
- * @returns {void} Responde con un arreglo de alimentos o un error 500.
+ * @param {import('express').Request} req - Objeto de solicitud HTTP de Express.
+ * @param {import('express').Response} res - Objeto de respuesta HTTP de Express.
+ * @returns {Promise<void>}
  */
 module.exports.obtenerAlimentos = async (req, res) => {
     const alimento = new Alimento();
@@ -24,7 +21,6 @@ module.exports.obtenerAlimentos = async (req, res) => {
         res.status(500).send("Error al obtener alimentos");
     }
 };
-
 
 /**
  * Registra un nuevo alimento en la base de datos.
@@ -64,5 +60,3 @@ module.exports.registrarAlimento = async (req, res) => {
         message: "Error del servidor al registrar alimento (error 500)"
     });
 };
-
-

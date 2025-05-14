@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "windows"]
+  output        = "../generated/prisma"
 }
 
 datasource db {
@@ -22,16 +23,14 @@ model CHAROLA {
   comidaCiclo                                              Float                 @db.Float
   hidratacionCiclo                                         Float                 @db.Float
   fechaActualizacion                                       DateTime?             @db.Date
-  estado                                                   String                @db.VarChar(25)
+  estado                                                   String?               @db.VarChar(25)
   densidadLarva                                            Float?                @db.Float
   fechaCreacion                                            DateTime?             @db.Date
   pesoCharola                                              Float?                @db.Float
   CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA     CHAROLA_CHAROLA[]     @relation("CHAROLA_CHAROLA_charolaHijaToCHAROLA")
   CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA CHAROLA_CHAROLA[]     @relation("CHAROLA_CHAROLA_charolaAncestroToCHAROLA")
   CHAROLA_COMIDA                                           CHAROLA_COMIDA[]
-  CHAROLA_FRAS                                             CHAROLA_FRAS[]
   CHAROLA_HIDRATACION                                      CHAROLA_HIDRATACION[]
-  CHAROLA_PUPA                                             CHAROLA_PUPA[]
   FRAS                                                     FRAS[]
   USUARIO_CHAROLA                                          USUARIO_CHAROLA[]
 }
@@ -47,49 +46,25 @@ model CHAROLA_CHAROLA {
 }
 
 model CHAROLA_COMIDA {
-  id               Int      @id @default(autoincrement())
-  charolaId        Int?
-  comidaId         Int?
-  cantidadOtorgada Float    @db.Float
-  fechaOtorgada    DateTime @db.Date
-  CHAROLA          CHAROLA? @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_COMIDA_ibfk_1")
-  COMIDA           COMIDA?  @relation(fields: [comidaId], references: [comidaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_COMIDA_ibfk_2")
+  charolaId        Int
+  comidaId         Int
+  cantidadOtorgada Float   @db.Float
+  CHAROLA          CHAROLA @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_COMIDA_ibfk_1")
+  COMIDA           COMIDA  @relation(fields: [comidaId], references: [comidaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_COMIDA_ibfk_2")
 
-  @@index([charolaId], map: "charolaId")
+  @@id([charolaId, comidaId])
   @@index([comidaId], map: "comidaId")
 }
 
-model CHAROLA_FRAS {
-  charolaId Int
-  frasId    Int
-  CHAROLA   CHAROLA @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_FRAS_ibfk_1")
-  FRAS      FRAS    @relation(fields: [frasId], references: [frasId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_FRAS_ibfk_2")
-
-  @@id([charolaId, frasId])
-  @@index([frasId], map: "frasId")
-}
-
 model CHAROLA_HIDRATACION {
-  id               Int          @id @default(autoincrement())
-  charolaId        Int?
-  hidratacionId    Int?
-  cantidadOtorgada Float        @db.Float
-  fechaOtorgada    DateTime     @db.Date
-  CHAROLA          CHAROLA?     @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_HIDRATACION_ibfk_1")
-  HIDRATACION      HIDRATACION? @relation(fields: [hidratacionId], references: [hidratacionId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_HIDRATACION_ibfk_2")
+  charolaId        Int
+  hidratacionId    Int
+  cantidadOtorgada Float?      @db.Float
+  CHAROLA          CHAROLA     @relation(fields: [charolaId], references: [charolaId], onUpdate: Restrict, map: "CHAROLA_HIDRATACION_ibfk_1")
+  HIDRATACION      HIDRATACION @relation(fields: [hidratacionId], references: [hidratacionId], onUpdate: Restrict, map: "CHAROLA_HIDRATACION_ibfk_2")
 
-  @@index([charolaId], map: "charolaId")
+  @@id([charolaId, hidratacionId])
   @@index([hidratacionId], map: "hidratacionId")
-}
-
-model CHAROLA_PUPA {
-  charolaId Int
-  pupaId    Int
-  CHAROLA   CHAROLA @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_PUPA_ibfk_1")
-  PUPA      PUPA    @relation(fields: [pupaId], references: [pupaId], onDelete: Cascade, onUpdate: Restrict, map: "CHAROLA_PUPA_ibfk_2")
-
-  @@id([charolaId, pupaId])
-  @@index([pupaId], map: "pupaId")
 }
 
 model COMIDA {
@@ -100,11 +75,10 @@ model COMIDA {
 }
 
 model FRAS {
-  frasId          Int            @id @default(autoincrement())
-  gramosGenerados Float          @db.Float
+  frasId          Int      @id @default(autoincrement())
+  gramosGenerados Float    @db.Float
   charolaId       Int?
-  CHAROLA_FRAS    CHAROLA_FRAS[]
-  CHAROLA         CHAROLA?       @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "FRAS_ibfk_1")
+  CHAROLA         CHAROLA? @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "FRAS_ibfk_1")
 
   @@index([charolaId], map: "charolaId")
 }
@@ -114,13 +88,6 @@ model HIDRATACION {
   nombre              String?               @db.VarChar(25)
   descripcion         String?               @db.VarChar(200)
   CHAROLA_HIDRATACION CHAROLA_HIDRATACION[]
-}
-
-model PUPA {
-  pupaId           Int            @id @default(autoincrement())
-  fechaRegistro    DateTime?      @db.Date
-  cantidadObtenida Int?
-  CHAROLA_PUPA     CHAROLA_PUPA[]
 }
 
 model USUARIO {

@@ -1,20 +1,21 @@
-/* Dependencias */
 const express = require("express");
 const router = express.Router();
 /* ------------ */
 
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
-
 /* INCLUDE CONTROLLERS */
-const controlador = require("../controllers/charola.controller");
+const charolaController = require('../controllers/charola.controller');
 /* ------------------- */
 
 /* GET METHODS */
+
+router.get('/consultarCharola/:id', charolaController.consultarCharola);
+
+router.get('/charolas', charolaController.obtenerCharolas);
+
 /* ----------- */
 
 /* POST METHODS */
-router.post("/registrarCharola", controlador.registrarCharola);
+
 /* ----------- */
 
 /* PUT METHODS */

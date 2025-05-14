@@ -1,98 +1,132 @@
-const db = require("../utils/database");
+// RF5 Registrar Charola
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF5
+// RF6 Buscar charola
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF6
+// RF7 Modificar datos generales Charola
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF7
+// RF8 Eliminar Charola
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF8
+// RF10 Consultar información detallada de una charola
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF10
+// RF16 Visualizar todas las charolas registradas en el sistema
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
+// RF21: Consultar charolas de cambios pasados
+// Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
+
+
+// models/charola.model.js
+const { PrismaClient } = require('../generated/prisma');
+const prisma = new PrismaClient();
 
 module.exports = class Charola {
+  /**
+   * Obtiene una charola con sus relaciones de comida e hidratación.
+   * @param {number|string} charolaID
+   * @returns {Promise<Object>}
+   */
+  static async getCharola(charolaID) {
+    try {
+      const charola = await prisma.CHAROLA.findUnique({
+        where: { charolaId: Number(charolaID) },
+        include: {
+          CHAROLA_COMIDA: {
+            include: { COMIDA: true }
+          },
+          CHAROLA_HIDRATACION: {
+            include: { HIDRATACION: true }
+          }
+        }
+      });
+  
+      if (!charola) {
+        return { error: 'No se encontró la charola con el ID proporcionado.' };
+      }
+  
+      const relacionComida = charola.CHAROLA_COMIDA[0] || {
+        charolaId: 0,
+        comidaId: 0,
+        cantidadOtorgada: 0
+      };
+  
+      const relacionHidratacion = charola.CHAROLA_HIDRATACION[0] || {
+        charolaId: 0,
+        hidratacionId: 0,
+        cantidadOtorgada: 0
+      };
+  
+      return {
+        charola,
+        relacionComida,
+        comida: relacionComida.comida ?? null,
+        relacionHidratacion,
+        hidratacion: relacionHidratacion.hidratacion ?? null
+      };
+  
+    } catch (error) {
+      console.error("Error al obtener charola:", error);
+      return { error: error.message };
+    }
+  }
+
+    /**
+   * Registra una nueva charola.
+   * @param {{ nombre: string, fecha: Date, alimentacion: number, peso: number, hidratacion: number }} data
+   * @returns {Promise<Object>} El registro creado.
+   */
   static async registrarCharola(data) {
     try {
-      const connection = await db();
-      const result = await connection.query(
-        "INSERT INTO charolas (nombre, fecha, alimentacion, peso, hidratacion) VALUES (?, ?, ?, ?)",
-        [data.id, data.nombre, data.descripcion, data.fecha]
-      );
-      return result;
+      const nueva = await prisma.CHAROLA.create({
+        data: {
+          nombre: data.nombre,
+          fecha: data.fecha,
+          alimentacion: data.alimentacion,
+          peso: data.peso,
+          hidratacion: data.hidratacion
+        }
+      });
+      return nueva;
     } catch (error) {
       console.error("Error al registrar la charola:", error);
       throw error;
     }
   }
 
-/**
- * Obtiene todos los datos correspondientes a una charola a partir de su ID.
- * @async
- * @function
- * @param {number|string} charolaID - ID de la charola a consultar.
- * @returns {Promise<Object>} Un objeto JSON que contiene la información de la charola, hidratación y comida asociadas,
- * o un objeto con un mensaje de error si no se encuentra la charola.
- */
-
-  static async getCharola(charolaID) {
-    const connection = await db();
-    try {
-
-      // query de charola
-      const [charola] = await connection.query(
-        'SELECT * FROM CHAROLA WHERE charolaId = ?',
-        [charolaID]
-      );
-  
-      // si la charola no existe regresa un mensaje de error
-      if (!charola || charola.length === 0) {
-        return { error: 'No se encontró la charola con el ID proporcionado.' };
-      }
-  
-      // query de charola_hisratacion
-      var [relacionHidratacion] = await connection.query(
-        'SELECT * FROM CHAROLA_HIDRATACION WHERE charolaId = ?',
-        [charolaID]
-      );
-  
-      // query de charola_comida
-      var [relacionComida] = await connection.query(
-        'SELECT * FROM CHAROLA_COMIDA WHERE charolaId = ?',
-        [charolaID]
-      );
-
-      // si no esta definida la relación la define
-      if (relacionHidratacion === undefined){
-        relacionHidratacion = {
-          charolaId : 0,
-          hidratacionId : 0,
-          cantidadOtorgada : 0
-        }
-      }
-
-      // si no esta definida la relación la define
-      if (relacionComida === undefined){
-        relacionComida = {
-          charolaId : 0,
-          comidaId : 0,
-          cantidadOtorgada : 0
-        }
-      }
-
-      // query de hidratacion
-      const [hidratacion] = await connection.query(
-        'SELECT * FROM HIDRATACION WHERE hidratacionId = ?',
-        [relacionHidratacion.hidratacionId]
-      );
-
-      // query de comida
-      const [comida] = await connection.query(
-        'SELECT * FROM COMIDA WHERE comidaId = ?',
-        [relacionComida.comidaId]
-      );
-
-      return {
-        relacionComida,
-        relacionHidratacion,
-        charola,
-        hidratacion,
-        comida
-      };
-
-    } catch (error) {
-      return { error: error.message };
-    } finally {
-      connection.release();
-    }
+  /**
+   * Obtiene una lista paginada de charolas ordenadas por fecha de creación descendente.
+   *
+   * @async
+   * @function getCharolasPaginadas
+   * @memberof Charola
+   * @param {number} limit - Número máximo de registros a obtener.
+   * @param {number} offset - Número de registros a omitir (para paginación).
+   * @returns {Promise<Object[]>} Lista de objetos que contienen `nombreCharola` y `fechaCreacion`.
+   */
+  static async getCharolasPaginadas(limit, offset) {
+    const rows = await prisma.CHAROLA.findMany({
+      select: {
+        charolaId: true,
+        nombreCharola: true,
+        fechaCreacion: true
+      },
+      orderBy: {
+        fechaCreacion: 'desc'
+      },
+      skip: offset,
+      take: limit
+    });
+    return rows;
   }
+
+  /**
+   * Obtiene el número total de charolas en la base de datos.
+   *
+   * @async
+   * @function getCantidadTotal
+   * @memberof Charola
+   * @returns {Promise<number>} Total de registros en la tabla CHAROLA.
+   */
+  static async getCantidadTotal() {
+    const total = await prisma.CHAROLA.count();
+    return total;
+  } 
 };

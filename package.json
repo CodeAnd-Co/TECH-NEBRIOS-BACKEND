@@ -6,7 +6,9 @@
   "type": "commonjs",
   "scripts": {
     "test": "jest --verbose",
-    "type": "module"
+    "type": "module",
+    "lint": "eslint ./models ./controllers --config ./linter/eslint.config.mjs",
+    "lint:fix": "eslint ./models ./controllers --config ./linter/eslint.config.mjs --fix"
   },
   "repository": {
     "type": "git",

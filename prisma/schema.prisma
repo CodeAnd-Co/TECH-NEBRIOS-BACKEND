@@ -23,7 +23,7 @@ model CHAROLA {
   comidaCiclo                                              Float                 @db.Float
   hidratacionCiclo                                         Float                 @db.Float
   fechaActualizacion                                       DateTime?             @db.Date
-  estado                                                   String?               @db.VarChar(25)
+  estado                                                   String                @db.VarChar(25)
   densidadLarva                                            Float?                @db.Float
   fechaCreacion                                            DateTime?             @db.Date
   pesoCharola                                              Float?                @db.Float
@@ -81,13 +81,8 @@ model COMIDA {
 }
 
 model FRAS {
-<<<<<<< HEAD
   frasId          Int            @id @default(autoincrement())
   gramosGenerados Float          @db.Float
-=======
-  frasId         Int      @id @default(autoincrement())
-  gramosGenerados Float    @db.Float
->>>>>>> develop
   charolaId       Int?
   CHAROLA_FRAS    CHAROLA_FRAS[]
   CHAROLA         CHAROLA?       @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "FRAS_ibfk_1")

@@ -15,7 +15,7 @@ const usuarioRoutes = require("./routes/usuario.routes");
 const alimentoRoutes = require("./routes/alimento.routes");
 const hidratacionRoutes = require("./routes/hidratacion.routes");
 const frasRoutes = require("./routes/fras.routes");
-// const charolaTamizadoRoutes = require("./routes/charolaTamizado.routes");
+const charolaTamizadoRoutes = require("./routes/charolaTamizado.routes");
 const historialCharlolaRoutes = require("./routes/historialCharola.routes");
 const reporteRoutes = require("./routes/reporte.routes");
 /* ----- */
@@ -26,7 +26,7 @@ app.use("/usuario", usuarioRoutes);
 app.use("/alimentacion", alimentoRoutes);
 app.use("/hidratacion", hidratacionRoutes);
 app.use("/fras", frasRoutes);
-// app.use("/charolaTamizado", charolaTamizadoRoutes);
+app.use("/charolaTamizado", charolaTamizadoRoutes);
 app.use("/historialCharola", historialCharlolaRoutes);
 app.use("/reporte", reporteRoutes);
 /* ----- */

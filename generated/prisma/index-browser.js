@@ -146,14 +146,16 @@ exports.Prisma.CHAROLA_COMIDAScalarFieldEnum = {
   id: 'id',
   charolaId: 'charolaId',
   comidaId: 'comidaId',
-  cantidadOtorgada: 'cantidadOtorgada'
+  cantidadOtorgada: 'cantidadOtorgada',
+  fechaOtorgada: 'fechaOtorgada'
 };
 
 exports.Prisma.CHAROLA_HIDRATACIONScalarFieldEnum = {
   id: 'id',
   charolaId: 'charolaId',
   hidratacionId: 'hidratacionId',
-  cantidadOtorgada: 'cantidadOtorgada'
+  cantidadOtorgada: 'cantidadOtorgada',
+  fechaOtorgada: 'fechaOtorgada'
 };
 
 exports.Prisma.COMIDAScalarFieldEnum = {

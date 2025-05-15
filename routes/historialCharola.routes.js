@@ -7,11 +7,13 @@ router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 /* INCLUDE CONTROLLERS */
-const historialCharolaController = require("../controllers/historialCharola.controller");
+const historialCharolaController = require('../controllers/historialCharola.controller');
 /* ------------------- */
 
 /* GET METHODS */
-router.get("/:charolaId/ancestros", historialCharolaController.obtenerHistorialAncestros);
+router.get('/:charolaId/ancestros', historialCharolaController.obtenerHistorialAncestros);
+
+router.get('/historialActividad/:id', historialCharolaController.obtenerHistorialActividad)
 /* ----------- */
 
 /* POST METHODS */

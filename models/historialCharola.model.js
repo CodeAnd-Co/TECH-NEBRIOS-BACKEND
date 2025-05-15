@@ -20,13 +20,10 @@ module.exports = class HistorialCharola {
         [charolaId]
       );
       return resultado;
-    } catch (err) {
-      throw err;
     } finally {
       conexion.release();
     }
   }
-     
   static async obtenerAncestros(charolaId) {
     const conexion = await database();
 
@@ -37,8 +34,6 @@ module.exports = class HistorialCharola {
       );
       
       return relaciones;
-    } catch (error) {
-      throw error;
     } finally {
       conexion.release();
     }

@@ -13,7 +13,6 @@ module.exports = class Usuario {
    * @returns {String|Object} - Token de JWT o mensaje de error.
    */
   static async iniciarSesion(datos) {
-    try {
       const usuario = await prisma.USUARIO.findFirst({
         where: { user: datos.usuario },
       });
@@ -45,12 +44,7 @@ module.exports = class Usuario {
         process.env.JWT_SECRET,
         { expiresIn: '1d' }
       );
-
-      return token;
-    } catch (err) {
-      console.err('Error al iniciar sesión:', error);
-      throw error;
-    }
+    return token;
   }
 
   /**

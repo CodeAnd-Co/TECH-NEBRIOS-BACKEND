@@ -6,7 +6,7 @@ export default [
   {
     languageOptions: {
       ecmaVersion: 2022,
-      sourceType: 'commonjs', // <--- esto es CLAVE si usas require/module
+      sourceType: 'commonjs',
       globals: {
         require: 'readonly',
         module: 'readonly',
@@ -37,6 +37,8 @@ export default [
         },
       ],
       'import/first': 'error',
+
+      'no-unused-vars': 'off',
     },
   },
 ];

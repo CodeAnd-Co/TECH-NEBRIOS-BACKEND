@@ -61,27 +61,70 @@ module.exports = class Charola {
     }
   }
 
-    /**
-   * Registra una nueva charola.
-   * @param {{ nombre: string, fecha: Date, alimentacion: number, peso: number, hidratacion: number }} data
-   * @returns {Promise<Object>} El registro creado.
+
+  /**
+   * Registra una nueva charola en la base de datos.
+   * @param {Object} data - Datos de la charola a registrar.
+   * @param {string} data.nombre - Nombre de la charola.
+   * @param {string} data.fechaCreacion - Fecha de creación de la charola.
+   * @param {number} data.densidadLarva - Densidad de larvas en la charola.
+   * @param {number} data.pesoCharola - Peso de la charola.
+   * @param {Array} data.comidas - Lista de comidas asociadas a la charola.
+   * @param {Array} data.hidrataciones - Lista de hidrataciones asociadas a la charola.
+   * @returns {Promise<Object>} - Objeto con la charola creada.
+   * @throws {Error} - Si ocurre un error durante la creación.
    */
-  static async registrarCharola(data) {
-    try {
-      const nueva = await prisma.CHAROLA.create({
-        data: {
-          nombre: data.nombre,
-          fecha: data.fecha,
-          alimentacion: data.alimentacion,
-          peso: data.peso,
-          hidratacion: data.hidratacion
+  static async registrar(data = {}) {
+    const {
+      nombre,
+      fechaCreacion,
+      densidadLarva,
+      pesoCharola,
+      comidas = [],
+      hidrataciones = []
+    } = data;
+
+    // Acumulado de comida e hidratación, comienza en 0 y suma la cantidad otorgada
+    const comidaCiclo = comidas.reduce((s, c) => s + c.cantidadOtorgada, 0);
+    const hidratacionCiclo = hidrataciones
+      .reduce((s, h) => s + h.cantidadOtorgada, 0);
+
+    // Llamada al cliente Prisma
+    return prisma.CHAROLA.create({
+      data: {
+        nombreCharola: nombre,
+        fechaCreacion: new Date(fechaCreacion),
+        densidadLarva,
+        pesoCharola,
+
+        estado: 'activa',
+        comidaCiclo,
+        hidratacionCiclo,
+
+        CHAROLA_COMIDA: {
+          create: comidas.map(c => ({
+            cantidadOtorgada: c.cantidadOtorgada,
+            fechaOtorgada: c.fechaOtorgada
+              ? new Date(c.fechaOtorgada)
+              : new Date(),
+            COMIDA: { connect: { comidaId: c.comidaId } }
+          }))
+        },
+        CHAROLA_HIDRATACION: {
+          create: hidrataciones.map(h => ({
+            cantidadOtorgada: h.cantidadOtorgada,
+            fechaOtorgada: h.fechaOtorgada
+              ? new Date(h.fechaOtorgada)
+              : new Date(),
+            HIDRATACION: { connect: { hidratacionId: h.hidratacionId } }
+          }))
         }
-      });
-      return nueva;
-    } catch (error) {
-      console.error('Error al registrar la charola:', error);
-      throw error;
-    }
+      },
+      include: {
+        CHAROLA_COMIDA: { include: { COMIDA: true } },
+        CHAROLA_HIDRATACION: { include: { HIDRATACION: true } }
+      }
+    });
   }
 
   static async eliminarCharola(charolaID) {

@@ -62,14 +62,13 @@ exports.obtenerHistorialAncestros = async (req, res) => {
 exports.obtenerHistorialActividad = async(req, res) => {
   try{
 
-      const {id} = req.params;
-      const idCharola = parseInt(id);
+      const id = parseInt(req.params.id, 10);
 
-      const alimentacion = await HistorialCharola.historialAlimentacion(idCharola);
+      const alimentacion = await HistorialCharola.historialAlimentacion(id);
 
-      const hidratacion = await HistorialCharola.historialHidratacion(idCharola);
+      const hidratacion = await HistorialCharola.historialHidratacion(id);
 
-      const estado = await HistorialCharola.estadoCharola(idCharola);
+      const estado = await HistorialCharola.estadoCharola(id);
 
       if(hidratacion.length > 0 || alimentacion.length > 0){
           res.status(200).json({"codigo": "Ok", "estado": estado, "alimentacion": alimentacion, "hidratacion": hidratacion});

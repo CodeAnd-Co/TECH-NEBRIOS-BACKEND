@@ -33,7 +33,20 @@ const consultarCharola = async (req, res) => {
   }
 };
 
-const registrarCharola = async () => {};
+/**
+ * @description Registrar charola registra todos los datos correspondientes de una charola.
+ * @param {*} req - Solicitud HTTP que contiene los datos de la charola.
+ * @param {*} res - Respuesta HTTP que se usa para enviar el resultado.
+ * @returns {JSON} Código de respuesta y token de sesión
+ */
+const registrarCharola = async (req, res) => {
+  try {
+    const nuevo = await Charola.registrar(req.body)
+    res.status(201).json({ data: nuevo })
+  } catch (error) {
+    res.status(500).json({ mensaje: 'Error interno del servidor' })
+  }
+}
 
 /**
  * @description Eliminar charola elimina todos los datos correspondientes de una charola con su ID.

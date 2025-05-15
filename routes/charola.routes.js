@@ -15,7 +15,7 @@ router.get('/charolas', charolaController.obtenerCharolas);
 /* ----------- */
 
 /* POST METHODS */
-
+router.post('/registrarCharola', charolaController.registrarCharola);
 /* ----------- */
 
 /* PUT METHODS */

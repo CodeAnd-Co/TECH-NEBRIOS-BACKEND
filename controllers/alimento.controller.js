@@ -4,7 +4,7 @@
  * Controlador de Alimentos.
  * @module controllers/alimentoController
  */
-const { Alimento } = require("../models/alimento.model");
+const { Alimento } = require('../models/alimento.model');
 
 /**
  * Obtiene todos los alimentos de la base de datos.
@@ -20,7 +20,7 @@ module.exports.obtenerAlimentos = async (req, res) => {
         const alimentos = await alimento.obtener();
         res.json(alimentos);
     } catch (error) {
-        res.status(500).send("Error al obtener alimentos");
+        res.status(500).send('Error al obtener alimentos');
     }
 };
 
@@ -38,28 +38,28 @@ module.exports.registrarAlimento = async (req, res) => {
     const { nombre, descripcion } = req.body;
 
     if (!nombre || !descripcion) {
-        return res.status(400).json({ success: false, message: "Datos no válidos" });
+        return res.status(400).json({ success: false, message: 'Datos no válidos' });
     }
 
     try {
         const alimento = new Alimento(null, nombre, descripcion);
         await alimento.agregar();
-        res.status(200).json({ success: true, message: "Alimento registrado exitosamente" });
-        console.log("Se conecto back con front");
+        res.status(200).json({ success: true, message: 'Alimento registrado exitosamente' });
+        console.log('Se conecto back con front');
     } catch (error) {
-        console.error("Error al registrar alimento:", error);
+        console.error('Error al registrar alimento:', error);
 
         if (error.code === 'ETIMEDOUT' || error.code === 'ECONNREFUSED') {
-            return res.status(101).json({ success: false, message: "Sin conexión a internet" });
+            return res.status(101).json({ success: false, message: 'Sin conexión a internet' });
         }
 
-        res.status(500).json({ success: false, message: "Error del servidor al registrar alimento" });
+        res.status(500).json({ success: false, message: 'Error del servidor al registrar alimento' });
     }
 
     // Esta línea no se alcanza pero queda como respaldo por errores lógicos.
     return res.status(500).json({
         success: false,
-        message: "Error del servidor al registrar alimento (error 500)"
+        message: 'Error del servidor al registrar alimento (error 500)'
     });
 };
 
@@ -77,14 +77,14 @@ module.exports.editarAlimento = async (req, res) => {
     const { nombreAlimento, descripcionAlimento } = req.body;
 
     if (!Number.isInteger(idAlimento) || idAlimento <= 0) {
-        return res.status(400).json({ error: "ID de alimento no válido" });
+        return res.status(400).json({ error: 'ID de alimento no válido' });
       }
 
     try {
         const alimento = new Alimento(idAlimento, nombreAlimento, descripcionAlimento);
         await alimento.actualizar();
-        res.json({ success: true, message: "Alimento actualizado" });
+        res.json({ success: true, message: 'Alimento actualizado' });
     } catch (error) {
-        res.status(500).send("Error al editar alimento");
+        res.status(500).send('Error al editar alimento');
     }
 };

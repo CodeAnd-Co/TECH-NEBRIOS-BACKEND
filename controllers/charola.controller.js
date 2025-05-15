@@ -6,7 +6,7 @@
 // RF16 Visualizar todas las charolas registradas en el sistema - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
 // RF21: Consultar charolas de cambios pasados - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
 
-const Charola = require("../models/charola.model.js");
+const Charola = require('../models/charola.model.js');
 
 /**
  * @description Consultar charola ontiene todos los datos correspondientes de una charola con su ID.
@@ -33,7 +33,7 @@ const consultarCharola = async (req, res) => {
   }
 };
 
-const registrarCharola = async (req, res) => {};
+const registrarCharola = async () => {};
 
 /**
  * @description Eliminar charola elimina todos los datos correspondientes de una charola con su ID.
@@ -98,7 +98,7 @@ const obtenerCharolas = async (req, res) => {
     const estadosValidos = ['activa', 'pasada'];
     if (estado && !estadosValidos.includes(estado)) {
       return res.status(400).json({
-        mensaje: `Estado inválido. Usa 'activa' o 'pasada'.`
+        mensaje: 'Estado inválido. Usa \'activa\' o \'pasada\'.'
       });
     }
 

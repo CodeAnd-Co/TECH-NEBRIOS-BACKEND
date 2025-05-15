@@ -28,12 +28,9 @@ class Hidratacion {
    * @throws {Error} Si ocurre un error de consulta o conexión.
    */
   async obtener() {
-    try {
-      return await prisma.HIDRATACION.findMany();
-    } catch (error) {
-      throw error;
-    }
+    return await prisma.HIDRATACION.findMany();
   }
+
 }
 
 module.exports = { Hidratacion };

@@ -6,7 +6,9 @@
   "type": "commonjs",
   "scripts": {
     "test": "jest --verbose",
-    "type": "module"
+    "type": "module",
+    "lint": "eslint ./models ./controllers --config ./linter/eslint.config.mjs",
+    "lint:fix": "eslint ./models ./controllers --config ./linter/eslint.config.mjs --fix"
   },
   "repository": {
     "type": "git",
@@ -36,6 +38,8 @@
     "nodejs": "^0.0.0"
   },
   "devDependencies": {
+    "eslint": "^9.26.0",
+    "eslint-plugin-import": "^2.31.0",
     "jest": "^29.7.0",
     "jsdoc": "^4.0.4",
     "prisma": "^6.7.0"

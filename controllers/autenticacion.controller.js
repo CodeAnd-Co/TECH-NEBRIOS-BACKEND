@@ -1,6 +1,6 @@
 // RF1 Iniciar Sesión - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/rf1
 
-const Usuario = require("../models/usuario.model.js");
+const Usuario = require('../models/usuario.model.js');
 
 /**
  * @description Inicia sesión de un usuario y devuelve un token de sesión si es exitoso.

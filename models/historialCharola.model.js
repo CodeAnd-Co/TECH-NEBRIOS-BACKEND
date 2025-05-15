@@ -3,7 +3,7 @@ const { PrismaClient } = require('../generated/prisma');
 const { format } = require('date-fns');
 const prisma = new PrismaClient();
 
-const db = require('../utils/database');
+const database = require('../utils/database');
 
 module.exports = class HistorialCharola {
   /**
@@ -12,7 +12,7 @@ module.exports = class HistorialCharola {
    * @returns {Promise<Array<{ charolaAncestro: number, nombreCharola: string }>>}
    */
   static async obtenerFechaCreacion(charolaId) {
-    const conexion = await db();
+    const conexion = await database();
 
     try {
       const resultado = await conexion.query(
@@ -28,7 +28,7 @@ module.exports = class HistorialCharola {
   }
      
   static async obtenerAncestros(charolaId) {
-    const conexion = await db();
+    const conexion = await database();
 
     try {
       const relaciones = await conexion.query(

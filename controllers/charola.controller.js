@@ -33,7 +33,7 @@ const consultarCharola = async (req, res) => {
   }
 };
 
-const registrarCharola = async (req, res) => {};
+const registrarCharola = async () => {};
 
 /**
  * @description Eliminar charola elimina todos los datos correspondientes de una charola con su ID.

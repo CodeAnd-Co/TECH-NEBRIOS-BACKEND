@@ -1,4 +1,4 @@
-const HistorialCharola = require("../models/historialCharola.model.js");
+const HistorialCharola = require('../models/historialCharola.model.js');
 
 /**
  * @function obtenerHistorialAncestros
@@ -71,13 +71,13 @@ exports.obtenerHistorialActividad = async(req, res) => {
       const estado = await HistorialCharola.estadoCharola(id);
 
       if(hidratacion.length > 0 || alimentacion.length > 0){
-          res.status(200).json({"codigo": "Ok", "estado": estado, "alimentacion": alimentacion, "hidratacion": hidratacion});
+          res.status(200).json({'codigo': 'Ok', 'estado': estado, 'alimentacion': alimentacion, 'hidratacion': hidratacion});
       } else {
-          res.status(201).json({"codigo": "Ok", "estado": estado});
+          res.status(201).json({'codigo': 'Ok', 'estado': estado});
       }
 
   } catch (error){
-      console.error("[Controller]. Error al obtener informacion de las charolas: ", error);
+      console.error('[Controller]. Error al obtener informacion de las charolas: ', error);
       res.status(500).json({'error': 'Ocurrio un error en el servidor'});
   }
 };

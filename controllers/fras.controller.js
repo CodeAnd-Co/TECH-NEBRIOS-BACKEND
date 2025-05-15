@@ -18,6 +18,6 @@ module.exports.obtenerFras = async (req, res) => {
         const listaFras = await fras.obtener();
         res.json(listaFras);
     } catch (error) {
-        res.status(500).send("Error al obtener Fras");
+        res.status(500).send('Error al obtener Fras');
     }
 }

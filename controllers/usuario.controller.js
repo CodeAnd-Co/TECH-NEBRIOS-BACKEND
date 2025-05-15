@@ -1,4 +1,4 @@
-const Usuario = require("../models/usuario.model.js");
+const Usuario = require('../models/usuario.model.js');
 
 /**
  * @description Registra un nuevo usuario en la base de datos.

@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('../generated/prisma');
-const dotenv = require("dotenv");
+const dotenv = require('dotenv');
 
 dotenv.config();
 const prisma = new PrismaClient();
@@ -19,7 +19,7 @@ module.exports = class Usuario {
       });
 
       if (!usuario) {
-        return { error: "Usuario inexistente" };
+        return { error: 'Usuario inexistente' };
       }
 
       const contrasenaCorrecta = await bcrypt.compare(
@@ -28,7 +28,7 @@ module.exports = class Usuario {
       );
 
       if (!contrasenaCorrecta) {
-        return { error: "Contraseña incorrecta" };
+        return { error: 'Contraseña incorrecta' };
       }
 
       // Verifica si también es administrador
@@ -40,15 +40,15 @@ module.exports = class Usuario {
         {
           id: usuario.usuarioId,
           nombreDeUsuario: usuario.user,
-          rol: admin ? "admin" : "usuario",
+          rol: admin ? 'admin' : 'usuario',
         },
         process.env.JWT_SECRET,
-        { expiresIn: "1d" }
+        { expiresIn: '1d' }
       );
 
       return token;
     } catch (err) {
-      console.err("Error al iniciar sesión:", error);
+      console.err('Error al iniciar sesión:', error);
       throw error;
     }
   }
@@ -65,7 +65,7 @@ module.exports = class Usuario {
         select: { user: true },
       });
     } catch (error) {
-      console.error("Error al buscar usuario:", error);
+      console.error('Error al buscar usuario:', error);
       throw error;
     }
   }
@@ -91,7 +91,7 @@ module.exports = class Usuario {
 
       return nuevo;
     } catch (error) {
-      console.log("Error al registrar usuario:", error);
+      console.log('Error al registrar usuario:', error);
       throw error;
     }
   }

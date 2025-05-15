@@ -56,7 +56,7 @@ module.exports = class Charola {
       };
   
     } catch (error) {
-      console.error("Error al obtener charola:", error);
+      console.error('Error al obtener charola:', error);
       return { error: error.message };
     }
   }
@@ -79,7 +79,7 @@ module.exports = class Charola {
       });
       return nueva;
     } catch (error) {
-      console.error("Error al registrar la charola:", error);
+      console.error('Error al registrar la charola:', error);
       throw error;
     }
   }

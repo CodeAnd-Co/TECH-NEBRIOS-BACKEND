@@ -26,7 +26,7 @@ class Fras {
         try {
             return await prisma.FRAS.findMany();
         } catch (error) {
-            console.error("Error al obtener los registros de Fras:", error);
+            console.error('Error al obtener los registros de Fras:', error);
             throw error;
         }
     }

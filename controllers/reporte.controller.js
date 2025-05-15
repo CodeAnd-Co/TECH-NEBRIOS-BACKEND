@@ -1,7 +1,7 @@
 // RF11:
 // https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF11
 
-const Reporte = require("../models/reporte.model.js");
+const Reporte = require('../models/reporte.model.js');
 const { generarExcelDesdeDatos }  = require('../utils/excelGenerador.js');
 
 /** 
@@ -20,12 +20,12 @@ exports.getDatos = async (req, res) => {
         }
 
         if (resultado.length > 0){
-            res.status(200).json({"code": "Ok", "resultado": resultado});
+            res.status(200).json({'code': 'Ok', 'resultado': resultado});
         }else {
-            res.status(201).json({"code": "Ok", "resultado": resultado});
+            res.status(201).json({'code': 'Ok', 'resultado': resultado});
         }
     }catch (error){
-        console.error("[Controller]. Error al obtener informacion de las charolas: ", error);
+        console.error('[Controller]. Error al obtener informacion de las charolas: ', error);
         res.status(500).json({'error': 'Ocurrio un error en el servidor'});
     }
 };
@@ -53,7 +53,7 @@ exports.postDescargarExcel = async (req, res) => {
         res.setHeader('Content-Disposition', 'attachment; filename=charolas.xlsx');
         res.status(200).send(buffer);
     } catch (error){
-        console.error("[Controller]. Error al descargar el archivo de excel: ", error);
+        console.error('[Controller]. Error al descargar el archivo de excel: ', error);
         res.status(500).json({'Error': 'Ocurrio un error en el servidor'});
     }
 }

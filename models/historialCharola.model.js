@@ -3,7 +3,7 @@ const { PrismaClient } = require('../generated/prisma');
 const { format } = require('date-fns');
 const prisma = new PrismaClient();
 
-const db = require("../utils/database");
+const db = require('../utils/database');
 
 module.exports = class HistorialCharola {
   /**
@@ -16,7 +16,7 @@ module.exports = class HistorialCharola {
 
     try {
       const resultado = await conexion.query(
-        "SELECT fechaCreacion FROM CHAROLA WHERE charolaId = ?",
+        'SELECT fechaCreacion FROM CHAROLA WHERE charolaId = ?',
         [charolaId]
       );
       return resultado;
@@ -32,7 +32,7 @@ module.exports = class HistorialCharola {
 
     try {
       const relaciones = await conexion.query(
-        "SELECT a.charolaAncestro, c.nombreCharola FROM CHAROLA_CHAROLA a JOIN CHAROLA c ON a.charolaAncestro = c.charolaId WHERE a.charolaHija = ?",
+        'SELECT a.charolaAncestro, c.nombreCharola FROM CHAROLA_CHAROLA a JOIN CHAROLA c ON a.charolaAncestro = c.charolaId WHERE a.charolaHija = ?',
         [charolaId]
       );
       
@@ -74,7 +74,7 @@ module.exports = class HistorialCharola {
       
         return resultadoFormateado;
     } catch (error) {
-        console.error("[Model] Error al obtener el historial de alimentacion de la charola: ", error);
+        console.error('[Model] Error al obtener el historial de alimentacion de la charola: ', error);
         throw error;      
     }
   }
@@ -109,7 +109,7 @@ module.exports = class HistorialCharola {
         
             return resultadoFormateado;
       } catch (error) {
-          console.error("[Model] Error al obtener el historial de hidratacion de la charola: ", error);
+          console.error('[Model] Error al obtener el historial de hidratacion de la charola: ', error);
           throw error;
       }
   }
@@ -140,7 +140,7 @@ module.exports = class HistorialCharola {
           
           return resultadoFormateado;
       } catch (error) {
-          console.error("[Model] Error al obtener el historial de hidratacion de la charola: ", error);
+          console.error('[Model] Error al obtener el historial de hidratacion de la charola: ', error);
           throw error;
       }
   }

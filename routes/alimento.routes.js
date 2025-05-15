@@ -11,10 +11,6 @@
 const express = require("express");
 const router = express.Router();
 
-// Middlewares
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
-
 
 // Controladores
 const alimentoController = require("../controllers/alimento.controller.js");
@@ -44,6 +40,14 @@ router.post('/agregar', alimentoController.registrarAlimento);
  * @memberof module:routes/alimentoRoutes
  */
 router.put('/editar/:idAlimento', alimentoController.editarAlimento);
+
+/**
+ * DELETE /eliminar/:idAlimento - Elimina un alimento existente.
+ * @name DELETE/eliminar/:idAlimento
+ * @function
+ * @memberof module:routes/alimentoRoutes
+ */
+router.delete('/eliminar/:idAlimento', alimentoController.eliminarAlimento);
 
 
 module.exports = router;

@@ -88,3 +88,27 @@ module.exports.editarAlimento = async (req, res) => {
         res.status(500).send('Error al editar alimento');
     }
 };
+
+/**
+ * Elimina un alimento existente en la base de datos.
+ * @async
+ * @function eliminarAlimento
+ * @param {import('express').Request} req - Objeto de solicitud HTTP, contiene params.
+ * @param {import('express').Response} res - Objeto de respuesta HTTP.
+ * @returns {Promise<void>}
+ */
+module.exports.eliminarAlimento = async (req, res) => {
+    const idAlimento = Number(req.params.idAlimento);
+
+    if (!Number.isInteger(idAlimento) || idAlimento <= 0) {
+        return res.status(400).json({ error: 'ID de alimento no válido' });
+      }
+
+    try {
+        const alimento = new Alimento(idAlimento);
+        await alimento.eliminar();
+        res.json({ success: true, message: 'Alimento eliminado' });
+    } catch (error) {
+        res.status(500).send('Error al eliminar alimento');
+    }
+};

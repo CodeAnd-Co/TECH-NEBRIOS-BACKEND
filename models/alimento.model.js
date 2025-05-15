@@ -67,6 +67,19 @@ class Alimento {
         },
       });
     }
+
+  /**
+   * Elimina un alimento de la tabla COMIDA.
+   * @async
+   * @method eliminar
+   * @returns {Promise<Object>} Registro eliminado del alimento.
+   * @throws {Error} Si ocurre un error de consulta o conexión.
+   */
+  async eliminar() {
+    return await prisma.COMIDA.delete({
+      where: { comidaId: this.idAlimento },
+    })
+  }
 }
 
 module.exports = { Alimento };

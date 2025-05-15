@@ -133,8 +133,9 @@ module.exports = class Charola {
    * @param {number} offset - Número de registros a omitir (para paginación).
    * @returns {Promise<Object[]>} Lista de objetos que contienen `nombreCharola` y `fechaCreacion`.
    */
-  static async getCharolasPaginadas(limit, offset) {
+  static async getCharolasPaginadas(limit, offset, estado) {
     const rows = await prisma.CHAROLA.findMany({
+      where: estado ? { estado } : undefined,
       select: {
         charolaId: true,
         nombreCharola: true,
@@ -157,8 +158,10 @@ module.exports = class Charola {
    * @memberof Charola
    * @returns {Promise<number>} Total de registros en la tabla CHAROLA.
    */
-  static async getCantidadTotal() {
-    const total = await prisma.CHAROLA.count();
+  static async getCantidadTotal(estado) {
+    const total = await prisma.CHAROLA.count({
+      where: estado ? { estado } : undefined
+    });
     return total;
   } 
 };

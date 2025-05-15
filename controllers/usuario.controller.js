@@ -1,3 +1,4 @@
+const Usuario = require('../models/usuario.model.js');
 
 /**
  * @description Registra un nuevo usuario en la base de datos.
@@ -7,6 +8,7 @@
  */
 exports.registrarUsuario = async (req, res) => {
     try {
+        await Usuario.registrarUsuario(req.body);
         return res.status(201).json({ code: 201 });
     } catch (error) {
         return res.status(500).json({ code: 500 });

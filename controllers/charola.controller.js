@@ -5,6 +5,7 @@
 // RF10 Consultar información detallada de una charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF10
 // RF16 Visualizar todas las charolas registradas en el sistema - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
 // RF21: Consultar charolas de cambios pasados - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
+// RF26 Registrar la alimentación de la charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF26
 
 const Charola = require('../models/charola.model.js');
 
@@ -144,9 +145,50 @@ const obtenerCharolas = async (req, res) => {
   }
 };
 
+/**
+ * Controlador para alimentar una charola con una cantidad específica de alimento.
+ *
+ * @async
+ * @function alimentarCharola
+ * @param {Object} req - Objeto de solicitud HTTP (Express).
+ * @param {Object} req.body - Cuerpo de la solicitud.
+ * @param {number} req.body.charolaId - ID de la charola a alimentar.
+ * @param {number} req.body.comidaId - ID del tipo de comida que se va a otorgar.
+ * @param {number} req.body.cantidadOtorgada - Cantidad de alimento otorgada en gramos.
+ * @param {Object} res - Objeto de respuesta HTTP (Express).
+ * @returns {Promise<Object>} Respuesta HTTP con el resultado del proceso o un error.
+ *
+ * @throws {400} Si faltan parámetros obligatorios en el cuerpo de la solicitud.
+ * @throws {500} Si ocurre un error interno al intentar alimentar la charola.
+ */
+const alimentarCharola = async (req, res) => {
+  const { charolaId, comidaId, cantidadOtorgada } = req.body;
+
+  console.log(charolaId);
+
+  if (!charolaId || !comidaId || cantidadOtorgada == null) {
+    return res.status(400).json({ error: 'Faltan parámetros obligatorios.' });
+  }
+
+  try {
+    const resultado = await Charola.alimentar({
+      charolaId,
+      comidaId,
+      cantidadOtorgada
+    });
+
+    return res.status(200).json({ data: resultado });
+  } catch (err) {
+    console.error('Error al alimentar charola:', err);
+    return res.status(500).json({ error: 'Error interno al alimentar charola.' });
+  }
+};
+
+
 module.exports = {
   consultarCharola,
   eliminarCharola,
   registrarCharola,
-  obtenerCharolas
+  obtenerCharolas,
+  alimentarCharola
 };

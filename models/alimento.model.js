@@ -82,4 +82,32 @@ class Alimento {
   }
 }
 
-module.exports = { Alimento };
+/**
+ * Modelo para la relación CHAROLA_COMIDA
+ * @module models/charolaComida
+ */
+class CharolaComida {
+  constructor(id, charolaId, comidaId, cantidadOtorgada, fechaOtorgada) {
+    this.id = id;
+    this.charolaId = charolaId;
+    this.comidaId = comidaId;
+    this.cantidadOtorgada = cantidadOtorgada;
+    this.fechaOtorgada = fechaOtorgada;
+  }
+
+  /**
+   * Agrega una nueva relación charola-comida
+   */
+  async agregar() {
+    return await prisma.CHAROLA_COMIDA.create({
+      data: {
+        charolaId: this.charolaId,
+        comidaId: this.comidaId,
+        cantidadOtorgada: this.cantidadOtorgada,
+        fechaOtorgada: this.fechaOtorgada,
+      },
+    });
+  }
+}
+
+module.exports = { Alimento, CharolaComida };

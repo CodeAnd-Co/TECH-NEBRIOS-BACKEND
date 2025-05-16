@@ -112,3 +112,29 @@ module.exports.eliminarAlimento = async (req, res) => {
         res.status(500).send('Error al eliminar alimento');
     }
 };
+
+/**
+ * Registrar comida de charola en la base de datos.
+ * @async
+ * @function registrarCharolaComida
+ * @param {import('express').Request} req - Objeto de solicitud HTTP, contiene params.
+ * @param {import('express').Response} res - Objeto de respuesta HTTP.
+ * @returns {Promise<void>}
+ */
+module.exports.registrarCharolaComida = async (req, res) => {
+  const { charolaId, comidaId, cantidadOtorgada, fechaOtorgada } = req.body;
+
+  if (!charolaId || !comidaId || !cantidadOtorgada || !fechaOtorgada) {
+    return res.status(400).json({ success: false, message: 'Datos incompletos' });
+  }
+
+  try {
+    const registro = new CharolaComida(null, charolaId, comidaId, cantidadOtorgada, fechaOtorgada);
+    await registro.agregar();
+
+    res.status(200).json({ success: true, message: 'Registro creado exitosamente' });
+  } catch (error) {
+    console.error('Error al registrar charola-comida:', error);
+    res.status(500).json({ success: false, message: 'Error del servidor' });
+  }
+};

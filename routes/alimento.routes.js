@@ -50,4 +50,6 @@ router.put('/editar/:idAlimento', alimentoController.editarAlimento);
 router.delete('/eliminar/:idAlimento', alimentoController.eliminarAlimento);
 
 
+router.post('/charola-comida', alimentoController.registrarCharolaComida);
+
 module.exports = router;

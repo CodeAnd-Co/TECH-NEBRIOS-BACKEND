@@ -8,7 +8,7 @@
     "test": "jest --verbose",
     "type": "module",
     "lint": "eslint ./models ./controllers ./server.js --config ./linter/eslint.config.mjs",
-    "lint:fix": "eslint ./models ./controllers --config ./linter/eslint.config.mjs --fix"
+    "lint:fix": "eslint ./models ./controllers ./server.js --config ./linter/eslint.config.mjs --fix"
   },
   "repository": {
     "type": "git",

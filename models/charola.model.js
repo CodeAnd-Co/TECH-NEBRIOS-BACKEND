@@ -214,11 +214,10 @@ module.exports = class Charola {
    * @param {{charolaId:number, comidaId:number, cantidadOtorgada:number}} params
    */
   static async alimentar({ charolaId, comidaId, cantidadOtorgada }) {
-    // Fecha que usamos en ambos: fechaOtorgada y fechaActualizacion
     const fecha = new Date();
-
+  
     return prisma.$transaction(async tx => {
-      // 1) Crear la relación comida
+      // 1) Crear la relación comida y traer también la comida relacionada
       const rel = await tx.CHAROLA_COMIDA.create({
         data: {
           charolaId,
@@ -226,21 +225,24 @@ module.exports = class Charola {
           cantidadOtorgada,
           fechaOtorgada: fecha
         },
+        include: {
+          COMIDA: true 
+        }
       });
-
-      // 2) Actualizar la charola: incrementar comidaCiclo y set fechaActualizacion
+  
+      // 2) Actualizar la charola
       const updated = await tx.CHAROLA.update({
         where: { charolaId },
         data: {
           comidaCiclo: { increment: cantidadOtorgada },
           fechaActualizacion: fecha
-        },
+        }
       });
-
+  
       return {
-        relacion: rel,
+        relacion: rel,  
         charola: updated
       };
     });
-  }
+  }  
 };

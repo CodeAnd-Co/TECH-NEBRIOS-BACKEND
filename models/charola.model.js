@@ -74,7 +74,7 @@ module.exports = class Charola {
    * @returns {Promise<Object>} - Objeto con la charola creada.
    * @throws {Error} - Si ocurre un error durante la creación.
    */
-  static async registrar(data = {}) {
+  static async registrar(data) {
     const {
       nombre,
       fechaCreacion,
@@ -85,15 +85,17 @@ module.exports = class Charola {
     } = data;
 
     // Acumulado de comida e hidratación, comienza en 0 y suma la cantidad otorgada
-    const comidaCiclo = comidas.reduce((s, c) => s + c.cantidadOtorgada, 0);
+    const comidaCiclo = comidas.reduce((suma, comida) => suma + comida.cantidadOtorgada, 0);
     const hidratacionCiclo = hidrataciones
-      .reduce((s, h) => s + h.cantidadOtorgada, 0);
+      .reduce((suma, hidratacion) => suma + hidratacion.cantidadOtorgada, 0);
 
+    const fecha = new Date(fechaCreacion);
     // Llamada al cliente Prisma
     return prisma.CHAROLA.create({
       data: {
         nombreCharola: nombre,
-        fechaCreacion: new Date(fechaCreacion),
+        fechaCreacion: fecha,
+        fechaActualizacion: fecha,
         densidadLarva,
         pesoCharola,
 
@@ -102,21 +104,21 @@ module.exports = class Charola {
         hidratacionCiclo,
 
         CHAROLA_COMIDA: {
-          create: comidas.map(c => ({
-            cantidadOtorgada: c.cantidadOtorgada,
-            fechaOtorgada: c.fechaOtorgada
-              ? new Date(c.fechaOtorgada)
+          create: comidas.map(charola => ({
+            cantidadOtorgada: charola.cantidadOtorgada,
+            fechaOtorgada: charola.fechaOtorgada
+              ? new Date(charola.fechaOtorgada)
               : new Date(),
-            COMIDA: { connect: { comidaId: c.comidaId } }
+            COMIDA: { connect: { comidaId: charola.comidaId } }
           }))
         },
         CHAROLA_HIDRATACION: {
-          create: hidrataciones.map(h => ({
-            cantidadOtorgada: h.cantidadOtorgada,
-            fechaOtorgada: h.fechaOtorgada
-              ? new Date(h.fechaOtorgada)
+          create: hidrataciones.map(hidratacion => ({
+            cantidadOtorgada: hidratacion.cantidadOtorgada,
+            fechaOtorgada: hidratacion.fechaOtorgada
+              ? new Date(hidratacion.fechaOtorgada)
               : new Date(),
-            HIDRATACION: { connect: { hidratacionId: h.hidratacionId } }
+            HIDRATACION: { connect: { hidratacionId: hidratacion.hidratacionId } }
           }))
         }
       },

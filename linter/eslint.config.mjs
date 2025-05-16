@@ -31,7 +31,7 @@ export default [
     rules: {
       'no-var': 'error', // Prohíbe el uso de `var`, se prefiere `let` o `const`
       'max-len': ['error', { code: 200 }], // Máximo de 200 caracteres por línea
-      'quotes': ['error', 'single'], // Obliga al uso de comillas simples
+      'quotes': ['error', 'single', { avoidEscape: true }], // Obliga al uso de comillas simples. Permite escapar si es necesario
       'no-eval': 'error', // Prohíbe el uso de `eval` por seguridad
       'one-var': ['error', 'never'], // No permite declarar múltiples variables con una sola declaración `var`/`let`/`const`
       'comma-style': ['error', 'last'], // Comas deben colocarse al final de la línea

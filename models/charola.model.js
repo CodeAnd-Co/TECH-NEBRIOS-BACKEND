@@ -74,7 +74,7 @@ module.exports = class Charola {
    * @returns {Promise<Object>} - Objeto con la charola creada.
    * @throws {Error} - Si ocurre un error durante la creación.
    */
-  static async registrar(data = {}) {
+  static async registrar(data) {
     const {
       nombre,
       fechaCreacion,
@@ -89,11 +89,13 @@ module.exports = class Charola {
     const hidratacionCiclo = hidrataciones
       .reduce((suma, hidratacion) => suma + hidratacion.cantidadOtorgada, 0);
 
+    const fecha = new Date(fechaCreacion);
     // Llamada al cliente Prisma
     return prisma.CHAROLA.create({
       data: {
         nombreCharola: nombre,
-        fechaCreacion: new Date(fechaCreacion),
+        fechaCreacion: fecha,
+        fechaActualizacion: fecha,
         densidadLarva,
         pesoCharola,
 

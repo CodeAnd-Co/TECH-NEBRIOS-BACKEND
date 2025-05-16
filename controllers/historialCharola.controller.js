@@ -62,7 +62,7 @@ exports.obtenerHistorialAncestros = async (req, res) => {
 exports.obtenerHistorialActividad = async(req, res) => {
   try{
 
-      const id = parseInt(req.params.id, 10);
+      const id = parseInt(req.query.charolaId);
 
       const alimentacion = await HistorialCharola.historialAlimentacion(id);
 

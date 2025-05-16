@@ -13,7 +13,7 @@ const historialCharolaController = require('../controllers/historialCharola.cont
 /* GET METHODS */
 router.get('/:charolaId/ancestros', historialCharolaController.obtenerHistorialAncestros);
 
-router.get('/historialActividad/:id', historialCharolaController.obtenerHistorialActividad)
+router.get('/historialActividad', historialCharolaController.obtenerHistorialActividad)
 /* ----------- */
 
 /* POST METHODS */

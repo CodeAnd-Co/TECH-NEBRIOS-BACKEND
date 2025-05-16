@@ -164,8 +164,6 @@ const obtenerCharolas = async (req, res) => {
 const alimentarCharola = async (req, res) => {
   const { charolaId, comidaId, cantidadOtorgada } = req.body;
 
-  console.log(charolaId);
-
   if (!charolaId || !comidaId || cantidadOtorgada == null) {
     return res.status(400).json({ error: 'Faltan parámetros obligatorios.' });
   }
@@ -179,7 +177,6 @@ const alimentarCharola = async (req, res) => {
 
     return res.status(200).json({ data: resultado });
   } catch (err) {
-    console.error('Error al alimentar charola:', err);
     return res.status(500).json({ error: 'Error interno al alimentar charola.' });
   }
 };

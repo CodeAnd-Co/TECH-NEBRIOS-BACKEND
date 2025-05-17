@@ -39,7 +39,7 @@ describe('Controlador tablaCharola', () => {
 
     tablaCharolaModel.obtenerDatos.mockResolvedValue(mockResultado);
 
-    await tablaCharolaController.getDatos(req, res); // 👈 nombre real exportado
+    await tablaCharolaController.getDatos(req, res); 
 
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({ code: 'Ok', resultado: mockResultado });
@@ -48,7 +48,7 @@ describe('Controlador tablaCharola', () => {
   test('[GET] Debe responder con código 201 y status ok cuando NO hay información de charolas', async () => {
     tablaCharolaModel.obtenerDatos.mockResolvedValue([]);
 
-    await tablaCharolaController.getDatos(req, res); // 👈 nombre real exportado
+    await tablaCharolaController.getDatos(req, res); 
 
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({ code: 'Ok', resultado: [] });
@@ -57,7 +57,7 @@ describe('Controlador tablaCharola', () => {
   test('[GET] Debe responder con código 500 y error cuando ocurre algún tipo de error en el flujo', async () => {
     tablaCharolaModel.obtenerDatos.mockRejectedValue(new Error('DB error'));
 
-    await tablaCharolaController.getDatos(req, res); // 👈 nombre real exportado
+    await tablaCharolaController.getDatos(req, res); 
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: expect.any(String) });

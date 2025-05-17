@@ -3,7 +3,7 @@
  * Controlador de Hidratación.
  * @module controllers/hidratacionController
  */
-const { Hidratacion } = require("../models/hidratacion.model");
+const { Hidratacion } = require('../models/hidratacion.model');
 
 /**
  * Obtiene toda la hidratación de la base de datos.
@@ -19,6 +19,6 @@ module.exports.obtenerHidratacion = async (req, res) => {
         const listaHidratacion = await hidratacion.obtener();
         res.json(listaHidratacion);
     } catch (error) {
-        res.status(500).send("Error al obtener hidratación");
+        res.status(500).send('Error al obtener hidratación');
     }
 };

@@ -5,7 +5,7 @@
 // RF10 Consultar información detallada de una charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF10
 // RF16 Visualizar todas las charolas registradas en el sistema - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
 // RF21: Consultar charolas de cambios pasados - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
-
+// RF26 Registrar la alimentación de la charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF26
 
 // models/charola.model.js
 const { PrismaClient } = require('../generated/prisma');
@@ -56,32 +56,77 @@ module.exports = class Charola {
       };
   
     } catch (error) {
-      console.error("Error al obtener charola:", error);
+      console.error('Error al obtener charola:', error);
       return { error: error.message };
     }
   }
 
-    /**
-   * Registra una nueva charola.
-   * @param {{ nombre: string, fecha: Date, alimentacion: number, peso: number, hidratacion: number }} data
-   * @returns {Promise<Object>} El registro creado.
+
+  /**
+   * Registra una nueva charola en la base de datos.
+   * @param {Object} data - Datos de la charola a registrar.
+   * @param {string} data.nombre - Nombre de la charola.
+   * @param {string} data.fechaCreacion - Fecha de creación de la charola.
+   * @param {number} data.densidadLarva - Densidad de larvas en la charola.
+   * @param {number} data.pesoCharola - Peso de la charola.
+   * @param {Array} data.comidas - Lista de comidas asociadas a la charola.
+   * @param {Array} data.hidrataciones - Lista de hidrataciones asociadas a la charola.
+   * @returns {Promise<Object>} - Objeto con la charola creada.
+   * @throws {Error} - Si ocurre un error durante la creación.
    */
-  static async registrarCharola(data) {
-    try {
-      const nueva = await prisma.CHAROLA.create({
-        data: {
-          nombre: data.nombre,
-          fecha: data.fecha,
-          alimentacion: data.alimentacion,
-          peso: data.peso,
-          hidratacion: data.hidratacion
+  static async registrar(data) {
+    const {
+      nombre,
+      fechaCreacion,
+      densidadLarva,
+      pesoCharola,
+      comidas = [],
+      hidrataciones = []
+    } = data;
+
+    // Acumulado de comida e hidratación, comienza en 0 y suma la cantidad otorgada
+    const comidaCiclo = comidas.reduce((suma, comida) => suma + comida.cantidadOtorgada, 0);
+    const hidratacionCiclo = hidrataciones
+      .reduce((suma, hidratacion) => suma + hidratacion.cantidadOtorgada, 0);
+
+    const fecha = new Date(fechaCreacion);
+    // Llamada al cliente Prisma
+    return prisma.CHAROLA.create({
+      data: {
+        nombreCharola: nombre,
+        fechaCreacion: fecha,
+        fechaActualizacion: fecha,
+        densidadLarva,
+        pesoCharola,
+
+        estado: 'activa',
+        comidaCiclo,
+        hidratacionCiclo,
+
+        CHAROLA_COMIDA: {
+          create: comidas.map(charola => ({
+            cantidadOtorgada: charola.cantidadOtorgada,
+            fechaOtorgada: charola.fechaOtorgada
+              ? new Date(charola.fechaOtorgada)
+              : new Date(),
+            COMIDA: { connect: { comidaId: charola.comidaId } }
+          }))
+        },
+        CHAROLA_HIDRATACION: {
+          create: hidrataciones.map(hidratacion => ({
+            cantidadOtorgada: hidratacion.cantidadOtorgada,
+            fechaOtorgada: hidratacion.fechaOtorgada
+              ? new Date(hidratacion.fechaOtorgada)
+              : new Date(),
+            HIDRATACION: { connect: { hidratacionId: hidratacion.hidratacionId } }
+          }))
         }
-      });
-      return nueva;
-    } catch (error) {
-      console.error("Error al registrar la charola:", error);
-      throw error;
-    }
+      },
+      include: {
+        CHAROLA_COMIDA: { include: { COMIDA: true } },
+        CHAROLA_HIDRATACION: { include: { HIDRATACION: true } }
+      }
+    });
   }
 
   static async eliminarCharola(charolaID) {
@@ -133,8 +178,9 @@ module.exports = class Charola {
    * @param {number} offset - Número de registros a omitir (para paginación).
    * @returns {Promise<Object[]>} Lista de objetos que contienen `nombreCharola` y `fechaCreacion`.
    */
-  static async getCharolasPaginadas(limit, offset) {
+  static async getCharolasPaginadas(limit, offset, estado) {
     const rows = await prisma.CHAROLA.findMany({
+      where: estado ? { estado } : undefined,
       select: {
         charolaId: true,
         nombreCharola: true,
@@ -157,8 +203,48 @@ module.exports = class Charola {
    * @memberof Charola
    * @returns {Promise<number>} Total de registros en la tabla CHAROLA.
    */
-  static async getCantidadTotal() {
-    const total = await prisma.CHAROLA.count();
+  static async getCantidadTotal(estado) {
+    const total = await prisma.CHAROLA.count({
+      where: estado ? { estado } : undefined
+    });
     return total;
   } 
+
+  /**
+   * Alimenta la charola: crea registro en CHAROLA_COMIDA y
+   * luego actualiza comidaCiclo y fechaActualizacion en CHAROLA.
+   * @param {{charolaId:number, comidaId:number, cantidadOtorgada:number}} params
+   */
+  static async alimentar({ charolaId, comidaId, cantidadOtorgada }) {
+    const fecha = new Date();
+  
+    return prisma.$transaction(async tx => {
+      // 1) Crear la relación comida y traer también la comida relacionada
+      const rel = await tx.CHAROLA_COMIDA.create({
+        data: {
+          charolaId,
+          comidaId,
+          cantidadOtorgada,
+          fechaOtorgada: fecha
+        },
+        include: {
+          COMIDA: true 
+        }
+      });
+  
+      // 2) Actualizar la charola
+      const updated = await tx.CHAROLA.update({
+        where: { charolaId },
+        data: {
+          comidaCiclo: { increment: cantidadOtorgada },
+          fechaActualizacion: fecha
+        }
+      });
+  
+      return {
+        relacion: rel,  
+        charola: updated
+      };
+    });
+  }  
 };

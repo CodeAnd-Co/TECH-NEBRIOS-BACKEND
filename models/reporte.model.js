@@ -40,7 +40,7 @@ const ReporteModel = {
 
       return resultadoFormateado;
     } catch (error) {
-      console.error("[Model] Error al obtener información de las charolas:", error);
+      console.error('[Model] Error al obtener información de las charolas:', error);
       throw error;      
     }
   }

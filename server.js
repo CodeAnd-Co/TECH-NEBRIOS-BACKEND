@@ -1,11 +1,14 @@
 /* Dependencias */
-const express = require("express");
-const path = require("path");
-const db = require("./utils/database");
+const express = require('express');
+const path = require('path');
+const db = require('./utils/database');
 
 const app = express();
 
-const sesionActiva = require("./utils/middlewares/sesionActiva");
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true })); 
+
+const sesionActiva = require('./utils/middlewares/sesionActiva');
 /* ------------ */
 
 
@@ -35,9 +38,9 @@ app.use("/reporte", reporteRoutes);
 async function testDB() {
   try {
     const test = await db();
-    console.log("Conexión exitosa. Resultado:", test);
+    console.log('Conexión exitosa. Resultado:', test);
   } catch (error) {
-    console.error("Error al conectar con la base de datos:", error);
+    console.error('Error al conectar con la base de datos:', error);
   }
 }
 
@@ -45,20 +48,19 @@ testDB();
 /* ----- */
 
 /* Inicializar express */
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
-app.use(express.static(path.join(__dirname, "public")));
-app.use(express.json()); 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 /* ----- */
 
 /* Route 404 Error */
 app.use((req, res, next) => {
-  res.status(404).render("404", { title: "404 - Not Found" });
+  res.status(404).render('404', { title: '404 - Not Found' });
 });
 app.use((req, res) => {
-  console.log("invalid url");
-  res.redirect("/");
+  console.log('invalid url');
+  res.redirect('/');
 });
 /* ----- */
 

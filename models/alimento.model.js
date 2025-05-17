@@ -32,11 +32,7 @@ class Alimento {
    * @throws {Error} Si ocurre un error de consulta o conexión.
    */
   async obtener() {
-    try {
-      return await prisma.COMIDA.findMany();
-    } catch (error) {
-      throw error;
-    }
+    return await prisma.COMIDA.findMany();
   }
 
     /**
@@ -46,19 +42,14 @@ class Alimento {
      * @returns {Promise<Object>} Registro insertado del alimento.
      * @throws {Error} Si ocurre un error de inserción.
      */
-    async agregar() {
-        try {
-         const nuevo = await prisma.COMIDA.create({
-            data: {
-            nombre: this.nombreAlimento,
-            descripcion: this.descripcionAlimento,
-         },
-        });
-          return nuevo;
-        } catch (error) {
-          throw error;
-        }
-    }
+  async agregar() {
+    return await prisma.COMIDA.create({
+      data: {
+        nombre: this.nombreAlimento,
+        descripcion: this.descripcionAlimento,
+      },
+    });
+  }
 
     /**
    * Actualiza un alimento existente en la tabla COMIDA.
@@ -68,19 +59,27 @@ class Alimento {
    * @throws {Error} Si ocurre un error de consulta o conexión.
    */
     async actualizar() {
-      try {
-        const actualizado = await prisma.COMIDA.update({
-          where: { comidaId: this.idAlimento },
-          data: {
-            nombre:      this.nombreAlimento,
-            descripcion: this.descripcionAlimento,
-          },
-        });
-        return actualizado;
-      } catch (error) {
-        throw error;
-      }
+      return await prisma.COMIDA.update({
+        where: { comidaId: this.idAlimento },
+        data: {
+          nombre:      this.nombreAlimento,
+          descripcion: this.descripcionAlimento,
+        },
+      });
     }
+
+  /**
+   * Elimina un alimento de la tabla COMIDA.
+   * @async
+   * @method eliminar
+   * @returns {Promise<Object>} Registro eliminado del alimento.
+   * @throws {Error} Si ocurre un error de consulta o conexión.
+   */
+  async eliminar() {
+    return await prisma.COMIDA.delete({
+      where: { comidaId: this.idAlimento },
+    })
+  }
 }
 
 module.exports = { Alimento };

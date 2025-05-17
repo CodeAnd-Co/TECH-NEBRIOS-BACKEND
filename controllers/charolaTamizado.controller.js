@@ -4,7 +4,7 @@
  * Controlador de Alimentos.
  * @module controllers/alimentoController
  */
-const { Tamizado } = require("../models/charolaTamizado.model");
+const Tamizado = require("../models/charolaTamizado.model");
 
 module.exports.tamizarCharolaIndividual = async (req, res) => {
     if (req.body == null) {
@@ -13,23 +13,23 @@ module.exports.tamizarCharolaIndividual = async (req, res) => {
     try {
     const {
       charolas,
-      tipoComida,
-      tipoHidratacion,
-      cantidadComida,
-      cantidadHidratacion,
-      cantidadPupa,
-      cantidadFras,
+      alimento,
+      hidratacion,
+      alimentoCantidad,
+      hidratacionCantidad,
+      pupa,
+      fras,
       fecha,
     } = req.body;
 
     const tamizado = new Tamizado({
       charolas,
-      tipoComida,
-      tipoHidratacion,
-      cantidadComida,
-      cantidadHidratacion,
-      cantidadPupa,
-      cantidadFras,
+      alimento,
+      hidratacion,
+      alimentoCantidad,
+      hidratacionCantidad,
+      pupa,
+      fras,
       fecha,
     });
 
@@ -42,11 +42,11 @@ module.exports.tamizarCharolaIndividual = async (req, res) => {
       });
     }
 
-    // Si la clase devuelve un error como objeto
-    return res.status(400).json({
+    // Si el modelo devuelve un error
+    /*return res.status(400).json({
       success: false,
       message: resultado.message || "Error en el tamizado",
-    });
+    });*/
 
   } catch (err) {
     console.error("Error en el controller de tamizado:", err);
@@ -66,10 +66,6 @@ module.exports.tamizarMultiplesCharolas = async (req, res) => {
     try {
     const {
       charolas,
-      tipoComida,
-      tipoHidratacion,
-      cantidadComida,
-      cantidadHidratacion,
       cantidadPupa,
       cantidadFras,
       fecha,
@@ -77,10 +73,6 @@ module.exports.tamizarMultiplesCharolas = async (req, res) => {
 
     const tamizado = new Tamizado({
       charolas,
-      tipoComida,
-      tipoHidratacion,
-      cantidadComida,
-      cantidadHidratacion,
       cantidadPupa,
       cantidadFras,
       fecha,
@@ -98,7 +90,7 @@ module.exports.tamizarMultiplesCharolas = async (req, res) => {
     // Si la clase devuelve un error como objeto
     return res.status(400).json({
       success: false,
-      message: resultado.message || "Error en el tamizado",
+      message: "Error en el tamizado",
     });
 
   } catch (err) {

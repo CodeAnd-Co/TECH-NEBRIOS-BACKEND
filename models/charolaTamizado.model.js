@@ -14,7 +14,7 @@ module.exports = class Tamizado {
     cantidadFras = 0,
     fecha = new Date()
   }) {
-    this.elementos = elementos;
+    this.charolas = charolas;
     this.tipoComida = tipoComida;
     this.tipoHidratacion = tipoHidratacion;
     this.cantidadComida = cantidadComida;
@@ -24,10 +24,10 @@ module.exports = class Tamizado {
     this.fecha = new Date(fecha);
   }
 
-  async tamizarIndividual(){
+  async tamizarIndividual() {
     try {
         return await prisma.$transaction(async (tx) => {
-        // Buscar IDs
+        // Buscar IDs de comida e hidratación
         const comida = await tx.cOMIDA.findFirst({
             where: { nombre: this.nombreComida },
         });
@@ -39,15 +39,37 @@ module.exports = class Tamizado {
             throw new Error("Nombre de comida o hidratación no válido");
         }
 
-        // 1. Crear FRAS
-        const fras = await tx.fRAS.create({
-            data: {
-            gramosGenerados: this.cantidadFras,
-            fechaOtorgada: this.fecha,
+        // Obtener todos los IDs de charolas por nombre
+        const charolasBD = await tx.cHAROLA.findMany({
+            where: {
+            nombreCharola: { in: this.charolas },
+            },
+            select: {
+            charolaId: true,
+            nombreCharola: true,
             },
         });
 
-        // 2. Crear PUPA
+        // Validar que se encontraron todas las charolas
+        const nombresEncontrados = new Set(charolasBD.map(c => c.nombreCharola));
+        const nombresFaltantes = this.charolas.filter(n => !nombresEncontrados.has(n));
+        if (nombresFaltantes.length > 0) {
+            throw new Error(`Charolas no encontradas: ${nombresFaltantes.join(', ')}`);
+        }
+
+        // Crear mapa nombre → id para acceso fácil
+        const mapaCharolas = new Map();
+        charolasBD.forEach(c => mapaCharolas.set(c.nombreCharola, c.charolaId));
+
+        // Crear FRAS
+        const fras = await tx.fRAS.create({
+            data: {
+            gramosGenerados: this.cantidadFras,
+            fechaRegistro: this.fecha,
+            },
+        });
+
+        // Crear PUPA
         const pupa = await tx.pUPA.create({
             data: {
             cantidadObtenida: this.cantidadPupa,
@@ -55,8 +77,10 @@ module.exports = class Tamizado {
             },
         });
 
-        // 3. Procesar cada charola
-        for (const charolaId of this.charolas) {
+        // Procesar cada charola por nombre
+        for (const nombre of this.charolas) {
+            const charolaId = mapaCharolas.get(nombre);
+
             await tx.cHAROLA_FRAS.create({
             data: { charolaId, frasId: fras.frasId },
             });
@@ -95,56 +119,79 @@ module.exports = class Tamizado {
 
         return true;
         });
-
-        }catch(error) {
-            console.error("Error al tamizar charola:", error);
-            return error;
-        }
+    } catch (error) {
+        console.error("Error al tamizar charola:", error);
+        return error;
   }
+}
 
-  async tamizadoMultiple(){
+
+  async tamizadoMultiple() {
     return await prisma.$transaction(async (tx) => {
-      // 1. Crear FRAS
-      const fras = await tx.fRAS.create({
-        data: {
-          gramosGenerados: this.cantidadFras,
+        // 0. Buscar IDs de charolas por nombre
+        const charolasBD = await tx.cHAROLA.findMany({
+        where: {
+            nombreCharola: { in: this.charolas },
         },
-      });
-
-      // 2. Crear PUPA
-      const pupa = await tx.pUPA.create({
-        data: {
-          cantidadObtenida: this.cantidadPupa,
-          fechaRegistro: this.fecha,
+        select: {
+            charolaId: true,
+            nombreCharola: true,
         },
-      });
+        });
 
-      // 3. Procesar cada charola
-      for (const charolaId of this.charolas) {
+        // Validar que se encontraron todas
+        const nombresEncontrados = new Set(charolasBD.map(c => c.nombreCharola));
+        const nombresFaltantes = this.charolas.filter(n => !nombresEncontrados.has(n));
+        if (nombresFaltantes.length > 0) {
+        throw new Error(`Charolas no encontradas: ${nombresFaltantes.join(', ')}`);
+        }
+
+        // Crear mapa nombre → id
+        const mapaCharolas = new Map();
+        charolasBD.forEach(c => mapaCharolas.set(c.nombreCharola, c.charolaId));
+
+        // 1. Crear FRAS
+        const fras = await tx.fRAS.create({
+        data: {
+            gramosGenerados: this.cantidadFras,
+        },
+        });
+
+        // 2. Crear PUPA
+        const pupa = await tx.pUPA.create({
+        data: {
+            cantidadObtenida: this.cantidadPupa,
+            fechaRegistro: this.fecha,
+        },
+        });
+
+        // 3. Procesar cada charola (por nombre)
+        for (const nombre of this.charolas) {
+        const charolaId = mapaCharolas.get(nombre);
+
         await tx.cHAROLA_FRAS.create({
-          data: {
+            data: {
             charolaId,
             frasId: fras.frasId,
-          },
+            },
         });
 
         await tx.cHAROLA_PUPA.create({
-          data: {
+            data: {
             charolaId,
             pupaId: pupa.pupaId,
-          },
+            },
         });
 
         await tx.cHAROLA.update({
-          where: { charolaId },
-          data: {
+            where: { charolaId },
+            data: {
             fechaActualizacion: this.fecha,
-          },
+            },
         });
-      }
+        }
 
-      return true;
+        return true;
     });
-
   }
 }

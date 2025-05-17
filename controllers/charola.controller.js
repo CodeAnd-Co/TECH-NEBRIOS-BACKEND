@@ -182,10 +182,31 @@ const alimentarCharola = async (req, res) => {
 };
 
 
+const editarCharola = async (req, res) => {
+  try{
+    const charolaId = req.query.charolaId;
+
+    const nuevoEstado = req.query.nuevoEstado;
+    const nuevaFechaActualizacion = req.query.nuevaFechaActualizacion;
+    const nuevoPeso = req.query.nuevoPeso;
+    const nuevaAlimentacion = req.query.nuevaAlimentacion;
+    const nuevaAlimentacionOtorgada = req.query.nuevaAlimentacionOtorgada;
+    const nuevaHidratacion = req.query.nuevaHidratacion;
+    const nuevaHidratacionOtorgada = req.query.nuevaHidratacionOtorgada;
+
+    console.log('Parametros: '+nuevoEstado+', '+nuevaFechaActualizacion+', '+nuevoPeso+', '+nuevaAlimentacion+', '+nuevaAlimentacionOtorgada+', '+nuevaHidratacion+', '+nuevaHidratacionOtorgada);
+
+    res.status(200).json({mensaje: "Ok"});
+  } catch (error) {
+    console.error('❌ Error al obtener charolas:', error);
+    res.status(500).json({ mensaje: "Error interno del servidor"});
+  }
+};
 module.exports = {
   consultarCharola,
   eliminarCharola,
   registrarCharola,
   obtenerCharolas,
-  alimentarCharola
+  alimentarCharola,
+  editarCharola,
 };

@@ -32,3 +32,5 @@ router.post('/tamizadoIndividual', tamizadoController.tamizarCharolaIndividual);
  */
 
 router.post('/tamizadoMultiple', tamizadoController.tamizarMultiplesCharolas);
+
+module.exports = router;

@@ -19,7 +19,7 @@ router.post('/registrarCharola', charolaController.registrarCharola);
 /* ----------- */
 
 /* PUT METHODS */
-
+router.put('/editarCharola', charolaController.editarCharola);
 /* ----------- */
 
 /* DELETE METHODS */

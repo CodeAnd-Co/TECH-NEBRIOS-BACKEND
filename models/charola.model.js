@@ -127,6 +127,15 @@ module.exports = class Charola {
     });
   }
 
+  static async editarCharola() {
+    try{
+      
+    } catch (error){
+      console.error('Error al editar la charola:', error);
+      return { error: 'Error al editar la charola' };
+    }
+  }
+
   static async eliminarCharola(charolaID) {
     try {
       const id = Number(charolaID);

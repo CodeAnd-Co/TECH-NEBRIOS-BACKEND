@@ -8,7 +8,7 @@ const Tamizado = require("../models/charolaTamizado.model");
 
 module.exports.tamizarCharolaIndividual = async (req, res) => {
     if (req.body == null) {
-        return res.status(400).json({ success: false, message: "Datos no válidos" });
+        return res.status(400).json({ exito: false, mensaje: "Datos no válidos" });
     }
     try {
     const {
@@ -37,22 +37,16 @@ module.exports.tamizarCharolaIndividual = async (req, res) => {
 
     if (resultado === true) {
       return res.status(200).json({
-        success: true,
-        message: "Tamizado registrado correctamente",
+        exito: true,
+        mensaje: "Tamizado registrado correctamente",
       });
     }
-
-    // Si el modelo devuelve un error
-    /*return res.status(400).json({
-      success: false,
-      message: resultado.message || "Error en el tamizado",
-    });*/
 
   } catch (err) {
     console.error("Error en el controller de tamizado:", err);
     return res.status(500).json({
-      success: false,
-      message: "Error interno del servidor",
+      exito: false,
+      mensaje: "Error interno del servidor",
     });
   }
 
@@ -61,45 +55,38 @@ module.exports.tamizarCharolaIndividual = async (req, res) => {
 
 module.exports.tamizarMultiplesCharolas = async (req, res) => {
     if (req.body == null) {
-        return res.status(400).json({ success: false, message: "Datos no válidos" });
+        return res.status(400).json({ exito: false, mensaje: "Datos no válidos" });
     }
     try {
     const {
       charolas,
-      cantidadPupa,
-      cantidadFras,
+      pupa,
+      fras,
       fecha,
     } = req.body;
 
     const tamizado = new Tamizado({
       charolas,
-      cantidadPupa,
-      cantidadFras,
-      fecha,
+      cantidadPupa: pupa,
+      cantidadFras: fras,
+      fecha: fecha,
     });
 
     const resultado = await tamizado.tamizadoMultiple();
 
     if (resultado === true) {
       return res.status(200).json({
-        success: true,
-        message: "Tamizado registrado correctamente",
+        exito: true,
+        mensaje: "Tamizado registrado correctamente",
       });
     }
-
-    // Si la clase devuelve un error como objeto
-    return res.status(400).json({
-      success: false,
-      message: "Error en el tamizado",
-    });
 
   } catch (err) {
     console.error("Error en el controller de tamizado:", err);
     return res.status(500).json({
-      success: false,
-      message: "Error interno del servidor",
+      exito: false,
+      mensaje: "Error interno del servidor",
     });
   }
-
   
 }

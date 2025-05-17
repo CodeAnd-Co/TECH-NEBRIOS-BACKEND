@@ -154,6 +154,7 @@ module.exports = class Tamizado {
         const fras = await tx.fRAS.create({
         data: {
             gramosGenerados: this.cantidadFras,
+            fechaRegistro: this.fecha,
         },
         });
 

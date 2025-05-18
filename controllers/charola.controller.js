@@ -182,26 +182,61 @@ const alimentarCharola = async (req, res) => {
 };
 
 
+const crearObjetoCharola = (charolaId, estado, pesoCharola, fechaActualizacion) =>{
+  const resultado = new Map();
+
+  resultado.set("charolaId", parseInt(charolaId));
+  resultado.set("estado", estado);
+  resultado.set("pesoCharola", parseInt(pesoCharola));
+  resultado.set("fechaActualizacion", new Date(fechaActualizacion));
+
+  return resultado;
+}
+
+const crearObjetoAlimentacion = (alimentoId, cantidadOtorgada, fechaOtorgada) => {
+  const resultado = new Map();
+
+  resultado.set("alimentoId", parseInt(alimentoId));
+  resultado.set("cantidadOtorgada", parseInt(cantidadOtorgada));
+  resultado.set("fechaOtorgada", new Date(fechaOtorgada));
+
+  return resultado;
+}
+
+const crearObjetoHidratacion = (hidratacionId, cantidadOtorgada, fechaOtorgada) => {
+  const resultado = new Map();
+
+  resultado.set("hidratacionId", parseInt(hidratacionId));
+  resultado.set("cantidadOtorgada", parseInt(cantidadOtorgada));
+  resultado.set("fechaOtorgada", new Date(fechaOtorgada));
+
+  return resultado;
+}
+
+
 const editarCharola = async (req, res) => {
   try{
     const charolaId = req.query.charolaId;
+    const fechaActualizacion = req.query.fechaActualizacion;
 
-    const nuevoEstado = req.query.nuevoEstado;
-    const nuevaFechaActualizacion = req.query.nuevaFechaActualizacion;
-    const nuevoPeso = req.query.nuevoPeso;
-    const nuevaAlimentacion = req.query.nuevaAlimentacion;
-    const nuevaAlimentacionOtorgada = req.query.nuevaAlimentacionOtorgada;
-    const nuevaHidratacion = req.query.nuevaHidratacion;
-    const nuevaHidratacionOtorgada = req.query.nuevaHidratacionOtorgada;
+    const charola = crearObjetoCharola(charolaId, req.query.nuevoEstado, req.query.nuevoPeso, fechaActualizacion);
+    const alimentacion = crearObjetoAlimentacion(req.query.nuevaAlimentacion, req.query.nuevaAlimentacionOtorgada, fechaActualizacion);
+    const hidratacion = crearObjetoHidratacion(req.query.nuevaHidratacion, req.query.nuevaHidratacionOtorgada, fechaActualizacion);
 
-    console.log('Parametros: '+nuevoEstado+', '+nuevaFechaActualizacion+', '+nuevoPeso+', '+nuevaAlimentacion+', '+nuevaAlimentacionOtorgada+', '+nuevaHidratacion+', '+nuevaHidratacionOtorgada);
+    const resultado = await Charola.editarCharola(charola, alimentacion, hidratacion);
 
-    res.status(200).json({mensaje: "Ok"});
+    if (resultado == 200){
+      res.status(200).json({mensaje: "Ok"});
+      return;
+    }
+
+    res.status(500).json({error: "Ocurrió un error al editar los datos de la charola"});
   } catch (error) {
-    console.error('❌ Error al obtener charolas:', error);
+    console.error('❌ Error al editar charolas:', error);
     res.status(500).json({ mensaje: "Error interno del servidor"});
   }
 };
+
 module.exports = {
   consultarCharola,
   eliminarCharola,

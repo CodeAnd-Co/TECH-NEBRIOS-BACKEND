@@ -61,11 +61,16 @@ module.exports = class HistorialCharola {
             },
         });
 
-        const resultadoFormateado = resultado.map(item => ({
+        const resultadoFormateado = resultado.map(item => {
+          const isoString = item.fechaOtorgada.toISOString();
+          const [año, mes, dia] = isoString.split('T')[0].split('-');
+
+          return {
             cantidadOtorgada: item.cantidadOtorgada.toString(),
-            fechaOtorgada: format(new Date(item.fechaOtorgada), 'dd/MM/yyyy'),
+            fechaOtorgada: `${dia}/${mes}/${año}`,
             nombre: item.COMIDA.nombre,
-        }));
+          };
+        });
       
         return resultadoFormateado;
     } catch (error) {
@@ -96,11 +101,16 @@ module.exports = class HistorialCharola {
               },
           });
 
-          const resultadoFormateado = resultado.map(item => ({
+          const resultadoFormateado = resultado.map(item => {
+            const isoString = item.fechaOtorgada.toISOString();
+            const [año, mes, dia] = isoString.split('T')[0].split('-');
+
+            return {
               cantidadOtorgada: item.cantidadOtorgada.toString(),
-              fechaOtorgada: format(new Date(item.fechaOtorgada), 'dd/MM/yyyy'),
+              fechaOtorgada: `${dia}/${mes}/${año}`,
               nombre: item.HIDRATACION.nombre,
-          }));
+            };
+          });
         
             return resultadoFormateado;
       } catch (error) {
@@ -126,13 +136,14 @@ module.exports = class HistorialCharola {
               },
           });
 
+          const fechaStr = resultado.fechaActualizacion.toISOString();
+          const [año, mes, dia] = fechaStr.split('T')[0].split('-');
+
           const resultadoFormateado = {
             ...resultado,
-            fechaActualizacion: resultado.fechaActualizacion
-              ? format(new Date(resultado.fechaActualizacion), 'dd/MM/yyyy')
-              : null,
+            fechaActualizacion: `${dia}/${mes}/${año}`,
           };
-          
+
           return resultadoFormateado;
       } catch (error) {
           console.error('[Model] Error al obtener el historial de hidratacion de la charola: ', error);

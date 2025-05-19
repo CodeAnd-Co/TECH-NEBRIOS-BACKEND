@@ -3,7 +3,23 @@
 const { PrismaClient } = require('../generated/prisma');
 const prisma = new PrismaClient();
 
+
+/**
+ * Clase que representa el proceso de tamizado de charolas.
+ * @class
+ */
 module.exports = class Tamizado {
+    /**
+   * Crea una instancia de Tamizado.
+   * @param {string[]} charolas - Lista de nombres de charolas a procesar.
+   * @param {string} tipoComida - Tipo de comida otorgada.
+   * @param {string} tipoHidratacion - Tipo de hidratación otorgada.
+   * @param {number} cantidadComida - Cantidad de comida otorgada a cada charola.
+   * @param {number} cantidadHidratacion - Cantidad de hidratación otorgada a cada charola.
+   * @param {number} cantidadPupa - Cantidad de pupas obtenidas.
+   * @param {number} cantidadFras - Cantidad de fras (residuos) obtenidos en gramos.
+   * @param {Date|string} fecha - Fecha del tamizado.
+   */
     constructor({
     charolas = [],
     tipoComida = '',
@@ -23,6 +39,14 @@ module.exports = class Tamizado {
     this.cantidadFras = cantidadFras;
     this.fecha = new Date(fecha);
   }
+
+  /**
+   * Realiza el tamizado para una sola charola.
+   * Registra la comida, hidratación, fras y pupa asociada a la charola.
+   * 
+   * @async
+   * @returns {Promise<boolean|Error>} Retorna `true` si el tamizado fue exitoso, o un `Error` si ocurre una falla.
+   */
 
   async tamizarIndividual() {
     try {
@@ -125,6 +149,13 @@ module.exports = class Tamizado {
   }
 }
 
+/**
+   * Realiza el tamizado para varias charolas.
+   * Registra el fras y pupa y los asocia a cada charola.
+   * 
+   * @async
+   * @returns {Promise<boolean|Error>} Retorna `true` si el tamizado fue exitoso, o un `Error` si ocurre una falla.
+   */
 
   async tamizadoMultiple() {
     return await prisma.$transaction(async (tx) => {

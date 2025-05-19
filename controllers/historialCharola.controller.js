@@ -97,8 +97,8 @@ exports.postHistorialAncestros = async (req, res) => {
       )
     );
     return res.status(200).json({ message: 'Ancestros asignados correctamente' });
-  } catch (e) {
-    console.error('[Controller] Error asignando ancestros:', e);
+  } catch (error) {
+    console.error('[Controller] Error asignando ancestros:', error);
     return res.status(500).json({ error: 'No se pudieron asignar ancestros' });
   }
 };

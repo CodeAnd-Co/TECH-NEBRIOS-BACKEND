@@ -4,7 +4,7 @@
  * Controlador de Alimentos.
  * @module controllers/alimentoController
  */
-const Tamizado = require("../models/charolaTamizado.model");
+const Tamizado = require('../models/charolaTamizado.model');
 
 /**
  * Controlador para realizar el tamizado individual de charolas.
@@ -20,7 +20,7 @@ const Tamizado = require("../models/charolaTamizado.model");
 
 module.exports.tamizarCharolaIndividual = async (req, res) => {
     if (req.body == null) {
-        return res.status(400).json({ exito: false, mensaje: "Datos no válidos" });
+        return res.status(400).json({ exito: false, mensaje: 'Datos no válidos' });
     }
     try {
     const {
@@ -50,15 +50,15 @@ module.exports.tamizarCharolaIndividual = async (req, res) => {
     if (resultado === true) {
       return res.status(200).json({
         exito: true,
-        mensaje: "Tamizado registrado correctamente",
+        mensaje: 'Tamizado registrado correctamente',
       });
     }
 
   } catch (err) {
-    console.error("Error en el controller de tamizado:", err);
+    console.error('Error en el controller de tamizado:', err);
     return res.status(500).json({
       exito: false,
-      mensaje: "Error interno del servidor",
+      mensaje: 'Error interno del servidor',
     });
   }
 
@@ -79,7 +79,7 @@ module.exports.tamizarCharolaIndividual = async (req, res) => {
 
 module.exports.tamizarMultiplesCharolas = async (req, res) => {
     if (req.body == null) {
-        return res.status(400).json({ exito: false, mensaje: "Datos no válidos" });
+        return res.status(400).json({ exito: false, mensaje: 'Datos no válidos' });
     }
     try {
     const {
@@ -101,15 +101,15 @@ module.exports.tamizarMultiplesCharolas = async (req, res) => {
     if (resultado === true) {
       return res.status(200).json({
         exito: true,
-        mensaje: "Tamizado registrado correctamente",
+        mensaje: 'Tamizado registrado correctamente',
       });
     }
 
   } catch (err) {
-    console.error("Error en el controller de tamizado:", err);
+    console.error('Error en el controller de tamizado:', err);
     return res.status(500).json({
       exito: false,
-      mensaje: "Error interno del servidor",
+      mensaje: 'Error interno del servidor',
     });
   }
   

@@ -60,7 +60,7 @@ module.exports = class Tamizado {
         });
 
         if (!comida || !hidratacion) {
-            throw new Error("Nombre de comida o hidratación no válido");
+            throw new Error('Nombre de comida o hidratación no válido');
         }
 
         // Obtener todos los IDs de charolas por nombre
@@ -75,15 +75,15 @@ module.exports = class Tamizado {
         });
 
         // Validar que se encontraron todas las charolas
-        const nombresEncontrados = new Set(charolasBD.map(c => c.nombreCharola));
-        const nombresFaltantes = this.charolas.filter(n => !nombresEncontrados.has(n));
+        const nombresEncontrados = new Set(charolasBD.map(charola => charola.nombreCharola));
+        const nombresFaltantes = this.charolas.filter(nombres => !nombresEncontrados.has(nombres));
         if (nombresFaltantes.length > 0) {
             throw new Error(`Charolas no encontradas: ${nombresFaltantes.join(', ')}`);
         }
 
         // Crear mapa nombre → id para acceso fácil
         const mapaCharolas = new Map();
-        charolasBD.forEach(c => mapaCharolas.set(c.nombreCharola, c.charolaId));
+        charolasBD.forEach(charola => mapaCharolas.set(charola.nombreCharola, charola.charolaId));
 
         // Crear FRAS
         const fras = await tx.fRAS.create({
@@ -144,7 +144,7 @@ module.exports = class Tamizado {
         return true;
         });
     } catch (error) {
-        console.error("Error al tamizar charola:", error);
+        console.error('Error al tamizar charola:', error);
         return error;
   }
 }
@@ -171,15 +171,15 @@ module.exports = class Tamizado {
         });
 
         // Validar que se encontraron todas
-        const nombresEncontrados = new Set(charolasBD.map(c => c.nombreCharola));
-        const nombresFaltantes = this.charolas.filter(n => !nombresEncontrados.has(n));
+        const nombresEncontrados = new Set(charolasBD.map(charola => charola.nombreCharola));
+        const nombresFaltantes = this.charolas.filter(nombre => !nombresEncontrados.has(nombre));
         if (nombresFaltantes.length > 0) {
         throw new Error(`Charolas no encontradas: ${nombresFaltantes.join(', ')}`);
         }
 
         // Crear mapa nombre → id
         const mapaCharolas = new Map();
-        charolasBD.forEach(c => mapaCharolas.set(c.nombreCharola, c.charolaId));
+        charolasBD.forEach(charola => mapaCharolas.set(charola.nombreCharola, charola.charolaId));
 
         // 1. Crear FRAS
         const fras = await tx.fRAS.create({

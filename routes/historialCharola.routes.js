@@ -17,7 +17,7 @@ router.get('/historialActividad', historialCharolaController.obtenerHistorialAct
 /* ----------- */
 
 /* POST METHODS */
-
+router.post('/:charolaId/ancestros', historialCharolaController.postHistorialAncestros);
 /* ----------- */
 
 /* PUT METHODS */

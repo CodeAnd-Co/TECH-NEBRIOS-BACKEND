@@ -81,3 +81,24 @@ exports.obtenerHistorialActividad = async(req, res) => {
       res.status(500).json({'error': 'Ocurrio un error en el servidor'});
   }
 };
+
+exports.postHistorialAncestros = async (req, res) => {
+  const hija = parseInt(req.params.charolaId, 10);
+  const { ancestros } = req.body;  
+
+  if (!Array.isArray(ancestros)) {
+    return res.status(400).json({ error: 'Debes enviar un array de IDs en “ancestros”' });
+  }
+
+  try {
+    await Promise.all(
+      ancestros.map(ancestroId =>
+        HistorialCharola.asignarAncestro({ charolaHija: hija, charolaAncestro: ancestroId })
+      )
+    );
+    return res.status(200).json({ message: 'Ancestros asignados correctamente' });
+  } catch (e) {
+    console.error('[Controller] Error asignando ancestros:', e);
+    return res.status(500).json({ error: 'No se pudieron asignar ancestros' });
+  }
+};

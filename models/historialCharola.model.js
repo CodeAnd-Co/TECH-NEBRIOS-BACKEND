@@ -29,7 +29,7 @@ module.exports = class HistorialCharola {
 
     try {
       const relaciones = await conexion.query(
-        'SELECT a.charolaAncestro, c.nombreCharola FROM CHAROLA_CHAROLA a JOIN CHAROLA c ON a.charolaAncestro = c.charolaId WHERE a.charolaHija = ?',
+        'SELECT a.charolaHija, c.nombreCharola FROM CHAROLA_CHAROLA a JOIN CHAROLA c ON a.charolaHija = c.charolaId WHERE a.charolaAncestro = ?',
         [charolaId]
       );
       
@@ -138,5 +138,15 @@ module.exports = class HistorialCharola {
           console.error('[Model] Error al obtener el historial de hidratacion de la charola: ', error);
           throw error;
       }
+  }
+
+ /**
+   * Inserta una tupla en CHAROLA_CHAROLA
+   * @param {{charolaHija: number, charolaAncestro: number}} data
+   */
+  static async asignarAncestro({ charolaHija, charolaAncestro }) {
+    return prisma.CHAROLA_CHAROLA.create({
+      data: { charolaHija, charolaAncestro }
+    });
   }
 };

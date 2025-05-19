@@ -12,32 +12,45 @@ module.exports = class HistorialCharola {
    * @returns {Promise<Array<{ charolaAncestro: number, nombreCharola: string }>>}
    */
   static async obtenerFechaCreacion(charolaId) {
-    const conexion = await database();
-
     try {
-      const resultado = await conexion.query(
-        'SELECT fechaCreacion FROM CHAROLA WHERE charolaId = ?',
-        [charolaId]
-      );
-      return resultado;
-    } finally {
-      conexion.release();
+      const resultado = await prisma.cHAROLA.findUnique({
+        where: { charolaId: Number(charolaId) },
+        select: { fechaCreacion: true },
+      });
+  
+      if (!resultado) return [];
+  
+      return [{ fechaCreacion: resultado.fechaCreacion }];
+    } catch (error) {
+      throw error;
     }
   }
+  
   static async obtenerAncestros(charolaId) {
-    const conexion = await database();
-
     try {
-      const relaciones = await conexion.query(
-        'SELECT a.charolaAncestro, c.nombreCharola FROM CHAROLA_CHAROLA a JOIN CHAROLA c ON a.charolaAncestro = c.charolaId WHERE a.charolaHija = ?',
-        [charolaId]
-      );
-      
-      return relaciones;
-    } finally {
-      conexion.release();
+      const resultado = await prisma.cHAROLA_CHAROLA.findMany({
+        where: {
+          charolaHija: Number(charolaId),
+        },
+        select: {
+          charolaAncestro: true,
+          CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA: {
+            select: {
+              nombreCharola: true,
+            },
+          },
+        },
+      });
+  
+      // Formatear resultado como el query original
+      return resultado.map(relacion => ({
+        charolaAncestro: relacion.charolaAncestro,
+        nombreCharola: relacion.CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA.nombreCharola,
+      }));
+    } catch (error) {
+      throw error;
     }
-  }
+  }  
 
   /**
      * @description Método para obtener el historial de la alimentación de una charola.
@@ -49,6 +62,9 @@ module.exports = class HistorialCharola {
         const resultado = await prisma.CHAROLA_COMIDA.findMany({
             where: {
               charolaId: charolaId,
+            },
+            orderBy: {
+              fechaOtorgada: 'desc', 
             },
             select: {
               cantidadOtorgada: true,
@@ -69,7 +85,6 @@ module.exports = class HistorialCharola {
       
         return resultadoFormateado;
     } catch (error) {
-        console.error('[Model] Error al obtener el historial de alimentacion de la charola: ', error);
         throw error;      
     }
   }
@@ -84,6 +99,9 @@ module.exports = class HistorialCharola {
           const resultado = await prisma.CHAROLA_HIDRATACION.findMany({
               where: {
                 charolaId: charolaId,
+              },
+              orderBy: {
+                fechaOtorgada: 'desc',
               },
               select: {
                 cantidadOtorgada: true,
@@ -104,7 +122,6 @@ module.exports = class HistorialCharola {
         
             return resultadoFormateado;
       } catch (error) {
-          console.error('[Model] Error al obtener el historial de hidratacion de la charola: ', error);
           throw error;
       }
   }
@@ -135,7 +152,6 @@ module.exports = class HistorialCharola {
           
           return resultadoFormateado;
       } catch (error) {
-          console.error('[Model] Error al obtener el historial de hidratacion de la charola: ', error);
           throw error;
       }
   }

@@ -1,56 +1,74 @@
 // models/historialCharola.model.js
 const { PrismaClient } = require('../generated/prisma');
 const { format } = require('date-fns');
+const logger = require('../utils/logger');
 const prisma = new PrismaClient();
 
 const database = require('../utils/database');
 
 module.exports = class HistorialCharola {
   /**
-   * Obtiene los ancestros (padres) de una charola.
-   * @param {number|string} charolaId
-   * @returns {Promise<Array<{ charolaAncestro: number, nombreCharola: string }>>}
-   */
-  static async obtenerFechaCreacion(charolaId) {
-    try {
-      const resultado = await prisma.cHAROLA.findUnique({
-        where: { charolaId: Number(charolaId) },
-        select: { fechaCreacion: true },
-      });
-  
-      if (!resultado) return [];
-  
-      return [{ fechaCreacion: resultado.fechaCreacion }];
-    } catch (error) {
-      throw error;
-    }
+ * Obtiene la fecha de creación de una charola específica.
+ *
+ * @async
+ * @function obtenerFechaCreacion
+ * @param {number|string} charolaId - El ID de la charola cuya fecha de creación se desea consultar.
+ * @returns {Promise<Array<{ fechaCreacion: Date }>>} Una promesa que resuelve con un arreglo que contiene
+ *          un objeto con la propiedad `fechaCreacion`, o un arreglo vacío si no se encuentra la charola.
+ * @throws {Error} Lanza un error si ocurre una excepción durante la consulta a la base de datos.
+ */
+static async obtenerFechaCreacion(charolaId) {
+  try {
+    const resultado = await prisma.cHAROLA.findUnique({
+      where: { charolaId: Number(charolaId) },
+      select: { fechaCreacion: true },
+    });
+
+    if (!resultado) return [];
+
+    return [{ fechaCreacion: resultado.fechaCreacion }];
+  } catch (error) {
+    logger.error('Error en obtenerFechaCreacion', { error });
+    throw error;
   }
-  
-  static async obtenerAncestros(charolaId) {
-    try {
-      const resultado = await prisma.cHAROLA_CHAROLA.findMany({
-        where: {
-          charolaHija: Number(charolaId),
-        },
-        select: {
-          charolaAncestro: true,
-          CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA: {
-            select: {
-              nombreCharola: true,
-            },
+}
+
+/**
+ * Obtiene los ancestros directos de una charola (relaciones madre/abuela, etc).
+ *
+ * @async
+ * @function obtenerAncestros
+ * @param {number|string} charolaId - El ID de la charola hija cuya línea ancestral se desea consultar.
+ * @returns {Promise<Array<{ charolaAncestro: number, nombreCharola: string }>>} Una promesa que resuelve con un arreglo
+ *          de objetos, donde cada uno representa una charola ancestro con su ID y nombre.
+ * @throws {Error} Lanza un error si ocurre una excepción durante la consulta a la base de datos.
+ */
+static async obtenerAncestros(charolaId) {
+  try {
+    const resultado = await prisma.cHAROLA_CHAROLA.findMany({
+      where: {
+        charolaHija: Number(charolaId),
+      },
+      select: {
+        charolaAncestro: true,
+        CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA: {
+          select: {
+            nombreCharola: true,
           },
         },
-      });
-  
-      // Formatear resultado como el query original
-      return resultado.map(relacion => ({
-        charolaAncestro: relacion.charolaAncestro,
-        nombreCharola: relacion.CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA.nombreCharola,
-      }));
-    } catch (error) {
-      throw error;
-    }
-  }  
+      },
+    });
+
+    // Formatear resultado como el query original
+    return resultado.map(relacion => ({
+      charolaAncestro: relacion.charolaAncestro,
+      nombreCharola: relacion.CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA.nombreCharola,
+    }));
+  } catch (error) {
+    logger.error('Error en obtenerAncestros', { error });
+    throw error;
+  }
+}
 
   /**
      * @description Método para obtener el historial de la alimentación de una charola.
@@ -85,6 +103,7 @@ module.exports = class HistorialCharola {
       
         return resultadoFormateado;
     } catch (error) {
+      logger.error('Error en historialAlimentacion', { error });
         throw error;      
     }
   }
@@ -122,6 +141,7 @@ module.exports = class HistorialCharola {
         
             return resultadoFormateado;
       } catch (error) {
+        logger.error('Error en historialHidratacion', { error });
           throw error;
       }
   }
@@ -152,6 +172,7 @@ module.exports = class HistorialCharola {
           
           return resultadoFormateado;
       } catch (error) {
+        logger.error('Error en estadoCharola', { error });
           throw error;
       }
   }

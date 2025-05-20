@@ -5,7 +5,7 @@
 // RF10 Consultar información detallada de una charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF10
 // RF16 Visualizar todas las charolas registradas en el sistema - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
 // RF21: Consultar charolas de cambios pasados - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
-
+// RF26 Registrar la alimentación de la charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF26
 
 // models/charola.model.js
 const { PrismaClient } = require('../generated/prisma');
@@ -209,4 +209,42 @@ module.exports = class Charola {
     });
     return total;
   } 
+
+  /**
+   * Alimenta la charola: crea registro en CHAROLA_COMIDA y
+   * luego actualiza comidaCiclo y fechaActualizacion en CHAROLA.
+   * @param {{charolaId:number, comidaId:number, cantidadOtorgada:number}} params
+   */
+  static async alimentar({ charolaId, comidaId, cantidadOtorgada }) {
+    const fecha = new Date();
+  
+    return prisma.$transaction(async tx => {
+      // 1) Crear la relación comida y traer también la comida relacionada
+      const rel = await tx.CHAROLA_COMIDA.create({
+        data: {
+          charolaId,
+          comidaId,
+          cantidadOtorgada,
+          fechaOtorgada: fecha
+        },
+        include: {
+          COMIDA: true 
+        }
+      });
+  
+      // 2) Actualizar la charola
+      const updated = await tx.CHAROLA.update({
+        where: { charolaId },
+        data: {
+          comidaCiclo: { increment: cantidadOtorgada },
+          fechaActualizacion: fecha
+        }
+      });
+  
+      return {
+        relacion: rel,  
+        charola: updated
+      };
+    });
+  }  
 };

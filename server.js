@@ -5,12 +5,11 @@ const db = require('./utils/database');
 
 const app = express();
 
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const sesionActiva = require('./utils/middlewares/sesionActiva');
 /* ------------ */
-
 
 /* Rutas */
 const charolaRoutes = require('./routes/charola.routes');

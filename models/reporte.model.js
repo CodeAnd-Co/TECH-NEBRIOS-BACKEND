@@ -2,7 +2,7 @@ const { PrismaClient } = require('../generated/prisma');
 const { format } = require('date-fns');
 
 const prisma = new PrismaClient();
- 
+
 const ReporteModel = {
   /**
    * @description Metodo para realizar la consulta de la información de las charolas.
@@ -41,7 +41,7 @@ const ReporteModel = {
       return resultadoFormateado;
     } catch (error) {
       console.error('[Model] Error al obtener información de las charolas:', error);
-      throw error;      
+      throw error;
     }
   }
 };

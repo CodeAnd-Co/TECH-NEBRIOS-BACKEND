@@ -6,11 +6,9 @@
  * @module routes/alimentacion
  */
 
-
 //Dependencias
 const express = require("express");
 const router = express.Router();
-
 
 // Controladores
 const alimentoController = require("../controllers/alimento.controller.js");
@@ -21,7 +19,7 @@ const alimentoController = require("../controllers/alimento.controller.js");
  * @returns {Object[]} Lista de alimentos
  */
 
-router.get('/', alimentoController.obtenerAlimentos); 
+router.get('/', alimentoController.obtenerAlimentos);
 
 /**
  * POST /agregar
@@ -48,7 +46,6 @@ router.put('/editar/:idAlimento', alimentoController.editarAlimento);
  * @memberof module:routes/alimentoRoutes
  */
 router.delete('/eliminar/:idAlimento', alimentoController.eliminarAlimento);
-
 
 router.post('/charola-comida', alimentoController.registrarCharolaComida);
 

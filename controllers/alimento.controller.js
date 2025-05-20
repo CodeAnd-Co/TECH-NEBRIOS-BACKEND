@@ -5,6 +5,7 @@
  * @module controllers/alimentoController
  */
 const { Alimento } = require('../models/alimento.model');
+const { CharolaComida } = require('../models/charola_comida.model');
 
 /**
  * Obtiene todos los alimentos de la base de datos.

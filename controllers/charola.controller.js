@@ -186,12 +186,12 @@ const alimentarCharola = async (req, res) => {
 const crearObjetoCharola = (charolaId, nuevoNombre, fechaCreacion, estado, pesoCharola, fechaActualizacion) =>{
   const resultado = new Map();
 
-  resultado.set("charolaId", parseInt(charolaId));
-  resultado.set("nombreCharola", nuevoNombre);
-  resultado.set("fechaCreacion", new Date(fechaCreacion));
-  resultado.set("estado", estado);
-  resultado.set("pesoCharola", parseInt(pesoCharola));
-  resultado.set("fechaActualizacion", new Date(fechaActualizacion));
+  resultado.set('charolaId', parseInt(charolaId));
+  resultado.set('nombreCharola', nuevoNombre);
+  resultado.set('fechaCreacion', new Date(fechaCreacion));
+  resultado.set('estado', estado);
+  resultado.set('pesoCharola', parseInt(pesoCharola));
+  resultado.set('fechaActualizacion', new Date(fechaActualizacion));
 
   return resultado;
 }
@@ -199,9 +199,9 @@ const crearObjetoCharola = (charolaId, nuevoNombre, fechaCreacion, estado, pesoC
 const crearObjetoAlimentacion = (alimentoId, cantidadOtorgada, fechaOtorgada) => {
   const resultado = new Map();
 
-  resultado.set("alimentoId", parseInt(alimentoId));
-  resultado.set("cantidadOtorgada", parseInt(cantidadOtorgada));
-  resultado.set("fechaOtorgada", new Date(fechaOtorgada));
+  resultado.set('alimentoId', parseInt(alimentoId));
+  resultado.set('cantidadOtorgada', parseInt(cantidadOtorgada));
+  resultado.set('fechaOtorgada', new Date(fechaOtorgada));
 
   return resultado;
 }
@@ -209,9 +209,9 @@ const crearObjetoAlimentacion = (alimentoId, cantidadOtorgada, fechaOtorgada) =>
 const crearObjetoHidratacion = (hidratacionId, cantidadOtorgada, fechaOtorgada) => {
   const resultado = new Map();
 
-  resultado.set("hidratacionId", parseInt(hidratacionId));
-  resultado.set("cantidadOtorgada", parseInt(cantidadOtorgada));
-  resultado.set("fechaOtorgada", new Date(fechaOtorgada));
+  resultado.set('hidratacionId', parseInt(hidratacionId));
+  resultado.set('cantidadOtorgada', parseInt(cantidadOtorgada));
+  resultado.set('fechaOtorgada', new Date(fechaOtorgada));
 
   return resultado;
 }
@@ -229,14 +229,14 @@ const editarCharola = async (req, res) => {
     const resultado = await Charola.editarCharola(charola, alimentacion, hidratacion);
 
     if (resultado == 200){
-      res.status(200).json({mensaje: "Ok"});
+      res.status(200).json({mensaje: 'Ok'});
       return;
     }
 
-    res.status(500).json({error: "Ocurrió un error al editar los datos de la charola"});
+    res.status(500).json({error: 'Ocurrió un error al editar los datos de la charola'});
   } catch (error) {
     console.error('❌ Error al editar charolas:', error);
-    res.status(500).json({ mensaje: "Error interno del servidor"});
+    res.status(500).json({ mensaje: 'Error interno del servidor'});
   }
 };
 

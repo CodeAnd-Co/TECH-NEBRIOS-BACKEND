@@ -78,7 +78,7 @@ const eliminarCharola = async (req, res) => {
   } catch (err) {
     console.error('Error al eliminar la charola:', err);
     res.status(500).json({ error: 'Error al eliminar la charola' });
-    
+
   }
 };
 

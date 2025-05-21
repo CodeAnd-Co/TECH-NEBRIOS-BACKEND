@@ -1,4 +1,4 @@
-
+//RF40: Editar un tipo de hidratación en el sistema - https://codeandco-wiki.netlify.app/docs/next/proyectos/larvas/documentacion/requisitos/RF40
 const { PrismaClient } = require('../generated/prisma');
 const prisma = new PrismaClient();
 
@@ -31,6 +31,21 @@ class Hidratacion {
     return await prisma.HIDRATACION.findMany();
   }
 
+      /**
+   * Actualiza un tipo de hidratacion existente en la tabla HIDRATACION.
+   * @async
+   * @method actualizar
+   * @returns {Promise<Object>} Registro actualizado del alimento.
+   * @throws {Error} Si ocurre un error de consulta o conexión.
+   */
+      async actualizar() {
+        return await prisma.HIDRATACION.update({
+          where: { hidratacionId: this.idHidratacion },
+          data: {
+            nombre:      this.nombreHidratacion,
+            descripcion: this.descripcionHidratacion,
+          },
+        });
+      }
 }
-
 module.exports = { Hidratacion };

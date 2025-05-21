@@ -1,4 +1,4 @@
-
+//RF40: Editar un tipo de hidratación en el sistema - https://codeandco-wiki.netlify.app/docs/next/proyectos/larvas/documentacion/requisitos/RF40
 /* Dependencias */
 const express = require("express");
 const router = express.Router();
@@ -26,6 +26,12 @@ router.get('/', hidratacionController.obtenerHidratacion);
 
 /* PUT METHODS */
 /**
+ * PUT /editar/:idHidratacion - Edita hidratacion existente.
+ * @name PUT/editar/:idHidratacion
+ * @function
+ * @memberof module:routes/hidratacionRoutes
+ */
+router.put('/editar/:idHidratacion', hidratacionController.editarHidratacion);
 
 /* ----------- */
 

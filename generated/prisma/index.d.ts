@@ -391,8 +391,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.7.0
-   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -5459,6 +5459,7 @@ export namespace Prisma {
     charolaId?: boolean
     comidaId?: boolean
     cantidadOtorgada?: boolean
+    fechaOtorgada?: boolean
     CHAROLA?: boolean | CHAROLA_COMIDA$CHAROLAArgs<ExtArgs>
     COMIDA?: boolean | CHAROLA_COMIDA$COMIDAArgs<ExtArgs>
   }, ExtArgs["result"]["cHAROLA_COMIDA"]>
@@ -5473,7 +5474,7 @@ export namespace Prisma {
     fechaOtorgada?: boolean
   }
 
-  export type CHAROLA_COMIDAOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "charolaId" | "comidaId" | "cantidadOtorgada", ExtArgs["result"]["CHAROLA_COMIDA"]>
+  export type CHAROLA_COMIDAOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "charolaId" | "comidaId" | "cantidadOtorgada" | "fechaOtorgada", ExtArgs["result"]["cHAROLA_COMIDA"]>
   export type CHAROLA_COMIDAInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     CHAROLA?: boolean | CHAROLA_COMIDA$CHAROLAArgs<ExtArgs>
     COMIDA?: boolean | CHAROLA_COMIDA$COMIDAArgs<ExtArgs>
@@ -18744,30 +18745,6 @@ export namespace Prisma {
     frasId?: IntFilter<"CHAROLA_FRAS"> | number
   }
 
-  export type CHAROLA_FRASUpsertWithWhereUniqueWithoutCHAROLAInput = {
-    where: CHAROLA_FRASWhereUniqueInput
-    update: XOR<CHAROLA_FRASUpdateWithoutCHAROLAInput, CHAROLA_FRASUncheckedUpdateWithoutCHAROLAInput>
-    create: XOR<CHAROLA_FRASCreateWithoutCHAROLAInput, CHAROLA_FRASUncheckedCreateWithoutCHAROLAInput>
-  }
-
-  export type CHAROLA_FRASUpdateWithWhereUniqueWithoutCHAROLAInput = {
-    where: CHAROLA_FRASWhereUniqueInput
-    data: XOR<CHAROLA_FRASUpdateWithoutCHAROLAInput, CHAROLA_FRASUncheckedUpdateWithoutCHAROLAInput>
-  }
-
-  export type CHAROLA_FRASUpdateManyWithWhereWithoutCHAROLAInput = {
-    where: CHAROLA_FRASScalarWhereInput
-    data: XOR<CHAROLA_FRASUpdateManyMutationInput, CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLAInput>
-  }
-
-  export type CHAROLA_FRASScalarWhereInput = {
-    AND?: CHAROLA_FRASScalarWhereInput | CHAROLA_FRASScalarWhereInput[]
-    OR?: CHAROLA_FRASScalarWhereInput[]
-    NOT?: CHAROLA_FRASScalarWhereInput | CHAROLA_FRASScalarWhereInput[]
-    charolaId?: IntFilter<"CHAROLA_FRAS"> | number
-    frasId?: IntFilter<"CHAROLA_FRAS"> | number
-  }
-
   export type CHAROLA_HIDRATACIONUpsertWithWhereUniqueWithoutCHAROLAInput = {
     where: CHAROLA_HIDRATACIONWhereUniqueInput
     update: XOR<CHAROLA_HIDRATACIONUpdateWithoutCHAROLAInput, CHAROLA_HIDRATACIONUncheckedUpdateWithoutCHAROLAInput>
@@ -20037,10 +20014,6 @@ export namespace Prisma {
     frasId: number
   }
 
-  export type CHAROLA_FRASCreateManyCHAROLAInput = {
-    frasId: number
-  }
-
   export type CHAROLA_HIDRATACIONCreateManyCHAROLAInput = {
     id?: number
     hidratacionId?: number | null
@@ -20103,18 +20076,6 @@ export namespace Prisma {
     comidaId?: NullableIntFieldUpdateOperationsInput | number | null
     cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
     fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CHAROLA_FRASUpdateWithoutCHAROLAInput = {
-    FRAS?: FRASUpdateOneRequiredWithoutCHAROLA_FRASNestedInput
-  }
-
-  export type CHAROLA_FRASUncheckedUpdateWithoutCHAROLAInput = {
-    frasId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLAInput = {
-    frasId?: IntFieldUpdateOperationsInput | number
   }
 
   export type CHAROLA_FRASUpdateWithoutCHAROLAInput = {
@@ -20214,22 +20175,6 @@ export namespace Prisma {
     charolaId?: NullableIntFieldUpdateOperationsInput | number | null
     cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
     fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CHAROLA_FRASCreateManyFRASInput = {
-    charolaId: number
-  }
-
-  export type CHAROLA_FRASUpdateWithoutFRASInput = {
-    CHAROLA?: CHAROLAUpdateOneRequiredWithoutCHAROLA_FRASNestedInput
-  }
-
-  export type CHAROLA_FRASUncheckedUpdateWithoutFRASInput = {
-    charolaId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type CHAROLA_FRASUncheckedUpdateManyWithoutFRASInput = {
-    charolaId?: IntFieldUpdateOperationsInput | number
   }
 
   export type CHAROLA_FRASCreateManyFRASInput = {

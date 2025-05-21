@@ -1,10 +1,10 @@
 // RF18 Historial de actividad:
 // https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF18
 
-const historialActividadController  = require('../controllers/historialActividad.controller.js');
-const historialActividadModel = require('../models/historialActividad.model.js');
+const historialActividadController  = require('../controllers/historialCharola.controller.js');
+const historialActividadModel = require('../models/historialCharola.model.js');
 
-jest.mock('../models/historialActividad.model');
+jest.mock('../models/historialCharola.model');
 
 describe('Controlador historial de actividad', () => {
     let req, res;
@@ -29,7 +29,7 @@ describe('Controlador historial de actividad', () => {
         historialActividadModel.historialHidratacion.mockResolvedValue(hidratacionMock);
         historialActividadModel.estadoCharola.mockResolvedValue(estadoMock);
 
-        await historialActividadController.getHistorialActividad(req, res);
+        await historialActividadController.obtenerHistorialActividad(req, res);
 
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith({
@@ -47,7 +47,7 @@ describe('Controlador historial de actividad', () => {
         historialActividadModel.historialHidratacion.mockResolvedValue([]);
         historialActividadModel.estadoCharola.mockResolvedValue(estadoMock);
 
-        await historialActividadController.getHistorialActividad(req, res);
+        await historialActividadController.obtenerHistorialActividad(req, res);
 
         expect(res.status).toHaveBeenCalledWith(201);
         expect(res.json).toHaveBeenCalledWith({
@@ -59,7 +59,7 @@ describe('Controlador historial de actividad', () => {
     test('[GET] Debe responder con código 500 cuando ocurre un error interno del servidor', async () => {
         historialActividadModel.historialAlimentacion.mockRejectedValue(new Error('Fallo inesperado'));
 
-        await historialActividadController.getHistorialActividad(req, res);
+        await historialActividadController.obtenerHistorialActividad(req, res);
 
         expect(res.status).toHaveBeenCalledWith(500);
         expect(res.json).toHaveBeenCalledWith({

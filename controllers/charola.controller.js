@@ -7,6 +7,7 @@
 // RF21: Consultar charolas de cambios pasados - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
 // RF26 Registrar la alimentación de la charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF26
 
+const { hi } = require('date-fns/locale');
 const Charola = require('../models/charola.model.js');
 
 /**
@@ -182,10 +183,12 @@ const alimentarCharola = async (req, res) => {
 };
 
 
-const crearObjetoCharola = (charolaId, estado, pesoCharola, fechaActualizacion) =>{
+const crearObjetoCharola = (charolaId, nuevoNombre, fechaCreacion, estado, pesoCharola, fechaActualizacion) =>{
   const resultado = new Map();
 
   resultado.set("charolaId", parseInt(charolaId));
+  resultado.set("nombreCharola", nuevoNombre);
+  resultado.set("fechaCreacion", new Date(fechaCreacion));
   resultado.set("estado", estado);
   resultado.set("pesoCharola", parseInt(pesoCharola));
   resultado.set("fechaActualizacion", new Date(fechaActualizacion));
@@ -219,7 +222,7 @@ const editarCharola = async (req, res) => {
     const charolaId = req.query.charolaId;
     const fechaActualizacion = req.query.fechaActualizacion;
 
-    const charola = crearObjetoCharola(charolaId, req.query.nuevoEstado, req.query.nuevoPeso, fechaActualizacion);
+    const charola = crearObjetoCharola(charolaId, req.query.nuevoNombre, req.query.fechaCreacion, req.query.nuevoEstado, req.query.nuevoPeso, fechaActualizacion);
     const alimentacion = crearObjetoAlimentacion(req.query.nuevaAlimentacion, req.query.nuevaAlimentacionOtorgada, fechaActualizacion);
     const hidratacion = crearObjetoHidratacion(req.query.nuevaHidratacion, req.query.nuevaHidratacionOtorgada, fechaActualizacion);
 

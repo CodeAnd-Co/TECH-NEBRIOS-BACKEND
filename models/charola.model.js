@@ -129,6 +129,73 @@ module.exports = class Charola {
     });
   }
 
+  static async editarCharola(charola, alimento, hidratacion) {
+    try{
+      await prisma.CHAROLA.update({
+        where: {
+          charolaId: charola.get('charolaId'),
+        },
+        data: {
+          nombreCharola: charola.get('nombreCharola'),
+          fechaCreacion: charola.get('fechaCreacion'),
+          pesoCharola: charola.get('pesoCharola'),
+          estado: charola.get('estado'),
+          fechaActualizacion: charola.get('fechaActualizacion'),
+        },
+      });
+
+      const ultimoRegistroComida = await prisma.CHAROLA_COMIDA.findFirst({
+        where: {
+          charolaId: charola.get('charolaId'),
+        },
+        orderBy: {
+          id: 'desc',
+        },
+      });
+
+      if (ultimoRegistroComida) {
+        await prisma.CHAROLA_COMIDA.update({
+          where: {
+            id: ultimoRegistroComida.id,
+          },
+          data: {
+            comidaId: alimento.get('alimentoId'),
+            cantidadOtorgada: alimento.get('cantidadOtorgada'),
+            fechaOtorgada: alimento.get('fechaOtorgada'),
+          },
+        });
+      }
+
+        const ultimoRegistroHidratacion = await prisma.CHAROLA_HIDRATACION.findFirst({
+        where: {
+          charolaId: charola.get('charolaId'),
+        },
+        orderBy: {
+          id: 'desc',
+        },
+      });
+
+      if (ultimoRegistroHidratacion) {
+        await prisma.CHAROLA_HIDRATACION.update({
+          where: {
+            id: ultimoRegistroHidratacion.id,
+          },
+          data: {
+            hidratacionId: hidratacion.get('hidratacionId'),
+            cantidadOtorgada: hidratacion.get('cantidadOtorgada'),
+            fechaOtorgada: hidratacion.get('fechaOtorgada'),
+          },
+        });
+      }
+
+      return 200;
+
+    } catch (error){
+      console.error('Error al editar la charola:', error);
+      return { error: 'Error al editar la charola' };
+    }
+  }
+
   static async eliminarCharola(charolaID) {
     try {
       const id = Number(charolaID);

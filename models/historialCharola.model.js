@@ -95,13 +95,18 @@ module.exports = class HistorialCharola {
         },
       });
 
-      const resultadoFormateado = resultado.map(item => ({
-        cantidadOtorgada: item.cantidadOtorgada.toString(),
-        fechaOtorgada: format(new Date(item.fechaOtorgada), 'dd/MM/yyyy'),
-        nombre: item.COMIDA.nombre,
-      }));
+        const resultadoFormateado = resultado.map(item => {
+          const isoString = item.fechaOtorgada.toISOString();
+          const [año, mes, dia] = isoString.split('T')[0].split('-');
 
-      return resultadoFormateado;
+          return {
+            cantidadOtorgada: item.cantidadOtorgada.toString(),
+            fechaOtorgada: `${dia}/${mes}/${año}`,
+            nombre: item.COMIDA.nombre,
+          };
+        });
+      
+        return resultadoFormateado;
     } catch (error) {
       logger.error('Error en historialAlimentacion', { error });
       throw error;
@@ -133,17 +138,22 @@ module.exports = class HistorialCharola {
         },
       });
 
-      const resultadoFormateado = resultado.map(item => ({
-        cantidadOtorgada: item.cantidadOtorgada.toString(),
-        fechaOtorgada: format(new Date(item.fechaOtorgada), 'dd/MM/yyyy'),
-        nombre: item.HIDRATACION.nombre,
-      }));
+          const resultadoFormateado = resultado.map(item => {
+            const isoString = item.fechaOtorgada.toISOString();
+            const [año, mes, dia] = isoString.split('T')[0].split('-');
 
-      return resultadoFormateado;
-    } catch (error) {
-      logger.error('Error en historialHidratacion', { error });
-      throw error;
-    }
+            return {
+              cantidadOtorgada: item.cantidadOtorgada.toString(),
+              fechaOtorgada: `${dia}/${mes}/${año}`,
+              nombre: item.HIDRATACION.nombre,
+            };
+          });
+        
+            return resultadoFormateado;
+      } catch (error) {
+          console.error('[Model] Error al obtener el historial de hidratacion de la charola: ', error);
+          throw error;
+      }
   }
 
   /**
@@ -163,17 +173,18 @@ module.exports = class HistorialCharola {
         },
       });
 
-      const resultadoFormateado = {
-        ...resultado,
-        fechaActualizacion: resultado.fechaActualizacion
-          ? format(new Date(resultado.fechaActualizacion), 'dd/MM/yyyy')
-          : null,
-      };
+          const fechaStr = resultado.fechaActualizacion.toISOString();
+          const [año, mes, dia] = fechaStr.split('T')[0].split('-');
 
-      return resultadoFormateado;
-    } catch (error) {
-      logger.error('Error en estadoCharola', { error });
-      throw error;
-    }
+          const resultadoFormateado = {
+            ...resultado,
+            fechaActualizacion: `${dia}/${mes}/${año}`,
+          };
+
+          return resultadoFormateado;
+      } catch (error) {
+          console.error('[Model] Error al obtener el historial de hidratacion de la charola: ', error);
+          throw error;
+      }
   }
 };

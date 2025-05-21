@@ -6,6 +6,18 @@
  */
 const Tamizado = require('../models/charolaTamizado.model');
 
+/**
+ * Controlador para realizar el tamizado individual de charolas.
+ * Valida la entrada del cuerpo de la solicitud, instancia la clase `Tamizado`,
+ * y ejecuta el método `tamizarIndividual`.
+ *
+ * @async
+ * @function
+ * @param {import('express').Request} req - Objeto de solicitud HTTP de Express.
+ * @param {import('express').Response} res - Objeto de respuesta HTTP de Express.
+ * @returns {Json} Retorna una respuesta JSON con el resultado del proceso.
+ */
+
 module.exports.tamizarCharolaIndividual = async (req, res) => {
     if (req.body == null) {
         return res.status(400).json({ exito: false, mensaje: 'Datos no válidos' });
@@ -52,6 +64,18 @@ module.exports.tamizarCharolaIndividual = async (req, res) => {
 
   
 }
+
+/**
+ * Controlador para realizar el tamizado de múltiples charolas sin asignación de comida o hidratación.
+ * Valida la entrada del cuerpo de la solicitud, instancia la clase `Tamizado`,
+ * y ejecuta el método `tamizadoMultiple`.
+ *
+ * @async
+ * @function
+ * @param {import('express').Request} req - Objeto de solicitud HTTP de Express.
+ * @param {import('express').Response} res - Objeto de respuesta HTTP de Express.
+ * @returns {Json} Retorna una respuesta JSON con el resultado del proceso.
+ */
 
 module.exports.tamizarMultiplesCharolas = async (req, res) => {
     if (req.body == null) {

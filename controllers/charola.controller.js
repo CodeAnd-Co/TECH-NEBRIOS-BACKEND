@@ -77,7 +77,7 @@ const eliminarCharola = async (req, res) => {
   } catch (err) {
     console.error('Error al eliminar la charola:', err);
     res.status(500).json({ error: 'Error al eliminar la charola' });
-    
+
   }
 };
 
@@ -180,7 +180,6 @@ const alimentarCharola = async (req, res) => {
     return res.status(500).json({ error: 'Error interno al alimentar charola.' });
   }
 };
-
 
 module.exports = {
   consultarCharola,

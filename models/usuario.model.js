@@ -13,37 +13,37 @@ module.exports = class Usuario {
    * @returns {String|Object} - Token de JWT o mensaje de error.
    */
   static async iniciarSesion(datos) {
-      const usuario = await prisma.USUARIO.findFirst({
-        where: { user: datos.usuario },
-      });
+    const usuario = await prisma.USUARIO.findFirst({
+      where: { user: datos.usuario },
+    });
 
-      if (!usuario) {
-        return { error: 'Usuario inexistente' };
-      }
+    if (!usuario) {
+      return { error: 'Usuario inexistente' };
+    }
 
-      const contrasenaCorrecta = await bcrypt.compare(
-        datos.contrasena,
-        usuario.contrasena
-      );
+    const contrasenaCorrecta = await bcrypt.compare(
+      datos.contrasena,
+      usuario.contrasena
+    );
 
-      if (!contrasenaCorrecta) {
-        return { error: 'Contraseña incorrecta' };
-      }
+    if (!contrasenaCorrecta) {
+      return { error: 'Contraseña incorrecta' };
+    }
 
-      // Verifica si también es administrador
-      const admin = await prisma.ADMINISTRADOR.findFirst({
-        where: { usuarioId: usuario.usuarioId },
-      });
+    // Verifica si también es administrador
+    const admin = await prisma.ADMINISTRADOR.findFirst({
+      where: { usuarioId: usuario.usuarioId },
+    });
 
-      const token = jwt.sign(
-        {
-          id: usuario.usuarioId,
-          nombreDeUsuario: usuario.user,
-          rol: admin ? 'admin' : 'usuario',
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: '1d' }
-      );
+    const token = jwt.sign(
+      {
+        id: usuario.usuarioId,
+        nombreDeUsuario: usuario.user,
+        rol: admin ? 'admin' : 'usuario',
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: '1d' }
+    );
     return token;
   }
 

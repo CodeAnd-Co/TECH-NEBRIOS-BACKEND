@@ -44,6 +44,7 @@ module.exports = class HistorialCharola {
    * @throws {Error} Lanza un error si ocurre una excepción durante la consulta a la base de datos.
    */
   static async obtenerAncestros(charolaId) {
+    const conexion = await database();
     try {
       const relaciones = await conexion.query(
         'SELECT a.charolaHija, c.nombreCharola FROM CHAROLA_CHAROLA a JOIN CHAROLA c ON a.charolaHija = c.charolaId WHERE a.charolaAncestro = ?',

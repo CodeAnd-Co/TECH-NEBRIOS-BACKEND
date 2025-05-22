@@ -76,7 +76,7 @@ module.exports = class Tamizado {
 
         // Validar que se encontraron todas las charolas
         const nombresEncontrados = new Set(charolasBD.map(charola => charola.nombreCharola));
-        const nombresFaltantes = this.charolas.filter(nombres => !nombresEncontrados.has(nombres));
+        const nombresFaltantes = this.charolas.filter(nombre => !nombresEncontrados.has(nombre));
         if (nombresFaltantes.length > 0) {
             throw new Error(`Charolas no encontradas: ${nombresFaltantes.join(', ')}`);
         }

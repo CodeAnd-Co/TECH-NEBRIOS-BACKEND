@@ -3,9 +3,6 @@ const { PrismaClient } = require('../generated/prisma');
 const { format } = require('date-fns');
 const logger = require('../utils/logger');
 const prisma = new PrismaClient();
-
-const database = require('../utils/database');
-
 module.exports = class HistorialCharola {
   /**
  * Obtiene la fecha de creación de una charola específica.
@@ -44,7 +41,6 @@ module.exports = class HistorialCharola {
    * @throws {Error} Lanza un error si ocurre una excepción durante la consulta a la base de datos.
    */
   static async obtenerAncestros(charolaId) {
-    try {
       const resultado = await prisma.cHAROLA_CHAROLA.findMany({
         where: {
           charolaHija: Number(charolaId),
@@ -67,7 +63,6 @@ module.exports = class HistorialCharola {
     } catch (error) {
       logger.error('Error en obtenerAncestros', { error });
       throw error;
-    }
   }
 
   /**
@@ -186,5 +181,15 @@ module.exports = class HistorialCharola {
           console.error('[Model] Error al obtener el historial de hidratacion de la charola: ', error);
           throw error;
       }
+  }
+
+ /**
+   * Inserta una tupla en CHAROLA_CHAROLA
+   * @param {{charolaHija: number, charolaAncestro: number}} data
+   */
+  static async asignarAncestro({ charolaHija, charolaAncestro }) {
+    return prisma.CHAROLA_CHAROLA.create({
+      data: { charolaHija, charolaAncestro }
+    });
   }
 };

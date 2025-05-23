@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const sesionActiva = require('./utils/middlewares/sesionActiva');
+const limitarAPI = require('./utils/middlewares/limitarAPI');
 /* ------------ */
 
 /* Rutas */

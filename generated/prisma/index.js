@@ -240,7 +240,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/armando/Desktop/TECH-NEBRIOS-BACKEND/generated/prisma",
+      "value": "/Users/lapto/Desktop/zuustento/TECH-NEBRIOS-BACKEND/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -258,7 +258,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/armando/Desktop/TECH-NEBRIOS-BACKEND/prisma/schema.prisma",
+    "sourceFilePath": "/Users/lapto/Desktop/zuustento/TECH-NEBRIOS-BACKEND/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -272,7 +272,7 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
-  "postinstall": true,
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {

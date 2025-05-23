@@ -31,6 +31,13 @@ router.get('/', hidratacionController.obtenerHidratacion);
 
 /* DELETE METHODS */
 
+/**
+ * DELETE /eliminar/:idHidrato - Elimina un hidrato existente.
+ * @name DELETE/eliminar/:idHidratacion
+ * @function
+ * @memberof module:routes/hidratacionRoutes
+ */
+router.delete('/eliminar/:idHidratacion', hidratacionController.eliminarHidratacion);
 /* ----------- */
 
 module.exports = router;

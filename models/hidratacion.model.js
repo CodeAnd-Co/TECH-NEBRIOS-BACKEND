@@ -1,3 +1,4 @@
+// RF41 Eliminar un tipo de hidratación en el sistema - Documentación: https://codeandco-wiki.netlify.app/docs/next/proyectos/larvas/documentacion/requisitos/RF41
 
 const { PrismaClient } = require('../generated/prisma');
 const prisma = new PrismaClient();
@@ -41,12 +42,10 @@ class Hidratacion {
  * @throws {Error} Si ocurre un error de consulta o conexión.
  */
   async eliminar() {
-    console.log('llegando a modelo');
+
     const resultado = await prisma.HIDRATACION.delete({
       where: { hidratacionId: this.idHidratacion },
     });
-  
-    console.log('[Modelo] Resultado de la eliminación:', resultado);
   
     return resultado;
   }  

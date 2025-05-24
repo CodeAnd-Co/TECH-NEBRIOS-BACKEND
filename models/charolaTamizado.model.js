@@ -53,10 +53,10 @@ module.exports = class Tamizado {
         return await prisma.$transaction(async (tx) => {
         // Buscar IDs de comida e hidratación
         const comida = await tx.cOMIDA.findFirst({
-            where: { nombre: this.nombreComida },
+            where: { nombre: this.tipoComida },
         });
         const hidratacion = await tx.hIDRATACION.findFirst({
-            where: { nombre: this.nombreHidratacion },
+            where: { nombre: this.tipoHidratacion },
         });
 
         if (!comida || !hidratacion) {

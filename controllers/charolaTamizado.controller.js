@@ -36,14 +36,16 @@ module.exports.tamizarCharolaIndividual = async (req, res) => {
 
     const tamizado = new Tamizado({
       charolas,
-      alimento,
-      hidratacion,
-      alimentoCantidad,
-      hidratacionCantidad,
-      pupa,
-      fras,
+      tipoComida: alimento,
+      tipoHidratacion:hidratacion,
+      cantidadComida:alimentoCantidad,
+      cantidadHidratacion:hidratacionCantidad,
+      cantidadPupa:pupa,
+      cantidadFras:fras,
       fecha,
     });
+
+    console.log('Datos de tamizado:', tamizado);
 
     const resultado = await tamizado.tamizarIndividual();
 

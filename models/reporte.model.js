@@ -23,16 +23,19 @@ const ReporteModel = {
           estado: true,
           densidadLarva: true,
           fechaCreacion: true,
-          // pesoCharola eliminado como pediste
           CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA: {
             select: {
-              charolaAncestro: true
+              CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA: {
+                select: {
+                  nombreCharola: true
+                }
+              }
             }
           }
         }
       });
 
-      // Formateado de fechas a dd/MM/yyyy
+      // Formateado de fechas a dd/MM/yyyy y la lista de Ancestros
       const resultadoFormateado = resultado.map(
         ({ CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA, ...charola }) => ({
           ...charola,
@@ -43,10 +46,10 @@ const ReporteModel = {
             ? format(new Date(charola.fechaCreacion), 'dd/MM/yyyy')
             : null,
           charolaAncestros: CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA.map(
-            (rel) => rel.charolaAncestro
+            (rel) => rel.CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA.nombreCharola
           )
         })
-      );      
+      );     
 
       return resultadoFormateado;
     } catch (error) {

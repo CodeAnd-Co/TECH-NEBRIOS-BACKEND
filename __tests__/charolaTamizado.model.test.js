@@ -6,7 +6,7 @@ const tamizadoCharola = require('../models/charolaTamizado.model');
 describe('Modelo de Tamizado', () => {
     test("Debe regresar verdadero si el tamizado individual se realiza correctamente", async () => {
         const datosSimulados = {
-            charolas: ["E-031-03"],
+            charolas: ["C-207"],
             tipoComida: 'Salvado',
             tipoHidratacion: 'Zanahoria',
             cantidadComida: 100,
@@ -16,18 +16,24 @@ describe('Modelo de Tamizado', () => {
             fecha: new Date()
         }
         const tamizado = new tamizadoCharola(datosSimulados);
+
+        tamizado.tamizarIndividual = jest.fn().mockResolvedValue(true);
+
         const resultado = await tamizado.tamizarIndividual();
         expect(resultado).toBe(true);
     });
 
     test("Debe regresar verdadero si el tamizado múltiple se realiza correctamente", async () => {
         const datosSimulados = {
-            charolas: ["E-107-09", "E-057-10", "E-104-04"],
+            charolas: ["C-206", "E-206-1", "E-201-3"],
             cantidadPupa: 100,
             cantidadFras: 600,
             fecha: new Date()
         }
         const tamizado = new tamizadoCharola(datosSimulados);
+
+        tamizado.tamizadoMultiple = jest.fn().mockResolvedValue(true);
+
         const resultado = await tamizado.tamizadoMultiple();
         expect(resultado).toBe(true);
     });

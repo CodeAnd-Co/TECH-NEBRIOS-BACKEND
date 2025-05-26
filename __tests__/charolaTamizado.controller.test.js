@@ -54,7 +54,7 @@ describe('Controlador de Tamizado Individual', () => {
     test('Debería devolver un error 200 si el tamizado se realiza correctamente', async () => {
 
             req.body = {
-                charolas: ['E-031-03'],
+                charolas: ['C-206'],
                 alimento: 'Salvado',
                 hidratacion: 'Zanahoria',
                 alimentoCantidad: 100,
@@ -125,7 +125,7 @@ describe('Controlador de Tamizado Multiple', () => {
     test('Debería devolver un error 200 si el tamizado se realiza correctamente', async () => {
 
             req.body = {
-                charolas: ["E-107-09", "E-057-10", "E-104-04"],
+                charolas: ["C-206", "E-206-1", "E-201-3"],
                 pupa: 100,
                 fras: 500,
                 fecha: new Date(),

@@ -183,14 +183,13 @@ const alimentarCharola = async (req, res) => {
 };
 
 
-const crearObjetoCharola = (charolaId, nuevoNombre, fechaCreacion, estado, pesoCharola, fechaActualizacion) =>{
+const crearObjetoCharola = (charolaId, nuevoNombre, fechaCreacion, estado, fechaActualizacion) =>{
   const resultado = new Map();
 
   resultado.set('charolaId', parseInt(charolaId));
   resultado.set('nombreCharola', nuevoNombre);
   resultado.set('fechaCreacion', new Date(fechaCreacion));
   resultado.set('estado', estado);
-  resultado.set('pesoCharola', parseInt(pesoCharola));
   resultado.set('fechaActualizacion', new Date(fechaActualizacion));
 
   return resultado;
@@ -222,7 +221,7 @@ const editarCharola = async (req, res) => {
     const charolaId = req.query.charolaId;
     const fechaActualizacion = req.query.fechaActualizacion;
 
-    const charola = crearObjetoCharola(charolaId, req.query.nuevoNombre, req.query.fechaCreacion, req.query.nuevoEstado, req.query.nuevoPeso, fechaActualizacion);
+    const charola = crearObjetoCharola(charolaId, req.query.nuevoNombre, req.query.fechaCreacion, req.query.nuevoEstado, fechaActualizacion);
     const alimentacion = crearObjetoAlimentacion(req.query.nuevaAlimentacion, req.query.nuevaAlimentacionOtorgada, fechaActualizacion);
     const hidratacion = crearObjetoHidratacion(req.query.nuevaHidratacion, req.query.nuevaHidratacionOtorgada, fechaActualizacion);
 

@@ -135,6 +135,7 @@ module.exports = class Charola {
         data: {
           nombreCharola: charola.get('nombreCharola'),
           fechaCreacion: charola.get('fechaCreacion'),
+          densidadLarva: charola.get('densidadLarva'),
           estado: charola.get('estado'),
           fechaActualizacion: charola.get('fechaActualizacion'),
         },

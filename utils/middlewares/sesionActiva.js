@@ -16,7 +16,6 @@ async function verificarSesionActiva(req, res, next) {
         return res.status(401).json({code:401, msg: "Sin token de autorización"});
     }
     const token = autenticacion.split(' ')[1]; // Extraes token de "Bearer <token>"
-    console.log(token);
         if (!token) {
             return res.status(401).json({ message: "Token no válido" });
         }
@@ -30,10 +29,8 @@ async function verificarSesionActiva(req, res, next) {
 
         // Si el usuario está presente, se continua
         if (!existe) {
-            console.log("Usuario no autorizado");
             return res.status(401).json({ code: 401, msg: "Usuario no autorizado" });
         }
-        console.log("Usuario autorizado");
         next()
 }
 

@@ -86,14 +86,13 @@ module.exports.tamizarMultiplesCharolas = async (req, res) => {
     try {
     const {
       charolas,
-      fecha,
+      charolasParaTamizar
     } = req.body;
 
-    console.log(charolas);
 
     const tamizado = new Tamizado({
       charolas,
-      fecha: fecha,
+      charolasParaTamizar
     });
 
     const resultado = await tamizado.tamizadoMultiple();

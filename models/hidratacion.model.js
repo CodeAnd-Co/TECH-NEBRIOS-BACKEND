@@ -1,6 +1,6 @@
 //RF36: Registrar un nuevo tipo de hidratación al sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF36
 
-const { PrismaClient } = require("../generated/prisma");
+const { PrismaClient } = require('../generated/prisma');
 const prisma = new PrismaClient();
 
 /**

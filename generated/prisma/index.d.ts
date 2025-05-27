@@ -3278,9 +3278,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion: Date | null
-    estado: string | null
+    estado: string
     densidadLarva: number | null
-    fechaCreacion: Date | null
+    fechaCreacion: Date
     pesoCharola: number | null
     _count: CHAROLACountAggregateOutputType | null
     _avg: CHAROLAAvgAggregateOutputType | null
@@ -3369,9 +3369,9 @@ export namespace Prisma {
       comidaCiclo: number
       hidratacionCiclo: number
       fechaActualizacion: Date | null
-      estado: string | null
+      estado: string
       densidadLarva: number | null
-      fechaCreacion: Date | null
+      fechaCreacion: Date
       pesoCharola: number | null
     }, ExtArgs["result"]["cHAROLA"]>
     composites: {}
@@ -5459,6 +5459,7 @@ export namespace Prisma {
     charolaId?: boolean
     comidaId?: boolean
     cantidadOtorgada?: boolean
+    fechaOtorgada?: boolean
     CHAROLA?: boolean | CHAROLA_COMIDA$CHAROLAArgs<ExtArgs>
     COMIDA?: boolean | CHAROLA_COMIDA$COMIDAArgs<ExtArgs>
   }, ExtArgs["result"]["cHAROLA_COMIDA"]>
@@ -5473,7 +5474,7 @@ export namespace Prisma {
     fechaOtorgada?: boolean
   }
 
-  export type CHAROLA_COMIDAOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "charolaId" | "comidaId" | "cantidadOtorgada", ExtArgs["result"]["CHAROLA_COMIDA"]>
+  export type CHAROLA_COMIDAOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "charolaId" | "comidaId" | "cantidadOtorgada" | "fechaOtorgada", ExtArgs["result"]["cHAROLA_COMIDA"]>
   export type CHAROLA_COMIDAInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     CHAROLA?: boolean | CHAROLA_COMIDA$CHAROLAArgs<ExtArgs>
     COMIDA?: boolean | CHAROLA_COMIDA$COMIDAArgs<ExtArgs>
@@ -8277,18 +8278,21 @@ export namespace Prisma {
   export type FRASMinAggregateOutputType = {
     frasId: number | null
     gramosGenerados: number | null
+    fechaRegistro: Date | null
     charolaId: number | null
   }
 
   export type FRASMaxAggregateOutputType = {
     frasId: number | null
     gramosGenerados: number | null
+    fechaRegistro: Date | null
     charolaId: number | null
   }
 
   export type FRASCountAggregateOutputType = {
     frasId: number
     gramosGenerados: number
+    fechaRegistro: number
     charolaId: number
     _all: number
   }
@@ -8309,18 +8313,21 @@ export namespace Prisma {
   export type FRASMinAggregateInputType = {
     frasId?: true
     gramosGenerados?: true
+    fechaRegistro?: true
     charolaId?: true
   }
 
   export type FRASMaxAggregateInputType = {
     frasId?: true
     gramosGenerados?: true
+    fechaRegistro?: true
     charolaId?: true
   }
 
   export type FRASCountAggregateInputType = {
     frasId?: true
     gramosGenerados?: true
+    fechaRegistro?: true
     charolaId?: true
     _all?: true
   }
@@ -8414,6 +8421,7 @@ export namespace Prisma {
   export type FRASGroupByOutputType = {
     frasId: number
     gramosGenerados: number
+    fechaRegistro: Date | null
     charolaId: number | null
     _count: FRASCountAggregateOutputType | null
     _avg: FRASAvgAggregateOutputType | null
@@ -8439,6 +8447,7 @@ export namespace Prisma {
   export type FRASSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     frasId?: boolean
     gramosGenerados?: boolean
+    fechaRegistro?: boolean
     charolaId?: boolean
     CHAROLA_FRAS?: boolean | FRAS$CHAROLA_FRASArgs<ExtArgs>
     CHAROLA?: boolean | FRAS$CHAROLAArgs<ExtArgs>
@@ -8450,10 +8459,11 @@ export namespace Prisma {
   export type FRASSelectScalar = {
     frasId?: boolean
     gramosGenerados?: boolean
+    fechaRegistro?: boolean
     charolaId?: boolean
   }
 
-  export type FRASOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"frasId" | "gramosGenerados" | "charolaId", ExtArgs["result"]["fRAS"]>
+  export type FRASOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"frasId" | "gramosGenerados" | "fechaRegistro" | "charolaId", ExtArgs["result"]["fRAS"]>
   export type FRASInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     CHAROLA_FRAS?: boolean | FRAS$CHAROLA_FRASArgs<ExtArgs>
     CHAROLA?: boolean | FRAS$CHAROLAArgs<ExtArgs>
@@ -8469,6 +8479,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       frasId: number
       gramosGenerados: number
+      fechaRegistro: Date | null
       charolaId: number | null
     }, ExtArgs["result"]["fRAS"]>
     composites: {}
@@ -8843,6 +8854,7 @@ export namespace Prisma {
   interface FRASFieldRefs {
     readonly frasId: FieldRef<"FRAS", 'Int'>
     readonly gramosGenerados: FieldRef<"FRAS", 'Float'>
+    readonly fechaRegistro: FieldRef<"FRAS", 'DateTime'>
     readonly charolaId: FieldRef<"FRAS", 'Int'>
   }
     
@@ -10048,7 +10060,7 @@ export namespace Prisma {
     /**
      * The data needed to create a HIDRATACION.
      */
-    data: XOR<HIDRATACIONCreateInput, HIDRATACIONUncheckedCreateInput>
+    data?: XOR<HIDRATACIONCreateInput, HIDRATACIONUncheckedCreateInput>
   }
 
   /**
@@ -14642,7 +14654,7 @@ export namespace Prisma {
   interface PUPAFieldRefs {
     readonly pupaId: FieldRef<"PUPA", 'Int'>
     readonly fechaRegistro: FieldRef<"PUPA", 'DateTime'>
-    readonly cantidadObtenida: FieldRef<"PUPA", 'Int'>
+    readonly cantidadObtenida: FieldRef<"PUPA", 'Float'>
   }
     
 
@@ -15107,6 +15119,7 @@ export namespace Prisma {
   export const FRASScalarFieldEnum: {
     frasId: 'frasId',
     gramosGenerados: 'gramosGenerados',
+    fechaRegistro: 'fechaRegistro',
     charolaId: 'charolaId'
   };
 
@@ -15305,9 +15318,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFilter<"CHAROLA"> | number
     hidratacionCiclo?: FloatFilter<"CHAROLA"> | number
     fechaActualizacion?: DateTimeNullableFilter<"CHAROLA"> | Date | string | null
-    estado?: StringNullableFilter<"CHAROLA"> | string | null
+    estado?: StringFilter<"CHAROLA"> | string
     densidadLarva?: FloatNullableFilter<"CHAROLA"> | number | null
-    fechaCreacion?: DateTimeNullableFilter<"CHAROLA"> | Date | string | null
+    fechaCreacion?: DateTimeFilter<"CHAROLA"> | Date | string
     pesoCharola?: FloatNullableFilter<"CHAROLA"> | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAListRelationFilter
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAListRelationFilter
@@ -15325,9 +15338,9 @@ export namespace Prisma {
     comidaCiclo?: SortOrder
     hidratacionCiclo?: SortOrder
     fechaActualizacion?: SortOrderInput | SortOrder
-    estado?: SortOrderInput | SortOrder
+    estado?: SortOrder
     densidadLarva?: SortOrderInput | SortOrder
-    fechaCreacion?: SortOrderInput | SortOrder
+    fechaCreacion?: SortOrder
     pesoCharola?: SortOrderInput | SortOrder
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAOrderByRelationAggregateInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAOrderByRelationAggregateInput
@@ -15349,9 +15362,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFilter<"CHAROLA"> | number
     hidratacionCiclo?: FloatFilter<"CHAROLA"> | number
     fechaActualizacion?: DateTimeNullableFilter<"CHAROLA"> | Date | string | null
-    estado?: StringNullableFilter<"CHAROLA"> | string | null
+    estado?: StringFilter<"CHAROLA"> | string
     densidadLarva?: FloatNullableFilter<"CHAROLA"> | number | null
-    fechaCreacion?: DateTimeNullableFilter<"CHAROLA"> | Date | string | null
+    fechaCreacion?: DateTimeFilter<"CHAROLA"> | Date | string
     pesoCharola?: FloatNullableFilter<"CHAROLA"> | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAListRelationFilter
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAListRelationFilter
@@ -15369,9 +15382,9 @@ export namespace Prisma {
     comidaCiclo?: SortOrder
     hidratacionCiclo?: SortOrder
     fechaActualizacion?: SortOrderInput | SortOrder
-    estado?: SortOrderInput | SortOrder
+    estado?: SortOrder
     densidadLarva?: SortOrderInput | SortOrder
-    fechaCreacion?: SortOrderInput | SortOrder
+    fechaCreacion?: SortOrder
     pesoCharola?: SortOrderInput | SortOrder
     _count?: CHAROLACountOrderByAggregateInput
     _avg?: CHAROLAAvgOrderByAggregateInput
@@ -15389,9 +15402,9 @@ export namespace Prisma {
     comidaCiclo?: FloatWithAggregatesFilter<"CHAROLA"> | number
     hidratacionCiclo?: FloatWithAggregatesFilter<"CHAROLA"> | number
     fechaActualizacion?: DateTimeNullableWithAggregatesFilter<"CHAROLA"> | Date | string | null
-    estado?: StringNullableWithAggregatesFilter<"CHAROLA"> | string | null
+    estado?: StringWithAggregatesFilter<"CHAROLA"> | string
     densidadLarva?: FloatNullableWithAggregatesFilter<"CHAROLA"> | number | null
-    fechaCreacion?: DateTimeNullableWithAggregatesFilter<"CHAROLA"> | Date | string | null
+    fechaCreacion?: DateTimeWithAggregatesFilter<"CHAROLA"> | Date | string
     pesoCharola?: FloatNullableWithAggregatesFilter<"CHAROLA"> | number | null
   }
 
@@ -15615,6 +15628,7 @@ export namespace Prisma {
     NOT?: FRASWhereInput | FRASWhereInput[]
     frasId?: IntFilter<"FRAS"> | number
     gramosGenerados?: FloatFilter<"FRAS"> | number
+    fechaRegistro?: DateTimeNullableFilter<"FRAS"> | Date | string | null
     charolaId?: IntNullableFilter<"FRAS"> | number | null
     CHAROLA_FRAS?: CHAROLA_FRASListRelationFilter
     CHAROLA?: XOR<CHAROLANullableScalarRelationFilter, CHAROLAWhereInput> | null
@@ -15623,6 +15637,7 @@ export namespace Prisma {
   export type FRASOrderByWithRelationInput = {
     frasId?: SortOrder
     gramosGenerados?: SortOrder
+    fechaRegistro?: SortOrderInput | SortOrder
     charolaId?: SortOrderInput | SortOrder
     CHAROLA_FRAS?: CHAROLA_FRASOrderByRelationAggregateInput
     CHAROLA?: CHAROLAOrderByWithRelationInput
@@ -15634,6 +15649,7 @@ export namespace Prisma {
     OR?: FRASWhereInput[]
     NOT?: FRASWhereInput | FRASWhereInput[]
     gramosGenerados?: FloatFilter<"FRAS"> | number
+    fechaRegistro?: DateTimeNullableFilter<"FRAS"> | Date | string | null
     charolaId?: IntNullableFilter<"FRAS"> | number | null
     CHAROLA_FRAS?: CHAROLA_FRASListRelationFilter
     CHAROLA?: XOR<CHAROLANullableScalarRelationFilter, CHAROLAWhereInput> | null
@@ -15642,6 +15658,7 @@ export namespace Prisma {
   export type FRASOrderByWithAggregationInput = {
     frasId?: SortOrder
     gramosGenerados?: SortOrder
+    fechaRegistro?: SortOrderInput | SortOrder
     charolaId?: SortOrderInput | SortOrder
     _count?: FRASCountOrderByAggregateInput
     _avg?: FRASAvgOrderByAggregateInput
@@ -15656,6 +15673,7 @@ export namespace Prisma {
     NOT?: FRASScalarWhereWithAggregatesInput | FRASScalarWhereWithAggregatesInput[]
     frasId?: IntWithAggregatesFilter<"FRAS"> | number
     gramosGenerados?: FloatWithAggregatesFilter<"FRAS"> | number
+    fechaRegistro?: DateTimeNullableWithAggregatesFilter<"FRAS"> | Date | string | null
     charolaId?: IntNullableWithAggregatesFilter<"FRAS"> | number | null
   }
 
@@ -15917,7 +15935,7 @@ export namespace Prisma {
     NOT?: PUPAWhereInput | PUPAWhereInput[]
     pupaId?: IntFilter<"PUPA"> | number
     fechaRegistro?: DateTimeNullableFilter<"PUPA"> | Date | string | null
-    cantidadObtenida?: IntNullableFilter<"PUPA"> | number | null
+    cantidadObtenida?: FloatNullableFilter<"PUPA"> | number | null
     CHAROLA_PUPA?: CHAROLA_PUPAListRelationFilter
   }
 
@@ -15934,7 +15952,7 @@ export namespace Prisma {
     OR?: PUPAWhereInput[]
     NOT?: PUPAWhereInput | PUPAWhereInput[]
     fechaRegistro?: DateTimeNullableFilter<"PUPA"> | Date | string | null
-    cantidadObtenida?: IntNullableFilter<"PUPA"> | number | null
+    cantidadObtenida?: FloatNullableFilter<"PUPA"> | number | null
     CHAROLA_PUPA?: CHAROLA_PUPAListRelationFilter
   }, "pupaId">
 
@@ -15955,7 +15973,7 @@ export namespace Prisma {
     NOT?: PUPAScalarWhereWithAggregatesInput | PUPAScalarWhereWithAggregatesInput[]
     pupaId?: IntWithAggregatesFilter<"PUPA"> | number
     fechaRegistro?: DateTimeNullableWithAggregatesFilter<"PUPA"> | Date | string | null
-    cantidadObtenida?: IntNullableWithAggregatesFilter<"PUPA"> | number | null
+    cantidadObtenida?: FloatNullableWithAggregatesFilter<"PUPA"> | number | null
   }
 
   export type ADMINISTRADORCreateInput = {
@@ -15995,9 +16013,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
@@ -16015,9 +16033,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
@@ -16034,9 +16052,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
@@ -16054,9 +16072,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
@@ -16074,9 +16092,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
   }
 
@@ -16085,9 +16103,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
@@ -16097,9 +16115,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
@@ -16284,6 +16302,7 @@ export namespace Prisma {
 
   export type FRASCreateInput = {
     gramosGenerados: number
+    fechaRegistro?: Date | string | null
     CHAROLA_FRAS?: CHAROLA_FRASCreateNestedManyWithoutFRASInput
     CHAROLA?: CHAROLACreateNestedOneWithoutFRASInput
   }
@@ -16291,12 +16310,14 @@ export namespace Prisma {
   export type FRASUncheckedCreateInput = {
     frasId?: number
     gramosGenerados: number
+    fechaRegistro?: Date | string | null
     charolaId?: number | null
     CHAROLA_FRAS?: CHAROLA_FRASUncheckedCreateNestedManyWithoutFRASInput
   }
 
   export type FRASUpdateInput = {
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CHAROLA_FRAS?: CHAROLA_FRASUpdateManyWithoutFRASNestedInput
     CHAROLA?: CHAROLAUpdateOneWithoutFRASNestedInput
   }
@@ -16304,6 +16325,7 @@ export namespace Prisma {
   export type FRASUncheckedUpdateInput = {
     frasId?: IntFieldUpdateOperationsInput | number
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     charolaId?: NullableIntFieldUpdateOperationsInput | number | null
     CHAROLA_FRAS?: CHAROLA_FRASUncheckedUpdateManyWithoutFRASNestedInput
   }
@@ -16311,35 +16333,36 @@ export namespace Prisma {
   export type FRASCreateManyInput = {
     frasId?: number
     gramosGenerados: number
+    fechaRegistro?: Date | string | null
     charolaId?: number | null
   }
 
   export type FRASUpdateManyMutationInput = {
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FRASUncheckedUpdateManyInput = {
     frasId?: IntFieldUpdateOperationsInput | number
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     charolaId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type HIDRATACIONCreateInput = {
-    hidratacionId: number
     nombre?: string | null
     descripcion?: string | null
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONCreateNestedManyWithoutHIDRATACIONInput
   }
 
   export type HIDRATACIONUncheckedCreateInput = {
-    hidratacionId: number
+    hidratacionId?: number
     nombre?: string | null
     descripcion?: string | null
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedCreateNestedManyWithoutHIDRATACIONInput
   }
 
   export type HIDRATACIONUpdateInput = {
-    hidratacionId?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUpdateManyWithoutHIDRATACIONNestedInput
@@ -16353,13 +16376,12 @@ export namespace Prisma {
   }
 
   export type HIDRATACIONCreateManyInput = {
-    hidratacionId: number
+    hidratacionId?: number
     nombre?: string | null
     descripcion?: string | null
   }
 
   export type HIDRATACIONUpdateManyMutationInput = {
-    hidratacionId?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -16555,14 +16577,14 @@ export namespace Prisma {
 
   export type PUPAUpdateInput = {
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_PUPA?: CHAROLA_PUPAUpdateManyWithoutPUPANestedInput
   }
 
   export type PUPAUncheckedUpdateInput = {
     pupaId?: IntFieldUpdateOperationsInput | number
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_PUPA?: CHAROLA_PUPAUncheckedUpdateManyWithoutPUPANestedInput
   }
 
@@ -16574,13 +16596,13 @@ export namespace Prisma {
 
   export type PUPAUpdateManyMutationInput = {
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type PUPAUncheckedUpdateManyInput = {
     pupaId?: IntFieldUpdateOperationsInput | number
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -16709,6 +16731,21 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type StringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
   export type FloatNullableFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
     in?: number[] | null
@@ -16718,6 +16755,17 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type CHAROLA_CHAROLAListRelationFilter = {
@@ -16896,6 +16944,24 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
   export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
     in?: number[] | null
@@ -16910,6 +16976,20 @@ export namespace Prisma {
     _sum?: NestedFloatNullableFilter<$PrismaModel>
     _min?: NestedFloatNullableFilter<$PrismaModel>
     _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type CHAROLAScalarRelationFilter = {
@@ -16945,17 +17025,6 @@ export namespace Prisma {
   export type CHAROLA_CHAROLASumOrderByAggregateInput = {
     charolaHija?: SortOrder
     charolaAncestro?: SortOrder
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type CHAROLANullableScalarRelationFilter = {
@@ -17006,20 +17075,6 @@ export namespace Prisma {
     cantidadOtorgada?: SortOrder
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type HIDRATACIONNullableScalarRelationFilter = {
     is?: HIDRATACIONWhereInput | null
     isNot?: HIDRATACIONWhereInput | null
@@ -17063,21 +17118,6 @@ export namespace Prisma {
     cantidadOtorgada?: SortOrder
   }
 
-  export type StringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringFilter<$PrismaModel> | string
-  }
-
   export type COMIDAOrderByRelevanceInput = {
     fields: COMIDAOrderByRelevanceFieldEnum | COMIDAOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -17110,27 +17150,10 @@ export namespace Prisma {
     comidaId?: SortOrder
   }
 
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
   export type FRASCountOrderByAggregateInput = {
     frasId?: SortOrder
     gramosGenerados?: SortOrder
+    fechaRegistro?: SortOrder
     charolaId?: SortOrder
   }
 
@@ -17143,12 +17166,14 @@ export namespace Prisma {
   export type FRASMaxOrderByAggregateInput = {
     frasId?: SortOrder
     gramosGenerados?: SortOrder
+    fechaRegistro?: SortOrder
     charolaId?: SortOrder
   }
 
   export type FRASMinOrderByAggregateInput = {
     frasId?: SortOrder
     gramosGenerados?: SortOrder
+    fechaRegistro?: SortOrder
     charolaId?: SortOrder
   }
 
@@ -17534,12 +17559,20 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
   export type NullableFloatFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput = {
@@ -17806,10 +17839,6 @@ export namespace Prisma {
     connect?: COMIDAWhereUniqueInput
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
   export type CHAROLAUpdateOneWithoutCHAROLA_COMIDANestedInput = {
     create?: XOR<CHAROLACreateWithoutCHAROLA_COMIDAInput, CHAROLAUncheckedCreateWithoutCHAROLA_COMIDAInput>
     connectOrCreate?: CHAROLACreateOrConnectWithoutCHAROLA_COMIDAInput
@@ -17874,10 +17903,6 @@ export namespace Prisma {
     connectOrCreate?: CHAROLA_COMIDACreateOrConnectWithoutCOMIDAInput | CHAROLA_COMIDACreateOrConnectWithoutCOMIDAInput[]
     createMany?: CHAROLA_COMIDACreateManyCOMIDAInputEnvelope
     connect?: CHAROLA_COMIDAWhereUniqueInput | CHAROLA_COMIDAWhereUniqueInput[]
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
   }
 
   export type CHAROLA_COMIDAUpdateManyWithoutCOMIDANestedInput = {
@@ -18320,6 +18345,32 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type NestedStringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -18368,62 +18419,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedStringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringFilter<$PrismaModel> | string
-  }
-
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -18440,6 +18435,36 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type USUARIOCreateWithoutADMINISTRADORInput = {
@@ -18616,12 +18641,14 @@ export namespace Prisma {
 
   export type FRASCreateWithoutCHAROLAInput = {
     gramosGenerados: number
+    fechaRegistro?: Date | string | null
     CHAROLA_FRAS?: CHAROLA_FRASCreateNestedManyWithoutFRASInput
   }
 
   export type FRASUncheckedCreateWithoutCHAROLAInput = {
     frasId?: number
     gramosGenerados: number
+    fechaRegistro?: Date | string | null
     CHAROLA_FRAS?: CHAROLA_FRASUncheckedCreateNestedManyWithoutFRASInput
   }
 
@@ -18744,30 +18771,6 @@ export namespace Prisma {
     frasId?: IntFilter<"CHAROLA_FRAS"> | number
   }
 
-  export type CHAROLA_FRASUpsertWithWhereUniqueWithoutCHAROLAInput = {
-    where: CHAROLA_FRASWhereUniqueInput
-    update: XOR<CHAROLA_FRASUpdateWithoutCHAROLAInput, CHAROLA_FRASUncheckedUpdateWithoutCHAROLAInput>
-    create: XOR<CHAROLA_FRASCreateWithoutCHAROLAInput, CHAROLA_FRASUncheckedCreateWithoutCHAROLAInput>
-  }
-
-  export type CHAROLA_FRASUpdateWithWhereUniqueWithoutCHAROLAInput = {
-    where: CHAROLA_FRASWhereUniqueInput
-    data: XOR<CHAROLA_FRASUpdateWithoutCHAROLAInput, CHAROLA_FRASUncheckedUpdateWithoutCHAROLAInput>
-  }
-
-  export type CHAROLA_FRASUpdateManyWithWhereWithoutCHAROLAInput = {
-    where: CHAROLA_FRASScalarWhereInput
-    data: XOR<CHAROLA_FRASUpdateManyMutationInput, CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLAInput>
-  }
-
-  export type CHAROLA_FRASScalarWhereInput = {
-    AND?: CHAROLA_FRASScalarWhereInput | CHAROLA_FRASScalarWhereInput[]
-    OR?: CHAROLA_FRASScalarWhereInput[]
-    NOT?: CHAROLA_FRASScalarWhereInput | CHAROLA_FRASScalarWhereInput[]
-    charolaId?: IntFilter<"CHAROLA_FRAS"> | number
-    frasId?: IntFilter<"CHAROLA_FRAS"> | number
-  }
-
   export type CHAROLA_HIDRATACIONUpsertWithWhereUniqueWithoutCHAROLAInput = {
     where: CHAROLA_HIDRATACIONWhereUniqueInput
     update: XOR<CHAROLA_HIDRATACIONUpdateWithoutCHAROLAInput, CHAROLA_HIDRATACIONUncheckedUpdateWithoutCHAROLAInput>
@@ -18841,6 +18844,7 @@ export namespace Prisma {
     NOT?: FRASScalarWhereInput | FRASScalarWhereInput[]
     frasId?: IntFilter<"FRAS"> | number
     gramosGenerados?: FloatFilter<"FRAS"> | number
+    fechaRegistro?: DateTimeNullableFilter<"FRAS"> | Date | string | null
     charolaId?: IntNullableFilter<"FRAS"> | number | null
   }
 
@@ -18873,9 +18877,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDACreateNestedManyWithoutCHAROLAInput
@@ -18892,9 +18896,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedCreateNestedManyWithoutCHAROLAInput
@@ -18915,9 +18919,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDACreateNestedManyWithoutCHAROLAInput
@@ -18934,9 +18938,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedCreateNestedManyWithoutCHAROLAInput
@@ -18968,9 +18972,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUpdateManyWithoutCHAROLANestedInput
@@ -18987,9 +18991,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedUpdateManyWithoutCHAROLANestedInput
@@ -19016,9 +19020,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUpdateManyWithoutCHAROLANestedInput
@@ -19035,9 +19039,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_COMIDA?: CHAROLA_COMIDAUncheckedUpdateManyWithoutCHAROLANestedInput
@@ -19053,9 +19057,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
@@ -19072,9 +19076,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
@@ -19122,9 +19126,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
@@ -19141,9 +19145,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
@@ -19181,9 +19185,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
@@ -19200,9 +19204,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
@@ -19219,13 +19223,12 @@ export namespace Prisma {
   }
 
   export type HIDRATACIONCreateWithoutCHAROLA_HIDRATACIONInput = {
-    hidratacionId: number
     nombre?: string | null
     descripcion?: string | null
   }
 
   export type HIDRATACIONUncheckedCreateWithoutCHAROLA_HIDRATACIONInput = {
-    hidratacionId: number
+    hidratacionId?: number
     nombre?: string | null
     descripcion?: string | null
   }
@@ -19251,9 +19254,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
@@ -19270,9 +19273,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
@@ -19295,7 +19298,6 @@ export namespace Prisma {
   }
 
   export type HIDRATACIONUpdateWithoutCHAROLA_HIDRATACIONInput = {
-    hidratacionId?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -19368,9 +19370,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
@@ -19387,9 +19389,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
@@ -19437,9 +19439,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
@@ -19456,9 +19458,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
@@ -19613,9 +19615,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
@@ -19632,9 +19634,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
@@ -19696,9 +19698,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
@@ -19715,9 +19717,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
@@ -19733,9 +19735,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
@@ -19752,9 +19754,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
@@ -19772,12 +19774,14 @@ export namespace Prisma {
 
   export type FRASCreateWithoutCHAROLA_FRASInput = {
     gramosGenerados: number
+    fechaRegistro?: Date | string | null
     CHAROLA?: CHAROLACreateNestedOneWithoutFRASInput
   }
 
   export type FRASUncheckedCreateWithoutCHAROLA_FRASInput = {
     frasId?: number
     gramosGenerados: number
+    fechaRegistro?: Date | string | null
     charolaId?: number | null
   }
 
@@ -19802,9 +19806,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
@@ -19821,9 +19825,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
@@ -19847,12 +19851,14 @@ export namespace Prisma {
 
   export type FRASUpdateWithoutCHAROLA_FRASInput = {
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CHAROLA?: CHAROLAUpdateOneWithoutFRASNestedInput
   }
 
   export type FRASUncheckedUpdateWithoutCHAROLA_FRASInput = {
     frasId?: IntFieldUpdateOperationsInput | number
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     charolaId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
@@ -19861,9 +19867,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLACreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
@@ -19880,9 +19886,9 @@ export namespace Prisma {
     comidaCiclo: number
     hidratacionCiclo: number
     fechaActualizacion?: Date | string | null
-    estado?: string | null
+    estado: string
     densidadLarva?: number | null
-    fechaCreacion?: Date | string | null
+    fechaCreacion: Date | string
     pesoCharola?: number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLAInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedCreateNestedManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLAInput
@@ -19930,9 +19936,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
@@ -19949,9 +19955,9 @@ export namespace Prisma {
     comidaCiclo?: FloatFieldUpdateOperationsInput | number
     hidratacionCiclo?: FloatFieldUpdateOperationsInput | number
     fechaActualizacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    estado?: StringFieldUpdateOperationsInput | string
     densidadLarva?: NullableFloatFieldUpdateOperationsInput | number | null
-    fechaCreacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
     pesoCharola?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLANestedInput
     CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA?: CHAROLA_CHAROLAUncheckedUpdateManyWithoutCHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLANestedInput
@@ -19975,13 +19981,13 @@ export namespace Prisma {
 
   export type PUPAUpdateWithoutCHAROLA_PUPAInput = {
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type PUPAUncheckedUpdateWithoutCHAROLA_PUPAInput = {
     pupaId?: IntFieldUpdateOperationsInput | number
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type CHAROLA_PUPACreateWithoutPUPAInput = {
@@ -20037,10 +20043,6 @@ export namespace Prisma {
     frasId: number
   }
 
-  export type CHAROLA_FRASCreateManyCHAROLAInput = {
-    frasId: number
-  }
-
   export type CHAROLA_HIDRATACIONCreateManyCHAROLAInput = {
     id?: number
     hidratacionId?: number | null
@@ -20055,6 +20057,7 @@ export namespace Prisma {
   export type FRASCreateManyCHAROLAInput = {
     frasId?: number
     gramosGenerados: number
+    fechaRegistro?: Date | string | null
   }
 
   export type USUARIO_CHAROLACreateManyCHAROLAInput = {
@@ -20117,18 +20120,6 @@ export namespace Prisma {
     frasId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type CHAROLA_FRASUpdateWithoutCHAROLAInput = {
-    FRAS?: FRASUpdateOneRequiredWithoutCHAROLA_FRASNestedInput
-  }
-
-  export type CHAROLA_FRASUncheckedUpdateWithoutCHAROLAInput = {
-    frasId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type CHAROLA_FRASUncheckedUpdateManyWithoutCHAROLAInput = {
-    frasId?: IntFieldUpdateOperationsInput | number
-  }
-
   export type CHAROLA_HIDRATACIONUpdateWithoutCHAROLAInput = {
     cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
     fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20163,18 +20154,21 @@ export namespace Prisma {
 
   export type FRASUpdateWithoutCHAROLAInput = {
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CHAROLA_FRAS?: CHAROLA_FRASUpdateManyWithoutFRASNestedInput
   }
 
   export type FRASUncheckedUpdateWithoutCHAROLAInput = {
     frasId?: IntFieldUpdateOperationsInput | number
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     CHAROLA_FRAS?: CHAROLA_FRASUncheckedUpdateManyWithoutFRASNestedInput
   }
 
   export type FRASUncheckedUpdateManyWithoutCHAROLAInput = {
     frasId?: IntFieldUpdateOperationsInput | number
     gramosGenerados?: FloatFieldUpdateOperationsInput | number
+    fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type USUARIO_CHAROLAUpdateWithoutCHAROLAInput = {
@@ -20214,22 +20208,6 @@ export namespace Prisma {
     charolaId?: NullableIntFieldUpdateOperationsInput | number | null
     cantidadOtorgada?: FloatFieldUpdateOperationsInput | number
     fechaOtorgada?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CHAROLA_FRASCreateManyFRASInput = {
-    charolaId: number
-  }
-
-  export type CHAROLA_FRASUpdateWithoutFRASInput = {
-    CHAROLA?: CHAROLAUpdateOneRequiredWithoutCHAROLA_FRASNestedInput
-  }
-
-  export type CHAROLA_FRASUncheckedUpdateWithoutFRASInput = {
-    charolaId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type CHAROLA_FRASUncheckedUpdateManyWithoutFRASInput = {
-    charolaId?: IntFieldUpdateOperationsInput | number
   }
 
   export type CHAROLA_FRASCreateManyFRASInput = {

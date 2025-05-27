@@ -1,5 +1,6 @@
+//RF36: Registrar un nuevo tipo de hidratación al sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF36
 
-const { PrismaClient } = require('../generated/prisma');
+const { PrismaClient } = require("../generated/prisma");
 const prisma = new PrismaClient();
 
 /**
@@ -31,6 +32,21 @@ class Hidratacion {
     return await prisma.HIDRATACION.findMany();
   }
 
+  /**
+   * Agrega un nuevo tipo de hidratación a la tabla HIDRATACION.
+   * @async
+   * @method agregar
+   * @returns {Promise<Object>} Registro insertado de hidratación.
+   * @throws {Error} Si ocurre un error de inserción.
+   */
+  async agregar() {
+    return await prisma.HIDRATACION.create({
+      data: {
+        nombre: this.nombreHidratacion,
+        descripcion: this.descripcionHidratacion,
+      },
+    });
+  }
 }
 
 module.exports = { Hidratacion };

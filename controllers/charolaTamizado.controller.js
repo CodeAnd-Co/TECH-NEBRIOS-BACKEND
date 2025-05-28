@@ -24,7 +24,8 @@ module.exports.tamizarCharolaIndividual = async (req, res) => {
     }
     try {
     const {
-      charolas,
+      charolasNuevas,
+      charolasParaTamizar,
       alimento,
       hidratacion,
       alimentoCantidad,
@@ -35,17 +36,16 @@ module.exports.tamizarCharolaIndividual = async (req, res) => {
     } = req.body;
 
     const tamizado = new Tamizado({
-      charolas,
+      charolas: charolasNuevas,
       tipoComida: alimento,
-      tipoHidratacion:hidratacion,
-      cantidadComida:alimentoCantidad,
-      cantidadHidratacion:hidratacionCantidad,
-      cantidadPupa:pupa,
-      cantidadFras:fras,
+      tipoHidratacion: hidratacion,
+      cantidadComida: alimentoCantidad,
+      cantidadHidratacion: hidratacionCantidad,
+      cantidadPupa: pupa,
+      cantidadFras: fras,
       fecha,
+      charolasParaTamizar: charolasParaTamizar
     });
-
-    console.log('Datos de tamizado:', tamizado);
 
     const resultado = await tamizado.tamizarIndividual();
 

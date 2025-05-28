@@ -21,7 +21,7 @@ router.post('/alimentar', charolaController.alimentarCharola);
 /* ----------- */
 
 /* PUT METHODS */
-
+router.put('/editarCharola', charolaController.editarCharola);
 /* ----------- */
 
 /* DELETE METHODS */

@@ -5,12 +5,12 @@ const db = require('./utils/database');
 
 const app = express();
 
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const sesionActiva = require('./utils/middlewares/sesionActiva');
+const limitarAPI = require('./utils/middlewares/limitarAPI');
 /* ------------ */
-
 
 /* Rutas */
 const charolaRoutes = require('./routes/charola.routes');
@@ -18,20 +18,20 @@ const usuarioRoutes = require('./routes/usuario.routes');
 const alimentoRoutes = require('./routes/alimento.routes');
 const hidratacionRoutes = require('./routes/hidratacion.routes');
 const frasRoutes = require('./routes/fras.routes');
-// const charolaTamizadoRoutes = require("./routes/charolaTamizado.routes");
+const charolaTamizadoRoutes = require('./routes/charolaTamizado.routes');
 const historialCharlolaRoutes = require('./routes/historialCharola.routes');
 const reporteRoutes = require('./routes/reporte.routes');
 /* ----- */
 
 /* Rutas de la API */
-app.use('/charola', charolaRoutes);
-app.use('/usuario', usuarioRoutes);
-app.use('/alimentacion', alimentoRoutes);
-app.use('/hidratacion', hidratacionRoutes);
+app.use('/charola', sesionActiva, limitarAPI, charolaRoutes);
+app.use('/usuario', limitarAPI, usuarioRoutes);
+app.use('/alimentacion', sesionActiva, limitarAPI, alimentoRoutes);
+app.use('/hidratacion', sesionActiva, limitarAPI, hidratacionRoutes);
 app.use('/fras', frasRoutes);
-// app.use("/charolaTamizado", charolaTamizadoRoutes);
-app.use('/historialCharola', historialCharlolaRoutes);
-app.use('/reporte', reporteRoutes);
+app.use('/charolaTamizado', sesionActiva, limitarAPI, charolaTamizadoRoutes);
+app.use('/historialCharola', sesionActiva, limitarAPI, historialCharlolaRoutes);
+app.use('/reporte', sesionActiva, limitarAPI, reporteRoutes);
 /* ----- */
 
 /* Conexion a la base de datos*/

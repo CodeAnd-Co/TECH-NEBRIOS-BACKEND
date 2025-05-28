@@ -140,6 +140,7 @@ exports.Prisma.FRASScalarFieldEnum = {
   frasId: 'frasId',
   gramosGenerados: 'gramosGenerados',
   fechaRegistro: 'fechaRegistro',
+  fechaRegistro: 'fechaRegistro',
   charolaId: 'charolaId'
 };
 
@@ -248,7 +249,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "darwin-arm64",
         "native": true
       },
       {
@@ -271,7 +272,7 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
-  "postinstall": false,
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {

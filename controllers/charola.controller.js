@@ -182,6 +182,42 @@ const alimentarCharola = async (req, res) => {
   }
 };
 
+/**
+ * Controlador para hidratar una charola con una cantidad específica de hidratación.
+ *
+ * @async
+ * @function hidratarCharola
+ * @param {Object} req - Objeto de solicitud HTTP (Express).
+ * @param {Object} req.body - Cuerpo de la solicitud.
+ * @param {number} req.body.charolaId - ID de la charola a alimentar.
+ * @param {number} req.body.hidratacionId - ID del tipo de comida que se va a otorgar.
+ * @param {number} req.body.cantidadOtorgada - Cantidad de alimento otorgada en gramos.
+ * @param {Object} res - Objeto de respuesta HTTP (Express).
+ * @returns {Promise<Object>} Respuesta HTTP con el resultado del proceso o un error.
+ *
+ * @throws {400} Si faltan parámetros obligatorios en el cuerpo de la solicitud.
+ * @throws {500} Si ocurre un error interno al intentar alimentar la charola.
+ */
+const hidratarCharola = async (req, res) => {
+  const { charolaId, hidratacionId, cantidadOtorgada } = req.body;
+
+  if (!charolaId || !hidratacionId || cantidadOtorgada == null) {
+    return res.status(400).json({ error: 'Faltan parámetros obligatorios.' });
+  }
+
+  try {
+    const resultado = await Charola.hidratar({
+      charolaId,
+      hidratacionId,
+      cantidadOtorgada
+    });
+
+    return res.status(200).json({ data: resultado });
+  } catch (err) {
+    return res.status(500).json({ error: 'Error interno al alimentar charola.' });
+  }
+};
+
 
 const crearObjetoCharola = (charolaId, nuevoNombre, fechaCreacion, estado, densidadLarva, fechaActualizacion) =>{
   const resultado = new Map();

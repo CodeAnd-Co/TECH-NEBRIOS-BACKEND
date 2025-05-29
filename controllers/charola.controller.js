@@ -6,6 +6,7 @@
 // RF16 Visualizar todas las charolas registradas en el sistema - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
 // RF21: Consultar charolas de cambios pasados - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
 // RF26 Registrar la alimentación de la charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF26
+// RF42 Registrar la hidratación de la charola - Documentación: https://codeandco-wiki.netlify.app/docs/next/proyectos/larvas/documentacion/requisitos/RF42
 
 const { hi } = require('date-fns/locale');
 const Charola = require('../models/charola.model.js');
@@ -282,5 +283,6 @@ module.exports = {
   registrarCharola,
   obtenerCharolas,
   alimentarCharola,
+  hidratarCharola,
   editarCharola,
 };

@@ -36,12 +36,12 @@ module.exports.obtenerHidratacion = async (req, res) => {
  */
 
 module.exports.registrarHidratacion = async (req, res) => {
-  const { nombre, descripcion } = req.body;r
+  const { nombre, descripcion } = req.body;
 
   if (!nombre || !descripcion) {
     return res
       .status(400)
-      .json({ success: false, message: 'Datos no válidos' });
+      .json({ success: false, message: "Datos no válidos" });
   }
 
   try {
@@ -49,20 +49,20 @@ module.exports.registrarHidratacion = async (req, res) => {
     await hidratacion.agregar();
     res
       .status(200)
-      .json({ success: true, message: 'Hidratación registrada exitosamente' });
-    console.log('Se conecto back con front');
+      .json({ success: true, message: "Hidratación registrada exitosamente" });
+    console.log("Se conecto back con front");
   } catch (error) {
-    console.error('Error al registrar hidratación:', error);
+    console.error("Error al registrar hidratación:", error);
 
-    if (error.code === 'ETIMEDOUT' || error.code === 'ECONNREFUSED') {
+    if (error.code === "ETIMEDOUT" || error.code === "ECONNREFUSED") {
       return res
         .status(101)
-        .json({ success: false, message: 'Sin conexión a internet' });
+        .json({ success: false, message: "Sin conexión a internet" });
     }
 
     res.status(500).json({
       success: false,
-      message: 'Error del servidor al registrar hidratación',
+      message: "Error del servidor al registrar hidratación",
     });
   }
 };

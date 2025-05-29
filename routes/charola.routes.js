@@ -18,6 +18,8 @@ router.get('/charolas', charolaController.obtenerCharolas);
 router.post('/registrarCharola', charolaController.registrarCharola);
 
 router.post('/alimentar', charolaController.alimentarCharola);
+
+router.post('/hidratar', charolaController.hidratarCharola);
 /* ----------- */
 
 /* PUT METHODS */

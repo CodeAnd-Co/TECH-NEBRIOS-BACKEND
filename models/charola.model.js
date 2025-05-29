@@ -275,6 +275,44 @@ module.exports = class Charola {
   }
 
   /**
+   * Alimenta la charola: crea registro en CHAROLA_HIDRATACION y
+   * luego actualiza hidratacionCiclo y fechaActualizacion en CHAROLA.
+   * @param {{charolaId:number, hidratacionId:number, cantidadOtorgada:number}} params
+   */
+  static async hidratar({ charolaId, hidratacionId, cantidadOtorgada }) {
+    const fecha = new Date();
+
+    return prisma.$transaction(async tx => {
+      // 1) Crear la relación comida y traer también la comida relacionada
+      const rel = await tx.CHAROLA_HIDRATACION.create({
+        data: {
+          charolaId,
+          hidratacionId,
+          cantidadOtorgada,
+          fechaOtorgada: fecha
+        },
+        include: {
+          HIDRATACION: true
+        }
+      });
+
+      // 2) Actualizar la charola
+      const updated = await tx.CHAROLA.update({
+        where: { charolaId },
+        data: {
+          hidratacionCiclo: { increment: cantidadOtorgada },
+          fechaActualizacion: fecha
+        }
+      });
+
+      return {
+        relacion: rel,
+        charola: updated
+      };
+    });
+  }
+
+  /**
    * Alimenta la charola: crea registro en CHAROLA_COMIDA y
    * luego actualiza comidaCiclo y fechaActualizacion en CHAROLA.
    * @param {{charolaId:number, comidaId:number, cantidadOtorgada:number}} params

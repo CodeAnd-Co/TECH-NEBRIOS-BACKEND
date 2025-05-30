@@ -6,6 +6,7 @@
 // RF16 Visualizar todas las charolas registradas en el sistema - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
 // RF21: Consultar charolas de cambios pasados - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
 // RF26 Registrar la alimentación de la charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF26
+// RF42 Registrar la hidratación de la charola - Documentación: https://codeandco-wiki.netlify.app/docs/next/proyectos/larvas/documentacion/requisitos/RF42
 
 const { hi } = require('date-fns/locale');
 const Charola = require('../models/charola.model.js');
@@ -182,15 +183,51 @@ const alimentarCharola = async (req, res) => {
   }
 };
 
+/**
+ * Controlador para hidratar una charola con una cantidad específica de hidratación.
+ *
+ * @async
+ * @function hidratarCharola
+ * @param {Object} req - Objeto de solicitud HTTP (Express).
+ * @param {Object} req.body - Cuerpo de la solicitud.
+ * @param {number} req.body.charolaId - ID de la charola a alimentar.
+ * @param {number} req.body.hidratacionId - ID del tipo de comida que se va a otorgar.
+ * @param {number} req.body.cantidadOtorgada - Cantidad de alimento otorgada en gramos.
+ * @param {Object} res - Objeto de respuesta HTTP (Express).
+ * @returns {Promise<Object>} Respuesta HTTP con el resultado del proceso o un error.
+ *
+ * @throws {400} Si faltan parámetros obligatorios en el cuerpo de la solicitud.
+ * @throws {500} Si ocurre un error interno al intentar alimentar la charola.
+ */
+const hidratarCharola = async (req, res) => {
+  const { charolaId, hidratacionId, cantidadOtorgada } = req.body;
 
-const crearObjetoCharola = (charolaId, nuevoNombre, fechaCreacion, estado, pesoCharola, fechaActualizacion) =>{
+  if (!charolaId || !hidratacionId || cantidadOtorgada == null) {
+    return res.status(400).json({ error: 'Faltan parámetros obligatorios.' });
+  }
+
+  try {
+    const resultado = await Charola.hidratar({
+      charolaId,
+      hidratacionId,
+      cantidadOtorgada
+    });
+
+    return res.status(200).json({ data: resultado });
+  } catch (err) {
+    return res.status(500).json({ error: 'Error interno al alimentar charola.' });
+  }
+};
+
+
+const crearObjetoCharola = (charolaId, nuevoNombre, fechaCreacion, estado, densidadLarva, fechaActualizacion) =>{
   const resultado = new Map();
 
   resultado.set('charolaId', parseInt(charolaId));
   resultado.set('nombreCharola', nuevoNombre);
   resultado.set('fechaCreacion', new Date(fechaCreacion));
   resultado.set('estado', estado);
-  resultado.set('pesoCharola', parseInt(pesoCharola));
+  resultado.set('densidadLarva', parseInt(densidadLarva));
   resultado.set('fechaActualizacion', new Date(fechaActualizacion));
 
   return resultado;
@@ -222,7 +259,7 @@ const editarCharola = async (req, res) => {
     const charolaId = req.query.charolaId;
     const fechaActualizacion = req.query.fechaActualizacion;
 
-    const charola = crearObjetoCharola(charolaId, req.query.nuevoNombre, req.query.fechaCreacion, req.query.nuevoEstado, req.query.nuevoPeso, fechaActualizacion);
+    const charola = crearObjetoCharola(charolaId, req.query.nuevoNombre, req.query.fechaCreacion, req.query.nuevoEstado, req.query.nuevaDensidad, fechaActualizacion);
     const alimentacion = crearObjetoAlimentacion(req.query.nuevaAlimentacion, req.query.nuevaAlimentacionOtorgada, fechaActualizacion);
     const hidratacion = crearObjetoHidratacion(req.query.nuevaHidratacion, req.query.nuevaHidratacionOtorgada, fechaActualizacion);
 
@@ -246,5 +283,6 @@ module.exports = {
   registrarCharola,
   obtenerCharolas,
   alimentarCharola,
+  hidratarCharola,
   editarCharola,
 };

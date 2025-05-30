@@ -22,13 +22,14 @@ module.exports = class Tamizado {
    */
     constructor({
     charolas = [],
-    tipoComida = '',
-    tipoHidratacion = '',
+    tipoComida = 0,
+    tipoHidratacion = 0,
     cantidadComida = 0,
     cantidadHidratacion = 0,
     cantidadPupa = 0,
     cantidadFras = 0,
-    fecha = new Date()
+    fecha = new Date(),
+    charolasParaTamizar = []
   }) {
     this.charolas = charolas;
     this.tipoComida = tipoComida;
@@ -38,6 +39,7 @@ module.exports = class Tamizado {
     this.cantidadPupa = cantidadPupa;
     this.cantidadFras = cantidadFras;
     this.fecha = new Date(fecha);
+    this.charolasParaTamizar = charolasParaTamizar;
   }
 
   /**
@@ -51,97 +53,111 @@ module.exports = class Tamizado {
   async tamizarIndividual() {
     try {
         return await prisma.$transaction(async (tx) => {
-        // Buscar IDs de comida e hidratación
-        const comida = await tx.cOMIDA.findFirst({
-            where: { nombre: this.tipoComida },
-        });
-        const hidratacion = await tx.hIDRATACION.findFirst({
-            where: { nombre: this.tipoHidratacion },
-        });
-
-        if (!comida || !hidratacion) {
-            throw new Error('Nombre de comida o hidratación no válido');
-        }
-
-        // Obtener todos los IDs de charolas por nombre
-        const charolasBD = await tx.cHAROLA.findMany({
-            where: {
-            nombreCharola: { in: this.charolas },
-            },
-            select: {
-            charolaId: true,
-            nombreCharola: true,
-            },
-        });
-
-        // Validar que se encontraron todas las charolas
-        const nombresEncontrados = new Set(charolasBD.map(charola => charola.nombreCharola));
-        const nombresFaltantes = this.charolas.filter(nombre => !nombresEncontrados.has(nombre));
-        if (nombresFaltantes.length > 0) {
-            throw new Error(`Charolas no encontradas: ${nombresFaltantes.join(', ')}`);
-        }
-
-        // Crear mapa nombre → id para acceso fácil
-        const mapaCharolas = new Map();
-        charolasBD.forEach(charola => mapaCharolas.set(charola.nombreCharola, charola.charolaId));
-
-        // Crear FRAS
-        const fras = await tx.fRAS.create({
-            data: {
-            gramosGenerados: this.cantidadFras,
-            fechaRegistro: this.fecha,
-            },
-        });
-
-        // Crear PUPA
-        const pupa = await tx.pUPA.create({
-            data: {
-            cantidadObtenida: this.cantidadPupa,
-            fechaRegistro: this.fecha,
-            },
-        });
-
-        // Procesar cada charola por nombre
-        for (const nombre of this.charolas) {
-            const charolaId = mapaCharolas.get(nombre);
-
-            await tx.cHAROLA_FRAS.create({
-            data: { charolaId, frasId: fras.frasId },
+            // Crear FRAS
+            const fras = await tx.fRAS.create({
+                data: {
+                    gramosGenerados: this.cantidadFras,
+                    fechaRegistro: this.fecha,
+                },
             });
 
+            // Mapear FRAS y CHAROLA
+            await tx.cHAROLA_FRAS.create({
+                data: {
+                    charolaId: this.charolasParaTamizar[0].charolaId,
+                    frasId: fras.frasId
+                }
+            });
+
+            // Crear PUPA
+            const pupa = await tx.pUPA.create({
+                data: {
+                    cantidadObtenida: this.cantidadPupa,
+                    fechaRegistro: this.fecha,
+                },
+            });
+
+            // Mapear PUPA y CHAROLA
             await tx.cHAROLA_PUPA.create({
-            data: { charolaId, pupaId: pupa.pupaId },
+                data: {
+                    charolaId: this.charolasParaTamizar[0].charolaId,
+                    pupaId: pupa.pupaId
+                }
             });
 
             await tx.cHAROLA_COMIDA.create({
-            data: {
-                charolaId,
-                comidaId: comida.comidaId,
-                cantidadOtorgada: this.cantidadComida,
-                fechaOtorgada: this.fecha,
-            },
+                data: {
+                    charolaId: this.charolasParaTamizar[0].charolaId,
+                    comidaId: this.tipoComida,
+                    cantidadOtorgada: this.cantidadComida,
+                    fechaOtorgada: this.fecha,
+                }
             });
 
             await tx.cHAROLA_HIDRATACION.create({
-            data: {
-                charolaId,
-                hidratacionId: hidratacion.hidratacionId,
-                cantidadOtorgada: this.cantidadHidratacion,
-                fechaOtorgada: this.fecha,
-            },
+                data: {
+                    charolaId: this.charolasParaTamizar[0].charolaId,
+                    hidratacionId: this.tipoHidratacion,
+                    cantidadOtorgada: this.cantidadHidratacion,
+                    fechaOtorgada: this.fecha,
+                }
             });
 
             await tx.cHAROLA.update({
-            where: { charolaId },
-            data: {
-                comidaCiclo: { increment: this.cantidadComida },
-                hidratacionCiclo: { increment: this.cantidadHidratacion },
-                fechaActualizacion: this.fecha,
-            },
+                where: {
+                    charolaId: this.charolasParaTamizar[0].charolaId
+                },
+                data: {
+                    comidaCiclo: { increment: this.cantidadComida },
+                    hidratacionCiclo: { increment: this.cantidadHidratacion },
+                    fechaActualizacion: this.fecha,
+                },
             });
-        }
 
-        return true;
+            for (let charola of this.charolas) {
+                const nuevaCharola = await tx.CHAROLA.create({
+                    data: {
+                        nombreCharola: charola.nombre,
+                        fechaCreacion: new Date(charola.fechaCreacion),
+                        fechaActualizacion: new Date(charola.fechaActualizacion),
+                        densidadLarva: charola.densidadLarva,
+                        pesoCharola: charola.pesoCharola,
+                        estado: 'activa',
+                        comidaCiclo: charola.comidas[0].cantidadOtorgada,
+                        hidratacionCiclo: charola.hidrataciones[0].cantidadOtorgada,
+
+                        CHAROLA_COMIDA: {
+                            create: charola.comidas.map(charola => ({
+                                cantidadOtorgada: charola.cantidadOtorgada,
+                                fechaOtorgada: charola.fechaOtorgada
+                                ? new Date(charola.fechaOtorgada)
+                                : new Date(),
+                                COMIDA: { connect: { comidaId: charola.comidaId } }
+                            }))
+                        },
+                        CHAROLA_HIDRATACION: {
+                            create: charola.hidrataciones.map(hidratacion => ({
+                                cantidadOtorgada: hidratacion.cantidadOtorgada,
+                                fechaOtorgada: hidratacion.fechaOtorgada
+                                ? new Date(hidratacion.fechaOtorgada)
+                                : new Date(),
+                                HIDRATACION: { connect: { hidratacionId: hidratacion.hidratacionId } }
+                            }))
+                        }
+                    },
+                });
+                
+                for(let ancestro of this.charolasParaTamizar){
+                    await tx.cHAROLA_CHAROLA.create({
+                        data: {
+                            charolaHija: nuevaCharola.charolaId,
+                            charolaAncestro: ancestro.charolaId
+                        }
+                    })
+                }
+            }
+
+            return true;
         });
     } catch (error) {
         console.error('Error al tamizar charola:', error);
@@ -151,7 +167,8 @@ module.exports = class Tamizado {
 
 /**
    * Realiza el tamizado para varias charolas.
-   * Registra el fras y pupa y los asocia a cada charola.
+   * Registra los ancestros de las nuevas chrolas.
+   * Actualiza las charolas tamizadas a estatus 'pasada'
    * 
    * @async
    * @returns {Promise<boolean|Error>} Retorna `true` si el tamizado fue exitoso, o un `Error` si ocurre una falla.
@@ -159,68 +176,60 @@ module.exports = class Tamizado {
 
   async tamizadoMultiple() {
     return await prisma.$transaction(async (tx) => {
-        // 0. Buscar IDs de charolas por nombre
-        const charolasBD = await tx.cHAROLA.findMany({
-        where: {
-            nombreCharola: { in: this.charolas },
-        },
-        select: {
-            charolaId: true,
-            nombreCharola: true,
-        },
-        });
+        for (let charola of this.charolas) {
+            const nuevaCharola = await tx.CHAROLA.create({
+                data: {
+                    nombreCharola: charola.nombre,
+                    fechaCreacion: new Date(charola.fechaCreacion),
+                    fechaActualizacion: new Date(charola.fechaActualizacion),
+                    densidadLarva: charola.densidadLarva,
+                    pesoCharola: charola.pesoCharola,
+                    estado: 'activa',
+                    comidaCiclo: charola.comidas[0].cantidadOtorgada,
+                    hidratacionCiclo: charola.hidrataciones[0].cantidadOtorgada,
 
-        // Validar que se encontraron todas
-        const nombresEncontrados = new Set(charolasBD.map(charola => charola.nombreCharola));
-        const nombresFaltantes = this.charolas.filter(nombre => !nombresEncontrados.has(nombre));
-        if (nombresFaltantes.length > 0) {
-        throw new Error(`Charolas no encontradas: ${nombresFaltantes.join(', ')}`);
+                    CHAROLA_COMIDA: {
+                        create: charola.comidas.map(charola => ({
+                            cantidadOtorgada: charola.cantidadOtorgada,
+                            fechaOtorgada: charola.fechaOtorgada
+                            ? new Date(charola.fechaOtorgada)
+                            : new Date(),
+                            COMIDA: { connect: { comidaId: charola.comidaId } }
+                        }))
+                    },
+                    CHAROLA_HIDRATACION: {
+                        create: charola.hidrataciones.map(hidratacion => ({
+                            cantidadOtorgada: hidratacion.cantidadOtorgada,
+                            fechaOtorgada: hidratacion.fechaOtorgada
+                            ? new Date(hidratacion.fechaOtorgada)
+                            : new Date(),
+                            HIDRATACION: { connect: { hidratacionId: hidratacion.hidratacionId } }
+                        }))
+                    }
+                },
+            });
+            
+            for(let ancestro of this.charolasParaTamizar){
+                await tx.cHAROLA_CHAROLA.create({
+                    data: {
+                        charolaHija: nuevaCharola.charolaId,
+                        charolaAncestro: ancestro.charolaId
+                    }
+                })
+            }
         }
 
-        // Crear mapa nombre → id
-        const mapaCharolas = new Map();
-        charolasBD.forEach(charola => mapaCharolas.set(charola.nombreCharola, charola.charolaId));
-
-        // 1. Crear FRAS
-        const fras = await tx.fRAS.create({
-        data: {
-            gramosGenerados: this.cantidadFras,
-            fechaRegistro: this.fecha,
-        },
-        });
-
-        // 2. Crear PUPA
-        const pupa = await tx.pUPA.create({
-        data: {
-            cantidadObtenida: this.cantidadPupa,
-            fechaRegistro: this.fecha,
-        },
-        });
-
-        // 3. Procesar cada charola (por nombre)
-        for (const nombre of this.charolas) {
-        const charolaId = mapaCharolas.get(nombre);
-
-        await tx.cHAROLA_FRAS.create({
-            data: {
-            charolaId,
-            frasId: fras.frasId,
-            },
-        });
-
-        await tx.cHAROLA_PUPA.create({
-            data: {
-            charolaId,
-            pupaId: pupa.pupaId,
-            },
-        });
-
-        await tx.cHAROLA.update({
-            where: { charolaId },
-            data: {
-            fechaActualizacion: this.fecha,
-            },
-        });
+        for(let charolaPasada of this.charolasParaTamizar){
+            await tx.CHAROLA.update(
+                {
+                    where: {
+                        charolaId: charolaPasada.charolaId
+                    },
+                    data: {
+                        estado: 'pasada'
+                    }
+                }
+            )
         }
 
         return true;

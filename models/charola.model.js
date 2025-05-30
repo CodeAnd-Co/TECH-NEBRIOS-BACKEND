@@ -68,7 +68,6 @@ module.exports = class Charola {
    * @param {string} data.nombre - Nombre de la charola.
    * @param {string} data.fechaCreacion - Fecha de creación de la charola.
    * @param {number} data.densidadLarva - Densidad de larvas en la charola.
-   * @param {number} data.pesoCharola - Peso de la charola.
    * @param {Array} data.comidas - Lista de comidas asociadas a la charola.
    * @param {Array} data.hidrataciones - Lista de hidrataciones asociadas a la charola.
    * @returns {Promise<Object>} - Objeto con la charola creada.
@@ -79,7 +78,6 @@ module.exports = class Charola {
       nombre,
       fechaCreacion,
       densidadLarva,
-      pesoCharola,
       comidas = [],
       hidrataciones = []
     } = data;
@@ -97,7 +95,6 @@ module.exports = class Charola {
         fechaCreacion: fecha,
         fechaActualizacion: fecha,
         densidadLarva,
-        pesoCharola,
 
         estado: 'activa',
         comidaCiclo,
@@ -138,7 +135,7 @@ module.exports = class Charola {
         data: {
           nombreCharola: charola.get('nombreCharola'),
           fechaCreacion: charola.get('fechaCreacion'),
-          pesoCharola: charola.get('pesoCharola'),
+          densidadLarva: charola.get('densidadLarva'),
           estado: charola.get('estado'),
           fechaActualizacion: charola.get('fechaActualizacion'),
         },
@@ -275,6 +272,44 @@ module.exports = class Charola {
       where: estado ? { estado } : undefined
     });
     return total;
+  }
+
+  /**
+   * Alimenta la charola: crea registro en CHAROLA_HIDRATACION y
+   * luego actualiza hidratacionCiclo y fechaActualizacion en CHAROLA.
+   * @param {{charolaId:number, hidratacionId:number, cantidadOtorgada:number}} params
+   */
+  static async hidratar({ charolaId, hidratacionId, cantidadOtorgada }) {
+    const fecha = new Date();
+
+    return prisma.$transaction(async tx => {
+      // 1) Crear la relación comida y traer también la comida relacionada
+      const rel = await tx.CHAROLA_HIDRATACION.create({
+        data: {
+          charolaId,
+          hidratacionId,
+          cantidadOtorgada,
+          fechaOtorgada: fecha
+        },
+        include: {
+          HIDRATACION: true
+        }
+      });
+
+      // 2) Actualizar la charola
+      const updated = await tx.CHAROLA.update({
+        where: { charolaId },
+        data: {
+          hidratacionCiclo: { increment: cantidadOtorgada },
+          fechaActualizacion: fecha
+        }
+      });
+
+      return {
+        relacion: rel,
+        charola: updated
+      };
+    });
   }
 
   /**

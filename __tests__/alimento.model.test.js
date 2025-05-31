@@ -1,48 +1,118 @@
-//RF23: Registrar un nuevo tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF23
-/**
- * @file Pruebas unitarias del modelo Alimento.
- * @description Verifica que la clase Alimento pueda ser instanciada correctamente con diferentes combinaciones de datos.
- * @require @jest/globals
- * @require ../models/alimento.model.js
- */
-const { describe, test, expect } = require('@jest/globals');
-const { Alimento } = require('../models/alimento.model.js');
+const { Alimento, CharolaComida } = require('../models/alimento.model');
+
+jest.mock('../generated/prisma', () => {
+  const mockCreate = jest.fn();
+  const mockFindMany = jest.fn();
+  const mockUpdate = jest.fn();
+  const mockDelete = jest.fn();
+
+  return {
+    PrismaClient: jest.fn().mockImplementation(() => ({
+      COMIDA: {
+        create: mockCreate,
+        findMany: mockFindMany,
+        update: mockUpdate,
+        delete: mockDelete
+      },
+      CHAROLA_COMIDA: {
+        create: mockCreate
+      }
+    }))
+  };
+});
+
+const { PrismaClient } = require('../generated/prisma');
+const prisma = new PrismaClient();
 
 describe('Modelo Alimento', () => {
-  /**
-   * Prueba que se pueda crear un alimento sin ID (usualmente para inserción en BD con autoincremento).
-   */
-  test('Debe crear una instancia válida de Alimento sin ID (autoincremental)', () => {
-    const alimento = new Alimento(null, 'Manzana', 'Fruta dulce y roja');
-
-    expect(alimento.idAlimento).toBeNull();
-    expect(alimento.nombreAlimento).toBe('Manzana');
-    expect(alimento.descripcionAlimento).toBe('Fruta dulce y roja');
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
- /**
-   * Prueba la creación de una instancia sin ID explícito.
-   */
-  test('Debe permitir instanciar con solo nombre y descripción', () => {
-    const alimento = new Alimento(undefined, 'Papaya', 'Fruta tropical');
-    expect(alimento.nombreAlimento).toBe('Papaya');
-    expect(alimento.descripcionAlimento).toBe('Fruta tropical');
+  test('obtener debe devolver todos los alimentos', async () => {
+    const mockAlimentos = [
+      { comidaId: 1, nombre: 'Salvado', descripcion: 'A base de trigo' }
+    ];
+    prisma.COMIDA.findMany.mockResolvedValueOnce(mockAlimentos);
+
+    const alimento = new Alimento();
+    const resultado = await alimento.obtener();
+
+    expect(resultado).toEqual(mockAlimentos);
+    expect(prisma.COMIDA.findMany).toHaveBeenCalled();
   });
 
-  /**
-   * Prueba la creación con un ID explícito, como lo devolvería la base de datos.
-   */
-  test('Debe permitir ID numérico (cuando es asignado desde DB)', () => {
-    const alimento = new Alimento(10, 'Mango', 'Dulce');
-    expect(alimento.idAlimento).toBe(10);
+  test('agregar debe insertar un nuevo alimento', async () => {
+    const nuevo = { comidaId: 2, nombre: 'Zanahoria', descripcion: 'Hidratación' };
+    prisma.COMIDA.create.mockResolvedValueOnce(nuevo);
+
+    const alimento = new Alimento(null, 'Zanahoria', 'Hidratación');
+    const resultado = await alimento.agregar();
+
+    expect(resultado).toEqual(nuevo);
+    expect(prisma.COMIDA.create).toHaveBeenCalledWith({
+      data: { nombre: 'Zanahoria', descripcion: 'Hidratación' }
+    });
   });
 
-  /**
-   * Prueba que los campos puedan ser vacíos sin lanzar error, aunque se consideraría inválido lógicamente.
-   */
-  test('Debe manejar valores vacíos (aunque no lanza error)', () => {
-    const alimento = new Alimento(null, '', '');
-    expect(alimento.nombreAlimento).toBe('');
-    expect(alimento.descripcionAlimento).toBe('');
+  test('actualizar debe modificar un alimento existente', async () => {
+    const actualizado = { comidaId: 1, nombre: 'Salvado', descripcion: 'Modificado' };
+    prisma.COMIDA.update.mockResolvedValueOnce(actualizado);
+
+    const alimento = new Alimento(1, 'Salvado', 'Modificado');
+    const resultado = await alimento.actualizar();
+
+    expect(resultado).toEqual(actualizado);
+    expect(prisma.COMIDA.update).toHaveBeenCalledWith({
+      where: { comidaId: 1 },
+      data: { nombre: 'Salvado', descripcion: 'Modificado' }
+    });
+  });
+
+  test('eliminar debe remover un alimento', async () => {
+    const eliminado = { comidaId: 1, nombre: 'Salvado', descripcion: 'Desc' };
+    prisma.COMIDA.delete.mockResolvedValueOnce(eliminado);
+
+    const alimento = new Alimento(1);
+    const resultado = await alimento.eliminar();
+
+    expect(resultado).toEqual(eliminado);
+    expect(prisma.COMIDA.delete).toHaveBeenCalledWith({
+      where: { comidaId: 1 }
+    });
+  });
+});
+
+describe('Modelo CharolaComida', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('agregar debe registrar una relación charola-comida', async () => {
+    const mockRegistro = {
+      id: 10,
+      charolaId: 1,
+      comidaId: 2,
+      cantidadOtorgada: 100,
+      fechaOtorgada: new Date()
+    };
+
+    prisma.CHAROLA_COMIDA.create.mockResolvedValueOnce(mockRegistro);
+
+    const relacion = new CharolaComida(
+      null, 1, 2, 100, mockRegistro.fechaOtorgada
+    );
+
+    const resultado = await relacion.agregar();
+
+    expect(resultado).toEqual(mockRegistro);
+    expect(prisma.CHAROLA_COMIDA.create).toHaveBeenCalledWith({
+      data: {
+        charolaId: 1,
+        comidaId: 2,
+        cantidadOtorgada: 100,
+        fechaOtorgada: mockRegistro.fechaOtorgada
+      }
+    });
   });
 });

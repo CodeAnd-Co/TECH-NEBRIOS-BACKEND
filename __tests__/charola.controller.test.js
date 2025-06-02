@@ -1,89 +1,16 @@
-// RF10 Consultar charola - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF10
-// Pruebas del controlador de charola
-// Se asegura que las funciones del controlador respondan correctamente a solicitudes válidas o inválidas
+// Pruebas unitarias Jest para los controladores restantes del archivo charola.controller.js
 
 const charolaController = require('../controllers/charola.controller');
 const Charola = require('../models/charola.model');
 
 jest.mock('../models/charola.model');
 
-describe('Controlador Charola - consultarCharola', () => {
+describe('Controlador Charola - registrarCharola', () => {
   let req, res;
 
   beforeEach(() => {
     req = {
-      params: {}
-    };
-    res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn()
-    };
-  });
-
-  test('Debe devolver correctamente los datos de una charola existente', async () => {
-    const fakeCharola = {
-        charola: {
-            charolaId: 1004,
-            nombreCharola: 'testxd',
-            comidaCiclo: 10,
-            hidratacionCiclo: 15,
-            fechaActualizacion: null,
-            estado: 'activa',
-            densidadLarva: 10,
-            fechaCreacion: '2025-04-29T06:00:00.000Z',
-            pesoCharola: 10
-        },
-            hidratacion: {
-            hidratacionId: 1,
-            nombre: 'Zanahoria',
-            descripcion: 'Vegetal'
-        },
-            comida: {
-            comidaId: 1,
-            nombre: 'Manzana',
-            descripcion: 'fruta roja'
-        }
-    };
-  
-    req.params.id = '1004';
-    Charola.getCharola.mockResolvedValue(fakeCharola);
-  
-    await charolaController.consultarCharola(req, res);
-  
-    expect(Charola.getCharola).toHaveBeenCalledWith(1004);
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith({
-      data: fakeCharola
-    });
-  });
-
-  test('Debe retornar 404 si no se encuentra la charola', async () => {
-    req.params.id = '-1';
-    Charola.getCharola.mockResolvedValue({ error: 'No se encontró la charola con el ID proporcionado.' });
-
-    await charolaController.consultarCharola(req, res);
-
-    expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.json).toHaveBeenCalledWith({ error: 'No se encontró la charola con el ID proporcionado.' });
-  });
-
-  test('Debe retornar 500 si ocurre una excepción interna', async () => {
-    req.params.id = '123';
-    Charola.getCharola.mockRejectedValue(new Error('Fallo inesperado'));
-
-    await charolaController.consultarCharola(req, res);
-
-    expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({ error: 'Fallo inesperado' });
-  });
-});
-
-describe('Controlador Charola - eliminarCharola', () => {
-  let req, res;
-
-  beforeEach(() => {
-    req = {
-      params: {}
+      body: { nombreCharola: 'Charola 1' }
     };
     res = {
       status: jest.fn().mockReturnThis(),
@@ -92,50 +19,212 @@ describe('Controlador Charola - eliminarCharola', () => {
     jest.clearAllMocks();
   });
 
-  test('Debe eliminar correctamente una charola existente', async () => {
-    const fakeResponse = {
-      mensaje: 'Charola eliminada correctamente',
-      charolaId: 1004
+  test('Debe registrar una nueva charola correctamente', async () => {
+    const nuevaCharola = { charolaId: 1, nombreCharola: 'Charola 1' };
+    Charola.registrar.mockResolvedValue(nuevaCharola);
+
+    await charolaController.registrarCharola(req, res);
+
+    expect(Charola.registrar).toHaveBeenCalledWith(req.body);
+    expect(res.status).toHaveBeenCalledWith(201);
+    expect(res.json).toHaveBeenCalledWith({ data: nuevaCharola });
+  });
+
+  test('Debe retornar 500 en caso de error', async () => {
+    Charola.registrar.mockRejectedValue(new Error('Fallo interno'));
+
+    await charolaController.registrarCharola(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ mensaje: 'Error interno del servidor' });
+  });
+});
+
+
+describe('Controlador Charola - obtenerCharolas', () => {
+  let req, res;
+
+  beforeEach(() => {
+    req = { query: { page: '1', limit: '10' } };
+    res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn()
     };
+    jest.clearAllMocks();
+  });
 
-    req.params.id = '1004';
-    Charola.eliminarCharola.mockResolvedValue(fakeResponse);
+  test('Debe devolver la lista paginada de charolas', async () => {
+    Charola.getCharolasPaginadas.mockResolvedValue([{ charolaId: 1 }]);
+    Charola.getCantidadTotal.mockResolvedValue(1);
 
-    await charolaController.eliminarCharola(req, res);
+    await charolaController.obtenerCharolas(req, res);
 
-    expect(Charola.eliminarCharola).toHaveBeenCalledWith(1004);
     expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith({ data: fakeResponse });
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+      total: 1,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+      data: expect.any(Array)
+    }));
   });
 
-  test('Debe retornar 404 si no se encuentra la charola', async () => {
-    req.params.id = '-1';
-    Charola.eliminarCharola.mockResolvedValue({ error: 'Charola no encontrada' });
+  test('Debe retornar 400 si los parámetros son inválidos', async () => {
+    req.query.page = 'abc'; // no es un número
 
-    await charolaController.eliminarCharola(req, res);
-
-    expect(Charola.eliminarCharola).toHaveBeenCalledWith(-1);
-    expect(res.status).toHaveBeenCalledWith(404);
-    expect(res.json).toHaveBeenCalledWith({ error: 'Charola no encontrada' });
-  });
-
-  test('Debe retornar 400 si no se proporciona el ID', async () => {
-    req.params.id = undefined;
-
-    await charolaController.eliminarCharola(req, res);
+    await charolaController.obtenerCharolas(req, res);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ error: 'Falta id' });
+    expect(res.json).toHaveBeenCalledWith({
+      mensaje: 'Parámetros inválidos: page y limit deben ser enteros positivos'
+    });
   });
 
-  test('Debe retornar 500 si ocurre una excepción interna', async () => {
-    req.params.id = '123';
-    Charola.eliminarCharola.mockRejectedValue(new Error('Error de base de datos'));
+  test('Debe retornar 400 si estado es inválido', async () => {
+    req.query.estado = 'otro';
 
-    await charolaController.eliminarCharola(req, res);
+    await charolaController.obtenerCharolas(req, res);
 
-    expect(Charola.eliminarCharola).toHaveBeenCalledWith(123);
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({
+      mensaje: "Estado inválido. Usa 'activa' o 'pasada'."
+    });
+  });
+
+  test('Debe retornar 500 en caso de error', async () => {
+    Charola.getCharolasPaginadas.mockRejectedValue(new Error('Error inesperado'));
+
+    await charolaController.obtenerCharolas(req, res);
+
     expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({ error: 'Error al eliminar la charola' });
+    expect(res.json).toHaveBeenCalledWith({ mensaje: 'Error interno del servidor' });
+  });
+});
+
+describe('Controlador Charola - alimentarCharola', () => {
+  let req, res;
+
+  beforeEach(() => {
+    req = { body: { charolaId: 1, comidaId: 2, cantidadOtorgada: 50 } };
+    res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+    jest.clearAllMocks();
+  });
+
+  test('Debe alimentar correctamente una charola', async () => {
+    Charola.alimentar.mockResolvedValue({ success: true });
+
+    await charolaController.alimentarCharola(req, res);
+
+    expect(Charola.alimentar).toHaveBeenCalledWith(req.body);
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith({ data: { success: true } });
+  });
+
+  test('Debe retornar 400 si faltan parámetros', async () => {
+    req.body = { charolaId: 1 };
+
+    await charolaController.alimentarCharola(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ error: 'Faltan parámetros obligatorios.' });
+  });
+
+  test('Debe retornar 500 si ocurre un error', async () => {
+    Charola.alimentar.mockRejectedValue(new Error('Error interno'));
+
+    await charolaController.alimentarCharola(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ error: 'Error interno al alimentar charola.' });
+  });
+});
+
+describe('Controlador Charola - hidratarCharola', () => {
+  let req, res;
+
+  beforeEach(() => {
+    req = { body: { charolaId: 1, hidratacionId: 2, cantidadOtorgada: 20 } };
+    res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+    jest.clearAllMocks();
+  });
+
+  test('Debe hidratar correctamente una charola', async () => {
+    Charola.hidratar.mockResolvedValue({ success: true });
+
+    await charolaController.hidratarCharola(req, res);
+
+    expect(Charola.hidratar).toHaveBeenCalledWith(req.body);
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith({ data: { success: true } });
+  });
+
+  test('Debe retornar 400 si faltan parámetros', async () => {
+    req.body = { charolaId: 1 };
+
+    await charolaController.hidratarCharola(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ error: 'Faltan parámetros obligatorios.' });
+  });
+
+  test('Debe retornar 500 si ocurre un error', async () => {
+    Charola.hidratar.mockRejectedValue(new Error('Error interno'));
+
+    await charolaController.hidratarCharola(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ error: 'Error interno al alimentar charola.' });
+  });
+});
+
+describe('Controlador Charola - editarCharola', () => {
+  let req, res;
+
+  beforeEach(() => {
+    req = {
+      query: {
+        charolaId: '1',
+        nuevoNombre: 'Charola Nueva',
+        fechaCreacion: '2024-05-01',
+        nuevoEstado: 'activa',
+        nuevaDensidad: '200',
+        fechaActualizacion: '2024-05-02',
+        nuevaAlimentacion: '3',
+        nuevaAlimentacionOtorgada: '30',
+        nuevaHidratacion: '2',
+        nuevaHidratacionOtorgada: '15'
+      }
+    };
+
+    res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+    jest.clearAllMocks();
+  });
+
+  test('Debe editar la charola exitosamente', async () => {
+    Charola.editarCharola.mockResolvedValue(200);
+
+    await charolaController.editarCharola(req, res);
+
+    expect(Charola.editarCharola).toHaveBeenCalled();
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith({ mensaje: 'Ok' });
+  });
+
+  test('Debe devolver 500 si editarCharola falla', async () => {
+    Charola.editarCharola.mockResolvedValue(500);
+
+    await charolaController.editarCharola(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ error: 'Ocurrió un error al editar los datos de la charola' });
+  });
+
+  test('Debe manejar excepciones internas con código 500', async () => {
+    Charola.editarCharola.mockRejectedValue(new Error('Error de servidor'));
+
+    await charolaController.editarCharola(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({ mensaje: 'Error interno del servidor' });
   });
 });

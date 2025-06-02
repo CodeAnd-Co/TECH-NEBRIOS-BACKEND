@@ -1,118 +1,177 @@
-const { Alimento, CharolaComida } = require('../models/alimento.model');
+//RF23: Registrar un nuevo tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF23
+/**
+ * @file Pruebas unitarias del modelo Alimento.
+ * @description Verifica la funcionalidad del modelo Alimento con cobertura completa.
+ */
 
+const { Alimento, CharolaComida } = require('../models/alimento.model.js');
+
+// Mock explícito de prisma para pruebas
 jest.mock('../generated/prisma', () => {
-  const mockCreate = jest.fn();
-  const mockFindMany = jest.fn();
-  const mockUpdate = jest.fn();
-  const mockDelete = jest.fn();
+  const findMany = jest.fn();
+  const createComida = jest.fn();
+  const update = jest.fn();
+  const deleteMock = jest.fn();
+  const createCharola = jest.fn();
 
   return {
     PrismaClient: jest.fn().mockImplementation(() => ({
       COMIDA: {
-        create: mockCreate,
-        findMany: mockFindMany,
-        update: mockUpdate,
-        delete: mockDelete
+        findMany,
+        create: createComida,
+        update,
+        delete: deleteMock,
       },
       CHAROLA_COMIDA: {
-        create: mockCreate
-      }
-    }))
+        create: createCharola,
+      },
+    })),
   };
 });
 
 const { PrismaClient } = require('../generated/prisma');
-const prisma = new PrismaClient();
+const prismaMock = new PrismaClient();
 
 describe('Modelo Alimento', () => {
-  afterEach(() => {
+  beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  test('obtener debe devolver todos los alimentos', async () => {
-    const mockAlimentos = [
-      { comidaId: 1, nombre: 'Salvado', descripcion: 'A base de trigo' }
-    ];
-    prisma.COMIDA.findMany.mockResolvedValueOnce(mockAlimentos);
+  test('Debe crear una instancia válida de Alimento sin ID (autoincremental)', () => {
+    const alimento = new Alimento(null, 'Manzana', 'Fruta dulce y roja');
+    expect(alimento.idAlimento).toBeNull();
+    expect(alimento.nombreAlimento).toBe('Manzana');
+    expect(alimento.descripcionAlimento).toBe('Fruta dulce y roja');
+  });
+
+  test('Debe permitir instanciar con solo nombre y descripción', () => {
+    const alimento = new Alimento(undefined, 'Papaya', 'Fruta tropical');
+    expect(alimento.nombreAlimento).toBe('Papaya');
+    expect(alimento.descripcionAlimento).toBe('Fruta tropical');
+  });
+
+  test('Debe permitir ID numérico (cuando es asignado desde DB)', () => {
+    const alimento = new Alimento(10, 'Mango', 'Dulce');
+    expect(alimento.idAlimento).toBe(10);
+  });
+
+  test('Debe manejar valores vacíos (aunque no lanza error)', () => {
+    const alimento = new Alimento(null, '', '');
+    expect(alimento.nombreAlimento).toBe('');
+    expect(alimento.descripcionAlimento).toBe('');
+  });
+
+  // ------------------- Cobertura de métodos CRUD ------------------------
+
+  test('Debe obtener todos los alimentos desde la BD', async () => {
+    const mockData = [{ comidaId: 1, nombre: 'Zanahoria', descripcion: 'Verdura' }];
+    prismaMock.COMIDA.findMany.mockResolvedValue(mockData);
 
     const alimento = new Alimento();
     const resultado = await alimento.obtener();
 
-    expect(resultado).toEqual(mockAlimentos);
-    expect(prisma.COMIDA.findMany).toHaveBeenCalled();
+    expect(prismaMock.COMIDA.findMany).toHaveBeenCalledTimes(1);
+    expect(resultado).toEqual(mockData);
   });
 
-  test('agregar debe insertar un nuevo alimento', async () => {
-    const nuevo = { comidaId: 2, nombre: 'Zanahoria', descripcion: 'Hidratación' };
-    prisma.COMIDA.create.mockResolvedValueOnce(nuevo);
+  test('Debe agregar un nuevo alimento', async () => {
+    const mockInsertado = { comidaId: 99, nombre: 'Pepino', descripcion: 'Verde y fresco' };
+    prismaMock.COMIDA.create.mockResolvedValue(mockInsertado);
 
-    const alimento = new Alimento(null, 'Zanahoria', 'Hidratación');
+    const alimento = new Alimento(null, 'Pepino', 'Verde y fresco');
     const resultado = await alimento.agregar();
 
-    expect(resultado).toEqual(nuevo);
-    expect(prisma.COMIDA.create).toHaveBeenCalledWith({
-      data: { nombre: 'Zanahoria', descripcion: 'Hidratación' }
+    expect(prismaMock.COMIDA.create).toHaveBeenCalledWith({
+      data: {
+        nombre: 'Pepino',
+        descripcion: 'Verde y fresco',
+      },
     });
+    expect(resultado).toEqual(mockInsertado);
   });
 
-  test('actualizar debe modificar un alimento existente', async () => {
-    const actualizado = { comidaId: 1, nombre: 'Salvado', descripcion: 'Modificado' };
-    prisma.COMIDA.update.mockResolvedValueOnce(actualizado);
+  test('Debe actualizar un alimento existente', async () => {
+    const mockActualizado = { comidaId: 3, nombre: 'Pera', descripcion: 'Jugosa' };
+    prismaMock.COMIDA.update.mockResolvedValue(mockActualizado);
 
-    const alimento = new Alimento(1, 'Salvado', 'Modificado');
+    const alimento = new Alimento(3, 'Pera', 'Jugosa');
     const resultado = await alimento.actualizar();
 
-    expect(resultado).toEqual(actualizado);
-    expect(prisma.COMIDA.update).toHaveBeenCalledWith({
-      where: { comidaId: 1 },
-      data: { nombre: 'Salvado', descripcion: 'Modificado' }
+    expect(prismaMock.COMIDA.update).toHaveBeenCalledWith({
+      where: { comidaId: 3 },
+      data: {
+        nombre: 'Pera',
+        descripcion: 'Jugosa',
+      },
     });
+    expect(resultado).toEqual(mockActualizado);
   });
 
-  test('eliminar debe remover un alimento', async () => {
-    const eliminado = { comidaId: 1, nombre: 'Salvado', descripcion: 'Desc' };
-    prisma.COMIDA.delete.mockResolvedValueOnce(eliminado);
+  test('Debe eliminar un alimento por ID', async () => {
+    const mockEliminado = { comidaId: 5, nombre: 'Sandía', descripcion: 'Grande' };
+    prismaMock.COMIDA.delete.mockResolvedValue(mockEliminado);
 
-    const alimento = new Alimento(1);
+    const alimento = new Alimento(5);
     const resultado = await alimento.eliminar();
 
-    expect(resultado).toEqual(eliminado);
-    expect(prisma.COMIDA.delete).toHaveBeenCalledWith({
-      where: { comidaId: 1 }
+    expect(prismaMock.COMIDA.delete).toHaveBeenCalledWith({
+      where: { comidaId: 5 },
     });
+    expect(resultado).toEqual(mockEliminado);
   });
 });
 
+
+/**
+ * @file Pruebas unitarias del modelo CharolaComida.
+ * @description Verifica el comportamiento del modelo CharolaComida.
+ */
+
 describe('Modelo CharolaComida', () => {
-  afterEach(() => {
+  beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  test('agregar debe registrar una relación charola-comida', async () => {
-    const mockRegistro = {
-      id: 10,
+  test('Debe crear una instancia válida de CharolaComida', () => {
+    const instancia = new CharolaComida(1, 10, 20, 3.5, new Date('2025-06-01'));
+    expect(instancia.id).toBe(1);
+    expect(instancia.charolaId).toBe(10);
+    expect(instancia.comidaId).toBe(20);
+    expect(instancia.cantidadOtorgada).toBe(3.5);
+    expect(instancia.fechaOtorgada).toEqual(new Date('2025-06-01'));
+  });
+
+  test('Debe agregar correctamente una relación charola-comida', async () => {
+    const mockInsertado = {
+      id: 99,
       charolaId: 1,
       comidaId: 2,
-      cantidadOtorgada: 100,
-      fechaOtorgada: new Date()
+      cantidadOtorgada: 5,
+      fechaOtorgada: new Date('2025-06-01'),
     };
 
-    prisma.CHAROLA_COMIDA.create.mockResolvedValueOnce(mockRegistro);
+    prismaMock.CHAROLA_COMIDA.create.mockResolvedValue(mockInsertado);
 
-    const relacion = new CharolaComida(
-      null, 1, 2, 100, mockRegistro.fechaOtorgada
-    );
+    const instancia = new CharolaComida(null, 1, 2, 5, new Date('2025-06-01'));
+    const resultado = await instancia.agregar();
 
-    const resultado = await relacion.agregar();
-
-    expect(resultado).toEqual(mockRegistro);
-    expect(prisma.CHAROLA_COMIDA.create).toHaveBeenCalledWith({
+    expect(prismaMock.CHAROLA_COMIDA.create).toHaveBeenCalledWith({
       data: {
         charolaId: 1,
         comidaId: 2,
-        cantidadOtorgada: 100,
-        fechaOtorgada: mockRegistro.fechaOtorgada
-      }
+        cantidadOtorgada: 5,
+        fechaOtorgada: new Date('2025-06-01'),
+      },
     });
+
+    expect(resultado).toEqual(mockInsertado);
+  });
+
+  test('Debe lanzar error si prisma.create falla', async () => {
+    prismaMock.CHAROLA_COMIDA.create.mockRejectedValue(new Error('Error en BD'));
+
+    const instancia = new CharolaComida(null, 1, 2, 5, new Date());
+
+    await expect(instancia.agregar()).rejects.toThrow('Error en BD');
   });
 });

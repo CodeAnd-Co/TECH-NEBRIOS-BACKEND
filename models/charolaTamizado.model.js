@@ -1,6 +1,6 @@
 // RF20: Seleccionar Charolas Para Tamizar y Registrar sus Datos - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF37
 
-const { PrismaClient } = require("../generated/prisma");
+const { PrismaClient } = require('../generated/prisma');
 const prisma = new PrismaClient();
 
 /**
@@ -121,7 +121,7 @@ module.exports = class Tamizado {
               fechaActualizacion: new Date(charola.fechaActualizacion),
               densidadLarva: charola.densidadLarva,
               pesoCharola: charola.pesoCharola,
-              estado: "activa",
+              estado: 'activa',
               comidaCiclo: charola.comidas[0].cantidadOtorgada,
               hidratacionCiclo: charola.hidrataciones[0].cantidadOtorgada,
 
@@ -163,7 +163,7 @@ module.exports = class Tamizado {
 
       return resultado;
     } catch (error) {
-      console.error("Error al tamizar charola:", error);
+      console.error('Error al tamizar charola:', error);
       return new Error(error.message);
     }
   }
@@ -188,7 +188,7 @@ module.exports = class Tamizado {
               fechaActualizacion: new Date(charola.fechaActualizacion),
               densidadLarva: charola.densidadLarva,
               pesoCharola: charola.pesoCharola,
-              estado: "activa",
+              estado: 'activa',
               comidaCiclo: charola.comidas[0].cantidadOtorgada,
               hidratacionCiclo: charola.hidrataciones[0].cantidadOtorgada,
 
@@ -231,7 +231,7 @@ module.exports = class Tamizado {
               charolaId: charolaPasada.charolaId,
             },
             data: {
-              estado: "pasada",
+              estado: 'pasada',
             },
           });
         }
@@ -241,7 +241,7 @@ module.exports = class Tamizado {
 
       return resultado;
     } catch (error) {
-      console.error("Error al tamizar multiples charolas:", error);
+      console.error('Error al tamizar multiples charolas:', error);
       return new Error(error.message);
     }
   }

@@ -1,20 +1,16 @@
 //RF40: Editar un tipo de hidratación en el sistema - https://codeandco-wiki.netlify.app/docs/next/proyectos/larvas/documentacion/requisitos/RF40
 
-// RF40 Editar un tipo de hidratación en el sistema
 const { Hidratacion } = require('../models/hidratacion.model');
 
-// Objeto contenedor de mocks
-const mockPrismaHandlers = {};
-
+// Mock de PrismaClient directamente desde el archivo generado
 jest.mock('../generated/prisma', () => {
-  mockPrismaHandlers.findMany = jest.fn();
-  mockPrismaHandlers.update = jest.fn();
-
+  const findManyMock = jest.fn();
+  const updateMock = jest.fn();
   return {
     PrismaClient: jest.fn().mockImplementation(() => ({
       HIDRATACION: {
-        findMany: mockPrismaHandlers.findMany,
-        update: mockPrismaHandlers.update,
+        findMany: findManyMock,
+        update: updateMock,
       },
     })),
   };
@@ -24,60 +20,55 @@ const { PrismaClient } = require('../generated/prisma');
 const prisma = new PrismaClient();
 
 describe('Modelo Hidratacion', () => {
-  afterEach(() => {
+  beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  describe('obtener', () => {
-    test('debe devolver una lista de hidrataciones', async () => {
-      const mockData = [
-        { hidratacionId: 1, nombre: 'Agua', descripcion: 'Líquido esencial' },
-        { hidratacionId: 2, nombre: 'Jugo', descripcion: 'Fruta líquida' },
-      ];
+  it('debe obtener una lista de registros de hidratación', async () => {
+    const registrosMock = [
+      { hidratacionId: 1, nombre: 'Agua', descripcion: 'Líquido esencial' },
+    ];
+    prisma.HIDRATACION.findMany.mockResolvedValue(registrosMock);
 
-      mockPrismaHandlers.findMany.mockResolvedValue(mockData);
+    const instancia = new Hidratacion();
+    const resultado = await instancia.obtener();
 
-      const modelo = new Hidratacion();
-      const resultado = await modelo.obtener();
+    expect(resultado).toEqual(registrosMock);
+    expect(prisma.HIDRATACION.findMany).toHaveBeenCalled();
+  });
 
-      expect(mockPrismaHandlers.findMany).toHaveBeenCalled();
-      expect(resultado).toEqual(mockData);
+  it('debe actualizar correctamente un registro de hidratación', async () => {
+    const instancia = new Hidratacion(2, 'Suero', 'Hidratante oral');
+    const resultadoEsperado = {
+      hidratacionId: 2,
+      nombre: 'Suero',
+      descripcion: 'Hidratante oral',
+    };
+
+    prisma.HIDRATACION.update.mockResolvedValue(resultadoEsperado);
+
+    const resultado = await instancia.actualizar();
+
+    expect(resultado).toEqual(resultadoEsperado);
+    expect(prisma.HIDRATACION.update).toHaveBeenCalledWith({
+      where: { hidratacionId: 2 },
+      data: {
+        nombre: 'Suero',
+        descripcion: 'Hidratante oral',
+      },
     });
   });
 
-  describe('actualizar', () => {
-    test('debe actualizar y devolver el registro de hidratación', async () => {
-      const datosEntrada = {
-        idHidratacion: 1,
-        nombreHidratacion: 'Electrolitos',
-        descripcionHidratacion: 'Rehidratación oral',
-      };
+  it('debe lanzar un error si falla el método obtener', async () => {
+    prisma.HIDRATACION.findMany.mockRejectedValue(new Error('Error de BD'));
+    const instancia = new Hidratacion();
+    await expect(instancia.obtener()).rejects.toThrow('Error de BD');
+  });
 
-      const mockActualizado = {
-        hidratacionId: 1,
-        nombre: 'Electrolitos',
-        descripcion: 'Rehidratación oral',
-      };
-
-      mockPrismaHandlers.update.mockResolvedValue(mockActualizado);
-
-      const modelo = new Hidratacion(
-        datosEntrada.idHidratacion,
-        datosEntrada.nombreHidratacion,
-        datosEntrada.descripcionHidratacion
-      );
-
-      const resultado = await modelo.actualizar();
-
-      expect(mockPrismaHandlers.update).toHaveBeenCalledWith({
-        where: { hidratacionId: datosEntrada.idHidratacion },
-        data: {
-          nombre: datosEntrada.nombreHidratacion,
-          descripcion: datosEntrada.descripcionHidratacion,
-        },
-      });
-
-      expect(resultado).toEqual(mockActualizado);
-    });
+  it('debe lanzar un error si falla el método actualizar', async () => {
+    prisma.HIDRATACION.update.mockRejectedValue(new Error('Error de actualización'));
+    const instancia = new Hidratacion(3, 'Gatorade', 'Bebida energética');
+    await expect(instancia.actualizar()).rejects.toThrow('Error de actualización');
   });
 });
+

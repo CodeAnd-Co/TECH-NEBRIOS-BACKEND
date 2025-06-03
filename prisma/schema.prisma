@@ -92,7 +92,7 @@ model FRAS {
 }
 
 model HIDRATACION {
-  hidratacionId       Int                   @id
+  hidratacionId       Int                   @id @default(autoincrement())
   nombre              String?               @db.VarChar(25)
   descripcion         String?               @db.VarChar(200)
   CHAROLA_HIDRATACION CHAROLA_HIDRATACION[]
@@ -142,6 +142,6 @@ model CHAROLA_PUPA {
 model PUPA {
   pupaId           Int            @id @default(autoincrement())
   fechaRegistro    DateTime?      @db.Date
-  cantidadObtenida Int?
+  cantidadObtenida Float?         @db.Float
   CHAROLA_PUPA     CHAROLA_PUPA[]
 }

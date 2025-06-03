@@ -23,9 +23,9 @@ model CHAROLA {
   comidaCiclo                                              Float                 @db.Float
   hidratacionCiclo                                         Float                 @db.Float
   fechaActualizacion                                       DateTime?             @db.Date
-  estado                                                   String?               @db.VarChar(25)
+  estado                                                   String                @db.VarChar(25)
   densidadLarva                                            Float?                @db.Float
-  fechaCreacion                                            DateTime?             @db.Date
+  fechaCreacion                                            DateTime              @db.Date
   pesoCharola                                              Float?                @db.Float
   CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA     CHAROLA_CHAROLA[]     @relation("CHAROLA_CHAROLA_charolaHijaToCHAROLA")
   CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA CHAROLA_CHAROLA[]     @relation("CHAROLA_CHAROLA_charolaAncestroToCHAROLA")
@@ -83,11 +83,12 @@ model COMIDA {
 model FRAS {
   frasId          Int            @id @default(autoincrement())
   gramosGenerados Float          @db.Float
+  fechaRegistro   DateTime?      @db.Date
   charolaId       Int?
   CHAROLA_FRAS    CHAROLA_FRAS[]
   CHAROLA         CHAROLA?       @relation(fields: [charolaId], references: [charolaId], onDelete: Cascade, onUpdate: Restrict, map: "FRAS_ibfk_1")
 
-  @@index([charolaId], map: "charolaId")
+  @@index([charolaId], map: "idx_fras_charolaId")
 }
 
 model HIDRATACION {

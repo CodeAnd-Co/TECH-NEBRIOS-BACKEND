@@ -200,7 +200,6 @@ module.exports = class Charola {
       });
 
       return 200;
-
     } catch (error){
       console.error('Error al editar la charola:', error);
       return { error: 'Error al editar la charola' };

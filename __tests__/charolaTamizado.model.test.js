@@ -1,34 +1,67 @@
-// RF20: Seleccionar Charolas Para Tamizar y Registrar sus Datos - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF37
+// 👇 Debe ir primero: declara el mock ANTES de importar el módulo a testear
+jest.mock('../generated/prisma', () => {
+  const mockCreate = jest.fn().mockResolvedValue({ frasId: 1, pupaId: 1, charolaId: 1 });
+  const mockUpdate = jest.fn().mockResolvedValue({});
+  
+  const mockTx = {
+    fRAS: { create: mockCreate },
+    cHAROLA_FRAS: { create: mockCreate },
+    pUPA: { create: mockCreate },
+    cHAROLA_PUPA: { create: mockCreate },
+    cHAROLA_COMIDA: { create: mockCreate },
+    cHAROLA_HIDRATACION: { create: mockCreate },
+    cHAROLA: {
+      create: mockCreate,
+      update: mockUpdate,
+    },
+    CHAROLA: {
+      create: mockCreate,
+      update: mockUpdate,
+    },
+    cHAROLA_CHAROLA: { create: mockCreate },
+  };
 
-const { describe, test, expect } = require('@jest/globals');
-const tamizadoCharola = require('../models/charolaTamizado.model');
+  return {
+    PrismaClient: jest.fn().mockImplementation(() => ({
+      $transaction: (fn) => fn(mockTx),
+    })),
+  };
+});
 
-describe('Modelo de Tamizado', () => {
-    test("Debe regresar verdadero si el tamizado individual se realiza correctamente", async () => {
-        const datosSimulados = {
-            charolas: ["E-031-03"],
-            tipoComida: 'Salvado',
-            tipoHidratacion: 'Zanahoria',
-            cantidadComida: 100,
-            cantidadHidratacion: 50,
-            cantidadPupa: 100,
-            cantidadFras: 500,
-            fecha: new Date()
-        }
-        const tamizado = new tamizadoCharola(datosSimulados);
-        const resultado = await tamizado.tamizarIndividual();
-        expect(resultado).toBe(true);
-    });
+const Tamizado = require('../models/charolaTamizado.model');
 
-    test("Debe regresar verdadero si el tamizado múltiple se realiza correctamente", async () => {
-        const datosSimulados = {
-            charolas: ["E-107-09", "E-057-10", "E-104-04"],
-            cantidadPupa: 100,
-            cantidadFras: 600,
-            fecha: new Date()
-        }
-        const tamizado = new tamizadoCharola(datosSimulados);
-        const resultado = await tamizado.tamizadoMultiple();
-        expect(resultado).toBe(true);
-    });
+describe('Tamizado', () => {
+  const baseData = {
+    charolas: [
+      {
+        nombre: 'CharolaTest',
+        fechaCreacion: new Date(),
+        fechaActualizacion: new Date(),
+        densidadLarva: 100,
+        pesoCharola: 200,
+        comidas: [{ cantidadOtorgada: 10, comidaId: 1 }],
+        hidrataciones: [{ cantidadOtorgada: 20, hidratacionId: 1 }],
+      },
+    ],
+    tipoComida: 1,
+    tipoHidratacion: 1,
+    cantidadComida: 10,
+    cantidadHidratacion: 5,
+    cantidadPupa: 2,
+    cantidadFras: 30,
+    fecha: new Date(),
+    charolasParaTamizar: [{ charolaId: 1 }],
+  };
+
+  it('debe ejecutar tamizarIndividual sin errores', async () => {
+    const proceso = new Tamizado(baseData);
+    const result = await proceso.tamizarIndividual();
+    expect(result).toBe(true);
+  });
+
+  it('debe ejecutar tamizadoMultiple sin errores', async () => {
+    const proceso = new Tamizado(baseData);
+    const result = await proceso.tamizadoMultiple();
+    expect(result).toBe(true);
+  });
 });

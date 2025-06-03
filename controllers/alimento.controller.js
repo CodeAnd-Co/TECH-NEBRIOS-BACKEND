@@ -108,6 +108,13 @@ module.exports.eliminarAlimento = async (req, res) => {
 
     try {
         const alimento = new Alimento(idAlimento);
+        const asignaciones = await alimento.isAgregada();
+
+        // Verificar si el alimento está asignado a alguna charola
+        if (asignaciones > 0) {
+            return res.status(409).json({ success: false, message: 'El alimento no se puede eliminar porque está asignado a una charola' });
+        }
+
         await alimento.eliminar();
         res.json({ success: true, message: 'Alimento eliminado' });
     } catch (error) {

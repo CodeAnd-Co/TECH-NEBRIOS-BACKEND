@@ -68,6 +68,24 @@ class Alimento {
   }
 
   /**
+   * Verifica si un alimento está agregado a alguna charola.
+   * @async
+   * @method isAgregada
+   * @returns {Promise<number>} Número de asignaciones del alimento a charolas.
+   * @throws {Error} Si ocurre un error de consulta o conexión.
+   */
+  async isAgregada() {
+    try {
+      const asignaciones = await prisma.CHAROLA_COMIDA.count({
+          where: { comidaId: this.idAlimento },
+        });
+        return asignaciones;
+    } catch (error) {
+      throw new Error('Error al verificar asignaciones de alimento');
+    }
+  }
+
+  /**
    * Elimina un alimento de la tabla COMIDA.
    * @async
    * @method eliminar

@@ -128,19 +128,6 @@ module.exports = class Charola {
 
   static async editarCharola(charola, alimento, hidratacion) {
     try{
-      await prisma.CHAROLA.update({
-        where: {
-          charolaId: charola.get('charolaId'),
-        },
-        data: {
-          nombreCharola: charola.get('nombreCharola'),
-          fechaCreacion: charola.get('fechaCreacion'),
-          densidadLarva: charola.get('densidadLarva'),
-          estado: charola.get('estado'),
-          fechaActualizacion: charola.get('fechaActualizacion'),
-        },
-      });
-
       const ultimoRegistroComida = await prisma.CHAROLA_COMIDA.findFirst({
         where: {
           charolaId: charola.get('charolaId'),
@@ -150,7 +137,13 @@ module.exports = class Charola {
         },
       });
 
+      let diferenciaAlimento = 0;
+
       if (ultimoRegistroComida) {
+        const cantidadAnterior = ultimoRegistroComida.cantidadOtorgada;
+        const cantidadNueva = alimento.get('cantidadOtorgada');
+        diferenciaAlimento = cantidadNueva - cantidadAnterior;
+
         await prisma.CHAROLA_COMIDA.update({
           where: {
             id: ultimoRegistroComida.id,
@@ -172,7 +165,13 @@ module.exports = class Charola {
         },
       });
 
+      let diferenciaHidratacion = 0;
+
       if (ultimoRegistroHidratacion) {
+        const cantidadAnterior = ultimoRegistroHidratacion.cantidadOtorgada;
+        const cantidadNueva = hidratacion.get('cantidadOtorgada');
+        diferenciaHidratacion = cantidadNueva - cantidadAnterior;
+
         await prisma.CHAROLA_HIDRATACION.update({
           where: {
             id: ultimoRegistroHidratacion.id,
@@ -184,6 +183,21 @@ module.exports = class Charola {
           },
         });
       }
+
+      await prisma.CHAROLA.update({
+        where: {
+          charolaId: charola.get('charolaId'),
+        },
+        data: {
+          nombreCharola: charola.get('nombreCharola'),
+          fechaCreacion: charola.get('fechaCreacion'),
+          densidadLarva: charola.get('densidadLarva'),
+          estado: charola.get('estado'),
+          comidaCiclo: { increment: diferenciaAlimento },
+          hidratacionCiclo: { increment: diferenciaHidratacion },
+          fechaActualizacion: charola.get('fechaActualizacion'),
+        },
+      });
 
       return 200;
 

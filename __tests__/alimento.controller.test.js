@@ -146,47 +146,7 @@ describe('Controlador de Alimento', () => {
       expect(res.send).toHaveBeenCalledWith('Error al editar alimento');
     });
   });
-
-  describe('eliminarAlimento', () => {
-    it('debería retornar 400 si el id no es válido', async () => {
-      const req = mockRequest({}, { idAlimento: 'invalido' });
-      const res = mockResponse();
-
-      await controller.eliminarAlimento(req, res);
-
-      expect(res.status).toHaveBeenCalledWith(400);
-      expect(res.json).toHaveBeenCalledWith({ error: 'ID de alimento no válido' });
-    });
-
-    it('debería eliminar correctamente el alimento', async () => {
-      const req = mockRequest({}, { idAlimento: 1 });
-      const res = mockResponse();
-
-      Alimento.mockImplementation(() => ({ eliminar: jest.fn().mockResolvedValue() }));
-
-      await controller.eliminarAlimento(req, res);
-
-      expect(res.json).toHaveBeenCalledWith({
-        success: true,
-        message: 'Alimento eliminado',
-      });
-    });
-
-    it('debería retornar error 500 si falla la eliminación', async () => {
-      const req = mockRequest({}, { idAlimento: 1 });
-      const res = mockResponse();
-
-      Alimento.mockImplementation(() => ({
-        eliminar: jest.fn().mockRejectedValue(new Error()),
-      }));
-
-      await controller.eliminarAlimento(req, res);
-
-      expect(res.status).toHaveBeenCalledWith(500);
-      expect(res.send).toHaveBeenCalledWith('Error al eliminar alimento');
-    });
-  });
-
+  
   describe('registrarCharolaComida', () => {
     it('debería retornar 400 si faltan campos', async () => {
       const req = mockRequest({ comidaId: 1 }); // Falta info

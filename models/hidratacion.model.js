@@ -39,6 +39,41 @@ class Hidratacion {
     }
   }
 
+  /**
+    * Verifica si un alimento está agregado a alguna charola.
+    * @async
+    * @method isAgregada
+    * @returns {Promise<number>} Número de asignaciones de la hidratación a las charolas.
+    * @throws {Error} Si ocurre un error de consulta o conexión.
+    */
+  async isAgregada() {
+    try {
+      const asignaciones = await prisma.CHAROLA_HIDRATACION.count({
+          where: { hidratacionId: this.idHidratacion },
+        });
+        return asignaciones;
+    } catch (error) {
+      throw new Error('Error al verificar asignaciones de la hidratación: ' + error.message);
+    }
+  }
+
+  /**
+   * Elimina un alimento de la tabla COMIDA.
+   * @async
+   * @method eliminar
+   * @returns {Promise<Object>} Registro eliminado de hidratación.
+    * @throws {Error} Si ocurre un error de consulta o conexión.
+    */
+  async eliminar() {
+    try {
+     return await prisma.HIDRATACION.delete({
+       where: { hidratacionId: this.idHidratacion },
+     })
+   } catch (error) {
+     throw new Error('Error al eliminar hidratación: ' + error.message);
+   }
+ }
+
 }
 
 module.exports = { Hidratacion };

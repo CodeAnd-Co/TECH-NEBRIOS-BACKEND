@@ -1,32 +1,35 @@
+// RF29: Visualizar la información del Frass obtenido - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF29
+
 const { PrismaClient } = require('../generated/prisma');
 const prisma = new PrismaClient();
 
 class Fras {
-    /**
-     * Crea una nueva instancia de Fras.
-     * @constructor
-     * @param {number} frasId - Identificador del Fras.
-     * @param {number} gramosGenerados - Gramos generados por el Fras.
-     * @param {number} charolaId - Identificador de la charola asociada al Fras.
-     */
-    constructor(frasId, gramosGenerados, charolaId) {
-        this.frasId = frasId;
-        this.gramosGenerados = gramosGenerados;
-        this.charolaId = charolaId;
-    }
 
     /**
-     * Obtiene toda la Fras de la tabla FRAS.
-     * @async
-     * @method obtener
-     * @returns {Promise<Array<Object>>} Lista de registros de Fras.
-     * @throws {Error} Si ocurre un error de consulta o conexión.
+        * Obtiene todos los registros de Fras de la base de datos.
+        * @async
+        * @returns {Promise<Array>} Retorna una lista de objetos que contienen la información de las charolas y sus respectivos registros de Fras.
+        * @throws {Error} Lanza un error si ocurre un problema al consultar la base de datos.
      */
     async obtener() {
         try {
-            return await prisma.FRAS.findMany();
+            const resultado = await prisma.cHAROLA_FRAS.findMany({
+        select: {
+          CHAROLA: {
+            select: {
+              nombreCharola: true,
+            },
+          },
+          FRAS: {
+            select: {
+              fechaRegistro: true,
+              gramosGenerados: true,
+            },
+          },
+        },
+      });
+            return resultado;
         } catch (error) {
-            console.error('Error al obtener los registros de Fras:', error);
             throw error;
         }
     }

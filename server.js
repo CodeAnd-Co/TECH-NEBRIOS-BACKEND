@@ -26,8 +26,9 @@ const reporteRoutes = require('./routes/reporte.routes');
 /* Rutas de la API */
 app.use('/charola', limitarAPI, charolaRoutes);
 app.use('/usuario', limitarAPI, usuarioRoutes);
+// app.use('/alimentacion', sesionActiva, limitarAPI, alimentoRoutes);
 app.use('/alimentacion', limitarAPI, alimentoRoutes);
-app.use('/hidratacion', limitarAPI, hidratacionRoutes);
+app.use('/hidratacion', sesionActiva, limitarAPI, hidratacionRoutes);
 app.use('/fras', frasRoutes);
 app.use('/charolaTamizado', sesionActiva, limitarAPI, charolaTamizadoRoutes);
 app.use('/historialCharola', sesionActiva, limitarAPI, historialCharlolaRoutes);

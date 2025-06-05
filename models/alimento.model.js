@@ -1,6 +1,7 @@
 //RF23: Registrar un nuevo tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF23
 //RF24: Editar un tipo de comida en el sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF24
 
+const { th } = require('date-fns/locale');
 const { PrismaClient } = require('../generated/prisma');
 const prisma = new PrismaClient();
 
@@ -31,7 +32,11 @@ class Alimento {
    * @throws {Error} Si ocurre un error de consulta o conexión.
    */
   async obtener() {
-    return await prisma.COMIDA.findMany();
+    try {
+      return await prisma.COMIDA.findMany();
+    } catch (error) {
+      throw new Error('Error al obtener alimentos: ' + error.message);
+    }
   }
 
   /**
@@ -42,12 +47,16 @@ class Alimento {
    * @throws {Error} Si ocurre un error de inserción.
    */
   async agregar() {
-    return await prisma.COMIDA.create({
+     try {
+      return await prisma.COMIDA.create({
       data: {
         nombre: this.nombreAlimento,
         descripcion: this.descripcionAlimento,
       },
     });
+    } catch (error) {
+      throw new Error('Error al agregar alimento: ' + error.message);
+    }
   }
 
   /**
@@ -58,13 +67,35 @@ class Alimento {
  * @throws {Error} Si ocurre un error de consulta o conexión.
  */
   async actualizar() {
-    return await prisma.COMIDA.update({
+     try {
+      return await prisma.COMIDA.update({
       where: { comidaId: this.idAlimento },
       data: {
         nombre: this.nombreAlimento,
         descripcion: this.descripcionAlimento,
       },
     });
+    } catch (error) {
+      throw new Error('Error al actualizar alimento: ' + error.message);
+    }
+  }
+
+  /**
+   * Verifica si un alimento está agregado a alguna charola.
+   * @async
+   * @method isAgregada
+   * @returns {Promise<number>} Número de asignaciones del alimento a charolas.
+   * @throws {Error} Si ocurre un error de consulta o conexión.
+   */
+  async isAgregada() {
+    try {
+      const asignaciones = await prisma.CHAROLA_COMIDA.count({
+          where: { comidaId: this.idAlimento },
+        });
+        return asignaciones;
+    } catch (error) {
+      throw new Error('Error al verificar asignaciones de alimento: ' + error.message);
+    }
   }
 
   /**
@@ -75,9 +106,13 @@ class Alimento {
    * @throws {Error} Si ocurre un error de consulta o conexión.
    */
   async eliminar() {
-    return await prisma.COMIDA.delete({
-      where: { comidaId: this.idAlimento },
-    })
+     try {
+      return await prisma.COMIDA.delete({
+        where: { comidaId: this.idAlimento },
+      })
+    } catch (error) {
+      throw new Error('Error al eliminar alimento: ' + error.message);
+    }
   }
 }
 
@@ -98,7 +133,8 @@ class CharolaComida {
    * Agrega una nueva relación charola-comida
    */
   async agregar() {
-    return await prisma.CHAROLA_COMIDA.create({
+     try {
+      return await prisma.CHAROLA_COMIDA.create({
       data: {
         charolaId: this.charolaId,
         comidaId: this.comidaId,
@@ -106,6 +142,9 @@ class CharolaComida {
         fechaOtorgada: this.fechaOtorgada,
       },
     });
+    } catch (error) {
+      throw new Error('Error al agregar charola-comida: ' + error.message);
+    }
   }
 }
 

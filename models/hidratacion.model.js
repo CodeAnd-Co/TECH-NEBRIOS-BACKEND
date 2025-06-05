@@ -35,26 +35,10 @@ class Hidratacion {
     try {
       return await prisma.HIDRATACION.findMany();
     } catch (error) {
-      throw new Error('Error al obtener hidrataciones: ' + error.message);
+      throw new Error('Error al obtener hidratación: ' + error.message);
     }
   }
 
-  /**
- * Elimina un hidrato de la tabla HIDRATACION.
- * @async
- * @method eliminar
- * @returns {Promise<Object>} Registro eliminado del hidrato.
- * @throws {Error} Si ocurre un error de consulta o conexión.
- */
-  async eliminar() {
-    try {
-      return await prisma.HIDRATACION.delete({
-        where: { hidratacionId: this.idHidratacion },
-      })
-    } catch (error) {
-      throw new Error('Error al eliminar hidratación: ' + error.message);
-    }
-  }  
 }
 
 module.exports = { Hidratacion };

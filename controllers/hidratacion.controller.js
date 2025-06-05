@@ -41,6 +41,12 @@ module.exports.eliminarHidratacion = async (req, res) => {
 
     try {
         const hidratacion = new Hidratacion(idHidratacion);
+        const asignaciones = await hidratacion.isAgregada();
+
+         // Verificar si el alimento está asignado a alguna charola
+         if (asignaciones > 0) {
+             return res.status(409).json({ success: false, message: 'La hidratación no se puede eliminar porque está asignado a una charola' });
+         }
         await hidratacion.eliminar();
         res.json({ success: true, message: 'Hidrato eliminado' });
     } catch (error) {

@@ -1,5 +1,6 @@
 // RF41 Eliminar un tipo de hidratación en el sistema - Documentación: https://codeandco-wiki.netlify.app/docs/next/proyectos/larvas/documentacion/requisitos/RF41
 
+const { th } = require('date-fns/locale');
 const { PrismaClient } = require('../generated/prisma');
 const prisma = new PrismaClient();
 
@@ -31,7 +32,11 @@ class Hidratacion {
    * @throws {Error} Si ocurre un error de consulta o conexión.
    */
   async obtener() {
-    return await prisma.HIDRATACION.findMany();
+    try {
+      return await prisma.HIDRATACION.findMany();
+    } catch (error) {
+      throw new Error('Error al obtener hidrataciones: ' + error.message);
+    }
   }
 
   /**
@@ -42,12 +47,13 @@ class Hidratacion {
  * @throws {Error} Si ocurre un error de consulta o conexión.
  */
   async eliminar() {
-
-    const resultado = await prisma.HIDRATACION.delete({
-      where: { hidratacionId: this.idHidratacion },
-    });
-  
-    return resultado;
+    try {
+      return await prisma.HIDRATACION.delete({
+        where: { hidratacionId: this.idHidratacion },
+      })
+    } catch (error) {
+      throw new Error('Error al eliminar hidratación: ' + error.message);
+    }
   }  
 }
 

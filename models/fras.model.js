@@ -30,7 +30,7 @@ class Fras {
       });
             return resultado;
         } catch (error) {
-            throw error;
+            throw new Error('Error al obtener los registros de Fras: ' + error.message);
         }
     }
 }

@@ -1,5 +1,6 @@
 //RF40: Editar un tipo de hidratación en el sistema - https://codeandco-wiki.netlify.app/docs/next/proyectos/larvas/documentacion/requisitos/RF40
 // RF41 Eliminar un tipo de hidratación en el sistema - Documentación: https://codeandco-wiki.netlify.app/docs/next/proyectos/larvas/documentacion/requisitos/RF41
+//RF36: Registrar un nuevo tipo de hidratación al sistema - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF36
 
 const { th } = require('date-fns/locale');
 const { PrismaClient } = require('../generated/prisma');
@@ -92,5 +93,22 @@ class Hidratacion {
    }
  }
 
+ /**
+   * Agrega un nuevo tipo de hidratación a la tabla HIDRATACION.
+   * @async
+   * @method agregar
+   * @returns {Promise<Object>} Registro insertado de hidratación.
+   * @throws {Error} Si ocurre un error de inserción.
+   */
+ async agregar() {
+  return await prisma.HIDRATACION.create({
+    data: {
+      nombre: this.nombreHidratacion,
+      descripcion: this.descripcionHidratacion,
+    },
+  });
+}
+
 }
 module.exports = { Hidratacion };
+  

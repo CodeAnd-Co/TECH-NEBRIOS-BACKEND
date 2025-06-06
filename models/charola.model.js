@@ -206,7 +206,7 @@ module.exports = class Charola {
     }
   }
 
-  static async eliminarCharola(charolaID) {
+  static async eliminarCharola(charolaID, razon, usuario) {
     try {
       const id = Number(charolaID);
 
@@ -218,6 +218,17 @@ module.exports = class Charola {
       if (!existe) {
         return { error: 'No se encontró la charola para eliminar.' };
       }
+
+      const nombreCharola = existe.nombreCharola;
+
+      await prisma.ELIMINACION_MOTIVO.create({
+        data: {
+          user: usuario,
+          charola_nombre: nombreCharola,
+          motivo: razon,
+          fecha_eliminacion: new Date(),
+        }
+      });
 
       // Eliminar relaciones con hidratación
       await prisma.CHAROLA_HIDRATACION.deleteMany({

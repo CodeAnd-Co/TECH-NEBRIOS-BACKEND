@@ -60,13 +60,17 @@ const registrarCharola = async (req, res) => {
 
 const eliminarCharola = async (req, res) => {
   const { id } = req.params;
+  const {razon, usuario} = req.body;
+
+  console.log('razon:', razon);
+  console.log('usuario:', usuario);
 
   if (!id) {
     return res.status(400).json({ error: 'Falta id' });
   }
 
   try {
-    const charola = await Charola.eliminarCharola(parseInt(id))
+    const charola = await Charola.eliminarCharola(parseInt(id), razon, usuario);
 
     if (charola.error) {
       return res.status(404).json({ error: charola.error });

@@ -12,6 +12,9 @@ router.get('/consultarCharola/:id', charolaController.consultarCharola);
 
 router.get('/charolas', charolaController.obtenerCharolas);
 
+router.get('/charolas/filtrar', charolaController.filtrarCharolasPorFecha);
+
+
 /* ----------- */
 
 /* POST METHODS */

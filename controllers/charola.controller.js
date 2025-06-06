@@ -62,8 +62,6 @@ const eliminarCharola = async (req, res) => {
   const { id } = req.params;
   const {razon, usuario} = req.body;
 
-  console.log('razon:', razon);
-  console.log('usuario:', usuario);
 
   if (!id) {
     return res.status(400).json({ error: 'Falta id' });

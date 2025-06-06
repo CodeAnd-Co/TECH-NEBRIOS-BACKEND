@@ -48,4 +48,42 @@ describe("Modelo Hidratación", () => {
     expect(hidratacion.nombreHidratacion).toBe("");
     expect(hidratacion.descripcionHidratacion).toBe("");
   });
+
+  test("constructor debería asignar propiedades correctamente", () => {
+    expect(hidratacionInstance.idHidratacion).toBe(1);
+    expect(hidratacionInstance.nombreHidratacion).toBe("Agua Mineral");
+    expect(hidratacionInstance.descripcionHidratacion).toBe(
+      "Hidratación con gas"
+    );
+  });
+
+  test("obtener() debería retornar una lista de registros", async () => {
+    const mockData = [
+      {
+        idHidratacion: 1,
+        nombreHidratacion: "Agua",
+        descripcionHidratacion: "Simple",
+      },
+      {
+        idHidratacion: 2,
+        nombreHidratacion: "Suero",
+        descripcionHidratacion: "Electrolitos",
+      },
+    ];
+    prisma.HIDRATACION.findMany.mockResolvedValue(mockData);
+
+    const result = await hidratacionInstance.obtener();
+    expect(result).toEqual(mockData);
+    expect(prisma.HIDRATACION.findMany).toHaveBeenCalledTimes(1);
+  });
+
+  test("obtener() debería lanzar error si la consulta falla", async () => {
+    const mockError = new Error("Error en consulta");
+    prisma.HIDRATACION.findMany.mockRejectedValue(mockError);
+
+    await expect(hidratacionInstance.obtener()).rejects.toThrow(
+      "Error en consulta"
+    );
+    expect(prisma.HIDRATACION.findMany).toHaveBeenCalledTimes(2);
+  });
 });

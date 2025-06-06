@@ -96,4 +96,25 @@ describe("Controlador: registrarHidratacion", () => {
       message: "Error del servidor al registrar hidratación",
     });
   });
+
+  test("debería responder con lista de hidratación si la consulta es exitosa", async () => {
+    const mockData = [
+      {
+        idHidratacion: 1,
+        nombreHidratacion: "Agua",
+        descripcionHidratacion: "Natural",
+      },
+      {
+        idHidratacion: 2,
+        nombreHidratacion: "Suero",
+        descripcionHidratacion: "Electrolitos",
+      },
+    ];
+    mockHidratacionInstance.obtener.mockResolvedValue(mockData);
+
+    await obtenerHidratacion(req, res);
+
+    expect(mockHidratacionInstance.obtener).toHaveBeenCalledTimes(1);
+    expect(res.json).toHaveBeenCalledWith(mockData);
+  });
 });

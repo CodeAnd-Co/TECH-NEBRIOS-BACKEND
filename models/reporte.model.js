@@ -53,8 +53,32 @@ const ReporteModel = {
 
       return resultadoFormateado;
     } catch (error) {
-      console.error('[Model] Error al obtener información de las charolas:', error);
       throw error;
+    }
+  },
+
+  async obtenerEliminadas(){
+    try{
+      const resultado = await prisma.ELIMINACION_MOTIVO.findMany({
+        select: {
+          user: true,
+          charola_nombre: true,
+          motivo: true,
+          fecha_eliminacion: true,
+        }
+      });
+
+      const resultadoFormateado = resultado.map(item => ({
+        user: item.user,
+        charola_nombre: item.charola_nombre,
+        motivo: item.motivo,
+        fechaEliminacion: format(new Date(item.fecha_eliminacion), 'dd/MM/yyyy'),
+    }));
+
+      return resultadoFormateado;
+    } catch (error) {
+      console.log(error);
+      return error;
     }
   }
 };

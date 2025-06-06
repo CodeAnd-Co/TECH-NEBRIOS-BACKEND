@@ -17030,17 +17030,6 @@ export namespace Prisma {
     charolaAncestro?: SortOrder
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type CHAROLANullableScalarRelationFilter = {
     is?: CHAROLAWhereInput | null
     isNot?: CHAROLAWhereInput | null
@@ -17087,20 +17076,6 @@ export namespace Prisma {
     charolaId?: SortOrder
     comidaId?: SortOrder
     cantidadOtorgada?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type HIDRATACIONNullableScalarRelationFilter = {
@@ -17865,10 +17840,6 @@ export namespace Prisma {
     create?: XOR<COMIDACreateWithoutCHAROLA_COMIDAInput, COMIDAUncheckedCreateWithoutCHAROLA_COMIDAInput>
     connectOrCreate?: COMIDACreateOrConnectWithoutCHAROLA_COMIDAInput
     connect?: COMIDAWhereUniqueInput
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type CHAROLAUpdateOneWithoutCHAROLA_COMIDANestedInput = {

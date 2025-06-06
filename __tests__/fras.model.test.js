@@ -1,49 +1,105 @@
-const { Fras } = require('../models/fras.model');
-const { PrismaClient } = require('../generated/prisma');
+// RF29: Visualizar la información del Frass obtenido - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF29
 
+/**
+ * @fileoverview
+ * Pruebas unitarias para el modelo Fras (fras.model.js).
+ * Se “mockea” internamente a PrismaClient para no depender de una BD real.
+ */
+
+const { Fras } = require('../models/fras.model');
+
+// Jest provee un mecanismo para interceptar el require de '../generated/prisma'
 jest.mock('../generated/prisma', () => {
-  const mPrisma = {
-    FRAS: {
-      findMany: jest.fn()
-    }
+  // Creamos un “mock” de lo que exporta nuestro cliente generado:
+  // - PrismaClient: un constructor que al instanciarlo devuelve un objeto con cHAROLA_FRAS.findMany.
+  const findManyMock = jest.fn();
+  const prismaMock = {
+    cHAROLA_FRAS: {
+      findMany: findManyMock,
+    },
   };
   return {
-    PrismaClient: jest.fn(() => mPrisma)
+    PrismaClient: jest.fn(() => prismaMock),
   };
 });
 
-describe('Fras', () => {
-  let frasInstance;
-  let prisma;
+describe('Modelo Fras – método obtener()', () => {
+  let frasModel;
+  let mockFindMany;
+
+  beforeAll(() => {
+    // Importamos la función “mockeada” de PrismaClient:
+    const { PrismaClient } = require('../generated/prisma');
+    // Guardamos la referencia al mock de findMany para configurar su comportamiento
+    mockFindMany = new PrismaClient().cHAROLA_FRAS.findMany;
+  });
 
   beforeEach(() => {
-    prisma = new PrismaClient();
-    frasInstance = new Fras(1, 100, 2);
+    // Cada vez que arranque una prueba, instanciamos un nuevo Fras
+    frasModel = new Fras();
+    // Limpiamos el historial de llamadas y return values del mock
+    mockFindMany.mockReset();
   });
 
-  test('constructor debería asignar propiedades correctamente', () => {
-    expect(frasInstance.frasId).toBe(1);
-    expect(frasInstance.gramosGenerados).toBe(100);
-    expect(frasInstance.charolaId).toBe(2);
+  test('• debería invocar a prisma.cHAROLA_FRAS.findMany() sin parámetros extraños', async () => {
+    // Preparamos el retorno simulado (un arreglo vacío)
+    mockFindMany.mockResolvedValueOnce([]);
+
+    const resultado = await frasModel.obtener();
+
+    // 1) Verificamos que findMany fue llamado exactamente una vez
+    expect(mockFindMany).toHaveBeenCalledTimes(1);
+
+    // 2) Verificamos que no se le pasaron parámetros inesperados
+    expect(mockFindMany).toHaveBeenCalledWith({
+      select: {
+        CHAROLA: {
+          select: {
+            nombreCharola: true,
+          },
+        },
+        FRAS: {
+          select: {
+            fechaRegistro: true,
+            gramosGenerados: true,
+          },
+        },
+      },
+    });
+
+    // 3) Como findMany devolvió [], el método obtener() debe retornar []
+    expect(resultado).toEqual([]);
   });
 
-  test('obtener() debería retornar una lista de registros', async () => {
-    const mockData = [
-      { frasId: 1, gramosGenerados: 50, charolaId: 1 },
-      { frasId: 2, gramosGenerados: 75, charolaId: 2 }
+  test('• debería retornar los datos exactamente como los provee findMany', async () => {
+    // Creamos un array simulado que represente varias filas:
+    const filasSimuladas = [
+      {
+        CHAROLA: { nombreCharola: 'Charola A' },
+        FRAS: { fechaRegistro: new Date('2025-06-01'), gramosGenerados: 12.5 },
+      },
+      {
+        CHAROLA: { nombreCharola: 'Charola B' },
+        FRAS: { fechaRegistro: new Date('2025-06-02'), gramosGenerados:  7.8 },
+      },
     ];
-    prisma.FRAS.findMany.mockResolvedValue(mockData);
+    mockFindMany.mockResolvedValueOnce(filasSimuladas);
 
-    const result = await frasInstance.obtener();
-    expect(result).toEqual(mockData);
-    expect(prisma.FRAS.findMany).toHaveBeenCalledTimes(1);
+    const resultado = await frasModel.obtener();
+
+    // El método en sí no transforma los datos, solo devuelve tal cual lo que findMany retorna
+    expect(resultado).toEqual(filasSimuladas);
   });
 
-  test('obtener() debería lanzar error si la consulta falla', async () => {
-    const mockError = new Error('Error de conexión');
-    prisma.FRAS.findMany.mockRejectedValue(mockError);
+  test('• debería propagar el error si findMany arroja una excepción', async () => {
+    // Simulamos que findMany lanza un error
+    const errorSimulado = new Error('fallo en la BD');
+    mockFindMany.mockRejectedValueOnce(errorSimulado);
 
-    await expect(frasInstance.obtener()).rejects.toThrow('Error de conexión');
-    expect(prisma.FRAS.findMany).toHaveBeenCalledTimes(2);
+    // Usamos async/await y catch implícito de Jest para promesas que rechazan
+    await expect(frasModel.obtener()).rejects.toThrow('fallo en la BD');
+
+    // Verificamos que findMany se haya ejecutado
+    expect(mockFindMany).toHaveBeenCalledTimes(1);
   });
 });

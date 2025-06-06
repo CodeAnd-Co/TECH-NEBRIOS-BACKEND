@@ -89,4 +89,27 @@ module.exports = class Usuario {
       throw error;
     }
   }
+ 
+  static async obtenerUsuarios(){
+    try{
+      const usuarios = await prisma.USUARIO.findMany({
+        include: {
+          ADMINISTRADOR: true,
+        },
+      });
+
+      const resultado = usuarios.map(u => ({
+        usuarioId: u.usuarioId,
+        nombre: u.nombre,
+        apellido_p: u.apellido_p,
+        apellido_m: u.apellido_m,
+        user: u.user,
+        tipo_usuario: u.ADMINISTRADOR.length > 0 ? 'Administrador' : 'Usuario',
+      }));
+
+      return resultado;
+    }catch (error) {
+      throw error;
+    }
+  }
 };

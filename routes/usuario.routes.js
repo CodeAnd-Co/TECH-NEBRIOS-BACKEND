@@ -12,6 +12,7 @@ const autenticacionController = require("../controllers/autenticacion.controller
 /* ------------------- */
 
 /* GET METHODS */
+router.get("/obtenerUsuarios", usuarioController.obtenerUsuarios);
 /* ----------- */
 
 /* POST METHODS */

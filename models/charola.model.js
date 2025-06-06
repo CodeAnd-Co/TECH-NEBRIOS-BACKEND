@@ -30,23 +30,23 @@ module.exports = class Charola {
           }
         }
       });
-  
+
       if (!charola) {
         return { error: 'No se encontró la charola con el ID proporcionado.' };
       }
-  
+
       const relacionComida = charola.CHAROLA_COMIDA[0] || {
         charolaId: 0,
         comidaId: 0,
         cantidadOtorgada: 0
       };
-  
+
       const relacionHidratacion = charola.CHAROLA_HIDRATACION[0] || {
         charolaId: 0,
         hidratacionId: 0,
         cantidadOtorgada: 0
       };
-  
+
       return {
         charola,
         relacionComida,
@@ -54,7 +54,7 @@ module.exports = class Charola {
         relacionHidratacion,
         hidratacion: relacionHidratacion.HIDRATACION ?? null
       };
-  
+
     } catch (error) {
       console.error('Error al obtener charola:', error);
       return { error: error.message };
@@ -68,7 +68,6 @@ module.exports = class Charola {
    * @param {string} data.nombre - Nombre de la charola.
    * @param {string} data.fechaCreacion - Fecha de creación de la charola.
    * @param {number} data.densidadLarva - Densidad de larvas en la charola.
-   * @param {number} data.pesoCharola - Peso de la charola.
    * @param {Array} data.comidas - Lista de comidas asociadas a la charola.
    * @param {Array} data.hidrataciones - Lista de hidrataciones asociadas a la charola.
    * @returns {Promise<Object>} - Objeto con la charola creada.
@@ -79,7 +78,6 @@ module.exports = class Charola {
       nombre,
       fechaCreacion,
       densidadLarva,
-      pesoCharola,
       comidas = [],
       hidrataciones = []
     } = data;
@@ -97,7 +95,6 @@ module.exports = class Charola {
         fechaCreacion: fecha,
         fechaActualizacion: fecha,
         densidadLarva,
-        pesoCharola,
 
         estado: 'activa',
         comidaCiclo,
@@ -129,39 +126,119 @@ module.exports = class Charola {
     });
   }
 
+  static async editarCharola(charola, alimento, hidratacion) {
+    try{
+      const ultimoRegistroComida = await prisma.CHAROLA_COMIDA.findFirst({
+        where: {
+          charolaId: charola.get('charolaId'),
+        },
+        orderBy: {
+          id: 'desc',
+        },
+      });
+
+      let diferenciaAlimento = 0;
+
+      if (ultimoRegistroComida) {
+        const cantidadAnterior = ultimoRegistroComida.cantidadOtorgada;
+        const cantidadNueva = alimento.get('cantidadOtorgada');
+        diferenciaAlimento = cantidadNueva - cantidadAnterior;
+
+        await prisma.CHAROLA_COMIDA.update({
+          where: {
+            id: ultimoRegistroComida.id,
+          },
+          data: {
+            comidaId: alimento.get('alimentoId'),
+            cantidadOtorgada: alimento.get('cantidadOtorgada'),
+            fechaOtorgada: alimento.get('fechaOtorgada'),
+          },
+        });
+      }
+
+        const ultimoRegistroHidratacion = await prisma.CHAROLA_HIDRATACION.findFirst({
+        where: {
+          charolaId: charola.get('charolaId'),
+        },
+        orderBy: {
+          id: 'desc',
+        },
+      });
+
+      let diferenciaHidratacion = 0;
+
+      if (ultimoRegistroHidratacion) {
+        const cantidadAnterior = ultimoRegistroHidratacion.cantidadOtorgada;
+        const cantidadNueva = hidratacion.get('cantidadOtorgada');
+        diferenciaHidratacion = cantidadNueva - cantidadAnterior;
+
+        await prisma.CHAROLA_HIDRATACION.update({
+          where: {
+            id: ultimoRegistroHidratacion.id,
+          },
+          data: {
+            hidratacionId: hidratacion.get('hidratacionId'),
+            cantidadOtorgada: hidratacion.get('cantidadOtorgada'),
+            fechaOtorgada: hidratacion.get('fechaOtorgada'),
+          },
+        });
+      }
+
+      await prisma.CHAROLA.update({
+        where: {
+          charolaId: charola.get('charolaId'),
+        },
+        data: {
+          nombreCharola: charola.get('nombreCharola'),
+          fechaCreacion: charola.get('fechaCreacion'),
+          densidadLarva: charola.get('densidadLarva'),
+          estado: charola.get('estado'),
+          comidaCiclo: { increment: diferenciaAlimento },
+          hidratacionCiclo: { increment: diferenciaHidratacion },
+          fechaActualizacion: charola.get('fechaActualizacion'),
+        },
+      });
+
+      return 200;
+    } catch (error){
+      console.error('Error al editar la charola:', error);
+      return { error: 'Error al editar la charola' };
+    }
+  }
+
   static async eliminarCharola(charolaID) {
     try {
       const id = Number(charolaID);
-  
+
       // Verificar que la charola exista antes de intentar borrar
       const existe = await prisma.CHAROLA.findUnique({
         where: { charolaId: id }
       });
-  
+
       if (!existe) {
         return { error: 'No se encontró la charola para eliminar.' };
       }
-  
+
       // Eliminar relaciones con hidratación
       await prisma.CHAROLA_HIDRATACION.deleteMany({
         where: { charolaId: id }
       });
-  
+
       // Eliminar relaciones con comida
       await prisma.CHAROLA_COMIDA.deleteMany({
         where: { charolaId: id }
       });
-  
+
       // Eliminar la charola principal
       await prisma.CHAROLA.delete({
         where: { charolaId: id }
       });
-  
+
       return {
         mensaje: 'Charola eliminada correctamente',
         idEliminado: id
       };
-  
+
     } catch (error) {
       console.error('Error al eliminar la charola:', error);
       return { error: 'Error al eliminar la charola' };
@@ -208,7 +285,45 @@ module.exports = class Charola {
       where: estado ? { estado } : undefined
     });
     return total;
-  } 
+  }
+
+  /**
+   * Alimenta la charola: crea registro en CHAROLA_HIDRATACION y
+   * luego actualiza hidratacionCiclo y fechaActualizacion en CHAROLA.
+   * @param {{charolaId:number, hidratacionId:number, cantidadOtorgada:number}} params
+   */
+  static async hidratar({ charolaId, hidratacionId, cantidadOtorgada }) {
+    const fecha = new Date();
+
+    return prisma.$transaction(async tx => {
+      // 1) Crear la relación comida y traer también la comida relacionada
+      const rel = await tx.CHAROLA_HIDRATACION.create({
+        data: {
+          charolaId,
+          hidratacionId,
+          cantidadOtorgada,
+          fechaOtorgada: fecha
+        },
+        include: {
+          HIDRATACION: true
+        }
+      });
+
+      // 2) Actualizar la charola
+      const updated = await tx.CHAROLA.update({
+        where: { charolaId },
+        data: {
+          hidratacionCiclo: { increment: cantidadOtorgada },
+          fechaActualizacion: fecha
+        }
+      });
+
+      return {
+        relacion: rel,
+        charola: updated
+      };
+    });
+  }
 
   /**
    * Alimenta la charola: crea registro en CHAROLA_COMIDA y
@@ -217,7 +332,7 @@ module.exports = class Charola {
    */
   static async alimentar({ charolaId, comidaId, cantidadOtorgada }) {
     const fecha = new Date();
-  
+
     return prisma.$transaction(async tx => {
       // 1) Crear la relación comida y traer también la comida relacionada
       const rel = await tx.CHAROLA_COMIDA.create({
@@ -228,10 +343,10 @@ module.exports = class Charola {
           fechaOtorgada: fecha
         },
         include: {
-          COMIDA: true 
+          COMIDA: true
         }
       });
-  
+
       // 2) Actualizar la charola
       const updated = await tx.CHAROLA.update({
         where: { charolaId },
@@ -240,11 +355,11 @@ module.exports = class Charola {
           fechaActualizacion: fecha
         }
       });
-  
+
       return {
-        relacion: rel,  
+        relacion: rel,
         charola: updated
       };
     });
-  }  
+  }
 };

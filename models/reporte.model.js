@@ -2,7 +2,7 @@ const { PrismaClient } = require('../generated/prisma');
 const { format } = require('date-fns');
 
 const prisma = new PrismaClient();
- 
+
 const ReporteModel = {
   /**
    * @description Metodo para realizar la consulta de la información de las charolas.
@@ -23,25 +23,38 @@ const ReporteModel = {
           estado: true,
           densidadLarva: true,
           fechaCreacion: true,
-          pesoCharola: true
+          CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA: {
+            select: {
+              CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA: {
+                select: {
+                  nombreCharola: true
+                }
+              }
+            }
+          }
         }
       });
 
-      // Formateado de fechas a dd/MM/yyyy
-      const resultadoFormateado = resultado.map((charola) => ({
-        ...charola,
-        fechaActualizacion: charola.fechaActualizacion
-          ? format(new Date(charola.fechaActualizacion), 'dd/MM/yyyy')
-          : null,
-        fechaCreacion: charola.fechaCreacion
-          ? format(new Date(charola.fechaCreacion), 'dd/MM/yyyy')
-          : null,
-      }));
+      // Formateado de fechas a dd/MM/yyyy y la lista de Ancestros
+      const resultadoFormateado = resultado.map(
+        ({ CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA, ...charola }) => ({
+          ...charola,
+          fechaActualizacion: charola.fechaActualizacion
+            ? format(new Date(charola.fechaActualizacion), 'dd/MM/yyyy')
+            : null,
+          fechaCreacion: charola.fechaCreacion
+            ? format(new Date(charola.fechaCreacion), 'dd/MM/yyyy')
+            : null,
+          charolaAncestros: CHAROLA_CHAROLA_CHAROLA_CHAROLA_charolaHijaToCHAROLA.map(
+            (rel) => rel.CHAROLA_CHAROLA_CHAROLA_charolaAncestroToCHAROLA.nombreCharola
+          )
+        })
+      );     
 
       return resultadoFormateado;
     } catch (error) {
       console.error('[Model] Error al obtener información de las charolas:', error);
-      throw error;      
+      throw error;
     }
   }
 };

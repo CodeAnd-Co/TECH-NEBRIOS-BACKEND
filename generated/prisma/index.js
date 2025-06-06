@@ -241,6 +241,7 @@ const config = {
     },
     "output": {
       "value": "/Users/marianajuarezramirez/Desktop/TECH-NEBRIOS-BACKEND/generated/prisma",
+      "value": "/Users/armando/Desktop/TECH-NEBRIOS-BACKEND/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -259,6 +260,7 @@ const config = {
     ],
     "previewFeatures": [],
     "sourceFilePath": "/Users/marianajuarezramirez/Desktop/TECH-NEBRIOS-BACKEND/prisma/schema.prisma",
+    "sourceFilePath": "/Users/armando/Desktop/TECH-NEBRIOS-BACKEND/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

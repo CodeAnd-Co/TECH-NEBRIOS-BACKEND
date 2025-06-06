@@ -59,25 +59,46 @@ exports.obtenerHistorialAncestros = async (req, res) => {
  * @param {*} res - Respuesta HTTP que se usa para enviar el resultado.
  * @returns {json} Estado de la charola, historial de alimentación, historial de hidratación.
 */
-exports.obtenerHistorialActividad = async(req, res) => {
-  try{
+exports.obtenerHistorialActividad = async (req, res) => {
+  try {
 
-      const id = parseInt(req.query.charolaId);
+    const id = parseInt(req.query.charolaId);
 
-      const alimentacion = await HistorialCharola.historialAlimentacion(id);
+    const alimentacion = await HistorialCharola.historialAlimentacion(id);
 
-      const hidratacion = await HistorialCharola.historialHidratacion(id);
+    const hidratacion = await HistorialCharola.historialHidratacion(id);
 
-      const estado = await HistorialCharola.estadoCharola(id);
+    const estado = await HistorialCharola.estadoCharola(id);
 
-      if(hidratacion.length > 0 || alimentacion.length > 0){
-          res.status(200).json({'codigo': 'Ok', 'estado': estado, 'alimentacion': alimentacion, 'hidratacion': hidratacion});
-      } else {
-          res.status(201).json({'codigo': 'Ok', 'estado': estado});
-      }
+    if (hidratacion.length > 0 || alimentacion.length > 0) {
+      res.status(200).json({ 'codigo': 'Ok', 'estado': estado, 'alimentacion': alimentacion, 'hidratacion': hidratacion });
+    } else {
+      res.status(201).json({ 'codigo': 'Ok', 'estado': estado });
+    }
 
-  } catch (error){
-      console.error('[Controller]. Error al obtener informacion de las charolas: ', error);
-      res.status(500).json({'error': 'Ocurrio un error en el servidor'});
+  } catch (error) {
+    console.error('[Controller]. Error al obtener informacion de las charolas: ', error);
+    res.status(500).json({ 'error': 'Ocurrio un error en el servidor' });
+  }
+};
+
+exports.postHistorialAncestros = async (req, res) => {
+  const hija = parseInt(req.params.charolaId, 10);
+  const { ancestros } = req.body;  
+
+  if (!Array.isArray(ancestros)) {
+    return res.status(400).json({ error: 'Debes enviar un array de IDs en “ancestros”' });
+  }
+
+  try {
+    await Promise.all(
+      ancestros.map(ancestroId =>
+        HistorialCharola.asignarAncestro({ charolaHija: hija, charolaAncestro: ancestroId })
+      )
+    );
+    return res.status(200).json({ message: 'Ancestros asignados correctamente' });
+  } catch (error) {
+    console.error('[Controller] Error asignando ancestros:', error);
+    return res.status(500).json({ error: 'No se pudieron asignar ancestros' });
   }
 };

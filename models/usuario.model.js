@@ -91,25 +91,21 @@ module.exports = class Usuario {
   }
  
   static async obtenerUsuarios(){
-    try{
-      const usuarios = await prisma.USUARIO.findMany({
-        include: {
-          ADMINISTRADOR: true,
-        },
-      });
+    const usuarios = await prisma.USUARIO.findMany({
+      include: {
+        ADMINISTRADOR: true,
+      },
+    });
 
-      const resultado = usuarios.map(u => ({
-        usuarioId: u.usuarioId,
-        nombre: u.nombre,
-        apellido_p: u.apellido_p,
-        apellido_m: u.apellido_m,
-        user: u.user,
-        tipo_usuario: u.ADMINISTRADOR.length > 0 ? 'Administrador' : 'Usuario',
-      }));
+    const resultado = usuarios.map(usuario => ({
+      usuarioId: usuario.usuarioId,
+      nombre: usuario.nombre,
+      apellido_p: usuario.apellido_p,
+      apellido_m: usuario.apellido_m,
+      user: usuario.user,
+      tipo_usuario: usuario.ADMINISTRADOR.length > 0 ? 'Administrador' : 'Usuario',
+    }));
 
-      return resultado;
-    }catch (error) {
-      throw error;
-    }
+    return resultado;
   }
 };

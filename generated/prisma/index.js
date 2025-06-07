@@ -242,6 +242,7 @@ const config = {
     },
     "output": {
       "value": "C:\\Users\\emili\\OneDrive\\Escritorio\\6TO SEMESTRE\\CODENCO\\zustento\\TECH-NEBRIOS-BACKEND\\generated\\prisma",
+      "value": "C:\\Users\\juana\\Desktop\\dev\\6toSEM\\TECH-NEBRIOS-BACKEND\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -250,7 +251,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "windows",
         "native": true
       },
       {
@@ -260,6 +261,7 @@ const config = {
     ],
     "previewFeatures": [],
     "sourceFilePath": "C:\\Users\\emili\\OneDrive\\Escritorio\\6TO SEMESTRE\\CODENCO\\zustento\\TECH-NEBRIOS-BACKEND\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\juana\\Desktop\\dev\\6toSEM\\TECH-NEBRIOS-BACKEND\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -273,7 +275,7 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
-  "postinstall": true,
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -320,10 +322,6 @@ warnEnvConflicts({
 const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
-
-// file annotations for bundling tools to include these files
-path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node");
-path.join(process.cwd(), "generated/prisma/libquery_engine-darwin-arm64.dylib.node")
 
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node");

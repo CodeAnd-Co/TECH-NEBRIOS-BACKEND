@@ -32,7 +32,16 @@ exports.editarUsuario = async (req, res) => {
         return res.status(200).json({ code: 200 });
 
     } catch (error) {
-        console.log(error);
+        return res.status(500).json({ code: 500 });
+    }
+}
+
+exports.eliminarUsuario = async (req, res) => {
+    try{
+        const resultado = await Usuario.eliminarUsuario(parseInt(req.query.usuarioId));
+
+        return res.status(200).json({ code: 200 });
+    } catch (error){
         return res.status(500).json({ code: 500 });
     }
 }

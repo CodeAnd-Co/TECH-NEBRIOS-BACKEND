@@ -85,7 +85,6 @@ module.exports = class Usuario {
 
       return nuevo;
     } catch (error) {
-      console.log('Error al registrar usuario:', error);
       throw error;
     }
   }
@@ -107,5 +106,26 @@ module.exports = class Usuario {
     }));
 
     return resultado;
+  }
+
+  static async editarUsuario(usuarioId, infoUsuario){
+    try {
+      const contrasenaHash = await bcrypt.hash(infoUsuario.contrasena, 12);
+
+      await prisma.USUARIO.update({
+        where: {
+          usuarioId: usuarioId
+        },
+        data: {
+          user: infoUsuario.usuario,
+          contrasena: contrasenaHash,
+          nombre: infoUsuario.nombre,
+          apellido_m: infoUsuario.apellido_m,
+          apellido_p: infoUsuario.apellido_p,
+        }
+      })
+    } catch (error) {
+      throw error
+    }
   }
 };

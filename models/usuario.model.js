@@ -120,4 +120,12 @@ module.exports = class Usuario {
       }
     })
   }
+
+  static async eliminarUsuario(usuarioId){
+    await prisma.USUARIO.delete({
+      where: {
+        usuarioId: usuarioId
+      }
+    })
+  }
 };

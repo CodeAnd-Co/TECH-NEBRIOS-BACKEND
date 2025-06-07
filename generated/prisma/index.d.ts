@@ -406,8 +406,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.7.0
-   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -16995,61 +16995,6 @@ export namespace Prisma {
     cantidadObtenida?: FloatNullableWithAggregatesFilter<"PUPA"> | number | null
   }
 
-  export type ELIMINACION_MOTIVOWhereInput = {
-    AND?: ELIMINACION_MOTIVOWhereInput | ELIMINACION_MOTIVOWhereInput[]
-    OR?: ELIMINACION_MOTIVOWhereInput[]
-    NOT?: ELIMINACION_MOTIVOWhereInput | ELIMINACION_MOTIVOWhereInput[]
-    id?: IntFilter<"ELIMINACION_MOTIVO"> | number
-    user?: StringFilter<"ELIMINACION_MOTIVO"> | string
-    charola_nombre?: StringFilter<"ELIMINACION_MOTIVO"> | string
-    motivo?: StringFilter<"ELIMINACION_MOTIVO"> | string
-    fecha_eliminacion?: DateTimeNullableFilter<"ELIMINACION_MOTIVO"> | Date | string | null
-  }
-
-  export type ELIMINACION_MOTIVOOrderByWithRelationInput = {
-    id?: SortOrder
-    user?: SortOrder
-    charola_nombre?: SortOrder
-    motivo?: SortOrder
-    fecha_eliminacion?: SortOrderInput | SortOrder
-    _relevance?: ELIMINACION_MOTIVOOrderByRelevanceInput
-  }
-
-  export type ELIMINACION_MOTIVOWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: ELIMINACION_MOTIVOWhereInput | ELIMINACION_MOTIVOWhereInput[]
-    OR?: ELIMINACION_MOTIVOWhereInput[]
-    NOT?: ELIMINACION_MOTIVOWhereInput | ELIMINACION_MOTIVOWhereInput[]
-    user?: StringFilter<"ELIMINACION_MOTIVO"> | string
-    charola_nombre?: StringFilter<"ELIMINACION_MOTIVO"> | string
-    motivo?: StringFilter<"ELIMINACION_MOTIVO"> | string
-    fecha_eliminacion?: DateTimeNullableFilter<"ELIMINACION_MOTIVO"> | Date | string | null
-  }, "id">
-
-  export type ELIMINACION_MOTIVOOrderByWithAggregationInput = {
-    id?: SortOrder
-    user?: SortOrder
-    charola_nombre?: SortOrder
-    motivo?: SortOrder
-    fecha_eliminacion?: SortOrderInput | SortOrder
-    _count?: ELIMINACION_MOTIVOCountOrderByAggregateInput
-    _avg?: ELIMINACION_MOTIVOAvgOrderByAggregateInput
-    _max?: ELIMINACION_MOTIVOMaxOrderByAggregateInput
-    _min?: ELIMINACION_MOTIVOMinOrderByAggregateInput
-    _sum?: ELIMINACION_MOTIVOSumOrderByAggregateInput
-  }
-
-  export type ELIMINACION_MOTIVOScalarWhereWithAggregatesInput = {
-    AND?: ELIMINACION_MOTIVOScalarWhereWithAggregatesInput | ELIMINACION_MOTIVOScalarWhereWithAggregatesInput[]
-    OR?: ELIMINACION_MOTIVOScalarWhereWithAggregatesInput[]
-    NOT?: ELIMINACION_MOTIVOScalarWhereWithAggregatesInput | ELIMINACION_MOTIVOScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"ELIMINACION_MOTIVO"> | number
-    user?: StringWithAggregatesFilter<"ELIMINACION_MOTIVO"> | string
-    charola_nombre?: StringWithAggregatesFilter<"ELIMINACION_MOTIVO"> | string
-    motivo?: StringWithAggregatesFilter<"ELIMINACION_MOTIVO"> | string
-    fecha_eliminacion?: DateTimeNullableWithAggregatesFilter<"ELIMINACION_MOTIVO"> | Date | string | null
-  }
-
   export type ADMINISTRADORCreateInput = {
     USUARIO?: USUARIOCreateNestedOneWithoutADMINISTRADORInput
   }
@@ -17677,59 +17622,6 @@ export namespace Prisma {
     pupaId?: IntFieldUpdateOperationsInput | number
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
-  }
-
-  export type ELIMINACION_MOTIVOCreateInput = {
-    user: string
-    charola_nombre: string
-    motivo: string
-    fecha_eliminacion?: Date | string | null
-  }
-
-  export type ELIMINACION_MOTIVOUncheckedCreateInput = {
-    id?: number
-    user: string
-    charola_nombre: string
-    motivo: string
-    fecha_eliminacion?: Date | string | null
-  }
-
-  export type ELIMINACION_MOTIVOUpdateInput = {
-    user?: StringFieldUpdateOperationsInput | string
-    charola_nombre?: StringFieldUpdateOperationsInput | string
-    motivo?: StringFieldUpdateOperationsInput | string
-    fecha_eliminacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type ELIMINACION_MOTIVOUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    user?: StringFieldUpdateOperationsInput | string
-    charola_nombre?: StringFieldUpdateOperationsInput | string
-    motivo?: StringFieldUpdateOperationsInput | string
-    fecha_eliminacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type ELIMINACION_MOTIVOCreateManyInput = {
-    id?: number
-    user: string
-    charola_nombre: string
-    motivo: string
-    fecha_eliminacion?: Date | string | null
-  }
-
-  export type ELIMINACION_MOTIVOUpdateManyMutationInput = {
-    user?: StringFieldUpdateOperationsInput | string
-    charola_nombre?: StringFieldUpdateOperationsInput | string
-    motivo?: StringFieldUpdateOperationsInput | string
-    fecha_eliminacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type ELIMINACION_MOTIVOUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    user?: StringFieldUpdateOperationsInput | string
-    charola_nombre?: StringFieldUpdateOperationsInput | string
-    motivo?: StringFieldUpdateOperationsInput | string
-    fecha_eliminacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {

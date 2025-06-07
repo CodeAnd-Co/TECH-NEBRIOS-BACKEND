@@ -3,7 +3,9 @@
 // Se asegura que las funciones del controlador respondan correctamente a solicitudes válidas o inválidas.
 const { describe, test, expect, beforeEach} = require('@jest/globals');
 const jwt = require("jsonwebtoken");
-const usuarioController = require('../controllers/autenticacion.controller');
+const autenticacionController = require('../controllers/autenticacion.controller');
+const usuarioController = require('../controllers/usuario.controller')
+
 const Usuario = require('../models/usuario.model');
 
 jest.mock('../models/usuario.model');
@@ -36,14 +38,14 @@ describe('Controlador de Usuarios', () => {
       );
 
     Usuario.iniciarSesion.mockResolvedValue(fakeToken);
-    await usuarioController.iniciarSesion(req, res);
+    await autenticacionController.iniciarSesion(req, res);
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({ code: 200, token: expect.any(String) });
   });
   test('Debe retornar error 401 si el usuario no existe', async () => {
     req.body = { usuario: 'Pili' };
     Usuario.iniciarSesion.mockResolvedValue({error: "Usuario inexistente"});
-    await usuarioController.iniciarSesion(req, res);
+    await autenticacionController.iniciarSesion(req, res);
     expect(res.status).toHaveBeenCalledWith(401);
     expect(res.json).toHaveBeenCalledWith({ code: 401 });
   });
@@ -54,7 +56,7 @@ describe('Controlador de Usuarios', () => {
       };
     req.body =  inicioDeSesion;
     Usuario.iniciarSesion.mockResolvedValue({error: "Contraseña incorrecta"});
-    await usuarioController.iniciarSesion(req, res);
+    await autenticacionController.iniciarSesion(req, res);
     expect(res.status).toHaveBeenCalledWith(401);
     expect(res.json).toHaveBeenCalledWith({ code: 401 });
   });
@@ -65,8 +67,34 @@ describe('Controlador de Usuarios', () => {
       };
     req.body =  inicioDeSesion;
     Usuario.iniciarSesion.mockRejectedValue(new Error('Error del servidor'));
-    await usuarioController.iniciarSesion(req, res);
+    await autenticacionController.iniciarSesion(req, res);
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ code: 500 });
+  });
+
+  test('Debe obtener los usuarios', async () => {
+    const resultado = [
+      {
+        usuarioId: 1,
+        nombre: "Juan",
+        apellido_p: "Pérez",
+        apellido_m: "Lopez",
+        user: "juan123",
+        ADMINISTRADOR: [],
+      },
+      {
+        usuarioId: 2,
+        nombre: "Ana",
+        apellido_p: "Gomez",
+        apellido_m: "Ruiz",
+        user: "ana456",
+        ADMINISTRADOR: [{}],
+      },
+    ];
+    Usuario.obtenerUsuarios.mockResolvedValue(resultado);
+    await usuarioController.obtenerUsuarios(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith({resultado});
   });
 });

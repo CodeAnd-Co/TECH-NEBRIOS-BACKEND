@@ -11,7 +11,6 @@ const ReporteModel = {
   // RF11:
   // https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF11
   async obtenerDatos() {
-    try {
       // Consulta con ORM Prisma
       const resultado = await prisma.CHAROLA.findMany({
         select: {
@@ -52,9 +51,6 @@ const ReporteModel = {
       );     
 
       return resultadoFormateado;
-    } catch (error) {
-      throw error;
-    }
   },
 
   async obtenerEliminadas(){

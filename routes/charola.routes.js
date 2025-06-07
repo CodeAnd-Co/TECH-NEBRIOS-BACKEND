@@ -23,6 +23,9 @@ router.post('/registrarCharola', charolaController.registrarCharola);
 router.post('/alimentar', charolaController.alimentarCharola);
 
 router.post('/hidratar', charolaController.hidratarCharola);
+
+router.post("/eliminarCharola/:id", charolaController.eliminarCharola);
+
 /* ----------- */
 
 /* PUT METHODS */
@@ -30,7 +33,6 @@ router.put('/editarCharola', charolaController.editarCharola);
 /* ----------- */
 
 /* DELETE METHODS */
-router.delete("/eliminarCharola/:id", charolaController.eliminarCharola);
 
 /* ----------- */
 

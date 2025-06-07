@@ -18,6 +18,7 @@ router.get("/obtenerUsuarios", usuarioController.obtenerUsuarios);
 /* POST METHODS */
 router.post("/iniciarSesion", autenticacionController.iniciarSesion);
 router.post("/registrarUsuario", usuarioController.registrarUsuario);
+router.post("/recuperarContrasena", usuarioController.mandarCorreo);
 /* ----------- */
 
 /* PUT METHODS */

@@ -84,7 +84,10 @@ module.exports = class Usuario {
 
     return nuevo;
 }
- 
+  /**
+   * @description Extrae todos los usuarios de la base de datos y especifica sus roles
+   * @returns {Array} Resultado de la consulta.
+   */
   static async obtenerUsuarios(){
     const usuarios = await prisma.USUARIO.findMany({
       include: {
@@ -104,6 +107,12 @@ module.exports = class Usuario {
     return resultado;
   }
 
+    /**
+   * @description Edita la informacion de un usuario
+   * @param {Object} infoUsuario - Objeto con información del usuario.
+   * @param {int} usuarioId - Id del usuario a editar.
+   * @returns {Array} Resultado de la consulta
+   */
   static async editarUsuario(usuarioId, infoUsuario){
     const contrasenaHash = await bcrypt.hash(infoUsuario.contrasena, 12);
 
@@ -121,6 +130,10 @@ module.exports = class Usuario {
     })
   }
 
+  /**
+   * @description Elimina la informacion de un usuario
+   * @param {int} usuarioId - Id del usuario a editar.
+  */
   static async eliminarUsuario(usuarioId){
     await prisma.USUARIO.delete({
       where: {
@@ -129,6 +142,11 @@ module.exports = class Usuario {
     })
   }
 
+  /**
+   * @description Obtiene el id de un usuario apartir de su nombre
+   * @param {String} nombreUsuario Nombre del usuario
+   * @returns {int} Resultado de la consulta
+   */
   static async obtenerId(nombreUsuario) {
     return await prisma.USUARIO.findFirst({
       where: {
@@ -140,6 +158,12 @@ module.exports = class Usuario {
     })
   }
 
+  /**
+   * @description Cambia la contraseña de un usuario 
+   * @param {int} usuarioId Id del usuario
+   * @param {String} contrasena Contraseña nueva
+   * @returns {int} Resultado de la consulta
+   */
   static async cambiarContrasena(usuarioId, contrasena) {
     const contrasenaHash = await bcrypt.hash(contrasena, 12);
 

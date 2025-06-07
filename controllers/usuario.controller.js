@@ -1,5 +1,8 @@
-const Usuario = require("../models/usuario.model.js");
-const nodemailer = require("nodemailer");
+const Usuario = require('../models/usuario.model.js');
+const nodemailer = require('nodemailer');
+const path = require('path');
+const dotenv = require("dotenv");
+dotenv.config();
 
 /**
  * @description Registra un nuevo usuario en la base de datos.
@@ -16,31 +19,70 @@ exports.registrarUsuario = async (req, res) => {
   }
 };
 
+function generarContrasena(longitud = 6) {
+  const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let contrasena = '';
+  for (let it = 0; it < longitud; it++) {
+    const indice = Math.floor(Math.random() * caracteres.length);
+    contrasena += caracteres[indice];
+  }
+  return contrasena;
+}
+
 exports.mandarCorreo = async (req, res) => {
-  // Configura el transporter
-  const transporter = nodemailer.createTransport({
-      service: "gmail",
-    auth: {
-      user: "juaneduardorosasceron@gmail.com",
-      pass: "958f083f7b",
-    },
-  });
+    try{
+        const usuario = req.query.usuario;
+        const usuarioId = await Usuario.obtenerId(usuario);
+        if (usuarioId == null){
+            res.status(201).json({code: 201});
+            return;
+        }
 
-  // Opciones del correo
-  const mailOptions = {
-    from: "juaneduardorosasceron@gmail.com",
-    to: "A01710168@tec.mx",
-    subject: "Asunto del correo",
-    text: "Contenido del correo en texto plano",
-    html: "<h1>Contenido del correo en HTML</h1>",
-  };
+        const nuevaContrasena = generarContrasena();
 
-  // Enviar el correo
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Correo enviado: " + info.response);
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASSWORD,
+            },
+        });
+
+        const mailOptions = {
+            from: process.env.MAIL_USER,
+            to: process.env.MAIL_RECEIVER,
+            subject: 'Recuperar contraseña ZuustentoTracker',
+            html: `<div style="font-family: Arial, sans-serif; text-align: center;">
+                <img src="cid:logo" alt="Logo de ZuustentoTracker" style="width: 150px; margin-bottom: 20px;" />
+                <h2>¿Olvidaste tu contraseña?</h2>
+                <p>Este correo es automatizado, se solicitó el cambio de contraseña para:</p>
+                <p style="font-weight: bold">${usuario}</p>
+                <p>Nueva Contraseña:</p>
+                <p style="font-weight: bold">${nuevaContrasena}</p>
+                <p style="margin-top: 20px;">Si no solicitaste este cambio, puedes ignorar este correo.</p>
+            </div>`,
+            attachments: [
+            {
+                filename: 'logo.png',
+                path: path.join(__dirname, '..', 'public', 'ZuustentoTracker_AppIcon.png'),
+                cid: 'logo'
+            }
+            ]
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error)
+                res.status(500).json({code: 500});
+                return;
+            }
+        });
+
+        await Usuario.cambiarContrasena(usuarioId.usuarioId, nuevaContrasena);
+
+        res.status(200).json({code: 200});
+    } catch (error){
+        console.log(error)
+        res.status(500).json({code: 500})
     }
-  });
 };

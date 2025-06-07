@@ -89,4 +89,28 @@ module.exports = class Usuario {
       throw error;
     }
   }
+
+  static async obtenerId(nombreUsuario) {
+    return await prisma.USUARIO.findFirst({
+      where: {
+        user: nombreUsuario
+      },
+      select: {
+        usuarioId: true
+      }
+    })
+  }
+
+  static async cambiarContrasena(usuarioId, contrasena) {
+    const contrasenaHash = await bcrypt.hash(contrasena, 12);
+
+    await prisma.USUARIO.update({
+      where: {
+        usuarioId: usuarioId
+      },
+      data: {
+        contrasena: contrasenaHash
+      }
+    });
+  }
 };

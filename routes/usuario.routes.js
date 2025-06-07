@@ -17,7 +17,7 @@ const autenticacionController = require("../controllers/autenticacion.controller
 /* POST METHODS */
 router.post("/iniciarSesion", autenticacionController.iniciarSesion);
 router.post("/registrarUsuario", usuarioController.registrarUsuario);
-router.post("/recuperarContraseña", usuarioController.mandarCorreo);
+router.post("/recuperarContrasena", usuarioController.mandarCorreo);
 /* ----------- */
 
 /* PUT METHODS */

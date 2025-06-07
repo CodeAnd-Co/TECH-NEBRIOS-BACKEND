@@ -11,6 +11,7 @@ jest.mock("../generated/prisma", () => {
     USUARIO: {
       create: jest.fn(),
       findFirst: jest.fn(),
+      findMany: jest.fn()
     },
     ADMINISTRADOR: {
       findFirst: jest.fn(),
@@ -124,5 +125,30 @@ describe("Modelo Usuario", () => {
     prisma.USUARIO.findFirst.mockRejectedValue(new Error("Error de BD"));
 
     await expect(Usuario.buscarUsuario("EmiVa")).rejects.toThrow("Error de BD");
+  });
+
+  test('ObtenerUsuarios devuelve lista con todos los usuarios y rol', async () => {
+    const mockUsuarios = [
+      {
+        usuarioId: 1,
+        nombre: "Juan",
+        apellido_p: "Pérez",
+        apellido_m: "Lopez",
+        user: "juan123",
+        ADMINISTRADOR: [],
+      },
+      {
+        usuarioId: 2,
+        nombre: "Ana",
+        apellido_p: "Gomez",
+        apellido_m: "Ruiz",
+        user: "ana456",
+        ADMINISTRADOR: [{}],
+      },
+    ];
+    prisma.USUARIO.findMany.mockResolvedValue(mockUsuarios);
+
+    const result = await Usuario.obtenerUsuarios();
+    expect(Array.isArray(result)).toBe(true);
   });
 });

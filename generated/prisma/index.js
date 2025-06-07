@@ -241,9 +241,6 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/marianajuarezramirez/Desktop/TECH-NEBRIOS-BACKEND/generated/prisma",
-      "value": "/Users/armando/Desktop/TECH-NEBRIOS-BACKEND/generated/prisma",
-      "value": "/Users/lapto/Desktop/zuustento/TECH-NEBRIOS-BACKEND/generated/prisma",
       "value": "C:\\Users\\emili\\OneDrive\\Escritorio\\6TO SEMESTRE\\CODENCO\\zustento\\TECH-NEBRIOS-BACKEND\\generated\\prisma",
       "value": "C:\\Users\\juana\\Desktop\\dev\\6toSEM\\TECH-NEBRIOS-BACKEND\\generated\\prisma",
       "fromEnvVar": null

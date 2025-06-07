@@ -11,7 +11,6 @@ const ReporteModel = {
   // RF11:
   // https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF11
   async obtenerDatos() {
-    try {
       // Consulta con ORM Prisma
       const resultado = await prisma.CHAROLA.findMany({
         select: {
@@ -52,9 +51,30 @@ const ReporteModel = {
       );     
 
       return resultadoFormateado;
+  },
+
+  async obtenerEliminadas(){
+    try{
+      const resultado = await prisma.ELIMINACION_MOTIVO.findMany({
+        select: {
+          user: true,
+          charola_nombre: true,
+          motivo: true,
+          fecha_eliminacion: true,
+        }
+      });
+
+      const resultadoFormateado = resultado.map(item => ({
+        user: item.user,
+        charola_nombre: item.charola_nombre,
+        motivo: item.motivo,
+        fechaEliminacion: format(new Date(item.fecha_eliminacion), 'dd/MM/yyyy'),
+    }));
+
+      return resultadoFormateado;
     } catch (error) {
-      console.error('[Model] Error al obtener información de las charolas:', error);
-      throw error;
+      console.log(error);
+      return error;
     }
   }
 };

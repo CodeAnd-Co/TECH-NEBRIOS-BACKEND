@@ -6,6 +6,8 @@
 // RF16 Visualizar todas las charolas registradas en el sistema - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF16
 // RF21: Consultar charolas de cambios pasados - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
 // RF26 Registrar la alimentación de la charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF26
+//RF15  Filtrar charola por fecha - Documentación: https://codeandco-wiki.netlify.app/docs/next/proyectos/larvas/documentacion/requisitos/rf15/
+
 
 // models/charola.model.js
 const { PrismaClient } = require('../generated/prisma');
@@ -206,7 +208,7 @@ module.exports = class Charola {
     }
   }
 
-  static async eliminarCharola(charolaID) {
+  static async eliminarCharola(charolaID, razon, usuario) {
     try {
       const id = Number(charolaID);
 
@@ -218,6 +220,17 @@ module.exports = class Charola {
       if (!existe) {
         return { error: 'No se encontró la charola para eliminar.' };
       }
+
+      const nombreCharola = existe.nombreCharola;
+
+      await prisma.ELIMINACION_MOTIVO.create({
+        data: {
+          user: usuario,
+          charola_nombre: nombreCharola,
+          motivo: razon,
+          fecha_eliminacion: new Date(),
+        }
+      });
 
       // Eliminar relaciones con hidratación
       await prisma.CHAROLA_HIDRATACION.deleteMany({
@@ -362,4 +375,47 @@ module.exports = class Charola {
       };
     });
   }
+
+
+  /**
+ * Filtra las charolas por un rango de fechas.
+ * 
+ * @param {string} fechaInicio - Fecha inicial en formato ISO (ej. '2025-01-01')
+ * @param {string} fechaFin - Fecha final en formato ISO (ej. '2025-01-31')
+ * @returns {Promise<Array>} Lista de charolas en el rango
+ */
+
+  static async filtrarPorFecha(fechaInicio, fechaFin) {
+    try {
+      const inicio = new Date(fechaInicio);
+      const fin = new Date(fechaFin);
+
+      const charolas = await prisma.CHAROLA.findMany({
+        where: {
+          fechaCreacion: {
+            gte: inicio,
+            lte: fin
+          }
+        },
+        orderBy: {
+          fechaCreacion: 'desc'
+        },
+        include: {
+          CHAROLA_COMIDA: {
+            include: { COMIDA: true }
+          },
+          CHAROLA_HIDRATACION: {
+            include: { HIDRATACION: true }
+          }
+        }
+      });
+
+      return charolas;
+    } catch (error) {
+      console.error('Error al filtrar charolas por fecha:', error);
+      return { error: 'No se pudieron filtrar las charolas' };
+    }
+  }
+
+
 };

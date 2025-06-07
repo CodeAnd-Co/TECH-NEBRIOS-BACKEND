@@ -78,6 +78,11 @@ export type CHAROLA_PUPA = $Result.DefaultSelection<Prisma.$CHAROLA_PUPAPayload>
  * 
  */
 export type PUPA = $Result.DefaultSelection<Prisma.$PUPAPayload>
+/**
+ * Model ELIMINACION_MOTIVO
+ * 
+ */
+export type ELIMINACION_MOTIVO = $Result.DefaultSelection<Prisma.$ELIMINACION_MOTIVOPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -333,6 +338,16 @@ export class PrismaClient<
     * ```
     */
   get pUPA(): Prisma.PUPADelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.eLIMINACION_MOTIVO`: Exposes CRUD operations for the **ELIMINACION_MOTIVO** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ELIMINACION_MOTIVOS
+    * const eLIMINACION_MOTIVOS = await prisma.eLIMINACION_MOTIVO.findMany()
+    * ```
+    */
+  get eLIMINACION_MOTIVO(): Prisma.ELIMINACION_MOTIVODelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -391,8 +406,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.7.0
-   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -785,7 +800,8 @@ export namespace Prisma {
     USUARIO_CHAROLA: 'USUARIO_CHAROLA',
     CHAROLA_FRAS: 'CHAROLA_FRAS',
     CHAROLA_PUPA: 'CHAROLA_PUPA',
-    PUPA: 'PUPA'
+    PUPA: 'PUPA',
+    ELIMINACION_MOTIVO: 'ELIMINACION_MOTIVO'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -804,7 +820,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "aDMINISTRADOR" | "cHAROLA" | "cHAROLA_CHAROLA" | "cHAROLA_COMIDA" | "cHAROLA_HIDRATACION" | "cOMIDA" | "fRAS" | "hIDRATACION" | "uSUARIO" | "uSUARIO_CHAROLA" | "cHAROLA_FRAS" | "cHAROLA_PUPA" | "pUPA"
+      modelProps: "aDMINISTRADOR" | "cHAROLA" | "cHAROLA_CHAROLA" | "cHAROLA_COMIDA" | "cHAROLA_HIDRATACION" | "cOMIDA" | "fRAS" | "hIDRATACION" | "uSUARIO" | "uSUARIO_CHAROLA" | "cHAROLA_FRAS" | "cHAROLA_PUPA" | "pUPA" | "eLIMINACION_MOTIVO"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1666,6 +1682,72 @@ export namespace Prisma {
           }
         }
       }
+      ELIMINACION_MOTIVO: {
+        payload: Prisma.$ELIMINACION_MOTIVOPayload<ExtArgs>
+        fields: Prisma.ELIMINACION_MOTIVOFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ELIMINACION_MOTIVOFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ELIMINACION_MOTIVOPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ELIMINACION_MOTIVOFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ELIMINACION_MOTIVOPayload>
+          }
+          findFirst: {
+            args: Prisma.ELIMINACION_MOTIVOFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ELIMINACION_MOTIVOPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ELIMINACION_MOTIVOFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ELIMINACION_MOTIVOPayload>
+          }
+          findMany: {
+            args: Prisma.ELIMINACION_MOTIVOFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ELIMINACION_MOTIVOPayload>[]
+          }
+          create: {
+            args: Prisma.ELIMINACION_MOTIVOCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ELIMINACION_MOTIVOPayload>
+          }
+          createMany: {
+            args: Prisma.ELIMINACION_MOTIVOCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ELIMINACION_MOTIVODeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ELIMINACION_MOTIVOPayload>
+          }
+          update: {
+            args: Prisma.ELIMINACION_MOTIVOUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ELIMINACION_MOTIVOPayload>
+          }
+          deleteMany: {
+            args: Prisma.ELIMINACION_MOTIVODeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ELIMINACION_MOTIVOUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ELIMINACION_MOTIVOUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ELIMINACION_MOTIVOPayload>
+          }
+          aggregate: {
+            args: Prisma.ELIMINACION_MOTIVOAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateELIMINACION_MOTIVO>
+          }
+          groupBy: {
+            args: Prisma.ELIMINACION_MOTIVOGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ELIMINACION_MOTIVOGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ELIMINACION_MOTIVOCountArgs<ExtArgs>
+            result: $Utils.Optional<ELIMINACION_MOTIVOCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1763,6 +1845,7 @@ export namespace Prisma {
     cHAROLA_FRAS?: CHAROLA_FRASOmit
     cHAROLA_PUPA?: CHAROLA_PUPAOmit
     pUPA?: PUPAOmit
+    eLIMINACION_MOTIVO?: ELIMINACION_MOTIVOOmit
   }
 
   /* Types for Logging */
@@ -10060,7 +10143,7 @@ export namespace Prisma {
     /**
      * The data needed to create a HIDRATACION.
      */
-    data: XOR<HIDRATACIONCreateInput, HIDRATACIONUncheckedCreateInput>
+    data?: XOR<HIDRATACIONCreateInput, HIDRATACIONUncheckedCreateInput>
   }
 
   /**
@@ -14654,7 +14737,7 @@ export namespace Prisma {
   interface PUPAFieldRefs {
     readonly pupaId: FieldRef<"PUPA", 'Int'>
     readonly fechaRegistro: FieldRef<"PUPA", 'DateTime'>
-    readonly cantidadObtenida: FieldRef<"PUPA", 'Int'>
+    readonly cantidadObtenida: FieldRef<"PUPA", 'Float'>
   }
     
 
@@ -15041,6 +15124,922 @@ export namespace Prisma {
 
 
   /**
+   * Model ELIMINACION_MOTIVO
+   */
+
+  export type AggregateELIMINACION_MOTIVO = {
+    _count: ELIMINACION_MOTIVOCountAggregateOutputType | null
+    _avg: ELIMINACION_MOTIVOAvgAggregateOutputType | null
+    _sum: ELIMINACION_MOTIVOSumAggregateOutputType | null
+    _min: ELIMINACION_MOTIVOMinAggregateOutputType | null
+    _max: ELIMINACION_MOTIVOMaxAggregateOutputType | null
+  }
+
+  export type ELIMINACION_MOTIVOAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ELIMINACION_MOTIVOSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ELIMINACION_MOTIVOMinAggregateOutputType = {
+    id: number | null
+    user: string | null
+    charola_nombre: string | null
+    motivo: string | null
+    fecha_eliminacion: Date | null
+  }
+
+  export type ELIMINACION_MOTIVOMaxAggregateOutputType = {
+    id: number | null
+    user: string | null
+    charola_nombre: string | null
+    motivo: string | null
+    fecha_eliminacion: Date | null
+  }
+
+  export type ELIMINACION_MOTIVOCountAggregateOutputType = {
+    id: number
+    user: number
+    charola_nombre: number
+    motivo: number
+    fecha_eliminacion: number
+    _all: number
+  }
+
+
+  export type ELIMINACION_MOTIVOAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ELIMINACION_MOTIVOSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ELIMINACION_MOTIVOMinAggregateInputType = {
+    id?: true
+    user?: true
+    charola_nombre?: true
+    motivo?: true
+    fecha_eliminacion?: true
+  }
+
+  export type ELIMINACION_MOTIVOMaxAggregateInputType = {
+    id?: true
+    user?: true
+    charola_nombre?: true
+    motivo?: true
+    fecha_eliminacion?: true
+  }
+
+  export type ELIMINACION_MOTIVOCountAggregateInputType = {
+    id?: true
+    user?: true
+    charola_nombre?: true
+    motivo?: true
+    fecha_eliminacion?: true
+    _all?: true
+  }
+
+  export type ELIMINACION_MOTIVOAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ELIMINACION_MOTIVO to aggregate.
+     */
+    where?: ELIMINACION_MOTIVOWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ELIMINACION_MOTIVOS to fetch.
+     */
+    orderBy?: ELIMINACION_MOTIVOOrderByWithRelationInput | ELIMINACION_MOTIVOOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ELIMINACION_MOTIVOWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ELIMINACION_MOTIVOS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ELIMINACION_MOTIVOS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ELIMINACION_MOTIVOS
+    **/
+    _count?: true | ELIMINACION_MOTIVOCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ELIMINACION_MOTIVOAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ELIMINACION_MOTIVOSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ELIMINACION_MOTIVOMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ELIMINACION_MOTIVOMaxAggregateInputType
+  }
+
+  export type GetELIMINACION_MOTIVOAggregateType<T extends ELIMINACION_MOTIVOAggregateArgs> = {
+        [P in keyof T & keyof AggregateELIMINACION_MOTIVO]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateELIMINACION_MOTIVO[P]>
+      : GetScalarType<T[P], AggregateELIMINACION_MOTIVO[P]>
+  }
+
+
+
+
+  export type ELIMINACION_MOTIVOGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ELIMINACION_MOTIVOWhereInput
+    orderBy?: ELIMINACION_MOTIVOOrderByWithAggregationInput | ELIMINACION_MOTIVOOrderByWithAggregationInput[]
+    by: ELIMINACION_MOTIVOScalarFieldEnum[] | ELIMINACION_MOTIVOScalarFieldEnum
+    having?: ELIMINACION_MOTIVOScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ELIMINACION_MOTIVOCountAggregateInputType | true
+    _avg?: ELIMINACION_MOTIVOAvgAggregateInputType
+    _sum?: ELIMINACION_MOTIVOSumAggregateInputType
+    _min?: ELIMINACION_MOTIVOMinAggregateInputType
+    _max?: ELIMINACION_MOTIVOMaxAggregateInputType
+  }
+
+  export type ELIMINACION_MOTIVOGroupByOutputType = {
+    id: number
+    user: string
+    charola_nombre: string
+    motivo: string
+    fecha_eliminacion: Date | null
+    _count: ELIMINACION_MOTIVOCountAggregateOutputType | null
+    _avg: ELIMINACION_MOTIVOAvgAggregateOutputType | null
+    _sum: ELIMINACION_MOTIVOSumAggregateOutputType | null
+    _min: ELIMINACION_MOTIVOMinAggregateOutputType | null
+    _max: ELIMINACION_MOTIVOMaxAggregateOutputType | null
+  }
+
+  type GetELIMINACION_MOTIVOGroupByPayload<T extends ELIMINACION_MOTIVOGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ELIMINACION_MOTIVOGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ELIMINACION_MOTIVOGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ELIMINACION_MOTIVOGroupByOutputType[P]>
+            : GetScalarType<T[P], ELIMINACION_MOTIVOGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ELIMINACION_MOTIVOSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user?: boolean
+    charola_nombre?: boolean
+    motivo?: boolean
+    fecha_eliminacion?: boolean
+  }, ExtArgs["result"]["eLIMINACION_MOTIVO"]>
+
+
+
+  export type ELIMINACION_MOTIVOSelectScalar = {
+    id?: boolean
+    user?: boolean
+    charola_nombre?: boolean
+    motivo?: boolean
+    fecha_eliminacion?: boolean
+  }
+
+  export type ELIMINACION_MOTIVOOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user" | "charola_nombre" | "motivo" | "fecha_eliminacion", ExtArgs["result"]["eLIMINACION_MOTIVO"]>
+
+  export type $ELIMINACION_MOTIVOPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ELIMINACION_MOTIVO"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      user: string
+      charola_nombre: string
+      motivo: string
+      fecha_eliminacion: Date | null
+    }, ExtArgs["result"]["eLIMINACION_MOTIVO"]>
+    composites: {}
+  }
+
+  type ELIMINACION_MOTIVOGetPayload<S extends boolean | null | undefined | ELIMINACION_MOTIVODefaultArgs> = $Result.GetResult<Prisma.$ELIMINACION_MOTIVOPayload, S>
+
+  type ELIMINACION_MOTIVOCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ELIMINACION_MOTIVOFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ELIMINACION_MOTIVOCountAggregateInputType | true
+    }
+
+  export interface ELIMINACION_MOTIVODelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ELIMINACION_MOTIVO'], meta: { name: 'ELIMINACION_MOTIVO' } }
+    /**
+     * Find zero or one ELIMINACION_MOTIVO that matches the filter.
+     * @param {ELIMINACION_MOTIVOFindUniqueArgs} args - Arguments to find a ELIMINACION_MOTIVO
+     * @example
+     * // Get one ELIMINACION_MOTIVO
+     * const eLIMINACION_MOTIVO = await prisma.eLIMINACION_MOTIVO.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ELIMINACION_MOTIVOFindUniqueArgs>(args: SelectSubset<T, ELIMINACION_MOTIVOFindUniqueArgs<ExtArgs>>): Prisma__ELIMINACION_MOTIVOClient<$Result.GetResult<Prisma.$ELIMINACION_MOTIVOPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ELIMINACION_MOTIVO that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ELIMINACION_MOTIVOFindUniqueOrThrowArgs} args - Arguments to find a ELIMINACION_MOTIVO
+     * @example
+     * // Get one ELIMINACION_MOTIVO
+     * const eLIMINACION_MOTIVO = await prisma.eLIMINACION_MOTIVO.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ELIMINACION_MOTIVOFindUniqueOrThrowArgs>(args: SelectSubset<T, ELIMINACION_MOTIVOFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ELIMINACION_MOTIVOClient<$Result.GetResult<Prisma.$ELIMINACION_MOTIVOPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ELIMINACION_MOTIVO that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ELIMINACION_MOTIVOFindFirstArgs} args - Arguments to find a ELIMINACION_MOTIVO
+     * @example
+     * // Get one ELIMINACION_MOTIVO
+     * const eLIMINACION_MOTIVO = await prisma.eLIMINACION_MOTIVO.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ELIMINACION_MOTIVOFindFirstArgs>(args?: SelectSubset<T, ELIMINACION_MOTIVOFindFirstArgs<ExtArgs>>): Prisma__ELIMINACION_MOTIVOClient<$Result.GetResult<Prisma.$ELIMINACION_MOTIVOPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ELIMINACION_MOTIVO that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ELIMINACION_MOTIVOFindFirstOrThrowArgs} args - Arguments to find a ELIMINACION_MOTIVO
+     * @example
+     * // Get one ELIMINACION_MOTIVO
+     * const eLIMINACION_MOTIVO = await prisma.eLIMINACION_MOTIVO.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ELIMINACION_MOTIVOFindFirstOrThrowArgs>(args?: SelectSubset<T, ELIMINACION_MOTIVOFindFirstOrThrowArgs<ExtArgs>>): Prisma__ELIMINACION_MOTIVOClient<$Result.GetResult<Prisma.$ELIMINACION_MOTIVOPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ELIMINACION_MOTIVOS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ELIMINACION_MOTIVOFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ELIMINACION_MOTIVOS
+     * const eLIMINACION_MOTIVOS = await prisma.eLIMINACION_MOTIVO.findMany()
+     * 
+     * // Get first 10 ELIMINACION_MOTIVOS
+     * const eLIMINACION_MOTIVOS = await prisma.eLIMINACION_MOTIVO.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const eLIMINACION_MOTIVOWithIdOnly = await prisma.eLIMINACION_MOTIVO.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ELIMINACION_MOTIVOFindManyArgs>(args?: SelectSubset<T, ELIMINACION_MOTIVOFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ELIMINACION_MOTIVOPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ELIMINACION_MOTIVO.
+     * @param {ELIMINACION_MOTIVOCreateArgs} args - Arguments to create a ELIMINACION_MOTIVO.
+     * @example
+     * // Create one ELIMINACION_MOTIVO
+     * const ELIMINACION_MOTIVO = await prisma.eLIMINACION_MOTIVO.create({
+     *   data: {
+     *     // ... data to create a ELIMINACION_MOTIVO
+     *   }
+     * })
+     * 
+     */
+    create<T extends ELIMINACION_MOTIVOCreateArgs>(args: SelectSubset<T, ELIMINACION_MOTIVOCreateArgs<ExtArgs>>): Prisma__ELIMINACION_MOTIVOClient<$Result.GetResult<Prisma.$ELIMINACION_MOTIVOPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ELIMINACION_MOTIVOS.
+     * @param {ELIMINACION_MOTIVOCreateManyArgs} args - Arguments to create many ELIMINACION_MOTIVOS.
+     * @example
+     * // Create many ELIMINACION_MOTIVOS
+     * const eLIMINACION_MOTIVO = await prisma.eLIMINACION_MOTIVO.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ELIMINACION_MOTIVOCreateManyArgs>(args?: SelectSubset<T, ELIMINACION_MOTIVOCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ELIMINACION_MOTIVO.
+     * @param {ELIMINACION_MOTIVODeleteArgs} args - Arguments to delete one ELIMINACION_MOTIVO.
+     * @example
+     * // Delete one ELIMINACION_MOTIVO
+     * const ELIMINACION_MOTIVO = await prisma.eLIMINACION_MOTIVO.delete({
+     *   where: {
+     *     // ... filter to delete one ELIMINACION_MOTIVO
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ELIMINACION_MOTIVODeleteArgs>(args: SelectSubset<T, ELIMINACION_MOTIVODeleteArgs<ExtArgs>>): Prisma__ELIMINACION_MOTIVOClient<$Result.GetResult<Prisma.$ELIMINACION_MOTIVOPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ELIMINACION_MOTIVO.
+     * @param {ELIMINACION_MOTIVOUpdateArgs} args - Arguments to update one ELIMINACION_MOTIVO.
+     * @example
+     * // Update one ELIMINACION_MOTIVO
+     * const eLIMINACION_MOTIVO = await prisma.eLIMINACION_MOTIVO.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ELIMINACION_MOTIVOUpdateArgs>(args: SelectSubset<T, ELIMINACION_MOTIVOUpdateArgs<ExtArgs>>): Prisma__ELIMINACION_MOTIVOClient<$Result.GetResult<Prisma.$ELIMINACION_MOTIVOPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ELIMINACION_MOTIVOS.
+     * @param {ELIMINACION_MOTIVODeleteManyArgs} args - Arguments to filter ELIMINACION_MOTIVOS to delete.
+     * @example
+     * // Delete a few ELIMINACION_MOTIVOS
+     * const { count } = await prisma.eLIMINACION_MOTIVO.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ELIMINACION_MOTIVODeleteManyArgs>(args?: SelectSubset<T, ELIMINACION_MOTIVODeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ELIMINACION_MOTIVOS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ELIMINACION_MOTIVOUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ELIMINACION_MOTIVOS
+     * const eLIMINACION_MOTIVO = await prisma.eLIMINACION_MOTIVO.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ELIMINACION_MOTIVOUpdateManyArgs>(args: SelectSubset<T, ELIMINACION_MOTIVOUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ELIMINACION_MOTIVO.
+     * @param {ELIMINACION_MOTIVOUpsertArgs} args - Arguments to update or create a ELIMINACION_MOTIVO.
+     * @example
+     * // Update or create a ELIMINACION_MOTIVO
+     * const eLIMINACION_MOTIVO = await prisma.eLIMINACION_MOTIVO.upsert({
+     *   create: {
+     *     // ... data to create a ELIMINACION_MOTIVO
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ELIMINACION_MOTIVO we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ELIMINACION_MOTIVOUpsertArgs>(args: SelectSubset<T, ELIMINACION_MOTIVOUpsertArgs<ExtArgs>>): Prisma__ELIMINACION_MOTIVOClient<$Result.GetResult<Prisma.$ELIMINACION_MOTIVOPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ELIMINACION_MOTIVOS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ELIMINACION_MOTIVOCountArgs} args - Arguments to filter ELIMINACION_MOTIVOS to count.
+     * @example
+     * // Count the number of ELIMINACION_MOTIVOS
+     * const count = await prisma.eLIMINACION_MOTIVO.count({
+     *   where: {
+     *     // ... the filter for the ELIMINACION_MOTIVOS we want to count
+     *   }
+     * })
+    **/
+    count<T extends ELIMINACION_MOTIVOCountArgs>(
+      args?: Subset<T, ELIMINACION_MOTIVOCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ELIMINACION_MOTIVOCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ELIMINACION_MOTIVO.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ELIMINACION_MOTIVOAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ELIMINACION_MOTIVOAggregateArgs>(args: Subset<T, ELIMINACION_MOTIVOAggregateArgs>): Prisma.PrismaPromise<GetELIMINACION_MOTIVOAggregateType<T>>
+
+    /**
+     * Group by ELIMINACION_MOTIVO.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ELIMINACION_MOTIVOGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ELIMINACION_MOTIVOGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ELIMINACION_MOTIVOGroupByArgs['orderBy'] }
+        : { orderBy?: ELIMINACION_MOTIVOGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ELIMINACION_MOTIVOGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetELIMINACION_MOTIVOGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ELIMINACION_MOTIVO model
+   */
+  readonly fields: ELIMINACION_MOTIVOFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ELIMINACION_MOTIVO.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ELIMINACION_MOTIVOClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ELIMINACION_MOTIVO model
+   */
+  interface ELIMINACION_MOTIVOFieldRefs {
+    readonly id: FieldRef<"ELIMINACION_MOTIVO", 'Int'>
+    readonly user: FieldRef<"ELIMINACION_MOTIVO", 'String'>
+    readonly charola_nombre: FieldRef<"ELIMINACION_MOTIVO", 'String'>
+    readonly motivo: FieldRef<"ELIMINACION_MOTIVO", 'String'>
+    readonly fecha_eliminacion: FieldRef<"ELIMINACION_MOTIVO", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ELIMINACION_MOTIVO findUnique
+   */
+  export type ELIMINACION_MOTIVOFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ELIMINACION_MOTIVO
+     */
+    select?: ELIMINACION_MOTIVOSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ELIMINACION_MOTIVO
+     */
+    omit?: ELIMINACION_MOTIVOOmit<ExtArgs> | null
+    /**
+     * Filter, which ELIMINACION_MOTIVO to fetch.
+     */
+    where: ELIMINACION_MOTIVOWhereUniqueInput
+  }
+
+  /**
+   * ELIMINACION_MOTIVO findUniqueOrThrow
+   */
+  export type ELIMINACION_MOTIVOFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ELIMINACION_MOTIVO
+     */
+    select?: ELIMINACION_MOTIVOSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ELIMINACION_MOTIVO
+     */
+    omit?: ELIMINACION_MOTIVOOmit<ExtArgs> | null
+    /**
+     * Filter, which ELIMINACION_MOTIVO to fetch.
+     */
+    where: ELIMINACION_MOTIVOWhereUniqueInput
+  }
+
+  /**
+   * ELIMINACION_MOTIVO findFirst
+   */
+  export type ELIMINACION_MOTIVOFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ELIMINACION_MOTIVO
+     */
+    select?: ELIMINACION_MOTIVOSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ELIMINACION_MOTIVO
+     */
+    omit?: ELIMINACION_MOTIVOOmit<ExtArgs> | null
+    /**
+     * Filter, which ELIMINACION_MOTIVO to fetch.
+     */
+    where?: ELIMINACION_MOTIVOWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ELIMINACION_MOTIVOS to fetch.
+     */
+    orderBy?: ELIMINACION_MOTIVOOrderByWithRelationInput | ELIMINACION_MOTIVOOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ELIMINACION_MOTIVOS.
+     */
+    cursor?: ELIMINACION_MOTIVOWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ELIMINACION_MOTIVOS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ELIMINACION_MOTIVOS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ELIMINACION_MOTIVOS.
+     */
+    distinct?: ELIMINACION_MOTIVOScalarFieldEnum | ELIMINACION_MOTIVOScalarFieldEnum[]
+  }
+
+  /**
+   * ELIMINACION_MOTIVO findFirstOrThrow
+   */
+  export type ELIMINACION_MOTIVOFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ELIMINACION_MOTIVO
+     */
+    select?: ELIMINACION_MOTIVOSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ELIMINACION_MOTIVO
+     */
+    omit?: ELIMINACION_MOTIVOOmit<ExtArgs> | null
+    /**
+     * Filter, which ELIMINACION_MOTIVO to fetch.
+     */
+    where?: ELIMINACION_MOTIVOWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ELIMINACION_MOTIVOS to fetch.
+     */
+    orderBy?: ELIMINACION_MOTIVOOrderByWithRelationInput | ELIMINACION_MOTIVOOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ELIMINACION_MOTIVOS.
+     */
+    cursor?: ELIMINACION_MOTIVOWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ELIMINACION_MOTIVOS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ELIMINACION_MOTIVOS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ELIMINACION_MOTIVOS.
+     */
+    distinct?: ELIMINACION_MOTIVOScalarFieldEnum | ELIMINACION_MOTIVOScalarFieldEnum[]
+  }
+
+  /**
+   * ELIMINACION_MOTIVO findMany
+   */
+  export type ELIMINACION_MOTIVOFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ELIMINACION_MOTIVO
+     */
+    select?: ELIMINACION_MOTIVOSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ELIMINACION_MOTIVO
+     */
+    omit?: ELIMINACION_MOTIVOOmit<ExtArgs> | null
+    /**
+     * Filter, which ELIMINACION_MOTIVOS to fetch.
+     */
+    where?: ELIMINACION_MOTIVOWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ELIMINACION_MOTIVOS to fetch.
+     */
+    orderBy?: ELIMINACION_MOTIVOOrderByWithRelationInput | ELIMINACION_MOTIVOOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ELIMINACION_MOTIVOS.
+     */
+    cursor?: ELIMINACION_MOTIVOWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ELIMINACION_MOTIVOS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ELIMINACION_MOTIVOS.
+     */
+    skip?: number
+    distinct?: ELIMINACION_MOTIVOScalarFieldEnum | ELIMINACION_MOTIVOScalarFieldEnum[]
+  }
+
+  /**
+   * ELIMINACION_MOTIVO create
+   */
+  export type ELIMINACION_MOTIVOCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ELIMINACION_MOTIVO
+     */
+    select?: ELIMINACION_MOTIVOSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ELIMINACION_MOTIVO
+     */
+    omit?: ELIMINACION_MOTIVOOmit<ExtArgs> | null
+    /**
+     * The data needed to create a ELIMINACION_MOTIVO.
+     */
+    data: XOR<ELIMINACION_MOTIVOCreateInput, ELIMINACION_MOTIVOUncheckedCreateInput>
+  }
+
+  /**
+   * ELIMINACION_MOTIVO createMany
+   */
+  export type ELIMINACION_MOTIVOCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ELIMINACION_MOTIVOS.
+     */
+    data: ELIMINACION_MOTIVOCreateManyInput | ELIMINACION_MOTIVOCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ELIMINACION_MOTIVO update
+   */
+  export type ELIMINACION_MOTIVOUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ELIMINACION_MOTIVO
+     */
+    select?: ELIMINACION_MOTIVOSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ELIMINACION_MOTIVO
+     */
+    omit?: ELIMINACION_MOTIVOOmit<ExtArgs> | null
+    /**
+     * The data needed to update a ELIMINACION_MOTIVO.
+     */
+    data: XOR<ELIMINACION_MOTIVOUpdateInput, ELIMINACION_MOTIVOUncheckedUpdateInput>
+    /**
+     * Choose, which ELIMINACION_MOTIVO to update.
+     */
+    where: ELIMINACION_MOTIVOWhereUniqueInput
+  }
+
+  /**
+   * ELIMINACION_MOTIVO updateMany
+   */
+  export type ELIMINACION_MOTIVOUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ELIMINACION_MOTIVOS.
+     */
+    data: XOR<ELIMINACION_MOTIVOUpdateManyMutationInput, ELIMINACION_MOTIVOUncheckedUpdateManyInput>
+    /**
+     * Filter which ELIMINACION_MOTIVOS to update
+     */
+    where?: ELIMINACION_MOTIVOWhereInput
+    /**
+     * Limit how many ELIMINACION_MOTIVOS to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ELIMINACION_MOTIVO upsert
+   */
+  export type ELIMINACION_MOTIVOUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ELIMINACION_MOTIVO
+     */
+    select?: ELIMINACION_MOTIVOSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ELIMINACION_MOTIVO
+     */
+    omit?: ELIMINACION_MOTIVOOmit<ExtArgs> | null
+    /**
+     * The filter to search for the ELIMINACION_MOTIVO to update in case it exists.
+     */
+    where: ELIMINACION_MOTIVOWhereUniqueInput
+    /**
+     * In case the ELIMINACION_MOTIVO found by the `where` argument doesn't exist, create a new ELIMINACION_MOTIVO with this data.
+     */
+    create: XOR<ELIMINACION_MOTIVOCreateInput, ELIMINACION_MOTIVOUncheckedCreateInput>
+    /**
+     * In case the ELIMINACION_MOTIVO was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ELIMINACION_MOTIVOUpdateInput, ELIMINACION_MOTIVOUncheckedUpdateInput>
+  }
+
+  /**
+   * ELIMINACION_MOTIVO delete
+   */
+  export type ELIMINACION_MOTIVODeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ELIMINACION_MOTIVO
+     */
+    select?: ELIMINACION_MOTIVOSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ELIMINACION_MOTIVO
+     */
+    omit?: ELIMINACION_MOTIVOOmit<ExtArgs> | null
+    /**
+     * Filter which ELIMINACION_MOTIVO to delete.
+     */
+    where: ELIMINACION_MOTIVOWhereUniqueInput
+  }
+
+  /**
+   * ELIMINACION_MOTIVO deleteMany
+   */
+  export type ELIMINACION_MOTIVODeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ELIMINACION_MOTIVOS to delete
+     */
+    where?: ELIMINACION_MOTIVOWhereInput
+    /**
+     * Limit how many ELIMINACION_MOTIVOS to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ELIMINACION_MOTIVO without action
+   */
+  export type ELIMINACION_MOTIVODefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ELIMINACION_MOTIVO
+     */
+    select?: ELIMINACION_MOTIVOSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ELIMINACION_MOTIVO
+     */
+    omit?: ELIMINACION_MOTIVOOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -15180,6 +16179,17 @@ export namespace Prisma {
   export type PUPAScalarFieldEnum = (typeof PUPAScalarFieldEnum)[keyof typeof PUPAScalarFieldEnum]
 
 
+  export const ELIMINACION_MOTIVOScalarFieldEnum: {
+    id: 'id',
+    user: 'user',
+    charola_nombre: 'charola_nombre',
+    motivo: 'motivo',
+    fecha_eliminacion: 'fecha_eliminacion'
+  };
+
+  export type ELIMINACION_MOTIVOScalarFieldEnum = (typeof ELIMINACION_MOTIVOScalarFieldEnum)[keyof typeof ELIMINACION_MOTIVOScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -15229,6 +16239,15 @@ export namespace Prisma {
   };
 
   export type USUARIOOrderByRelevanceFieldEnum = (typeof USUARIOOrderByRelevanceFieldEnum)[keyof typeof USUARIOOrderByRelevanceFieldEnum]
+
+
+  export const ELIMINACION_MOTIVOOrderByRelevanceFieldEnum: {
+    user: 'user',
+    charola_nombre: 'charola_nombre',
+    motivo: 'motivo'
+  };
+
+  export type ELIMINACION_MOTIVOOrderByRelevanceFieldEnum = (typeof ELIMINACION_MOTIVOOrderByRelevanceFieldEnum)[keyof typeof ELIMINACION_MOTIVOOrderByRelevanceFieldEnum]
 
 
   /**
@@ -15935,7 +16954,7 @@ export namespace Prisma {
     NOT?: PUPAWhereInput | PUPAWhereInput[]
     pupaId?: IntFilter<"PUPA"> | number
     fechaRegistro?: DateTimeNullableFilter<"PUPA"> | Date | string | null
-    cantidadObtenida?: IntNullableFilter<"PUPA"> | number | null
+    cantidadObtenida?: FloatNullableFilter<"PUPA"> | number | null
     CHAROLA_PUPA?: CHAROLA_PUPAListRelationFilter
   }
 
@@ -15952,7 +16971,7 @@ export namespace Prisma {
     OR?: PUPAWhereInput[]
     NOT?: PUPAWhereInput | PUPAWhereInput[]
     fechaRegistro?: DateTimeNullableFilter<"PUPA"> | Date | string | null
-    cantidadObtenida?: IntNullableFilter<"PUPA"> | number | null
+    cantidadObtenida?: FloatNullableFilter<"PUPA"> | number | null
     CHAROLA_PUPA?: CHAROLA_PUPAListRelationFilter
   }, "pupaId">
 
@@ -15973,7 +16992,62 @@ export namespace Prisma {
     NOT?: PUPAScalarWhereWithAggregatesInput | PUPAScalarWhereWithAggregatesInput[]
     pupaId?: IntWithAggregatesFilter<"PUPA"> | number
     fechaRegistro?: DateTimeNullableWithAggregatesFilter<"PUPA"> | Date | string | null
-    cantidadObtenida?: IntNullableWithAggregatesFilter<"PUPA"> | number | null
+    cantidadObtenida?: FloatNullableWithAggregatesFilter<"PUPA"> | number | null
+  }
+
+  export type ELIMINACION_MOTIVOWhereInput = {
+    AND?: ELIMINACION_MOTIVOWhereInput | ELIMINACION_MOTIVOWhereInput[]
+    OR?: ELIMINACION_MOTIVOWhereInput[]
+    NOT?: ELIMINACION_MOTIVOWhereInput | ELIMINACION_MOTIVOWhereInput[]
+    id?: IntFilter<"ELIMINACION_MOTIVO"> | number
+    user?: StringFilter<"ELIMINACION_MOTIVO"> | string
+    charola_nombre?: StringFilter<"ELIMINACION_MOTIVO"> | string
+    motivo?: StringFilter<"ELIMINACION_MOTIVO"> | string
+    fecha_eliminacion?: DateTimeNullableFilter<"ELIMINACION_MOTIVO"> | Date | string | null
+  }
+
+  export type ELIMINACION_MOTIVOOrderByWithRelationInput = {
+    id?: SortOrder
+    user?: SortOrder
+    charola_nombre?: SortOrder
+    motivo?: SortOrder
+    fecha_eliminacion?: SortOrderInput | SortOrder
+    _relevance?: ELIMINACION_MOTIVOOrderByRelevanceInput
+  }
+
+  export type ELIMINACION_MOTIVOWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ELIMINACION_MOTIVOWhereInput | ELIMINACION_MOTIVOWhereInput[]
+    OR?: ELIMINACION_MOTIVOWhereInput[]
+    NOT?: ELIMINACION_MOTIVOWhereInput | ELIMINACION_MOTIVOWhereInput[]
+    user?: StringFilter<"ELIMINACION_MOTIVO"> | string
+    charola_nombre?: StringFilter<"ELIMINACION_MOTIVO"> | string
+    motivo?: StringFilter<"ELIMINACION_MOTIVO"> | string
+    fecha_eliminacion?: DateTimeNullableFilter<"ELIMINACION_MOTIVO"> | Date | string | null
+  }, "id">
+
+  export type ELIMINACION_MOTIVOOrderByWithAggregationInput = {
+    id?: SortOrder
+    user?: SortOrder
+    charola_nombre?: SortOrder
+    motivo?: SortOrder
+    fecha_eliminacion?: SortOrderInput | SortOrder
+    _count?: ELIMINACION_MOTIVOCountOrderByAggregateInput
+    _avg?: ELIMINACION_MOTIVOAvgOrderByAggregateInput
+    _max?: ELIMINACION_MOTIVOMaxOrderByAggregateInput
+    _min?: ELIMINACION_MOTIVOMinOrderByAggregateInput
+    _sum?: ELIMINACION_MOTIVOSumOrderByAggregateInput
+  }
+
+  export type ELIMINACION_MOTIVOScalarWhereWithAggregatesInput = {
+    AND?: ELIMINACION_MOTIVOScalarWhereWithAggregatesInput | ELIMINACION_MOTIVOScalarWhereWithAggregatesInput[]
+    OR?: ELIMINACION_MOTIVOScalarWhereWithAggregatesInput[]
+    NOT?: ELIMINACION_MOTIVOScalarWhereWithAggregatesInput | ELIMINACION_MOTIVOScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ELIMINACION_MOTIVO"> | number
+    user?: StringWithAggregatesFilter<"ELIMINACION_MOTIVO"> | string
+    charola_nombre?: StringWithAggregatesFilter<"ELIMINACION_MOTIVO"> | string
+    motivo?: StringWithAggregatesFilter<"ELIMINACION_MOTIVO"> | string
+    fecha_eliminacion?: DateTimeNullableWithAggregatesFilter<"ELIMINACION_MOTIVO"> | Date | string | null
   }
 
   export type ADMINISTRADORCreateInput = {
@@ -16350,21 +17424,19 @@ export namespace Prisma {
   }
 
   export type HIDRATACIONCreateInput = {
-    hidratacionId: number
     nombre?: string | null
     descripcion?: string | null
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONCreateNestedManyWithoutHIDRATACIONInput
   }
 
   export type HIDRATACIONUncheckedCreateInput = {
-    hidratacionId: number
+    hidratacionId?: number
     nombre?: string | null
     descripcion?: string | null
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedCreateNestedManyWithoutHIDRATACIONInput
   }
 
   export type HIDRATACIONUpdateInput = {
-    hidratacionId?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUpdateManyWithoutHIDRATACIONNestedInput
@@ -16378,13 +17450,12 @@ export namespace Prisma {
   }
 
   export type HIDRATACIONCreateManyInput = {
-    hidratacionId: number
+    hidratacionId?: number
     nombre?: string | null
     descripcion?: string | null
   }
 
   export type HIDRATACIONUpdateManyMutationInput = {
-    hidratacionId?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -16580,14 +17651,14 @@ export namespace Prisma {
 
   export type PUPAUpdateInput = {
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_PUPA?: CHAROLA_PUPAUpdateManyWithoutPUPANestedInput
   }
 
   export type PUPAUncheckedUpdateInput = {
     pupaId?: IntFieldUpdateOperationsInput | number
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_PUPA?: CHAROLA_PUPAUncheckedUpdateManyWithoutPUPANestedInput
   }
 
@@ -16599,13 +17670,66 @@ export namespace Prisma {
 
   export type PUPAUpdateManyMutationInput = {
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type PUPAUncheckedUpdateManyInput = {
     pupaId?: IntFieldUpdateOperationsInput | number
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type ELIMINACION_MOTIVOCreateInput = {
+    user: string
+    charola_nombre: string
+    motivo: string
+    fecha_eliminacion?: Date | string | null
+  }
+
+  export type ELIMINACION_MOTIVOUncheckedCreateInput = {
+    id?: number
+    user: string
+    charola_nombre: string
+    motivo: string
+    fecha_eliminacion?: Date | string | null
+  }
+
+  export type ELIMINACION_MOTIVOUpdateInput = {
+    user?: StringFieldUpdateOperationsInput | string
+    charola_nombre?: StringFieldUpdateOperationsInput | string
+    motivo?: StringFieldUpdateOperationsInput | string
+    fecha_eliminacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ELIMINACION_MOTIVOUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user?: StringFieldUpdateOperationsInput | string
+    charola_nombre?: StringFieldUpdateOperationsInput | string
+    motivo?: StringFieldUpdateOperationsInput | string
+    fecha_eliminacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ELIMINACION_MOTIVOCreateManyInput = {
+    id?: number
+    user: string
+    charola_nombre: string
+    motivo: string
+    fecha_eliminacion?: Date | string | null
+  }
+
+  export type ELIMINACION_MOTIVOUpdateManyMutationInput = {
+    user?: StringFieldUpdateOperationsInput | string
+    charola_nombre?: StringFieldUpdateOperationsInput | string
+    motivo?: StringFieldUpdateOperationsInput | string
+    fecha_eliminacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ELIMINACION_MOTIVOUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    user?: StringFieldUpdateOperationsInput | string
+    charola_nombre?: StringFieldUpdateOperationsInput | string
+    motivo?: StringFieldUpdateOperationsInput | string
+    fecha_eliminacion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -17400,6 +18524,44 @@ export namespace Prisma {
   export type PUPASumOrderByAggregateInput = {
     pupaId?: SortOrder
     cantidadObtenida?: SortOrder
+  }
+
+  export type ELIMINACION_MOTIVOOrderByRelevanceInput = {
+    fields: ELIMINACION_MOTIVOOrderByRelevanceFieldEnum | ELIMINACION_MOTIVOOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ELIMINACION_MOTIVOCountOrderByAggregateInput = {
+    id?: SortOrder
+    user?: SortOrder
+    charola_nombre?: SortOrder
+    motivo?: SortOrder
+    fecha_eliminacion?: SortOrder
+  }
+
+  export type ELIMINACION_MOTIVOAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ELIMINACION_MOTIVOMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user?: SortOrder
+    charola_nombre?: SortOrder
+    motivo?: SortOrder
+    fecha_eliminacion?: SortOrder
+  }
+
+  export type ELIMINACION_MOTIVOMinOrderByAggregateInput = {
+    id?: SortOrder
+    user?: SortOrder
+    charola_nombre?: SortOrder
+    motivo?: SortOrder
+    fecha_eliminacion?: SortOrder
+  }
+
+  export type ELIMINACION_MOTIVOSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type USUARIOCreateNestedOneWithoutADMINISTRADORInput = {
@@ -19226,13 +20388,12 @@ export namespace Prisma {
   }
 
   export type HIDRATACIONCreateWithoutCHAROLA_HIDRATACIONInput = {
-    hidratacionId: number
     nombre?: string | null
     descripcion?: string | null
   }
 
   export type HIDRATACIONUncheckedCreateWithoutCHAROLA_HIDRATACIONInput = {
-    hidratacionId: number
+    hidratacionId?: number
     nombre?: string | null
     descripcion?: string | null
   }
@@ -19302,7 +20463,6 @@ export namespace Prisma {
   }
 
   export type HIDRATACIONUpdateWithoutCHAROLA_HIDRATACIONInput = {
-    hidratacionId?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -19986,13 +21146,13 @@ export namespace Prisma {
 
   export type PUPAUpdateWithoutCHAROLA_PUPAInput = {
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type PUPAUncheckedUpdateWithoutCHAROLA_PUPAInput = {
     pupaId?: IntFieldUpdateOperationsInput | number
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type CHAROLA_PUPACreateWithoutPUPAInput = {

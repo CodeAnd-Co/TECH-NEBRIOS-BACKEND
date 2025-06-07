@@ -12,6 +12,7 @@ const autenticacionController = require("../controllers/autenticacion.controller
 /* ------------------- */
 
 /* GET METHODS */
+router.get("/obtenerUsuarios", usuarioController.obtenerUsuarios);
 /* ----------- */
 
 /* POST METHODS */
@@ -21,11 +22,11 @@ router.post("/recuperarContrasena", usuarioController.mandarCorreo);
 /* ----------- */
 
 /* PUT METHODS */
-
+router.put("/editarUsuario", usuarioController.editarUsuario);
 /* ----------- */
 
 /* DELETE METHODS */
-
+router.delete("/eliminarUsuario", usuarioController.eliminarUsuario);
 /* ----------- */
 
 module.exports = router;

@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.7.0
- * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+ * Prisma Client JS version: 6.8.2
+ * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
  */
 Prisma.prismaVersion = {
-  client: "6.7.0",
-  engine: "3cff47a7f5d65c3ea74883f1d736e41d68ce91ed"
+  client: "6.8.2",
+  engine: "2060c79ba17c6bb9f5823312b6f6b7f4a845738e"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -207,6 +207,14 @@ exports.Prisma.PUPAScalarFieldEnum = {
   cantidadObtenida: 'cantidadObtenida'
 };
 
+exports.Prisma.ELIMINACION_MOTIVOScalarFieldEnum = {
+  id: 'id',
+  user: 'user',
+  charola_nombre: 'charola_nombre',
+  motivo: 'motivo',
+  fecha_eliminacion: 'fecha_eliminacion'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -240,6 +248,12 @@ exports.Prisma.USUARIOOrderByRelevanceFieldEnum = {
   apellido_p: 'apellido_p'
 };
 
+exports.Prisma.ELIMINACION_MOTIVOOrderByRelevanceFieldEnum = {
+  user: 'user',
+  charola_nombre: 'charola_nombre',
+  motivo: 'motivo'
+};
+
 
 exports.Prisma.ModelName = {
   ADMINISTRADOR: 'ADMINISTRADOR',
@@ -254,7 +268,8 @@ exports.Prisma.ModelName = {
   USUARIO_CHAROLA: 'USUARIO_CHAROLA',
   CHAROLA_FRAS: 'CHAROLA_FRAS',
   CHAROLA_PUPA: 'CHAROLA_PUPA',
-  PUPA: 'PUPA'
+  PUPA: 'PUPA',
+  ELIMINACION_MOTIVO: 'ELIMINACION_MOTIVO'
 };
 
 /**

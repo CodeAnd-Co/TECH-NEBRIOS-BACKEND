@@ -11,14 +11,20 @@ dotenv.config();
  * @returns {JSON} Código de respuesta
  */
 exports.registrarUsuario = async (req, res) => {
-  try {
-    await Usuario.registrarUsuario(req.body);
-    return res.status(201).json({ code: 201 });
-  } catch (error) {
-    return res.status(500).json({ code: 500 });
-  }
-};
+    try {
+        await Usuario.registrarUsuario(req.body);
 
+        return res.status(200).json({ code: 200 });
+    } catch (error) {
+        return res.status(500).json({ code: 500 });
+    }
+}
+
+/**
+ * @description Genera una contraseña aleatoria.
+ * @param {int} longitud - Longitud de la contraseña.
+ * @returns {String} Contraseña nueva.
+ */
 function generarContrasena(longitud = 6) {
   const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let contrasena = '';
@@ -29,6 +35,12 @@ function generarContrasena(longitud = 6) {
   return contrasena;
 }
 
+/**
+ * @description Manda un correo de recuperación para recuperar la contraseña
+ * @param {*} req - Solicitud HTTP que contiene información del usuario.
+ * @param {*} res - Respuesta HTTP que se usa para enviar el resultado.
+ * @returns {JSON} Código de respuesta
+ */
 exports.mandarCorreo = async (req, res) => {
     try{
         const usuario = req.query.usuario;
@@ -86,3 +98,51 @@ exports.mandarCorreo = async (req, res) => {
         res.status(500).json({code: 500})
     }
 };
+
+/**
+ * @description Obtiene todos los usuarios de la base de datos
+ * @param {*} req - Solicitud HTTP que contiene información del usuario.
+ * @param {*} res - Respuesta HTTP que se usa para enviar el resultado.
+ * @returns {JSON} Código de respuesta
+ */
+exports.obtenerUsuarios = async (req, res) => {
+    try{
+        const resultado = await Usuario.obtenerUsuarios();
+        return res.status(200).json({resultado: resultado});
+    } catch (error){
+        return res.status(500).json({ code: 500 });
+    }
+}
+
+/**
+ * @description Edita la informacion de un usuario
+ * @param {*} req - Solicitud HTTP que contiene información del usuario.
+ * @param {*} res - Respuesta HTTP que se usa para enviar el resultado.
+ * @returns {JSON} Código de respuesta
+ */
+exports.editarUsuario = async (req, res) => {
+    try{
+        const resultado = await Usuario.editarUsuario(parseInt(req.query.usuarioId), req.body);
+
+        return res.status(200).json({ code: 200 });
+
+    } catch (error) {
+        return res.status(500).json({ code: 500 });
+    }
+}
+
+/**
+ * @description Elimina un usuario de la plataforma
+ * @param {*} req - Solicitud HTTP que contiene información del usuario.
+ * @param {*} res - Respuesta HTTP que se usa para enviar el resultado.
+ * @returns {JSON} Código de respuesta
+ */
+exports.eliminarUsuario = async (req, res) => {
+    try{
+        const resultado = await Usuario.eliminarUsuario(parseInt(req.query.usuarioId));
+
+        return res.status(200).json({ code: 200 });
+    } catch (error){
+        return res.status(500).json({ code: 500 });
+    }
+}

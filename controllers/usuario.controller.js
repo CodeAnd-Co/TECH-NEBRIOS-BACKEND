@@ -1,7 +1,7 @@
 const Usuario = require('../models/usuario.model.js');
 const nodemailer = require('nodemailer');
 const path = require('path');
-const dotenv = require("dotenv");
+const dotenv = require('dotenv');
 dotenv.config();
 
 /**

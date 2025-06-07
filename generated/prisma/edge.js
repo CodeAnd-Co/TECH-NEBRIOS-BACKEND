@@ -244,6 +244,7 @@ const config = {
       "value": "/Users/armando/Desktop/TECH-NEBRIOS-BACKEND/generated/prisma",
       "value": "/Users/lapto/Desktop/zuustento/TECH-NEBRIOS-BACKEND/generated/prisma",
       "value": "C:\\Users\\emili\\OneDrive\\Escritorio\\6TO SEMESTRE\\CODENCO\\zustento\\TECH-NEBRIOS-BACKEND\\generated\\prisma",
+      "value": "C:\\Users\\juana\\Desktop\\dev\\6toSEM\\TECH-NEBRIOS-BACKEND\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -252,7 +253,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "windows",
         "native": true
       },
       {
@@ -265,6 +266,7 @@ const config = {
     "sourceFilePath": "/Users/armando/Desktop/TECH-NEBRIOS-BACKEND/prisma/schema.prisma",
     "sourceFilePath": "/Users/lapto/Desktop/zuustento/TECH-NEBRIOS-BACKEND/prisma/schema.prisma",
     "sourceFilePath": "C:\\Users\\emili\\OneDrive\\Escritorio\\6TO SEMESTRE\\CODENCO\\zustento\\TECH-NEBRIOS-BACKEND\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\juana\\Desktop\\dev\\6toSEM\\TECH-NEBRIOS-BACKEND\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

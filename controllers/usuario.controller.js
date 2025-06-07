@@ -20,7 +20,19 @@ exports.obtenerUsuarios = async (req, res) => {
     try{
         const resultado = await Usuario.obtenerUsuarios();
         return res.status(200).json({resultado: resultado});
-    }catch{
+    } catch (error){
+        return res.status(500).json({ code: 500 });
+    }
+}
+
+exports.editarUsuario = async (req, res) => {
+    try{
+        const resultado = await Usuario.editarUsuario(parseInt(req.query.usuarioId), req.body);
+
+        return res.status(200).json({ code: 200 });
+
+    } catch (error) {
+        console.log(error);
         return res.status(500).json({ code: 500 });
     }
 }

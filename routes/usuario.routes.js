@@ -21,7 +21,7 @@ router.post("/registrarUsuario", usuarioController.registrarUsuario);
 /* ----------- */
 
 /* PUT METHODS */
-
+router.put("/editarUsuario", usuarioController.editarUsuario);
 /* ----------- */
 
 /* DELETE METHODS */

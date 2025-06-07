@@ -70,25 +70,20 @@ module.exports = class Usuario {
    * @returns {Object} Resultado de la creación del usuario.
    */
   static async registrarUsuario(usuarioNuevo) {
-    try {
-      const contrasenaHash = await bcrypt.hash(usuarioNuevo.contrasena, 12);
+    const contrasenaHash = await bcrypt.hash(usuarioNuevo.contrasena, 12);
 
-      const nuevo = await prisma.USUARIO.create({
-        data: {
-          user: usuarioNuevo.usuario,
-          contrasena: contrasenaHash,
-          nombre: usuarioNuevo.nombre,
-          apellido_m: usuarioNuevo.apellido_m,
-          apellido_p: usuarioNuevo.apellido_p,
-        },
-      });
+    const nuevo = await prisma.USUARIO.create({
+      data: {
+        user: usuarioNuevo.usuario,
+        contrasena: contrasenaHash,
+        nombre: usuarioNuevo.nombre,
+        apellido_m: usuarioNuevo.apellido_m,
+        apellido_p: usuarioNuevo.apellido_p,
+      },
+    });
 
-      return nuevo;
-    } catch (error) {
-      console.log('Error al registrar usuario:', error);
-      throw error;
-    }
-  }
+    return nuevo;
+}
  
   static async obtenerUsuarios(){
     const usuarios = await prisma.USUARIO.findMany({
@@ -107,5 +102,22 @@ module.exports = class Usuario {
     }));
 
     return resultado;
+  }
+
+  static async editarUsuario(usuarioId, infoUsuario){
+    const contrasenaHash = await bcrypt.hash(infoUsuario.contrasena, 12);
+
+    await prisma.USUARIO.update({
+      where: {
+        usuarioId: usuarioId
+      },
+      data: {
+        user: infoUsuario.usuario,
+        contrasena: contrasenaHash,
+        nombre: infoUsuario.nombre,
+        apellido_m: infoUsuario.apellido_m,
+        apellido_p: infoUsuario.apellido_p,
+      }
+    })
   }
 };

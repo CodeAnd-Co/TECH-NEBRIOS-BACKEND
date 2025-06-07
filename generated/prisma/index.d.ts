@@ -391,8 +391,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.7.0
-   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+   * Prisma Client JS version: 6.8.2
+   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
     client: string
@@ -10060,7 +10060,7 @@ export namespace Prisma {
     /**
      * The data needed to create a HIDRATACION.
      */
-    data: XOR<HIDRATACIONCreateInput, HIDRATACIONUncheckedCreateInput>
+    data?: XOR<HIDRATACIONCreateInput, HIDRATACIONUncheckedCreateInput>
   }
 
   /**
@@ -14654,7 +14654,7 @@ export namespace Prisma {
   interface PUPAFieldRefs {
     readonly pupaId: FieldRef<"PUPA", 'Int'>
     readonly fechaRegistro: FieldRef<"PUPA", 'DateTime'>
-    readonly cantidadObtenida: FieldRef<"PUPA", 'Int'>
+    readonly cantidadObtenida: FieldRef<"PUPA", 'Float'>
   }
     
 
@@ -15935,7 +15935,7 @@ export namespace Prisma {
     NOT?: PUPAWhereInput | PUPAWhereInput[]
     pupaId?: IntFilter<"PUPA"> | number
     fechaRegistro?: DateTimeNullableFilter<"PUPA"> | Date | string | null
-    cantidadObtenida?: IntNullableFilter<"PUPA"> | number | null
+    cantidadObtenida?: FloatNullableFilter<"PUPA"> | number | null
     CHAROLA_PUPA?: CHAROLA_PUPAListRelationFilter
   }
 
@@ -15952,7 +15952,7 @@ export namespace Prisma {
     OR?: PUPAWhereInput[]
     NOT?: PUPAWhereInput | PUPAWhereInput[]
     fechaRegistro?: DateTimeNullableFilter<"PUPA"> | Date | string | null
-    cantidadObtenida?: IntNullableFilter<"PUPA"> | number | null
+    cantidadObtenida?: FloatNullableFilter<"PUPA"> | number | null
     CHAROLA_PUPA?: CHAROLA_PUPAListRelationFilter
   }, "pupaId">
 
@@ -15973,7 +15973,7 @@ export namespace Prisma {
     NOT?: PUPAScalarWhereWithAggregatesInput | PUPAScalarWhereWithAggregatesInput[]
     pupaId?: IntWithAggregatesFilter<"PUPA"> | number
     fechaRegistro?: DateTimeNullableWithAggregatesFilter<"PUPA"> | Date | string | null
-    cantidadObtenida?: IntNullableWithAggregatesFilter<"PUPA"> | number | null
+    cantidadObtenida?: FloatNullableWithAggregatesFilter<"PUPA"> | number | null
   }
 
   export type ADMINISTRADORCreateInput = {
@@ -16350,21 +16350,19 @@ export namespace Prisma {
   }
 
   export type HIDRATACIONCreateInput = {
-    hidratacionId: number
     nombre?: string | null
     descripcion?: string | null
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONCreateNestedManyWithoutHIDRATACIONInput
   }
 
   export type HIDRATACIONUncheckedCreateInput = {
-    hidratacionId: number
+    hidratacionId?: number
     nombre?: string | null
     descripcion?: string | null
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUncheckedCreateNestedManyWithoutHIDRATACIONInput
   }
 
   export type HIDRATACIONUpdateInput = {
-    hidratacionId?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
     CHAROLA_HIDRATACION?: CHAROLA_HIDRATACIONUpdateManyWithoutHIDRATACIONNestedInput
@@ -16378,13 +16376,12 @@ export namespace Prisma {
   }
 
   export type HIDRATACIONCreateManyInput = {
-    hidratacionId: number
+    hidratacionId?: number
     nombre?: string | null
     descripcion?: string | null
   }
 
   export type HIDRATACIONUpdateManyMutationInput = {
-    hidratacionId?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -16580,14 +16577,14 @@ export namespace Prisma {
 
   export type PUPAUpdateInput = {
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_PUPA?: CHAROLA_PUPAUpdateManyWithoutPUPANestedInput
   }
 
   export type PUPAUncheckedUpdateInput = {
     pupaId?: IntFieldUpdateOperationsInput | number
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
     CHAROLA_PUPA?: CHAROLA_PUPAUncheckedUpdateManyWithoutPUPANestedInput
   }
 
@@ -16599,13 +16596,13 @@ export namespace Prisma {
 
   export type PUPAUpdateManyMutationInput = {
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type PUPAUncheckedUpdateManyInput = {
     pupaId?: IntFieldUpdateOperationsInput | number
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -19226,13 +19223,12 @@ export namespace Prisma {
   }
 
   export type HIDRATACIONCreateWithoutCHAROLA_HIDRATACIONInput = {
-    hidratacionId: number
     nombre?: string | null
     descripcion?: string | null
   }
 
   export type HIDRATACIONUncheckedCreateWithoutCHAROLA_HIDRATACIONInput = {
-    hidratacionId: number
+    hidratacionId?: number
     nombre?: string | null
     descripcion?: string | null
   }
@@ -19302,7 +19298,6 @@ export namespace Prisma {
   }
 
   export type HIDRATACIONUpdateWithoutCHAROLA_HIDRATACIONInput = {
-    hidratacionId?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
     descripcion?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -19986,13 +19981,13 @@ export namespace Prisma {
 
   export type PUPAUpdateWithoutCHAROLA_PUPAInput = {
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type PUPAUncheckedUpdateWithoutCHAROLA_PUPAInput = {
     pupaId?: IntFieldUpdateOperationsInput | number
     fechaRegistro?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    cantidadObtenida?: NullableIntFieldUpdateOperationsInput | number | null
+    cantidadObtenida?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type CHAROLA_PUPACreateWithoutPUPAInput = {

@@ -6,8 +6,6 @@ const { th } = require('date-fns/locale');
 const { PrismaClient } = require('../generated/prisma');
 const prisma = new PrismaClient();
 
-const db = require('../utils/database');
-
 /**
  * Modelo Hidratación usando Prisma.
  * @module models/hidratacion

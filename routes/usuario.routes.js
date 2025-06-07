@@ -25,7 +25,7 @@ router.put("/editarUsuario", usuarioController.editarUsuario);
 /* ----------- */
 
 /* DELETE METHODS */
-
+router.delete("/eliminarUsuario", usuarioController.eliminarUsuario);
 /* ----------- */
 
 module.exports = router;

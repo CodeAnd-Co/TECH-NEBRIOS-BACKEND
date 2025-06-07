@@ -7,6 +7,7 @@
 // RF21: Consultar charolas de cambios pasados - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF21
 // RF26 Registrar la alimentación de la charola - Documentación: https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF26
 // RF42 Registrar la hidratación de la charola - Documentación: https://codeandco-wiki.netlify.app/docs/next/proyectos/larvas/documentacion/requisitos/RF42
+//RF15  Filtrar charola por fecha - Documentación: https://codeandco-wiki.netlify.app/docs/next/proyectos/larvas/documentacion/requisitos/rf15/
 
 const { hi } = require('date-fns/locale');
 const Charola = require('../models/charola.model.js');
@@ -277,6 +278,41 @@ const editarCharola = async (req, res) => {
   }
 };
 
+/**
+ * Filtra las charolas por un rango de fechas de creación.
+ * 
+ * @param {Object} req - Objeto de solicitud HTTP con query params `inicio` y `fin`.
+ * @param {Object} res - Objeto de respuesta HTTP.
+ * @returns {Promise<void>}
+ */
+const filtrarCharolasPorFecha = async (req, res) => {
+  const { inicio, fin } = req.query;
+
+  if (!inicio || !fin) {
+    return res.status(400).json({
+      error: 'Debe proporcionar ambas fechas: inicio y fin.'
+    });
+  }
+
+  try {
+    const charolas = await Charola.filtrarPorFecha(inicio, fin);
+
+    if (charolas.error) {
+      return res.status(500).json({ error: charolas.error });
+    }
+
+    res.status(200).json({
+      data: charolas
+    });
+  } catch (error) {
+    console.error('❌ Error al filtrar charolas por fecha:', error);
+    res.status(500).json({
+      error: 'Error interno al filtrar charolas.'
+    });
+  }
+};
+
+
 module.exports = {
   consultarCharola,
   eliminarCharola,
@@ -285,4 +321,5 @@ module.exports = {
   alimentarCharola,
   hidratarCharola,
   editarCharola,
+  filtrarCharolasPorFecha
 };

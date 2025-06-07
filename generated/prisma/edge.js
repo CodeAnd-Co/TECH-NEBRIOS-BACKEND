@@ -180,6 +180,14 @@ exports.Prisma.PUPAScalarFieldEnum = {
   cantidadObtenida: 'cantidadObtenida'
 };
 
+exports.Prisma.ELIMINACION_MOTIVOScalarFieldEnum = {
+  id: 'id',
+  user: 'user',
+  charola_nombre: 'charola_nombre',
+  motivo: 'motivo',
+  fecha_eliminacion: 'fecha_eliminacion'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -213,6 +221,12 @@ exports.Prisma.USUARIOOrderByRelevanceFieldEnum = {
   apellido_p: 'apellido_p'
 };
 
+exports.Prisma.ELIMINACION_MOTIVOOrderByRelevanceFieldEnum = {
+  user: 'user',
+  charola_nombre: 'charola_nombre',
+  motivo: 'motivo'
+};
+
 
 exports.Prisma.ModelName = {
   ADMINISTRADOR: 'ADMINISTRADOR',
@@ -227,7 +241,8 @@ exports.Prisma.ModelName = {
   USUARIO_CHAROLA: 'USUARIO_CHAROLA',
   CHAROLA_FRAS: 'CHAROLA_FRAS',
   CHAROLA_PUPA: 'CHAROLA_PUPA',
-  PUPA: 'PUPA'
+  PUPA: 'PUPA',
+  ELIMINACION_MOTIVO: 'ELIMINACION_MOTIVO'
 };
 /**
  * Create the Client

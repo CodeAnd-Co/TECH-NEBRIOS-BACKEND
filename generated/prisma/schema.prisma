@@ -145,3 +145,11 @@ model PUPA {
   cantidadObtenida Float?         @db.Float
   CHAROLA_PUPA     CHAROLA_PUPA[]
 }
+
+model ELIMINACION_MOTIVO {
+  id                Int       @id @default(autoincrement())
+  user              String    @db.VarChar(50)
+  charola_nombre    String    @db.VarChar(20)
+  motivo            String    @db.Text
+  fecha_eliminacion DateTime? @default(now()) @db.Timestamp(0)
+}

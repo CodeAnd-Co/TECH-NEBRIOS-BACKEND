@@ -1,4 +1,5 @@
 // RF29: Visualizar la información del Frass obtenido - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF29
+// RF30: Editar la información del Frass obtenido - https://codeandco-wiki.netlify.app/docs/proyectos/larvas/documentacion/requisitos/RF30
 
 /* Dependencias */
 const express = require("express");
@@ -22,11 +23,10 @@ router.get('/', frasController.obtenerFras);
 /* ----------- */
 
 /* POST METHODS */
-
+router.post('/editar/:charolaId', frasController.actualizarGramos);
 /* ----------- */
 
 /* PUT METHODS */
-/**
 
 /* ----------- */
 

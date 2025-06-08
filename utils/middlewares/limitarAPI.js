@@ -8,7 +8,7 @@ const rateLimit = require('express-rate-limit');
  */
 const limitarAPI = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 200,   
+  max: 4000,   
   keyGenerator: (req) => {
     return req.ip;
   },

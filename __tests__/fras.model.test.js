@@ -55,11 +55,13 @@ describe('Modelo Fras – método obtener()', () => {
       select: {
         CHAROLA: {
           select: {
+            charolaId: true,
             nombreCharola: true,
           },
         },
         FRAS: {
           select: {
+            frasId: true,
             fechaRegistro: true,
             gramosGenerados: true,
           },

@@ -45,6 +45,9 @@ jest.mock('../generated/prisma', () => {
       findFirst: jest.fn(),
       deleteMany,
     },
+    ELIMINACION_MOTIVO: {
+    create: jest.fn(),
+  },
     $transaction,
   };
 
@@ -245,14 +248,23 @@ describe('Charola.editarCharola', () => {
 
 describe('Charola.eliminarCharola', () => {
   test('debe eliminar una charola existente y sus relaciones', async () => {
-    prisma.CHAROLA.findUnique.mockResolvedValue({ charolaId: 1 });
+    prisma.CHAROLA.findUnique.mockResolvedValue({ charolaId: 1, nombreCharola: 'Charola 1' });
+    prisma.ELIMINACION_MOTIVO.create.mockResolvedValue({});
     prisma.CHAROLA_HIDRATACION.deleteMany.mockResolvedValue({});
     prisma.CHAROLA_COMIDA.deleteMany.mockResolvedValue({});
     prisma.CHAROLA.delete.mockResolvedValue({});
 
-    const resultado = await Charola.eliminarCharola(1);
+    const resultado = await Charola.eliminarCharola(1, 'Charola dañada', 'usuario123');
 
     expect(prisma.CHAROLA.findUnique).toHaveBeenCalledWith({ where: { charolaId: 1 } });
+    expect(prisma.ELIMINACION_MOTIVO.create).toHaveBeenCalledWith({
+    data: {
+      user: 'usuario123',
+      charola_nombre: 'Charola 1',
+      motivo: 'Charola dañada',
+      fecha_eliminacion: expect.any(Date),
+    }
+  });
     expect(prisma.CHAROLA_HIDRATACION.deleteMany).toHaveBeenCalledWith({ where: { charolaId: 1 } });
     expect(prisma.CHAROLA_COMIDA.deleteMany).toHaveBeenCalledWith({ where: { charolaId: 1 } });
     expect(prisma.CHAROLA.delete).toHaveBeenCalledWith({ where: { charolaId: 1 } });

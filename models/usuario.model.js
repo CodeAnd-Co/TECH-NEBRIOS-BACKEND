@@ -70,23 +70,110 @@ module.exports = class Usuario {
    * @returns {Object} Resultado de la creación del usuario.
    */
   static async registrarUsuario(usuarioNuevo) {
-    try {
-      const contrasenaHash = await bcrypt.hash(usuarioNuevo.contrasena, 12);
+    const contrasenaHash = await bcrypt.hash(usuarioNuevo.contrasena, 12);
 
-      const nuevo = await prisma.USUARIO.create({
-        data: {
-          user: usuarioNuevo.usuario,
-          contrasena: contrasenaHash,
-          nombre: usuarioNuevo.nombre,
-          apellido_m: usuarioNuevo.apellido_m,
-          apellido_p: usuarioNuevo.apellido_p,
-        },
-      });
+    const nuevo = await prisma.USUARIO.create({
+      data: {
+        user: usuarioNuevo.usuario,
+        contrasena: contrasenaHash,
+        nombre: usuarioNuevo.nombre,
+        apellido_m: usuarioNuevo.apellido_m,
+        apellido_p: usuarioNuevo.apellido_p,
+      },
+    });
 
-      return nuevo;
-    } catch (error) {
-      console.log('Error al registrar usuario:', error);
-      throw error;
-    }
+    return nuevo;
+}
+  /**
+   * @description Extrae todos los usuarios de la base de datos y especifica sus roles
+   * @returns {Array} Resultado de la consulta.
+   */
+  static async obtenerUsuarios(){
+    const usuarios = await prisma.USUARIO.findMany({
+      include: {
+        ADMINISTRADOR: true,
+      },
+    });
+
+    const resultado = usuarios.map(usuario => ({
+      usuarioId: usuario.usuarioId,
+      nombre: usuario.nombre,
+      apellido_p: usuario.apellido_p,
+      apellido_m: usuario.apellido_m,
+      user: usuario.user,
+      tipo_usuario: usuario.ADMINISTRADOR.length > 0 ? 'Administrador' : 'Usuario',
+    }));
+
+    return resultado;
+  }
+
+    /**
+   * @description Edita la informacion de un usuario
+   * @param {Object} infoUsuario - Objeto con información del usuario.
+   * @param {int} usuarioId - Id del usuario a editar.
+   * @returns {Array} Resultado de la consulta
+   */
+  static async editarUsuario(usuarioId, infoUsuario){
+    const contrasenaHash = await bcrypt.hash(infoUsuario.contrasena, 12);
+
+    await prisma.USUARIO.update({
+      where: {
+        usuarioId: usuarioId
+      },
+      data: {
+        user: infoUsuario.usuario,
+        contrasena: contrasenaHash,
+        nombre: infoUsuario.nombre,
+        apellido_m: infoUsuario.apellido_m,
+        apellido_p: infoUsuario.apellido_p,
+      }
+    })
+  }
+
+  /**
+   * @description Elimina la informacion de un usuario
+   * @param {int} usuarioId - Id del usuario a editar.
+  */
+  static async eliminarUsuario(usuarioId){
+    await prisma.USUARIO.delete({
+      where: {
+        usuarioId: usuarioId
+      }
+    })
+  }
+
+  /**
+   * @description Obtiene el id de un usuario apartir de su nombre
+   * @param {String} nombreUsuario Nombre del usuario
+   * @returns {int} Resultado de la consulta
+   */
+  static async obtenerId(nombreUsuario) {
+    return await prisma.USUARIO.findFirst({
+      where: {
+        user: nombreUsuario
+      },
+      select: {
+        usuarioId: true
+      }
+    })
+  }
+
+  /**
+   * @description Cambia la contraseña de un usuario 
+   * @param {int} usuarioId Id del usuario
+   * @param {String} contrasena Contraseña nueva
+   * @returns {int} Resultado de la consulta
+   */
+  static async cambiarContrasena(usuarioId, contrasena) {
+    const contrasenaHash = await bcrypt.hash(contrasena, 12);
+
+    await prisma.USUARIO.update({
+      where: {
+        usuarioId: usuarioId
+      },
+      data: {
+        contrasena: contrasenaHash
+      }
+    });
   }
 };

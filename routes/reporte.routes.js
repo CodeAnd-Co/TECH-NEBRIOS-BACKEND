@@ -8,6 +8,7 @@ const reporteController = require('../controllers/reporte.controller');
 
 /* GET METHODS */
 router.get("/getDatos", reporteController.getDatos);
+router.get("/getEliminadas", reporteController.getEliminadas);
 /* ----------- */
 
 /* POST METHODS */

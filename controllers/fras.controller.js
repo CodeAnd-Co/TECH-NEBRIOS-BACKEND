@@ -39,17 +39,17 @@ module.exports.obtenerFras = async (req, res) => {
  * @returns {Promise<void>} Responde con éxito o un error si no se pudo actualizar.
  */
 module.exports.actualizarGramos = async (req, res) => {
-    const charolaId = req.params.charolaId;
+    const frasId = req.params.frasId;
     const { nuevosGramos } = req.body;
 
-    if (!charolaId || !nuevosGramos) {
+    if (!frasId) {
         return res.status(400).json({ success: false, message: 'Datos no válidos' });
     }
 
     const fras = new Fras();
 
     try {
-        const resultado = await fras.actualizarGramos(charolaId, nuevosGramos);
+        const resultado = await fras.actualizarGramos(frasId, nuevosGramos);
         res.status(200).json({ success: true, message: 'Gramos actualizados exitosamente', data: resultado });
     } catch (error) {
         console.error('Error al actualizar los gramos de Fras:', error);

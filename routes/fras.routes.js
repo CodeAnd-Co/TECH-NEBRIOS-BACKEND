@@ -23,7 +23,7 @@ router.get('/', frasController.obtenerFras);
 /* ----------- */
 
 /* POST METHODS */
-router.post('/editar/:charolaId', frasController.actualizarGramos);
+router.post('/editar/:frasId', frasController.actualizarGramos);
 /* ----------- */
 
 /* PUT METHODS */

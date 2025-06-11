@@ -378,44 +378,43 @@ module.exports = class Charola {
 
 
   /**
- * Filtra las charolas por un rango de fechas.
- * 
- * @param {string} fechaInicio - Fecha inicial en formato ISO (ej. '2025-01-01')
- * @param {string} fechaFin - Fecha final en formato ISO (ej. '2025-01-31')
- * @returns {Promise<Array>} Lista de charolas en el rango
- */
+   * Filtra las charolas por un rango de fechas y estado.
+   *
+   * @param {string} fechaInicio - Fecha inicial en formato ISO.
+   * @param {string} fechaFin - Fecha final en formato ISO.
+   * @param {string} estado - Estado opcional ("activa" o "pasada").
+   * @returns {Promise<Array>} Lista de charolas.
+   */
 
-  static async filtrarPorFecha(fechaInicio, fechaFin) {
+  static async filtrarPorFechaYEstado(fechaInicio, fechaFin, estado) {
     try {
-      const inicio = new Date(fechaInicio);
-      const fin = new Date(fechaFin);
-
-      const charolas = await prisma.CHAROLA.findMany({
-        where: {
+        const where = {
           fechaCreacion: {
-            gte: inicio,
-            lte: fin
+            gte: new Date(fechaInicio),
+            lte: new Date(fechaFin)
           }
-        },
-        orderBy: {
-          fechaCreacion: 'desc'
-        },
-        include: {
-          CHAROLA_COMIDA: {
-            include: { COMIDA: true }
-          },
-          CHAROLA_HIDRATACION: {
-            include: { HIDRATACION: true }
-          }
+        };
+
+        if (estado) {
+          where.estado = estado;
         }
-      });
 
-      return charolas;
-    } catch (error) {
-      console.error('Error al filtrar charolas por fecha:', error);
-      return { error: 'No se pudieron filtrar las charolas' };
-    }
+        const charolas = await prisma.CHAROLA.findMany({
+          where,
+          orderBy: {
+            fechaCreacion: 'desc'
+          },
+          include: {
+            CHAROLA_COMIDA: { include: { COMIDA: true } },
+            CHAROLA_HIDRATACION: { include: { HIDRATACION: true } }
+          }
+        });
+
+        return charolas;
+      } catch (error) {
+        console.error('Error al filtrar por fecha y estado:', error);
+        return { error: 'No se pudieron filtrar las charolas' };
+      }
   }
-
 
 };

@@ -281,14 +281,14 @@ const editarCharola = async (req, res) => {
 };
 
 /**
- * Filtra las charolas por un rango de fechas de creación.
- * 
- * @param {Object} req - Objeto de solicitud HTTP con query params `inicio` y `fin`.
+ * Filtra las charolas por un rango de fechas y estado opcional.
+ *
+ * @param {Object} req - Objeto de solicitud HTTP con query params `inicio`, `fin`, `estado`.
  * @param {Object} res - Objeto de respuesta HTTP.
  * @returns {Promise<void>}
  */
 const filtrarCharolasPorFecha = async (req, res) => {
-  const { inicio, fin } = req.query;
+  const { inicio, fin, estado } = req.query;
 
   if (!inicio || !fin) {
     return res.status(400).json({
@@ -296,8 +296,16 @@ const filtrarCharolasPorFecha = async (req, res) => {
     });
   }
 
+  // Validar estado si se proporciona
+  const estadosValidos = ['activa', 'pasada'];
+  if (estado && !estadosValidos.includes(estado)) {
+    return res.status(400).json({
+      error: "Estado inválido. Debe ser 'activa' o 'pasada'."
+    });
+  }
+
   try {
-    const charolas = await Charola.filtrarPorFecha(inicio, fin);
+    const charolas = await Charola.filtrarPorFechaYEstado(inicio, fin, estado);
 
     if (charolas.error) {
       return res.status(500).json({ error: charolas.error });
@@ -307,7 +315,7 @@ const filtrarCharolasPorFecha = async (req, res) => {
       data: charolas
     });
   } catch (error) {
-    console.error('❌ Error al filtrar charolas por fecha:', error);
+    console.error('❌ Error al filtrar charolas por fecha y estado:', error);
     res.status(500).json({
       error: 'Error interno al filtrar charolas.'
     });

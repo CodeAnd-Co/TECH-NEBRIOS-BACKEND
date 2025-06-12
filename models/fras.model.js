@@ -45,47 +45,44 @@ class Fras {
      * @return {Promise<Array>} Retorna una lista de objetos que contienen los gramos actualizados de Fras.
      * @throws {Error} Lanza un error si ocurre un problema al actualizar los gramos en la base de datos.
      * */
-    async actualizarGramos( charolaId, nuevosGramos ) {
+    async actualizarGramos( frasId, nuevosGramos ) {
         try {
             await prisma.fRAS.updateMany({
             where: {
-            CHAROLA_FRAS: {
-                some: {
-                charolaId: Number(charolaId)
-                }
-            }
+              frasId: Number(frasId)
             },
             data: {
             gramosGenerados: nuevosGramos
             }
         })
-const frasActualizados = await prisma.fRAS.findMany({
-  where: {
-    CHAROLA_FRAS: {
-      some: {
-        charolaId: Number(charolaId)
-      }
-    }
-  },
-  select: {
-    frasId: true,
-    gramosGenerados: true,
-    fechaRegistro: true,
-    CHAROLA_FRAS: {
-      select: {
-        charolaId: true,
-        CHAROLA: {
-          select: { nombreCharola: true }
+      const frasActualizados = await prisma.fRAS.findMany({
+        where: {
+          CHAROLA_FRAS: {
+            some: {
+              frasId: Number(frasId)
+            }
+          }
+        },
+        select: {
+          frasId: true,
+          gramosGenerados: true,
+          fechaRegistro: true,
+          CHAROLA_FRAS: {
+            select: {
+              charolaId: true,
+              CHAROLA: {
+                select: { nombreCharola: true }
+              }
+            }
+          }
         }
-      }
-    }
-  }
-});
+      });
 
             
         return frasActualizados;
 
         } catch (error) {
+          console.log(error);
             throw new Error('Error al actualizar los gramos de Fras: ' + error.message);
         }
     }
